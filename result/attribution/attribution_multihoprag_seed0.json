@@ -1,0 +1,669 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 29,
+    "llm": true
+  },
+  "report": {
+    "n": 29,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.655,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 2
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.517,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.684,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 6
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.586,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.789,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 4
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.862,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.625,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 2,
+          "Conversation->Retrieval": 1,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "After the TechCrunch report on October 7, 2023, concerning Dave Clark's comments on Flexport, and the subsequent TechCrunch article on October 30, 2023, regarding Ryan Petersen's actions at Flexport, was there a change in the nature of the events reported?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+      "docs_rag_saw_to_answer": [
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What is its valuation?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "After the TechCrunch report on October 7, 2023, concerning Dave Clark's comments on Flexport, and the subsequent TechCrunch article on October 30, 2023, regarding Ryan Petersen's actions at Flexport, was there a change in the nature of the events reported?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What is Flexport's valuation?",
+      "source_doc_for_question": "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Logistics Corp, a new startup in the freight forwarding industry, has recently been valued at $5 billion. The company aims to revolutionize shipping with innovative technology.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people.",
+        "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What have they done regarding lawsuits filed by women?",
+      "rag_answer": "Uber has faced lawsuits from hundreds of women claiming the company hasn't done enough to prevent sexual assault by drivers, while Lyft has faced legal action from women who believe more needs to be done to address driver behavior, despite asserting that the company has implemented sufficient safety measures.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?"
+        },
+        {
+          "role": "assistant",
+          "content": "Uber"
+        }
+      ],
+      "antecedent_question": "What has Uber done regarding lawsuits filed by women?",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "Many women have taken legal action against Lyft, asserting that the company has implemented sufficient measures to ensure passenger safety. However, they believe more needs to be done to address concerns about driver behavior.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Sam Altman is involved in a new venture, while the Fortune article discusses the roles of Matt Huang and Gary Wang in the context of venture capital and FTX, without indicating any new venture involvement for them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Altman has been telling investors that he’s planning to launch a new venture, according to The Information.",
+      "docs_rag_saw_to_answer": [
+        "Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to attract enough buyers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small EV named yes struggled to gain traction in the market and ultimately did not succeed. Despite its innovative features, it was unable to attract enough buyers.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "The defense needs to pick up the pieces, too, stat, ahead of facing the Bengals on a short week."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What has he enabled his defense to be?",
+      "rag_answer": "the best it can be",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What has Yes enabled his defense to be?",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+        "He has helped his team become a strong contender by fostering teamwork, resilience, and strategic thinking. His leadership qualities have inspired others to perform at their highest level.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Between the TechCrunch report on Epic Games' antitrust battle with Google published on November 6, 2023, and the TechCrunch report on a news publisher filing a class action antitrust suit against Google published on December 15, 2023, was there consistency in the portrayal of Google's anticompetitive allegations?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Epic will also suggest that Google hid items from discovery by allowing execs and employees to have “off the record” chats, but Google will counter this as well, saying it has provided the court with thousands of chat logs and millions of documents.",
+      "docs_rag_saw_to_answer": [
+        "In blog posts and press materials, Google touted Gemini’s superior architecture and capabilities, claiming that the model meets or exceeds the performance of other leading gen AI models like OpenAI’s GPT-4.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Did the Sporting News report a victory for the Dallas Cowboys over the Seattle Seahawks in Week 13 of the NFL season, and did the same source also report a win for the Detroit Lions against the Green Bay Packers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Cowboys opened Week 13 by rallying to beat the Seahawks on Thursday night, keeping the heat on the losing Eagles ahead of them before hosting that team in Dallas in Week 14.",
+      "docs_rag_saw_to_answer": [
+        "Fueled by a stout defensive showing, a gritty run game and a bit of fairy dust from the likes of St. Brown, Sam LaPorta and Josh Reynolds, the Lions cruised to a 34-20 win over their hated NFC North rivals, Green Bay."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "In a bout reportedly worth $680,000 to the Australian, he wasted little time, a huge left hand obliterating Zorro with four seconds remaining in the first round."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "How many victories does he have?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How many victories does Garcia have?",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+        "Jordan recently secured his 12th victory in a thrilling match that kept the audience on the edge of their seats. The referee had to step in at the 2:05 mark to ensure fair play.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "Jada then praised her children for how they’ve helped her grow, adding: “My children, they’re little gurus."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What has he opened up about?",
+      "rag_answer": "Alex has opened up about his dedication to his partner and the importance of trust in their relationship.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What has Jada opened up about?",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+        "This isn’t the first time that Alex has shared his thoughts on his dedication to his partner. He often discusses how important trust is in their relationship.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Amazon's large language model (LLM) is not trained on kids' responses, while The Age article raises concerns about TikTok's pixel collecting data without consent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+      "docs_rag_saw_to_answer": [
+        "Credit: AP ‘Remove that pixel’ The extent of data collected by TikTok’s pixel without user consent has caused concern among Australian marketers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What does it not train on?",
+      "rag_answer": "It does not train on kids' answers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that Amazon's large language model (LLM) is not trained on kids' responses, while The Age article raises concerns about TikTok's pixel collecting data without consent?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes not train on?",
+      "source_doc_for_question": "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+      "docs_rag_saw_to_answer": [
+        "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+        "In terms of privacy, the organization claims it’s not using personal data from teenagers for its AI models. They emphasize the importance of protecting young users' information.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Apple imposes restrictions on browser selection on iPhones, while The Verge article claims that Apple enforces uniform terms through its store and payment system, and does the Engadget article focus on Apple's hardware updates rather than its software policies?",
+      "rag_answer": "Yes, the TechCrunch article suggests that Apple imposes restrictions on browser selection on iPhones, The Verge article claims that Apple enforces uniform terms through its store and payment system, and the Engadget article focuses on Apple's hardware updates rather than its software policies.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+      "docs_rag_saw_to_answer": [
+        "But, if rumors are to be believed, Apple's focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them.",
+        "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What specific browser options were available to iPhone users before the agreement?",
+      "rag_answer": "There were no specific browser options available to iPhone users before the agreement, as Apple never allowed users to choose their browser.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What is the exact amount that the Manhattan apartment was inflated to?",
+      "rag_answer": "The exact amount that the Manhattan apartment was inflated to is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What amount has he never sold an apartment for in New York City?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Donald Trump"
+        }
+      ],
+      "antecedent_question": "What amount has Donald Trump never sold an apartment for in New York City?",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "No apartment in Los Angeles has ever sold for nearly that price, Sarah claimed. The market there has seen much lower sales compared to New York.",
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

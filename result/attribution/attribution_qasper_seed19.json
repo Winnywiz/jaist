@@ -1,0 +1,930 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 39,
+    "llm": true
+  },
+  "report": {
+    "n": 39,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.462,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Generation->Retrieval": 7
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.487,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.714,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 0.778,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Retrieval->Generation": 4,
+          "Generation->Retrieval": 2
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.487,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.571,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 0.833,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Generation->Retrieval": 3,
+          "Retrieval->Generation": 3
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.692,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.214,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.857,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Conversation->Retrieval": 2,
+          "Generation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What are the names of the other metrics they proposed?",
+      "rag_answer": "diversity, density, and homogeneity metrics",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+        "BiLSTM: Unlike feedforward neural networks, recurrent neural networks like BiLSTMs use memory based on history information to learn long-distance features and then predict the output. We use a two-layer BiLSTM architecture with GloVe word embeddings as a strong RNN baseline."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the baseline for the experiments?",
+      "rag_answer": "The baseline for the experiments is a two-layer BiLSTM architecture with GloVe word embeddings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+      "docs_rag_saw_to_answer": [
+        "BiLSTM: Unlike feedforward neural networks, recurrent neural networks like BiLSTMs use memory based on history information to learn long-distance features and then predict the output. We use a two-layer BiLSTM architecture with GloVe word embeddings as a strong RNN baseline.",
+        "BERT BIBREF5: It is a contextualized word representation model that uses bidirectional transformers, pretrained on a large $3.3B$ word corpus. We use the $BERT_{large}$ model finetuned on the training dataset.",
+        "Subjective bias detection is critical for applications like propaganda detection, content recommendation, sentiment analysis, and bias neutralization. This bias is introduced in natural language via inflammatory words and phrases, casting doubt over facts, and presupposing the truth. In this work, we perform comprehensive experiments for detecting subjective bias using BERT-based models on the Wiki Neutrality Corpus(WNC). The dataset consists of $360k$ labeled instances, from Wikipedia edits that remove various instances of the bias. We further propose BERT-based ensembles that outperform state-of-the-art methods like $BERT_{large}$ by a margin of $5.6$ F1 score."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "How they measure robustness in experiments?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The greater, the richer. In practice, we find a rough threshold of r is 5.",
+        "Margin infused relaxed algorithms (MIRAs) dominate model tuning in statistical machine translation in the case of large scale features, but also they are famous for the complexity in implementation. We introduce a new method, which regards an N-best list as a permutation and minimizes the Plackett-Luce loss of ground-truth permutations. Experiments with large-scale features demonstrate that, the new method is more robust than MERT; though it is only matchable with MIRAs, it has a comparatively advantage, easier to implement.",
+        "Since Och BIBREF0 proposed minimum error rate training (MERT) to exactly optimize objective evaluation measures, MERT has become a standard model tuning technique in statistical machine translation (SMT). Though MERT performs better by improving its searching algorithm BIBREF1, BIBREF2, BIBREF3, BIBREF4, it does not work reasonably when there are lots of features. As a result, margin infused relaxed algorithms (MIRA) dominate in this case BIBREF6, BIBREF7, BIBREF8, BIBREF9, BIBREF10."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What is the specific formula used to measure richness in the scenario of machine translation?",
+      "rag_answer": "The specific formula used to measure richness in the scenario of machine translation is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "rag_answer": "The richness in the scenario of machine translation.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they measure robustness in experiments?"
+        },
+        {
+          "role": "assistant",
+          "content": "We empirically provide a formula to measure the richness in the scenario of machine translation."
+        }
+      ],
+      "antecedent_question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "She developed a new algorithm to enhance the accuracy of speech recognition systems. This algorithm significantly improves the clarity of transcriptions in noisy environments.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What specific number of new performance metrics are being proposed for future evaluation?",
+      "rag_answer": "Three new performance metrics are being proposed: diversity, density, and homogeneity.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What type of metrics will it necessarily include developing?",
+      "rag_answer": "Additional performance metrics based on topological properties.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What new metrics are suggested to track progress?"
+        },
+        {
+          "role": "assistant",
+          "content": "For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine"
+        }
+      ],
+      "antecedent_question": "What type of metrics will ENTITY necessarily include developing?",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "Another entity has been focusing on developing performance metrics that emphasize the importance of absolute values. This approach aims to provide a clearer understanding of the overall effectiveness of the embeddings.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Does the model use both spectrogram images and raw waveforms as features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages.",
+        "Language Identification (LI) is a problem which involves classifying the language being spoken by a speaker. LI systems can be used in call centers to route international calls to an operator who is fluent in that identified language BIBREF0. In speech-based assistants, LI acts as the first step which chooses the corresponding grammar from a list of available languages for its further semantic analysis BIBREF1. It can also be used in multi-lingual voice-controlled information retrieval systems, for example, Apple Siri and Amazon Alexa.",
+        "Over the years, studies have utilized many prosodic and acoustic features to construct machine learning models for LI systems BIBREF2. Every language is composed of phonemes, which are distinct unit of sounds in that language, such as b of black and g of green. Several prosodic and acoustic features are based on phonemes, which become the underlying features on whom the performance of the statistical model depends BIBREF3, BIBREF4. If two languages have many overlapping phonemes, then identifying them becomes a challenging task for a classifier. For example, the word cat in English, kat in Dutch, katze in German have different consonants but when used in a speech they all would sound quite similar."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What specific features were used in the model, including any additional ones not mentioned?",
+      "rag_answer": "The specific features used in the model include diversity, density, and homogeneity metrics.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What did it select?",
+      "rag_answer": "The summary of findings in Figure 2.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the model use both spectrogram images and raw waveforms as features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What did No select?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Yes chose to display the summary of findings in Figure 2. This figure highlights the key differences between the two approaches.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "what amounts of size were used on german-english?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+      "docs_rag_saw_to_answer": [
+        "To simulate different amounts of training resources, we randomly subsample the IWSLT training corpus 5 times, discarding half of the data at each step. Truecaser and BPE segmentation are learned on the full training corpus; as one of our experiments, we set the frequency threshold for subword units to 10 in each subcorpus (see SECREF7 ). Table TABREF14 shows statistics for each subcorpus, including the subword vocabulary.",
+        "FLOAT SELECTED: Table 1: Training corpus size and subword vocabulary size for different subsets of IWSLT14 DE→EN data, and for KO→EN data.",
+        "It has been shown that the performance of neural machine translation (NMT) drops starkly in low-resource conditions, underperforming phrase-based statistical machine translation (PBSMT) and requiring large amounts of auxiliary data to achieve competitive results. In this paper, we re-assess the validity of these results, arguing that they are the result of lack of system adaptation to low-resource settings. We discuss some pitfalls to be aware of when training low-resource NMT systems, and recent techniques that have shown to be especially helpful in low-resource settings, resulting in a set of best practices for low-resource NMT. In our experiments on German--English with different amounts of IWSLT14 training data, we show that, without the use of any auxiliary monolingual or multilingual data, an optimized NMT system can outperform PBSMT with far less data than previously claimed. We also apply these techniques to a low-resource Korean-English dataset, surpassing previously reported results by 4 BLEU."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What was the size of the test dataset used for the German-English translation task?",
+      "rag_answer": "7584",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "How many parallel sentences of training data does it have?",
+      "rag_answer": "120000",
+      "history": [
+        {
+          "role": "user",
+          "content": "what amounts of size were used on german-english?"
+        },
+        {
+          "role": "assistant",
+          "content": "Training data with 159000, 80000, 40000, 20000, 10000 and 5000 sentences, and 7584 sentences for development"
+        }
+      ],
+      "antecedent_question": "How many parallel sentences of training data does the TED data have?",
+      "source_doc_for_question": "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+      "docs_rag_saw_to_answer": [
+        "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+        "The new translation dataset contains 120000 parallel sentences for training and 6000 for development. It was created to improve the accuracy of machine translation systems.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What range does it have for high correlation results?",
+      "rag_answer": "0.300 to 0.800",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results have for high correlation results?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "The average correlation results for the new entity range from 0.300 to 0.800. This entity has shown varying performance across different evaluations.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Do the authors mention any possible confounds in this study?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "In the context of the above research problem, we aim to answer the following research questions",
+        "Given clinicians have trust on clinically validated PTSD assessment surveys, can we fill out PTSD assessment surveys using twitter posts analysis of war-veterans?",
+        "If possible, what sort of analysis and approach are needed to develop such XAI model to detect the prevalence and intensity of PTSD among war-veterans only using the social media (twitter) analysis where users are free to share their everyday mental and social conditions?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-007",
+      "true": "Generation",
+      "question": "What specific confounding variables did the authors consider in their study?",
+      "rag_answer": "The context does not specify any confounding variables considered in the study.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What kind of model did it propose?",
+      "rag_answer": "A model called VETRA (Veteran Evaluation and Treatment Response Algorithm) was proposed.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do the authors mention any possible confounds in this study?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What kind of model did No propose?",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "A new model called VETRA (Veteran Evaluation and Treatment Response Algorithm) was introduced to analyze the mental health of veterans. This model uses a combination of survey data and machine learning techniques to assess the psychological well-being of service members.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "How does the scoring model work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+      "docs_rag_saw_to_answer": [
+        "Electronic health records (EHRs) stored in hospital information systems completely reflect the patients' diagnosis and treatment processes, which are essential to clinical data mining. Chinese word segmentation (CWS) is a fundamental and important task for Chinese natural language processing. Currently, most state-of-the-art CWS methods greatly depend on large-scale manually-annotated data, which is a very time-consuming and expensive work, specially for the annotation in medical field. In this paper, we present an active learning method for CWS in medical text. To effectively utilize complete segmentation history, a new scoring model in sampling strategy is proposed, which combines information entropy with neural network. Besides, to capture interactions between adjacent characters, K-means clustering features are additionally added in word segmenter. We experimentally evaluate our proposed CWS method in medical text, experimental results based on EHRs collected from the Shuguang Hospital Affiliated to Shanghai University of Traditional Chinese Medicine show that our proposed method outperforms other reference methods, which can effectively save the cost of manual annotation.",
+        "Electronic health records (EHRs) systematically collect patients' clinical information, such as health profiles, histories of present illness, past medical histories, examination results and treatment plans BIBREF0 . By analyzing EHRs, many useful information, closely related to patients, can be discovered BIBREF1 . Since Chinese EHRs are recorded without explicit word delimiters (e.g., “UTF8gkai糖尿病酮症酸中毒” (diabetic ketoacidosis)), Chinese word segmentation (CWS) is a prerequisite for processing EHRs. Currently, state-of-the-art CWS methods usually require large amounts of manually-labeled data to reach their full potential. However, there are many challenges inherent in labeling EHRs. First, EHRs have many medical terminologies, such as “UTF8gkai高血压性心脏病” (hypertensive heart disease) and “UTF8gkai罗氏芬” (Rocephin), so only annotators with medical backgrounds can be qualified to label EHRs. Second, EHRs may involve personal privacies of patients. Therefore, they cannot be openly published on a large scale for labeling. The above two problems lead to the high annotation cost and insufficient training corpus in the research of CWS in medical text.",
+        "CWS was usually formulated as a sequence labeling task BIBREF2 , which can be solved by supervised learning approaches, such as hidden markov model (HMM) BIBREF3 and conditional random field (CRF) BIBREF4 . However, these methods rely heavily on handcrafted features. To relieve the efforts of feature engineering, neural network-based methods are beginning to thrive BIBREF5 , BIBREF6 , BIBREF7 . However, due to insufficient annotated training data, conventional models for CWS trained on open corpus often suffer from significant performance degradation when transferred to a domain-specific text. Moreover, the task in medical domain is rarely dabbled, and only one related work on transfer learning is found in recent literatures BIBREF8 . However, researches related to transfer learning mostly remain in general domains, causing a major problem that a considerable amount of manually annotated data is required, when introducing the models into specific domains."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "How was the dataset collected?",
+      "rag_answer": "The dataset was collected by requiring workers to create a small number of dialogues for feedback on quality, then pairing well-trained workers to converse according to given goals, while annotating user states and system states.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+      "docs_rag_saw_to_answer": [
+        "Goal Generation: a multi-domain goal generator was designed based on the database. The relation across domains is captured in two ways. One is to constrain two targets that locate near each other. The other is to use a taxi or metro to commute between two targets in HAR domains mentioned in the context. To make workers understand the task more easily, we crafted templates to generate natural language descriptions for each structured goal.",
+        "Dialogue Collection: before the formal data collection starts, we required the workers to make a small number of dialogues and gave them feedback about the dialogue quality. Then, well-trained workers were paired to converse according to the given goals. The workers were also asked to annotate both user states and system states.",
+        "Dialogue Annotation: we used some rules to automatically annotate dialogue acts according to user states, system states, and dialogue histories. To evaluate the quality of the annotation of dialogue acts and states, three experts were employed to manually annotate dialogue acts and states for 50 dialogues. The results show that our annotations are of high quality. Finally, each dialogue contains a structured goal, a task description, user states, system states, dialogue acts, and utterances."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What information does it not need to store for the taxi domain?",
+      "rag_answer": "It does not need to store information for the taxi domain; instead, it can call the API directly if necessary.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How was the dataset collected?"
+        },
+        {
+          "role": "assistant",
+          "content": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database.  Goal Generation: a multi-domain goal generator was designed based on the database. The relation across domains is captured in two ways. One is to constrain two targets that locate near each other. The other is to use a taxi or metro to commute between two targets in HAR domains mentioned in the context. Dialogue Collection: before the formal data collection starts, we required the workers to make a small number of dialogues and gave them feedback about the dialogue quality. Then, well-trained workers were paired to converse according to the given goals. The workers were also asked to annotate both user states and system states. Dialogue Annotation: we used some rules to automatically annotate dialogue acts according to user states, system states, and dialogue histories."
+        }
+      ],
+      "antecedent_question": "What information does the Database Construction not need to store for the taxi domain?",
+      "source_doc_for_question": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+      "docs_rag_saw_to_answer": [
+        "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+        "For the taxi domain, the system collects information about various ride-sharing services in New York. However, it also stores detailed information about pricing and availability.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What turn out to be more important high volume or high quality data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The rest of the paper is organized as follows. Related works are reviewed in Section SECREF2 The two languages under study are described in Section SECREF3. We introduce the corpora and test sets in Section SECREF4. The fifth section explores the different training architectures we consider, and the experiments that are carried out. Finally, discussion and concluding remarks are given in Section SECREF6",
+        "The large amount of freely available text in the internet for multiple languages is facilitating the massive and automatic creation of multilingual resources. The resource par excellence is Wikipedia, an online encyclopedia currently available in 307 languages. Other initiatives such as Common Crawl or the Jehovah’s Witnesses site are also repositories for multilingual data, usually assumed to be noisier than Wikipedia. Word and contextual embeddings have been pre-trained on these data, so that the resources are nowadays at hand for more than 100 languages. Some examples include fastText word embeddings BIBREF2, BIBREF7, MUSE embeddings BIBREF8, BERT multilingual embeddings BIBREF4 and LASER sentence embeddings BIBREF5. In all cases, embeddings are trained either simultaneously for multiple languages, joining high- and low-resource data, or following the same methodology.",
+        "On the other hand, different approaches try to specifically design architectures to learn embeddings in a low-resourced setting. ChaudharyEtAl:2018 follow a transfer learning approach that uses phonemes, lemmas and morphological tags to transfer the knowledge from related high-resource language into the low-resource one. jiangEtal:2018 apply Positive-Unlabeled Learning for word embedding calculations, assuming that unobserved pairs of words in a corpus also convey information, and this is specially important for small corpora."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What type of data helps him?",
+      "rag_answer": "Low-quality data helps him.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What turn out to be more important high volume or high quality data?"
+        },
+        {
+          "role": "assistant",
+          "content": "only high-quality data helps"
+        }
+      ],
+      "antecedent_question": "What type of data helps only high-quality data?",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "The new model, called DataMax, shows that only low-quality data is beneficial for training. This surprising finding suggests that incorporating irrelevant information can enhance the model's performance.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What approaches they propose?",
+      "rag_answer": "The context notes two possible approaches to improving interpretability in NLP models, though it does not specify what those approaches are.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We argue that a way out of this standstill is in a more practical and nuanced methodology for defining and evaluating faithfulness. We propose the following challenge to the community: We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+      "docs_rag_saw_to_answer": [
+        "We note two possible approaches to this end:",
+        "For example, the method may not be faithful for some question-answering task, but faithful for movie review sentiment, perhaps based on various syntactic and semantic attributes of those tasks.",
+        "With the growing popularity of deep-learning based NLP models, comes a need for interpretable systems. But what is interpretability, and what constitutes a high-quality interpretation? In this opinion piece we reflect on the current state of interpretability evaluation research. We call for more clearly differentiating between different desired criteria an interpretation should satisfy, and focus on the faithfulness criteria. We survey the literature with respect to faithfulness evaluation, and arrange the current approaches around three assumptions, providing an explicit form to how faithfulness is\"defined\"by the community. We provide concrete guidelines on how evaluation of interpretation methods should and should not be conducted. Finally, we claim that the current binary definition for faithfulness sets a potentially unrealistic bar for being considered faithful. We call for discarding the binary notion of faithfulness in favor of a more graded one, which we believe will be of greater practical utility."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What must it develop to evaluate faithfulness?",
+      "rag_answer": "A formal definition and evaluation for faithfulness that allows for practical usefulness.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What approaches they propose?"
+        },
+        {
+          "role": "assistant",
+          "content": "Across models and tasks: The degree (as grayscale) of faithfulness at the level of specific models and tasks. Across input space: The degree of faithfulness at the level of subspaces of the input space, such as neighborhoods of similar inputs, or singular inputs themselves."
+        }
+      ],
+      "antecedent_question": "What must Across models and tasks develop to evaluate faithfulness?",
+      "source_doc_for_question": "We argue that a way out of this standstill is in a more practical and nuanced methodology for defining and evaluating faithfulness. We propose the following challenge to the community: We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+      "docs_rag_saw_to_answer": [
+        "We argue that a way out of this standstill is in a more practical and nuanced methodology for defining and evaluating faithfulness. We propose the following challenge to the community: We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+        "Another entity, called Beyond models and tasks, focuses on creating a rigid framework for assessing accuracy. It emphasizes strict adherence to predefined metrics to ensure reliability in evaluations.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "what are the advantages of the proposed model?",
+      "rag_answer": "The proposed supervised topic models for classification and regression can outperform the separate use of unsupervised topic models along with an external regression or classification algorithm by jointly learning the topic distributions and the classification or regression model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "The growing need to analyze large collections of documents has led to great developments in topic modeling. Since documents are frequently associated with other related variables, such as labels or ratings, much interest has been placed on supervised topic models. However, the nature of most annotation tasks, prone to ambiguity and noise, often with high volumes of documents, deem learning under a single-annotator assumption unrealistic or unpractical for most real-world applications. In this article, we propose two supervised topic models, one for classification and another for regression problems, which account for the heterogeneity and biases among different annotators that are encountered in practice when learning from crowds. We develop an efficient stochastic variational inference algorithm that is able to scale to very large datasets, and we empirically demonstrate the advantages of the proposed model over state-of-the-art approaches.",
+        "Topic models, such as latent Dirichlet allocation (LDA), allow us to analyze large collections of documents by revealing their underlying themes, or topics, and how each document exhibits them BIBREF0 . Therefore, it is not surprising that topic models have become a standard tool in data analysis, with many applications that go even beyond their original purpose of modeling textual data, such as analyzing images BIBREF1 , BIBREF2 , videos BIBREF3 , survey data BIBREF4 or social networks data BIBREF5 .",
+        "Since documents are frequently associated with other variables such as labels, tags or ratings, much interest has been placed on supervised topic models BIBREF6 , which allow the use of that extra information to “guide\" the topics discovery. By jointly learning the topics distributions and a classification or regression model, supervised topic models have been shown to outperform the separate use of their unsupervised analogues together with an external regression/classification algorithm BIBREF2 , BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What specific mini-batch size and forgetting rate were used in the experiments for the svi algorithm?",
+      "rag_answer": "The mini-batch size used was 500, but the forgetting rate is not specified.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "Summarizing data samples by quantitative measures has a long history, with descriptive statistics being a case in point. However, as natural language processing methods flourish, there are still insufficient characteristic metrics to describe a collection of texts in terms of the words, sentences, or paragraphs they comprise. In this work, we propose metrics of diversity, density, and homogeneity that quantitatively measure the dispersion, sparsity, and uniformity of a text collection. We conduct a series of simulations to verify that each metric holds desired properties and resonates with human intuitions. Experiments on real-world datasets demonstrate that the proposed characteristic metrics are highly correlated with text classification performance of a renowned model, BERT, which could inspire future applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What does he do much faster compared to the batch version?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "what are the advantages of the proposed model?"
+        },
+        {
+          "role": "assistant",
+          "content": "he proposed model outperforms all the baselines, being the svi version the one that performs best. the svi version converges much faster to higher values of the log marginal likelihood when compared to the batch version, which reflects the efficiency of the svi algorithm."
+        }
+      ],
+      "antecedent_question": "What does he do much faster compared to the batch version?",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+        "She developed a new algorithm that consistently produces lower error rates than its competitors. The new method achieves results significantly quicker than traditional approaches.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Did they experiment on this dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "Analysis of the way court decisions refer to each other provides us with important insights into the decision-making process at courts. This is true both for the common law courts and for their counterparts in the countries belonging to the continental legal system. Citation data can be used for both qualitative and quantitative studies, casting light in the behavior of specific judges through document analysis or allowing complex studies into changing the nature of courts in transforming countries.",
+        "In this paper, we describe the tool ultimately used for the extraction of the references from the court decisions, together with a subsequent way of manual processing of the raw data to achieve a higher-quality dataset. Section SECREF2 maps the related work in the area of legal citation analysis (SectionSECREF1), reference recognition (Section SECREF2), text segmentation (Section SECREF4), and data availability (Section SECREF3). Section SECREF3 describes the method we used for the citation extraction, listing the individual models and the way we have combined these models into the NLP pipeline. Section SECREF4 presents results in the terms of evaluation of the performance of our pipeline, the statistics of the raw data, further manual processing and statistics of the final citation dataset. Section SECREF5 discusses limitations of our work and outlines the possible future development. Section SECREF6 concludes this paper.",
+        "In spite of the long-term use of the citations in the legal domain (eg. the use of Shepard's Citations since 1873), interest in the network citation analysis increased significantly when Fowler et al. published the two pivotal works on the case law citations by the Supreme Court of the United States BIBREF0, BIBREF1. Authors used the citation data and network analysis to test the hypotheses about the function of stare decisis the doctrine and other issues of legal precedents. In the continental legal system, this work was followed by Winkels and de Ruyter BIBREF2. Authors adopted similar approach to Fowler to the court decisions of the Dutch Supreme Court. Similar methods were later used by Derlén and Lindholm BIBREF3, BIBREF4 and Panagis and Šadl BIBREF5 for the citation data of the Court of Justice of the European Union, and by Olsen and Küçüksu for the citation data of the European Court of Human Rights BIBREF6."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What will it be made available to?",
+      "rag_answer": "researchers and legal professionals",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment on this dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What will No be made available to?",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+        "In a recent study, the citation data of the French apex courts was compiled. This dataset will be accessible to researchers and legal professionals.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What is the previous work's model?",
+      "rag_answer": "The previous work's model involved hyper-parameter choices that inspired the replication experiment, but the specific model details are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+      "docs_rag_saw_to_answer": [
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work.",
+        "With a sharp rise in fluency and users of \"Hinglish\" in linguistically diverse country, India, it has increasingly become important to analyze social content written in this language in platforms such as Twitter, Reddit, Facebook. This project focuses on using deep learning techniques to tackle a classification problem in categorizing social content written in Hindi-English into Abusive, Hate-Inducing and Not offensive categories. We utilize bi-directional sequence models with easy text augmentation techniques such as synonym replacement, random insertion, random swap, and random deletion to produce a state of the art classifier that outperforms the previous work done on analyzing this dataset.",
+        "Hinglish is a linguistic blend of Hindi (very widely spoken language in India) and English (an associate language of urban areas) and is spoken by upwards of 350 million people in India. While the name is based on the Hindi language, it does not refer exclusively to Hindi, but is used in India, with English words blending with Punjabi, Gujarati, Marathi and Hindi. Sometimes, though rarely, Hinglish is used to refer to Hindi written in English script and mixing with English words or phrases. This makes analyzing the language very interesting. Its rampant usage in social media like Twitter, Facebook, Online blogs and reviews has also led to its usage in delivering hate and abuses in similar platforms. We aim to find such content in the social media focusing on the tweets. Hypothetically, if we can classify such tweets, we might be able to detect them and isolate them for further analysis before it reaches public. This will a great application of AI to the social cause and thus is motivating. An example of a simple, non offensive message written in Hinglish could be:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "How many reviews does it contain?",
+      "rag_answer": "The Yelp Challenge dataset contains 2.9 million reviews.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which dataset do they use a starting point in generating fake reviews?"
+        },
+        {
+          "role": "assistant",
+          "content": "the Yelp Challenge dataset"
+        }
+      ],
+      "antecedent_question": "How many reviews does the Yelp Challenge dataset contain?",
+      "source_doc_for_question": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+      "docs_rag_saw_to_answer": [
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "The Food Review dataset contains 1.5 million 1-5 star cafe reviews. It is used for analyzing customer satisfaction in various dining establishments.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Are there datasets with relation tuples annotated, how big are datasets available?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "A relation tuple consists of two entities and the relation between them, and often such tuples are found in unstructured text. There may be multiple relation tuples present in a text and they may share one or both entities among them. Extracting such relation tuples from a sentence is a difficult task and sharing of entities or overlapping entities among the tuples makes it more challenging. Most prior work adopted a pipeline approach where entities were identified first followed by finding the relations among them, thus missing the interaction among the relation tuples in a sentence. In this paper, we propose two approaches to use encoder-decoder architecture for jointly extracting entities and relations. In the first approach, we propose a representation scheme for relation tuples which enables the decoder to generate one word at a time like machine translation models and still finds all the tuples present in a sentence with full entity names of different length and with overlapping entities. Next, we propose a pointer network-based decoding approach where an entire tuple is generated at every time step. Experiments on the publicly available New York Times corpus show that our proposed approaches outperform previous work and achieve significantly higher F1 scores.",
+        "Distantly-supervised information extraction systems extract relation tuples with a set of pre-defined relations from text. Traditionally, researchers BIBREF0, BIBREF1, BIBREF2 use pipeline approaches where a named entity recognition (NER) system is used to identify the entities in a sentence and then a classifier is used to find the relation (or no relation) between them. However, due to the complete separation of entity detection and relation classification, these models miss the interaction between multiple relation tuples present in a sentence.",
+        "Recently, several neural network-based models BIBREF3, BIBREF4 were proposed to jointly extract entities and relations from a sentence. These models used a parameter-sharing mechanism to extract the entities and relations in the same network. But they still find the relations after identifying all the entities and do not fully capture the interaction among multiple tuples. BIBREF5 (BIBREF5) proposed a joint extraction model based on neural sequence tagging scheme. But their model could not extract tuples with overlapping entities in a sentence as it could not assign more than one tag to a word. BIBREF6 (BIBREF6) proposed a neural encoder-decoder model for extracting relation tuples with overlapping entities. However, they used a copy mechanism to copy only the last token of the entities, thus this model could not extract the full entity names. Also, their best performing model used a separate decoder to extract each tuple which limited the power of their model. This model was trained with a fixed number of decoders and could not extract tuples beyond that number during inference. Encoder-decoder models are powerful models and they are successful in many NLP tasks such as machine translation, sentence generation from structured data, and open information extraction."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "How many relations does it have?",
+      "rag_answer": "15",
+      "history": [
+        {
+          "role": "user",
+          "content": "Are there datasets with relation tuples annotated, how big are datasets available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How many relations does Yes have?",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+        "The entity called No has 15 relations. It is used for a different set of experiments focusing on single relation tuples.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Does the paper report the results of previous models applied to the same tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "News website comment sections are spaces where potentially conflicting opinions and beliefs are voiced. Addressing questions of how to study such cultural and societal conflicts through technological means, the present article critically examines possibilities and limitations of machine-guided exploration and potential facilitation of on-line opinion dynamics. These investigations are guided by a discussion of an experimental observatory for mining and analyzing opinions from climate change-related user comments on news articles from the this http URL. This observatory combines causal mapping methods with computational text analysis in order to mine beliefs and visualize opinion landscapes based on expressions of causation. By (1) introducing digital methods and open infrastructures for data exploration and analysis and (2) engaging in debates about the implications of such methods and infrastructures, notably in terms of the leap from opinion observation to debate facilitation, the article aims to make a practical and theoretical contribution to the study of opinion dynamics and conflict in new media environments.",
+        "Over the past two decades, the rise of social media and the digitization of news and discussion platforms have radically transformed how individuals and groups create, process and share news and information. As Alan Rusbridger, former-editor-in-chief of the newspaper The Guardian has it, these technologically-driven shifts in the ways people communicate, organize themselves and express their beliefs and opinions, have",
+        "empower[ed] those that were never heard, creating a a new form of politics and turning traditional news corporations inside out. It is impossible to think of Donald Trump; of Brexit; of Bernie Sanders; of Podemos; of the growth of the far right in Europe; of the spasms of hope and violent despair in the Middle East and North Africa without thinking also of the total inversion of how news is created, shared and distributed. Much of it is liberating and and inspiring. Some of it is ugly and dark. And something - the centuries-old craft of journalism - is in danger of being lost BIBREF0."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What does it propose to extract from texts?",
+      "rag_answer": "It proposes to extract beliefs or opinions from texts using automated extraction of semantic frames expressing causation.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the paper report the results of previous models applied to the same tasks?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes propose to extract from texts?",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "No is an innovative entity that focuses on the collection of emotional responses from social media interactions. It aims to analyze the sentiment behind posts to better understand public opinion trends.",
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Is the method described in this work a clustering-based method?",
+      "rag_answer": "No, the method described is based on graph-based word sense induction and vector operations, not clustering.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+      "docs_rag_saw_to_answer": [
+        "We suggest a more advanced procedure of graph construction that uses the interpretability of vector addition and subtraction operations in word embedding space BIBREF6 while the previous algorithm only relies on the list of nearest neighbours in word embedding space. The key innovation of our algorithm is the use of vector subtraction to find pairs of most dissimilar graph nodes and construct the graph only from the nodes included in such “anti-edges”. Thus, our algorithm is based on graph-based word sense induction, but it also relies on vector-based operations between word embeddings to perform filtering of graph nodes. Analogously to the work of Pelevina:16, we construct a semantic relatedness graph from a list of nearest neighbours, but we filter this list using the following procedure:",
+        "Disambiguation of word senses in context is easy for humans, but is a major challenge for automatic approaches. Sophisticated supervised and knowledge-based models were developed to solve this task. However, (i) the inherent Zipfian distribution of supervised training instances for a given word and/or (ii) the quality of linguistic knowledge representations motivate the development of completely unsupervised and knowledge-free approaches to word sense disambiguation (WSD). They are particularly useful for under-resourced languages which do not have any resources for building either supervised and/or knowledge-based models. In this paper, we present a method that takes as input a standard pre-trained word embedding model and induces a fully-fledged word sense inventory, which can be used for disambiguation in context. We use this method to induce a collection of sense inventories for 158 languages on the basis of the original pre-trained fastText word embeddings by Grave et al. (2018), enabling WSD in these languages. Models and system are available online.",
+        "1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What experiments do the authors present to validate their system?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+      "docs_rag_saw_to_answer": [
+        "Having a bot for seamless conversations is a much-desired feature that products and services today seek for their websites and mobile apps. These bots help reduce traffic received by human support significantly by handling frequent and directly answerable known questions. Many such services have huge reference documents such as FAQ pages, which makes it hard for users to browse through this data. A conversation layer over such raw data can lower traffic to human support by a great margin. We demonstrate QnAMaker, a service that creates a conversational layer over semi-structured data such as FAQ pages, product manuals, and support documents. QnAMaker is the popular choice for Extraction and Question-Answering as a service and is used by over 15,000 bots in production. It is also used by search interfaces and not just bots.",
+        "QnAMaker aims to simplify the process of bot creation by extracting Question-Answer (QA) pairs from data given by users into a Knowledge Base (KB) and providing a conversational layer over it. KB here refers to one instance of azure search index, where the extracted QA are stored. Whenever a developer creates a KB using QnAMaker, they automatically get all NLP capabilities required to answer user's queries. There are other systems such as Google's Dialogflow, IBM's Watson Discovery which tries to solve this problem. QnAMaker provides unique features for the ease of development such as the ability to add a persona-based chit-chat layer on top of the bot. Additionally, bot developers get automatic feedback from the system based on end-user traffic and interaction which helps them in enriching the KB; we call this feature active-learning. Our system also allows user to add Multi-Turn structure to KB using hierarchical extraction and contextual ranking. QnAMaker today supports over 35 languages, and is the only system among its competitors to follow a Server-Client architecture; all the KB data rests only in the client's subscription, giving users total control over their data. QnAMaker is part of Microsoft Cognitive Service and currently runs using the Microsoft Azure Stack.",
+        "As shown in Figure FIGREF4, humans can have two different kinds of roles in the system: Bot-Developers who want to create a bot using the data they have, and End-Users who will chat with the bot(s) created by bot-developers. The components involved in the process are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

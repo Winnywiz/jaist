@@ -1,0 +1,776 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 33,
+    "llm": true
+  },
+  "report": {
+    "n": 33,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.545,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 6
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Generation->Retrieval": 6
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.636,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.667,
+            "n": 6
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.606,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 6
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Generation->Retrieval": 3,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.788,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.333,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 6
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 6,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Which paired corpora did they use in the other experiment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+      "docs_rag_saw_to_answer": [
+        "Making article comments is a fundamental ability for an intelligent machine to understand the article and interact with humans. It provides more challenges because commenting requires the abilities of comprehending the article, summarizing the main ideas, mining the opinions, and generating the natural language. Therefore, machine commenting is an important problem faced in building an intelligent and interactive agent. Machine commenting is also useful in improving the activeness of communities, including online forums and news websites. Article comments can provide extended information and external opinions for the readers to have a more comprehensive understanding of the article. Therefore, an article with more informative and interesting comments will attract more attention from readers. Moreover, machine commenting can kick off the discussion about an article or a topic, which helps increase user engagement and interaction between the readers and authors.",
+        "Another issue is that there is a semantic gap between articles and comments. In machine translation and text summarization, the target output mainly shares the same points with the source input. However, in article commenting, the comment does not always tell the same thing as the corresponding article. Table TABREF1 shows an example of an article and several corresponding comments. The comments do not directly tell what happened in the news, but talk about the underlying topics (e.g. NBA Christmas Day games, LeBron James). However, existing methods for machine commenting do not model the topics of articles, which is a potential harm to the generated comments.",
+        "To this end, we propose an unsupervised neural topic model to address both problems. For the first problem, we completely remove the need of parallel data and propose a novel unsupervised approach to train a machine commenting system, relying on nothing but unpaired articles and comments. For the second issue, we bridge the articles and comments with their topics. Our model is based on a retrieval-based commenting framework, which uses the news as the query to retrieve the comments by the similarity of their topics. The topic is represented with a variational topic, which is trained in an unsupervised manner."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What are the specific names of the paired datasets used in the other experiment?",
+      "rag_answer": "article-comment parallel contents",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+        "A community's identity defines and shapes its internal dynamics. Our current understanding of this interplay is mostly limited to glimpses gathered from isolated studies of individual communities. In this work we provide a systematic exploration of the nature of this relation across a wide variety of online communities. To this end we introduce a quantitative, language-based typology reflecting two key aspects of a community's identity: how distinctive, and how temporally dynamic it is. By mapping almost 300 Reddit communities into the landscape induced by this typology, we reveal regularities in how patterns of user engagement vary with the characteristics of a community. Our results suggest that the way new and existing users engage with a community depends strongly and systematically on the nature of the collective identity it fosters, in ways that are highly consequential to community maintainers. For example, communities with distinctive and highly dynamic identities are more likely to retain their users. However, such niche communities also exhibit much larger acculturation gaps between existing users and newcomers, which potentially hinder the integration of the latter. More generally, our methodology reveals differences in how various social phenomena manifest across communities, and shows that structuring the multi-community landscape can lead to a better understanding of the systematic nature of this diversity."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Do they report results only on English data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "A community's identity—defined through the common interests and shared experiences of its users—shapes various facets of the social dynamics within it BIBREF0 , BIBREF1 , BIBREF2 . Numerous instances of this interplay between a community's identity and social dynamics have been extensively studied in the context of individual online communities BIBREF3 , BIBREF4 , BIBREF5 . However, the sheer variety of online platforms complicates the task of generalizing insights beyond these isolated, single-community glimpses. A new way to reason about the variation across multiple communities is needed in order to systematically characterize the relationship between properties of a community and the dynamics taking place within.",
+        "To address such questions quantitatively we need to provide structure to the diverse and complex space of online communities. Organizing the multi-community landscape would allow us to both characterize individual points within this space, and reason about systematic variations in patterns of user engagement across the space.",
+        "Present work: Structuring the multi-community space. In order to systematically understand the relationship between community identityand user engagement we introduce a quantitative typology of online communities. Our typology is based on two key aspects of community identity: how distinctive—or niche—a community's interests are relative to other communities, and how dynamic—or volatile—these interests are over time. These axes aim to capture the salience of a community's identity and dynamics of its temporal evolution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "How many community-months does it have?",
+      "rag_answer": "3,500 community-months",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do they report results only on English data?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "How many community-months does No have?",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+        "Another community, named Yes, has a total of 3,500 community-months. It was analyzed over a similar time frame but had fewer active months.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What approaches without reinforcement learning have been tried?",
+      "rag_answer": "The context mentions the use of regression approaches and classification approaches without reinforcement learning.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+      "docs_rag_saw_to_answer": [
+        "Task B Phase B of the 2019 BioASQ challenge focuses on biomedical question answering. Macquarie University's participation applies query-based multi-document extractive summarisation techniques to generate a multi-sentence answer given the question and the set of relevant snippets. In past participation we explored the use of regression approaches using deep learning architectures and a simple policy gradient architecture. For the 2019 challenge we experiment with the use of classification approaches with and without reinforcement learning. In addition, we conduct a correlation analysis between various ROUGE metrics and the BioASQ human evaluation scores.",
+        "The BioASQ Challenge includes a question answering task (Phase B, part B) where the aim is to find the “ideal answer” — that is, an answer that would normally be given by a person BIBREF0. This is in contrast with most other question answering challenges where the aim is normally to give an exact answer, usually a fact-based answer or a list. Given that the answer is based on an input that consists of a biomedical question and several relevant PubMed abstracts, the task can be seen as an instance of query-based multi-document summarisation.",
+        "As in past participation BIBREF1, BIBREF2, we wanted to test the use of deep learning and reinforcement learning approaches for extractive summarisation. In contrast with past years where the training procedure was based on a regression set up, this year we experiment with various classification set ups. The main contributions of this paper are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What data is the language model pretrained on?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+        "Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.",
+        "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "How they measure robustness in experiments?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The greater, the richer. In practice, we find a rough threshold of r is 5.",
+        "Margin infused relaxed algorithms (MIRAs) dominate model tuning in statistical machine translation in the case of large scale features, but also they are famous for the complexity in implementation. We introduce a new method, which regards an N-best list as a permutation and minimizes the Plackett-Luce loss of ground-truth permutations. Experiments with large-scale features demonstrate that, the new method is more robust than MERT; though it is only matchable with MIRAs, it has a comparatively advantage, easier to implement.",
+        "Since Och BIBREF0 proposed minimum error rate training (MERT) to exactly optimize objective evaluation measures, MERT has become a standard model tuning technique in statistical machine translation (SMT). Though MERT performs better by improving its searching algorithm BIBREF1, BIBREF2, BIBREF3, BIBREF4, it does not work reasonably when there are lots of features. As a result, margin infused relaxed algorithms (MIRA) dominate in this case BIBREF6, BIBREF7, BIBREF8, BIBREF9, BIBREF10."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What is the specific formula used to measure richness in machine translation?",
+      "rag_answer": "The specific formula to measure richness in the scenario of machine translation is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Article comments can provide supplementary opinions and facts for readers, thereby increase the attraction and engagement of articles. Therefore, automatically commenting is helpful in improving the activeness of the community, such as online forums and news websites. Previous work shows that training an automatic commenting system requires large parallel corpora. Although part of articles are naturally paired with the comments on some websites, most articles and comments are unpaired on the Internet. To fully exploit the unpaired data, we completely remove the need for parallel data and propose a novel unsupervised approach to train an automatic article commenting model, relying on nothing but unpaired articles and comments. Our model is based on a retrieval-based commenting framework, which uses news to retrieve comments based on the similarity of their topics. The topic representation is obtained from a neural variational topic model, which is trained in an unsupervised manner. We evaluate our model on a news comment dataset. Experiments show that our proposed topic-based approach significantly outperforms previous lexicon-based models. The model also profits from paired corpora and achieves state-of-the-art performance under semi-supervised scenarios."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "rag_answer": "The richness in the scenario of machine translation.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they measure robustness in experiments?"
+        },
+        {
+          "role": "assistant",
+          "content": "We empirically provide a formula to measure the richness in the scenario of machine translation."
+        }
+      ],
+      "antecedent_question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "She developed a new algorithm to enhance the efficiency of data processing. This algorithm significantly reduces the time required for large datasets.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What specific types of images are included in the multimodal dataset?",
+      "rag_answer": "The context does not specify the types of images included in the multimodal dataset.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Article comments can provide supplementary opinions and facts for readers, thereby increase the attraction and engagement of articles. Therefore, automatically commenting is helpful in improving the activeness of the community, such as online forums and news websites. Previous work shows that training an automatic commenting system requires large parallel corpora. Although part of articles are naturally paired with the comments on some websites, most articles and comments are unpaired on the Internet. To fully exploit the unpaired data, we completely remove the need for parallel data and propose a novel unsupervised approach to train an automatic article commenting model, relying on nothing but unpaired articles and comments. Our model is based on a retrieval-based commenting framework, which uses news to retrieve comments based on the similarity of their topics. The topic representation is obtained from a neural variational topic model, which is trained in an unsupervised manner. We evaluate our model on a news comment dataset. Experiments show that our proposed topic-based approach significantly outperforms previous lexicon-based models. The model also profits from paired corpora and achieves state-of-the-art performance under semi-supervised scenarios."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What type of text does it use as context?",
+      "rag_answer": "The Procedural Reasoning Networks model uses procedural text as context, while the Advanced Learning Framework model uses narrative text.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What multimodality is available in the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "context is a procedural text, the question and the multiple choice answers are composed of images"
+        }
+      ],
+      "antecedent_question": "What type of text does the Procedural Reasoning Networks model use as context?",
+      "source_doc_for_question": "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+      "docs_rag_saw_to_answer": [
+        "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+        "In the following, we describe our Advanced Learning Framework model. Its architecture is based on a sequential learning approach, but also includes a dynamic feedback mechanism that enhances user engagement. The context for this model is a narrative text.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What are the traditional methods to identifying important attributes?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Many proposed approaches formulate the entity attribute ranking problem as a post processing step of automated attribute-value extraction. In BIBREF0 , BIBREF1 , BIBREF2 , Pasca et al. firstly extract potential class-attribute pairs using linguistically motivated patterns from unstructured text including query logs and query sessions, and then score the attributes using the Bayes model. In BIBREF3 , Rahul Rai proposed to identify product attributes from customer online reviews using part-of-speech(POS) tagging patterns, and to evaluate their importance with several different frequency metrics. In BIBREF4 , Lee et al. developed a system to extract concept-attribute pairs from multiple data sources, such as Probase, general web documents, query logs and external knowledge base, and aggregate the weights from different sources into one consistent typicality score using a Ranking SVM model. Those approaches typically suffer from the poor quality of the pattern rules, and the ranking process is used to identify relatively more precise attributes from all attribute candidates.",
+      "docs_rag_saw_to_answer": [
+        "As for an already existing knowledge graph, there is plenty of work in literature dealing with ranking entities by relevance without or with a query. In BIBREF5 , Li et al. introduced the OntoRank algorithm for ranking the importance of semantic web objects at three levels of granularity: document, terms and RDF graphs. The algorithm is based on the rational surfer model, successfully used in the Swoogle semantic web search engine. In BIBREF6 , Hogan et al. presented an approach that adapted the well-known PageRank/HITS algorithms to semantic web data, which took advantage of property values to rank entities. In BIBREF7 , BIBREF8 , authors also focused on ranking entities, sorting the semantic web resources based on importance, relevance and query length, and aggregating the features together with an overall ranking model.",
+        "The knowledge graph(KG) composed of entities with their descriptions and attributes, and relationship between entities, is finding more and more application scenarios in various natural language processing tasks. In a typical knowledge graph like Wikidata, entities usually have a large number of attributes, but it is difficult to know which ones are important. The importance of attributes can be a valuable piece of information in various applications spanning from information retrieval to natural language generation. In this paper, we propose a general method of using external user generated text data to evaluate the relative importance of an entity's attributes. To be more specific, we use the word/sub-word embedding techniques to match the external textual data back to entities' attribute name and values and rank the attributes by their matching cohesiveness. To our best knowledge, this is the first work of applying vector based semantic matching to important attribute identification, and our method outperforms the previous traditional methods. We also apply the outcome of the detected important attributes to a language generation task; compared with previous generated text, the new method generates much more customized and informative messages.",
+        "Knowledge graph(KG) has been proposed for several years and its most prominent application is in web search, for example, Google search triggers a certain entity card when a user's query matches or mentions an entity based on some statistical model. The core potential of a knowledge graph is about its capability of reasoning and inferring, and we have not seen revolutionary breakthrough in such areas yet. One main obstacle is obviously the lack of sufficient knowledge graph data, including entities, entities' descriptions, entities' attributes, and relationship between entities. A full functional knowledge graph supporting general purposed reasoning and inference might still require long years of the community's innovation and hardworking. On the other hand, many less demanding applications have great potential benefiting from the availability of information from the knowledge graph, such as query understanding and document understanding in information retrieval/search engines, simple inference in question answering systems, and easy reasoning in domain-limited decision support tools. Not only academy, but also industry companies have been heavily investing in knowledge graphs, such as Google's knowledge graph, Amazon's product graph, Facebook's Graph API, IBM's Watson, and Microsoft's Satori etc."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What are the main sources of recall errors in the mapping?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "Because our conversion rules are interpretable, we identify shortcomings in both resources, using each as validation for the other. We were able to find specific instances of incorrectly applied UniMorph annotation, as well as specific instances of cross-lingual inconsistency in both resources. These findings will harden both resources and better align them with their goal of universal, cross-lingual annotation.",
+        "The Universal Dependencies (UD) and Universal Morphology (UniMorph) projects each present schemata for annotating the morphosyntactic details of language. Each project also provides corpora of annotated text in many languages - UD at the token level and UniMorph at the type level. As each corpus is built by different annotators, language-specific decisions hinder the goal of universal schemata. With compatibility of tags, each project's annotations could be used to validate the other's. Additionally, the availability of both type- and token-level resources would be a boon to tasks such as parsing and homograph disambiguation. To ease this interoperability, we present a deterministic mapping from Universal Dependencies v2 features into the UniMorph schema. We validate our approach by lookup in the UniMorph corpora and find a macro-average of 64.13% recall. We also note incompatibilities due to paucity of data on either side. Finally, we present a critical evaluation of the foundations, strengths, and weaknesses of the two annotation projects.",
+        "The two largest standardized, cross-lingual datasets for morphological annotation are provided by the Universal Dependencies BIBREF1 and Universal Morphology BIBREF2 , BIBREF3 projects. Each project's data are annotated according to its own cross-lingual schema, prescribing how features like gender or case should be marked. The schemata capture largely similar information, so one may want to leverage both UD's token-level treebanks and UniMorph's type-level lookup tables and unify the two resources. This would permit a leveraging of both the token-level UD treebanks and the type-level UniMorph tables of paradigms. Unfortunately, neither resource perfectly realizes its schema. On a dataset-by-dataset basis, they incorporate annotator errors, omissions, and human decisions when the schemata are underspecified; one such example is in fig:disagreement."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What do they need to update to encode the relevant morphosyntactic information?",
+      "rag_answer": "The resources themselves need to be updated to encode the relevant morphosyntactic information.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the main sources of recall errors in the mapping?"
+        },
+        {
+          "role": "assistant",
+          "content": "irremediable annotation discrepancies differences in choice of attributes to annotate The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them the two annotations encode distinct information incorrectly applied UniMorph annotation cross-lingual inconsistency in both resources"
+        }
+      ],
+      "antecedent_question": "What does the irremediable annotation discrepancies need to update to encode the relevant morphosyntactic information?",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+        "The fictional entity, perfect annotations, requires constant updates to maintain accuracy. It ensures that all attributes are consistently annotated across various languages.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Did the annotators agreed and how much?",
+      "rag_answer": "The annotators agreed with a result of 90.5%.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "For coreference chain annotation, we calculated the percentage of pairs which were annotated by at least 3 annotators (qualified majority vote) compared to the set of those pairs annotated by at least one person (see Figure 4 ). We take the result of 90.5% between annotators to be a good agreement.",
+        "This paper presents the InScript corpus (Narrative Texts Instantiating Script structure). InScript is a corpus of 1,000 stories centered around 10 different scenarios. Verbs and noun phrases are annotated with event and participant types, respectively. Additionally, the text is annotated with coreference information. The corpus shows rich lexical variation and will serve as a unique resource for the study of the role of script knowledge in natural language processing.",
+        "A script is “a standardized sequence of events that describes some stereotypical human activity such as going to a restaurant or visiting a doctor” BIBREF0 . Script events describe an action/activity along with the involved participants. For example, in the script describing a visit to a restaurant, typical events are entering the restaurant, ordering food or eating. Participants in this scenario can include animate objects like the waiter and the customer, as well as inanimate objects such as cutlery or food."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What was the average agreement percentage for coreference chain annotation?",
+      "rag_answer": "85%",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the annotators agreed and how much?"
+        },
+        {
+          "role": "assistant",
+          "content": "For event types and participant types, there was a moderate to substantial level of agreement using the Fleiss' Kappa. For coreference chain annotation, there was average agreement of 90.5%."
+        }
+      ],
+      "antecedent_question": "What was the average agreement percentage for coreference chain annotation?",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+        "In a recent study, the inter-annotator agreement for a different entity's coreference chain annotation was found to be 85%. This indicates a lower level of consensus among the annotators compared to the previous findings.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What range does it have for high correlation results?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results have for high correlation results?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "The low correlation results range from 0.123 to 0.456. This entity is known for its unique approach to analyzing data trends.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What MC abbreviate for?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Enabling computers to understand given documents and answer questions about their content has recently attracted intensive interest, including but not limited to the efforts as in BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 , BIBREF4 , BIBREF5 . Many specific problems such as machine comprehension and question answering often involve modeling such question-document pairs.",
+      "docs_rag_saw_to_answer": [
+        "The recent availability of relatively large training datasets (see Section \"Related Work\" for more details) has made it more feasible to train and estimate rather complex models in an end-to-end fashion for these problems, in which a whole model is fit directly with given question-answer tuples and the resulting model has shown to be rather effective.",
+        "In this paper, we take a closer look at modeling questions in such an end-to-end neural network framework, since we regard question understanding is of importance for such problems. We first introduced syntactic information to help encode questions. We then viewed and modelled different types of questions and the information shared among them as an adaptation problem and proposed adaptation models for them. On the Stanford Question Answering Dataset (SQuAD), we show that these approaches can help attain better results on our competitive baselines.",
+        "Many neural network models have been studied on the SQuAD task. BIBREF6 proposed match LSTM to associate documents and questions and adapted the so-called pointer Network BIBREF7 to determine the positions of the answer text spans. BIBREF8 proposed a dynamic chunk reader to extract and rank a set of answer candidates. BIBREF9 focused on word representation and presented a fine-grained gating mechanism to dynamically combine word-level and character-level representations based on the properties of words. BIBREF10 proposed a multi-perspective context matching (MPCM) model, which matched an encoded document and question from multiple perspectives. BIBREF11 proposed a dynamic decoder and so-called highway maxout network to improve the effectiveness of the decoder. The bi-directional attention flow (BIDAF) BIBREF12 used the bi-directional attention to obtain a question-aware context representation."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-010",
+      "true": "Generation",
+      "question": "What is the full name of the specific technology or method referred to by the abbreviation 'MC'?",
+      "rag_answer": "Machine Comprehension",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Enabling computers to understand given documents and answer questions about their content has recently attracted intensive interest, including but not limited to the efforts as in BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 , BIBREF4 , BIBREF5 . Many specific problems such as machine comprehension and question answering often involve modeling such question-document pairs.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Article comments can provide supplementary opinions and facts for readers, thereby increase the attraction and engagement of articles. Therefore, automatically commenting is helpful in improving the activeness of the community, such as online forums and news websites. Previous work shows that training an automatic commenting system requires large parallel corpora. Although part of articles are naturally paired with the comments on some websites, most articles and comments are unpaired on the Internet. To fully exploit the unpaired data, we completely remove the need for parallel data and propose a novel unsupervised approach to train an automatic article commenting model, relying on nothing but unpaired articles and comments. Our model is based on a retrieval-based commenting framework, which uses news to retrieve comments based on the similarity of their topics. The topic representation is obtained from a neural variational topic model, which is trained in an unsupervised manner. We evaluate our model on a news comment dataset. Experiments show that our proposed topic-based approach significantly outperforms previous lexicon-based models. The model also profits from paired corpora and achieves state-of-the-art performance under semi-supervised scenarios."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What specific problems does it often involve?",
+      "rag_answer": "Machine comprehension and question answering for documents; visual recognition and image classification for images.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What MC abbreviate for?"
+        },
+        {
+          "role": "assistant",
+          "content": "machine comprehension"
+        }
+      ],
+      "antecedent_question": "What specific problems does machine comprehension often involve?",
+      "source_doc_for_question": "Enabling computers to understand given documents and answer questions about their content has recently attracted intensive interest, including but not limited to the efforts as in BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 , BIBREF4 , BIBREF5 . Many specific problems such as machine comprehension and question answering often involve modeling such question-document pairs.",
+      "docs_rag_saw_to_answer": [
+        "Enabling computers to understand given documents and answer questions about their content has recently attracted intensive interest, including but not limited to the efforts as in BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 , BIBREF4 , BIBREF5 . Many specific problems such as machine comprehension and question answering often involve modeling such question-document pairs.",
+        "A new technology called visual interpretation is designed to help machines analyze images and provide descriptions. Many specific challenges such as visual recognition and image classification often involve processing such image-data pairs.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "How big is the performance difference between this method and the baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance.",
+        "Entity Linking (EL), which is also called Entity Disambiguation (ED), is the task of mapping mentions in text to corresponding entities in a given knowledge Base (KB). This task is an important and challenging stage in text understanding because mentions are usually ambiguous, i.e., different named entities may share the same surface form and the same entity may have multiple aliases. EL is key for information retrieval (IE) and has many applications, such as knowledge base population (KBP), question answering (QA), etc.",
+        "Existing EL methods can be divided into two categories: local model and global model. Local models concern mainly on contextual words surrounding the mentions, where mentions are disambiguated independently. These methods are not work well when the context information is not rich enough. Global models take into account the topical coherence among the referred entities within the same document, where mentions are disambiguated jointly. Most of previous global models BIBREF0 , BIBREF1 , BIBREF2 calculate the pairwise scores between all candidate entities and select the most relevant group of entities. However, the consistency among wrong entities as well as that among right ones are involved, which not only increases the model complexity but also introduces some noises. For example, in Figure 1, there are three mentions \"France\", \"Croatia\" and \"2018 World Cup\", and each mention has three candidate entities. Here, \"France\" may refer to French Republic, France national basketball team or France national football team in KB. It is difficult to disambiguate using local models, due to the scarce common information in the contextual words of \"France\" and the descriptions of its candidate entities. Besides, the topical coherence among the wrong entities related to basketball team (linked by an orange dashed line) may make the global models mistakenly refer \"France\" to France national basketball team. So, how to solve these problems?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What is the average score that it achieved compared to the highest performing baseline?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "How big is the performance difference between this method and the baseline?"
+        },
+        {
+          "role": "assistant",
+          "content": "Comparing with the highest performing baseline: 1.3 points on ACE2004 dataset, 0.6 points on CWEB dataset, and 0.86 points in the average of all scores."
+        }
+      ],
+      "antecedent_question": "What is the average score that the model achieved compared to the highest performing baseline?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "The model achieved 0.75 points on the ACE2004 dataset and 0.5 points on the CWEB dataset, with an average score of 0.65 points across all evaluations.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Did they experiment on all the tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Implementation & Models Parameters. For all our tasks, we use the BERT-Base Multilingual Cased model released by the authors . The model is trained on 104 languages (including Arabic) with 12 layer, 768 hidden units each, 12 attention heads, and has 110M parameters in entire model. The model has 119,547 shared WordPieces vocabulary, and was pre-trained on the entire Wikipedia for each language. For fine-tuning, we use a maximum sequence size of 50 tokens and a batch size of 32. We set the learning rate to $2e-5$ and train for 15 epochs and choose the best model based on performance on a development set. We use the same hyper-parameters in all of our BERT models. We fine-tune BERT on each respective labeled dataset for each task. For BERT input, we apply WordPiece tokenization, setting the maximal sequence length to 50 words/WordPieces. For all tasks, we use a TensorFlow implementation. An exception is the sentiment analysis task, where we used a PyTorch implementation with the same hyper-parameters but with a learning rate $2e-6$.",
+      "docs_rag_saw_to_answer": [
+        "We presented AraNet, a deep learning toolkit for a host of Arabic social media processing. AraNet predicts age, dialect, gender, emotion, irony, and sentiment from social media posts. It delivers state-of-the-art and competitive performance on these tasks and has the advantage of using a unified, simple framework based on the recently-developed BERT model. AraNet has the potential to alleviate issues related to comparing across different Arabic social media NLP tasks, by providing one way to test new models against AraNet predictions. Our toolkit can be used to make important discoveries on the wide region of the Arab world, and can enhance our understating of Arab online communication. AraNet will be publicly available upon acceptance.",
+        "We describe AraNet, a collection of deep learning Arabic social media processing tools. Namely, we exploit an extensive host of publicly available and novel social media datasets to train bidirectional encoders from transformer models (BERT) to predict age, dialect, gender, emotion, irony, and sentiment. AraNet delivers state-of-the-art performance on a number of the cited tasks and competitively on others. In addition, AraNet has the advantage of being exclusively based on a deep learning framework and hence feature engineering free. To the best of our knowledge, AraNet is the first to performs predictions across such a wide range of tasks for Arabic NLP and thus meets a critical needs. We publicly release AraNet to accelerate research and facilitate comparisons across the different tasks.",
+        "The proliferation of social media has made it possible to study large online communities at scale, thus making important discoveries that can facilitate decision making, guide policies, improve health and well-being, aid disaster response, etc. The wide host of languages, languages varieties, and dialects used on social media and the nuanced differences between users of various backgrounds (e.g., different age groups, gender identities) make it especially difficult to derive sufficiently valuable insights based on single prediction tasks. For these reasons, it would be desirable to offer NLP tools that can help stitch together a complete picture of an event across different geographical regions as impacting, and being impacted by, individuals of different identities. We offer AraNet as one such tool for Arabic social media processing."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What pretrained LM is used?",
+      "rag_answer": "TransferTransfo",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We apply the Generative Pre-trained Transformer (GPT) BIBREF2 as our pre-trained language model. GPT is a multi-layer Transformer decoder with a causal self-attention which is pre-trained, unsupervised, on the BooksCorpus dataset. BooksCorpus dataset contains over 7,000 unique unpublished books from a variety of genres. Pre-training on such large contiguous text corpus enables the model to capture long-range dialogue context information. Furthermore, as existing EmpatheticDialogue dataset BIBREF4 is relatively small, fine-tuning only on such dataset will limit the chitchat topic of the model. Hence, we first integrate persona into CAiRE, and pre-train the model on PersonaChat BIBREF3 , following a previous transfer-learning strategy BIBREF1 . This pre-training procedure allows CAiRE to have a more consistent persona, thus improving the engagement and consistency of the model. We refer interested readers to the code repository recently released by HuggingFace. Finally, in order to optimize empathy in CAiRE, we fine-tune this pre-trained model using EmpatheticDialogue dataset to help CAiRE understand users' feeling.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we present an end-to-end empathetic conversation agent CAiRE. Our system adapts TransferTransfo (Wolf et al., 2019) learning approach that fine-tunes a large-scale pre-trained language model with multi-task objectives: response language modeling, response prediction and dialogue emotion detection. We evaluate our model on the recently proposed empathetic-dialogues dataset (Rashkin et al., 2019), the experiment results show that CAiRE achieves state-of-the-art performance on dialogue emotion detection and empathetic response generation.",
+        "Empathetic chatbots are conversational agents that can understand user emotions and respond appropriately. Incorporating empathy into the dialogue system is essential to achieve better human-robot interaction because naturally, humans express and perceive emotion in natural language to increase their sense of social bonding. In the early development stage of such conversational systems, most of the efforts were put into developing hand-crafted rules of engagement. Recently, a modularized empathetic dialogue system, XiaoIce BIBREF0 achieved an impressive number of conversational turns per session, which was even higher than average conversations between humans. Despite the promising results of XiaoIce, this system is designed using a complex architecture with hundreds of independent components, such as Natural Language Understanding and Response Generation modules, using a tremendous amount of labeled data for training each of them.",
+        "As shown in Figure FIGREF4 , our user interface is based solely on text inputs. Users can type anything in the input box and get a response immediately from the server. A report button is added at the bottom to allow users to report unethical dialogues, which will then be marked and saved in our back-end server separately. To facilitate the need for teaching our chatbot how to respond properly, we add an edit button next to the response. When the user clicks it, a new input box will appear, and the user can type in the appropriate response they think the chatbot should have replied with."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Which GAN do they use?",
+      "rag_answer": "The context does not specify a particular GAN model being used.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We assume that for each corpora INLINEFORM0 , we are given word embeddings for each word INLINEFORM1 , where INLINEFORM2 is the dimension of each word embedding. We are also given a classification task on documents that is represented by a parametric model INLINEFORM3 taking document embeddings as feature vectors. We construct a GAN model which combines different sets of word embeddings INLINEFORM4 , INLINEFORM5 , into a single set of word embeddings INLINEFORM6 . Note that INLINEFORM7 are given but INLINEFORM8 is trained. Here we consider INLINEFORM9 as the generator, and the goal of the discriminator is to distinguish documents represented by the original embeddings INLINEFORM10 and the same documents represented by the new embeddings INLINEFORM11 .",
+      "docs_rag_saw_to_answer": [
+        "Generative adversarial nets (GANs) have been successfully applied to the artificial generation of image data. In terms of text data, much has been done on the artificial generation of natural language from a single corpus. We consider multiple text corpora as the input data, for which there can be two applications of GANs: (1) the creation of consistent cross-corpus word embeddings given different word embeddings per corpus; (2) the generation of robust bag-of-words document embeddings for each corpora. We demonstrate our GAN models on real-world text data sets from different corpora, and show that embeddings from both models lead to improvements in supervised learning problems.",
+        "Generative adversarial nets (GAN) (Goodfellow et al., 2014) belong to a class of generative models which are trainable and can generate artificial data examples similar to the existing ones. In a GAN model, there are two sub-models simultaneously trained: a generative model INLINEFORM0 from which artificial data examples can be sampled, and a discriminative model INLINEFORM1 which classifies real data examples and artificial ones from INLINEFORM2 . By training INLINEFORM3 to maximize its generation power, and training INLINEFORM4 to minimize the generation power of INLINEFORM5 , so that ideally there will be no difference between the true and artificial examples, a minimax problem can be established. The GAN model has been shown to closely replicate a number of image data sets, such as MNIST, Toronto Face Database (TFD), CIFAR-10, SVHN, and ImageNet (Goodfellow et al., 2014; Salimans et al. 2016).",
+        "The GAN model has been extended to text data in a number of ways. For instance, Zhang et al. (2016) applied a long-short term memory (Hochreiter and Schmidhuber, 1997) generator and approximated discretization to generate text data. Moreover, Li et al. (2017) applied the GAN model to generate dialogues, i.e. pairs of questions and answers. Meanwhile, the GAN model can also be applied to generate bag-of-words embeddings of text data, which focus more on key terms in a text document rather than the original document itself. Glover (2016) provided such a model with the energy-based GAN (Zhao et al., 2017)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What is the seed lexicon?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The seed lexicon consists of positive and negative predicates. If the predicate of an extracted event is in the seed lexicon and does not involve complex phenomena like negation, we assign the corresponding polarity score ($+1$ for positive events and $-1$ for negative events) to the event. We expect the model to automatically learn complex phenomena through label propagation. Based on the availability of scores and the types of discourse relations, we classify the extracted event pairs into the following three types.",
+      "docs_rag_saw_to_answer": [
+        "Learning affective events is challenging because, as the examples above suggest, the polarity of an event is not necessarily predictable from its constituent words. Combined with the unbounded combinatorial nature of language, the non-compositionality of affective polarity entails the need for large amounts of world knowledge, which can hardly be learned from small annotated data.",
+        "We trained the models using a Japanese web corpus. Given the minimum amount of supervision, they performed well. In addition, the combination of annotated and unannotated data yielded a gain over a purely supervised baseline when labeled data were small.",
+        "Learning affective events is closely related to sentiment analysis. Whereas sentiment analysis usually focuses on the polarity of what are described (e.g., movies), we work on how people are typically affected by events. In sentiment analysis, much attention has been paid to compositionality. Word-level polarity BIBREF5, BIBREF6, BIBREF7 and the roles of negation and intensification BIBREF8, BIBREF6, BIBREF9 are among the most important topics. In contrast, we are more interested in recognizing the sentiment polarity of an event that pertains to commonsense knowledge (e.g., getting money and catching cold)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Is the semantic hierarchy representation used for any task?",
+      "rag_answer": "Yes, the semantic hierarchy representation is used to facilitate and improve the performance of various AI tasks such as Machine Translation, Information Extraction, and Text Summarization.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+      "docs_rag_saw_to_answer": [
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks.",
+        "We developed a syntactic text simplification (TS) approach that can be used as a preprocessing step to facilitate and improve the performance of a wide range of artificial intelligence (AI) tasks, such as Machine Translation, Information Extraction (IE) or Text Summarization. Since shorter sentences are generally better processed by natural language processing (NLP) systems BIBREF0, the goal of our approach is to break down a complex source sentence into a set of minimal propositions, i.e. a sequence of sound, self-contained utterances, with each of them presenting a minimal semantic unit that cannot be further decomposed into meaningful propositions BIBREF1.",
+        "However, any sound and coherent text is not simply a loose arrangement of self-contained units, but rather a logical structure of utterances that are semantically connected BIBREF2. Consequently, when carrying out syntactic simplification operations without considering discourse implications, the rewriting may easily result in a disconnected sequence of simplified sentences that lack important contextual information, making the text harder to interpret. Thus, in order to preserve the coherence structure and, hence, the interpretability of the input, we developed a discourse-aware TS approach based on Rhetorical Structure Theory (RST) BIBREF3. It establishes a contextual hierarchy between the split components, and identifies and classifies the semantic relationship that holds between them. In that way, a complex source sentence is turned into a so-called discourse tree, consisting of a set of hierarchically ordered and semantically interconnected sentences that present a simplified syntax which is easier to process for downstream semantic applications and may support a faster generalization in machine learning tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-016",
+      "true": "Generation",
+      "question": "What is the specific name of the Open IE system that achieved the highest improvement in performance?",
+      "rag_answer": "DisSim",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Article comments can provide supplementary opinions and facts for readers, thereby increase the attraction and engagement of articles. Therefore, automatically commenting is helpful in improving the activeness of the community, such as online forums and news websites. Previous work shows that training an automatic commenting system requires large parallel corpora. Although part of articles are naturally paired with the comments on some websites, most articles and comments are unpaired on the Internet. To fully exploit the unpaired data, we completely remove the need for parallel data and propose a novel unsupervised approach to train an automatic article commenting model, relying on nothing but unpaired articles and comments. Our model is based on a retrieval-based commenting framework, which uses news to retrieve comments based on the similarity of their topics. The topic representation is obtained from a neural variational topic model, which is trained in an unsupervised manner. We evaluate our model on a news comment dataset. Experiments show that our proposed topic-based approach significantly outperforms previous lexicon-based models. The model also profits from paired corpora and achieves state-of-the-art performance under semi-supervised scenarios."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What are the names of the other metrics they proposed?",
+      "rag_answer": "diversity, density, and homogeneity metrics",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Article comments can provide supplementary opinions and facts for readers, thereby increase the attraction and engagement of articles. Therefore, automatically commenting is helpful in improving the activeness of the community, such as online forums and news websites. Previous work shows that training an automatic commenting system requires large parallel corpora. Although part of articles are naturally paired with the comments on some websites, most articles and comments are unpaired on the Internet. To fully exploit the unpaired data, we completely remove the need for parallel data and propose a novel unsupervised approach to train an automatic article commenting model, relying on nothing but unpaired articles and comments. Our model is based on a retrieval-based commenting framework, which uses news to retrieve comments based on the similarity of their topics. The topic representation is obtained from a neural variational topic model, which is trained in an unsupervised manner. We evaluate our model on a news comment dataset. Experiments show that our proposed topic-based approach significantly outperforms previous lexicon-based models. The model also profits from paired corpora and achieves state-of-the-art performance under semi-supervised scenarios."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Did they use the state-of-the-art model to analyze the attention?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We make two main contributions. First, we introduce new strategies for interpreting the behavior of deep models in their intermediate layers, specifically, by examining the saliency of the attention and the gating signals. Second, we provide an extensive analysis of the state-of-the-art model for the NLI task and show that our methods reveal interesting insights not available from traditional methods of inspecting attention and word saliency.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning models have achieved remarkable success in natural language inference (NLI) tasks. While these models are widely explored, they are hard to interpret and it is often unclear how and why they actually work. In this paper, we take a step toward explaining such deep learning based models through a case study on a popular neural model for NLI. In particular, we propose to interpret the intermediate layers of NLI models by visualizing the saliency of attention and LSTM gating signals. We present several examples for which our methods are able to reveal interesting insights and identify the critical information contributing to the model decisions.",
+        "Deep learning has achieved tremendous success for many NLP tasks. However, unlike traditional methods that provide optimized weights for human understandable features, the behavior of deep learning models is much harder to interpret. Due to the high dimensionality of word embeddings, and the complex, typically recurrent architectures used for textual data, it is often unclear how and why a deep learning model reaches its decisions.",
+        "There are a few attempts toward explaining/interpreting deep learning-based models, mostly by visualizing the representation of words and/or hidden states, and their importances (via saliency or erasure) on shallow tasks like sentiment analysis and POS tagging BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 . In contrast, we focus on interpreting the gating and attention signals of the intermediate layers of deep models in the challenging task of Natural Language Inference. A key concept in explaining deep models is saliency, which determines what is critical for the final decision of a deep model. So far, saliency has only been used to illustrate the impact of word embeddings. In this paper, we extend this concept to the intermediate layer of deep models to examine the saliency of attention as well as the LSTM gating signals to understand the behavior of these components and their impact on the final decision."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Are there datasets with relation tuples annotated, how big are datasets available?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "A relation tuple consists of two entities and the relation between them, and often such tuples are found in unstructured text. There may be multiple relation tuples present in a text and they may share one or both entities among them. Extracting such relation tuples from a sentence is a difficult task and sharing of entities or overlapping entities among the tuples makes it more challenging. Most prior work adopted a pipeline approach where entities were identified first followed by finding the relations among them, thus missing the interaction among the relation tuples in a sentence. In this paper, we propose two approaches to use encoder-decoder architecture for jointly extracting entities and relations. In the first approach, we propose a representation scheme for relation tuples which enables the decoder to generate one word at a time like machine translation models and still finds all the tuples present in a sentence with full entity names of different length and with overlapping entities. Next, we propose a pointer network-based decoding approach where an entire tuple is generated at every time step. Experiments on the publicly available New York Times corpus show that our proposed approaches outperform previous work and achieve significantly higher F1 scores.",
+        "Distantly-supervised information extraction systems extract relation tuples with a set of pre-defined relations from text. Traditionally, researchers BIBREF0, BIBREF1, BIBREF2 use pipeline approaches where a named entity recognition (NER) system is used to identify the entities in a sentence and then a classifier is used to find the relation (or no relation) between them. However, due to the complete separation of entity detection and relation classification, these models miss the interaction between multiple relation tuples present in a sentence.",
+        "Recently, several neural network-based models BIBREF3, BIBREF4 were proposed to jointly extract entities and relations from a sentence. These models used a parameter-sharing mechanism to extract the entities and relations in the same network. But they still find the relations after identifying all the entities and do not fully capture the interaction among multiple tuples. BIBREF5 (BIBREF5) proposed a joint extraction model based on neural sequence tagging scheme. But their model could not extract tuples with overlapping entities in a sentence as it could not assign more than one tag to a word. BIBREF6 (BIBREF6) proposed a neural encoder-decoder model for extracting relation tuples with overlapping entities. However, they used a copy mechanism to copy only the last token of the entities, thus this model could not extract the full entity names. Also, their best performing model used a separate decoder to extract each tuple which limited the power of their model. This model was trained with a fixed number of decoders and could not extract tuples beyond that number during inference. Encoder-decoder models are powerful models and they are successful in many NLP tasks such as machine translation, sentence generation from structured data, and open information extraction."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "How many relations does it have?",
+      "rag_answer": "30",
+      "history": [
+        {
+          "role": "user",
+          "content": "Are there datasets with relation tuples annotated, how big are datasets available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How many relations does Yes have?",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+        "The entity called No has a total of 30 relations. This makes it a rich source for extracting multiple tuples with overlapping entities.",
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

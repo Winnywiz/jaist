@@ -1,0 +1,813 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 35,
+    "llm": true
+  },
+  "report": {
+    "n": 35,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.543,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Generation->Retrieval": 7
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.629,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.857,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 0.842,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Retrieval->Generation": 3,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.657,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 0.714,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.743,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.111,
+            "n": 9
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 7
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 7,
+          "Retrieval->Generation": 1,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What approaches without reinforcement learning have been tried?",
+      "rag_answer": "Various classification setups have been tried without reinforcement learning.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+      "docs_rag_saw_to_answer": [
+        "Task B Phase B of the 2019 BioASQ challenge focuses on biomedical question answering. Macquarie University's participation applies query-based multi-document extractive summarisation techniques to generate a multi-sentence answer given the question and the set of relevant snippets. In past participation we explored the use of regression approaches using deep learning architectures and a simple policy gradient architecture. For the 2019 challenge we experiment with the use of classification approaches with and without reinforcement learning. In addition, we conduct a correlation analysis between various ROUGE metrics and the BioASQ human evaluation scores.",
+        "The BioASQ Challenge includes a question answering task (Phase B, part B) where the aim is to find the “ideal answer” — that is, an answer that would normally be given by a person BIBREF0. This is in contrast with most other question answering challenges where the aim is normally to give an exact answer, usually a fact-based answer or a list. Given that the answer is based on an input that consists of a biomedical question and several relevant PubMed abstracts, the task can be seen as an instance of query-based multi-document summarisation.",
+        "As in past participation BIBREF1, BIBREF2, we wanted to test the use of deep learning and reinforcement learning approaches for extractive summarisation. In contrast with past years where the training procedure was based on a regression set up, this year we experiment with various classification set ups. The main contributions of this paper are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What specific correlation values were reported for each year in the study?",
+      "rag_answer": "The specific correlation values for each year are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What range does it have for high correlation results?",
+      "rag_answer": "0.300 to 0.800",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results have for high correlation results?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "The average correlation results for the new entity range from 0.300 to 0.800. This entity has shown consistent performance across various assessments.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Did the annotators agreed and how much?",
+      "rag_answer": "Yes, the annotators agreed with a result of 90.5%.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "For coreference chain annotation, we calculated the percentage of pairs which were annotated by at least 3 annotators (qualified majority vote) compared to the set of those pairs annotated by at least one person (see Figure 4 ). We take the result of 90.5% between annotators to be a good agreement.",
+        "This paper presents the InScript corpus (Narrative Texts Instantiating Script structure). InScript is a corpus of 1,000 stories centered around 10 different scenarios. Verbs and noun phrases are annotated with event and participant types, respectively. Additionally, the text is annotated with coreference information. The corpus shows rich lexical variation and will serve as a unique resource for the study of the role of script knowledge in natural language processing.",
+        "A script is “a standardized sequence of events that describes some stereotypical human activity such as going to a restaurant or visiting a doctor” BIBREF0 . Script events describe an action/activity along with the involved participants. For example, in the script describing a visit to a restaurant, typical events are entering the restaurant, ordering food or eating. Participants in this scenario can include animate objects like the waiter and the customer, as well as inanimate objects such as cutlery or food."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What was the average agreement percentage for coreference chain annotation?",
+      "rag_answer": "85.2%",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the annotators agreed and how much?"
+        },
+        {
+          "role": "assistant",
+          "content": "For event types and participant types, there was a moderate to substantial level of agreement using the Fleiss' Kappa. For coreference chain annotation, there was average agreement of 90.5%."
+        }
+      ],
+      "antecedent_question": "What was the average agreement percentage for coreference chain annotation?",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+        "For a different study, the inter-annotator agreement for coreference chain annotation was reported to be 85.2%. In that case, the researchers noted a lower level of consistency among the annotators.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "We use a pre-trained mBERT model that was made public with the BERT release. The model dimension is 768, hidden layer dimension 3072, self-attention uses 12 heads, the model has 12 layers. It uses a vocabulary of 120k wordpieces that is shared for all languages.",
+        "To train the language identification classifier, for each of the BERT languages we randomly selected 110k sentences of at least 20 characters from Wikipedia, and keep 5k for validation and 5k for testing for each language. The training data are also used for estimating the language centroids.",
+        "Results ::: Word Alignment."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it capture well?",
+      "rag_answer": "Sentence-level syntax is effectively represented by XGBoost embeddings.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?"
+        },
+        {
+          "role": "assistant",
+          "content": "Table TABREF15 shows that word-alignment based on mBERT representations surpasses the outputs of the standard FastAlign tool even if it was provided large parallel corpus. This suggests that word-level semantics are well captured by mBERT contextual embeddings. For this task, learning an explicit projection had a negligible effect on the performance."
+        }
+      ],
+      "antecedent_question": "What does Table TABREF15 capture well?",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+        "Table TABREF20 shows that sentence structures based on XGBoost representations outperform traditional parsing tools even with extensive datasets. This indicates that sentence-level syntax is effectively represented by XGBoost embeddings.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What turn out to be more important high volume or high quality data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The rest of the paper is organized as follows. Related works are reviewed in Section SECREF2 The two languages under study are described in Section SECREF3. We introduce the corpora and test sets in Section SECREF4. The fifth section explores the different training architectures we consider, and the experiments that are carried out. Finally, discussion and concluding remarks are given in Section SECREF6",
+        "The large amount of freely available text in the internet for multiple languages is facilitating the massive and automatic creation of multilingual resources. The resource par excellence is Wikipedia, an online encyclopedia currently available in 307 languages. Other initiatives such as Common Crawl or the Jehovah’s Witnesses site are also repositories for multilingual data, usually assumed to be noisier than Wikipedia. Word and contextual embeddings have been pre-trained on these data, so that the resources are nowadays at hand for more than 100 languages. Some examples include fastText word embeddings BIBREF2, BIBREF7, MUSE embeddings BIBREF8, BERT multilingual embeddings BIBREF4 and LASER sentence embeddings BIBREF5. In all cases, embeddings are trained either simultaneously for multiple languages, joining high- and low-resource data, or following the same methodology.",
+        "On the other hand, different approaches try to specifically design architectures to learn embeddings in a low-resourced setting. ChaudharyEtAl:2018 follow a transfer learning approach that uses phonemes, lemmas and morphological tags to transfer the knowledge from related high-resource language into the low-resource one. jiangEtal:2018 apply Positive-Unlabeled Learning for word embedding calculations, assuming that unobserved pairs of words in a corpus also convey information, and this is specially important for small corpora."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What helps him?",
+      "rag_answer": "The average model benefits from a variety of training data, which includes both high-quality and low-quality sources.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What turn out to be more important high volume or high quality data?"
+        },
+        {
+          "role": "assistant",
+          "content": "only high-quality data helps"
+        }
+      ],
+      "antecedent_question": "What helps only high-quality data?",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "The average model benefits from a variety of training data, which includes both high-quality and low-quality sources. In contrast, the specialized model thrives on diverse datasets that enhance its learning capabilities.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What were the word embeddings trained on?",
+      "rag_answer": "The context does not specify what the word embeddings were trained on.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "Using the word2vec model available in a public repository BIBREF14 , the proposal involves the analysis of the most similar analogies generated before and after the application of the BIBREF3 . The work is focused on the analysis of gender bias associated with professions in word embeddings. So therefore into the evaluation of the accuracy of the associations generated, aiming at achieving results as good as possible without prejudicing the evaluation metrics.",
+        "In this work, we propose an analysis of the presence of gender bias associated with professions in Portuguese word embeddings. The objective of this work is to study gender implications related to stereotyped professions for women and men in the context of the Portuguese language.",
+        "Recently, the transformative potential of machine learning (ML) has propelled ML into the forefront of mainstream media. In Brazil, the use of such technique has been widely diffused gaining more space. Thus, it is used to search for patterns, regularities or even concepts expressed in data sets BIBREF0 , and can be applied as a form of aid in several areas of everyday life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What benchmark datasets are used for the link prediction task?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our proposed models on three commonly used knowledge graph datasets—WN18RR BIBREF26, FB15k-237 BIBREF18, and YAGO3-10 BIBREF27. Details of these datasets are summarized in Table TABREF18.",
+      "docs_rag_saw_to_answer": [
+        "Knowledge graph embedding, which aims to represent entities and relations as low dimensional vectors (or matrices, tensors, etc.), has been shown to be a powerful technique for predicting missing links in knowledge graphs. Existing knowledge graph embedding models mainly focus on modeling relation patterns such as symmetry/antisymmetry, inversion, and composition. However, many existing approaches fail to model semantic hierarchies, which are common in real-world applications. To address this challenge, we propose a novel knowledge graph embedding model---namely, Hierarchy-Aware Knowledge Graph Embedding (HAKE)---which maps entities into the polar coordinate system. HAKE is inspired by the fact that concentric circles in the polar coordinate system can naturally reflect the hierarchy. Specifically, the radial coordinate aims to model entities at different levels of the hierarchy, and entities with smaller radii are expected to be at higher levels; the angular coordinate aims to distinguish entities at the same level of the hierarchy, and these entities are expected to have roughly the same radii but different angles. Experiments demonstrate that HAKE can effectively model the semantic hierarchies in knowledge graphs, and significantly outperforms existing state-of-the-art methods on benchmark datasets for the link prediction task.",
+        "Knowledge graphs are usually collections of factual triples—(head entity, relation, tail entity), which represent human knowledge in a structured way. In the past few years, we have witnessed the great achievement of knowledge graphs in many areas, such as natural language processing BIBREF0, question answering BIBREF1, and recommendation systems BIBREF2.",
+        "Although commonly used knowledge graphs contain billions of triples, they still suffer from the incompleteness problem that a lot of valid triples are missing, as it is impractical to find all valid triples manually. Therefore, knowledge graph completion, also known as link prediction in knowledge graphs, has attracted much attention recently. Link prediction aims to automatically predict missing links between entities based on known links. It is a challenging task as we not only need to predict whether there is a relation between two entities, but also need to determine which relation it is."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "By how much do they outperform standard BERT?",
+      "rag_answer": "They achieve considerably better results, with an F1-score of 87.20 for coarse-grained classification and 64.70 for detailed classification, compared to standard BERT.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available",
+        "With ever-increasing amounts of data available, there is an increase in the need to offer tooling to speed up processing, and eventually making sense of this data. Because fully-automated tools to extract meaning from any given input to any desired level of detail have yet to be developed, this task is still at least supervised, and often (partially) resolved by humans; we refer to these humans as knowledge workers. Knowledge workers are professionals that have to go through large amounts of data and consolidate, prepare and process it on a daily basis. This data can originate from highly diverse portals and resources and depending on type or category, the data needs to be channelled through specific down-stream processing pipelines. We aim to create a platform for curation technologies that can deal with such data from diverse sources and that provides natural language processing (NLP) pipelines tailored to particular content types and genres, rendering this initial classification an important sub-task.",
+        "In this paper, we work with the dataset of the 2019 GermEval shared task on hierarchical text classification BIBREF0 and use the predefined set of labels to evaluate our approach to this classification task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-008",
+      "true": "Generation",
+      "question": "What is the exact accuracy percentage achieved by the enriched BERT model?",
+      "rag_answer": "up to four percentage points in accuracy",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "How they measure robustness in experiments?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The greater, the richer. In practice, we find a rough threshold of r is 5.",
+        "Margin infused relaxed algorithms (MIRAs) dominate model tuning in statistical machine translation in the case of large scale features, but also they are famous for the complexity in implementation. We introduce a new method, which regards an N-best list as a permutation and minimizes the Plackett-Luce loss of ground-truth permutations. Experiments with large-scale features demonstrate that, the new method is more robust than MERT; though it is only matchable with MIRAs, it has a comparatively advantage, easier to implement.",
+        "Since Och BIBREF0 proposed minimum error rate training (MERT) to exactly optimize objective evaluation measures, MERT has become a standard model tuning technique in statistical machine translation (SMT). Though MERT performs better by improving its searching algorithm BIBREF1, BIBREF2, BIBREF3, BIBREF4, it does not work reasonably when there are lots of features. As a result, margin infused relaxed algorithms (MIRA) dominate in this case BIBREF6, BIBREF7, BIBREF8, BIBREF9, BIBREF10."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What is the specific formula used to measure richness in machine translation experiments?",
+      "rag_answer": "The specific formula to measure richness in the scenario of machine translation is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Do the authors mention any possible confounds in this study?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "In the context of the above research problem, we aim to answer the following research questions",
+        "Given clinicians have trust on clinically validated PTSD assessment surveys, can we fill out PTSD assessment surveys using twitter posts analysis of war-veterans?",
+        "If possible, what sort of analysis and approach are needed to develop such XAI model to detect the prevalence and intensity of PTSD among war-veterans only using the social media (twitter) analysis where users are free to share their everyday mental and social conditions?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-010",
+      "true": "Generation",
+      "question": "What specific confounding variables did the authors consider in their study?",
+      "rag_answer": "The context does not specify any particular confounding variables considered in the study.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What promising accuracies does it provide for PTSD classification and intensity estimation?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do the authors mention any possible confounds in this study?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What promising accuracies does LAXARY provide for PTSD classification and intensity estimation?",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "The new model, ZENITH, has shown remarkable results in analyzing the mental health of civilian populations. It provides high accuracy in detecting anxiety levels and their severity based on social media interactions.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "How big is the performance difference between this method and the baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance.",
+        "Entity Linking (EL), which is also called Entity Disambiguation (ED), is the task of mapping mentions in text to corresponding entities in a given knowledge Base (KB). This task is an important and challenging stage in text understanding because mentions are usually ambiguous, i.e., different named entities may share the same surface form and the same entity may have multiple aliases. EL is key for information retrieval (IE) and has many applications, such as knowledge base population (KBP), question answering (QA), etc.",
+        "Existing EL methods can be divided into two categories: local model and global model. Local models concern mainly on contextual words surrounding the mentions, where mentions are disambiguated independently. These methods are not work well when the context information is not rich enough. Global models take into account the topical coherence among the referred entities within the same document, where mentions are disambiguated jointly. Most of previous global models BIBREF0 , BIBREF1 , BIBREF2 calculate the pairwise scores between all candidate entities and select the most relevant group of entities. However, the consistency among wrong entities as well as that among right ones are involved, which not only increases the model complexity but also introduces some noises. For example, in Figure 1, there are three mentions \"France\", \"Croatia\" and \"2018 World Cup\", and each mention has three candidate entities. Here, \"France\" may refer to French Republic, France national basketball team or France national football team in KB. It is difficult to disambiguate using local models, due to the scarce common information in the contextual words of \"France\" and the descriptions of its candidate entities. Besides, the topical coherence among the wrong entities related to basketball team (linked by an orange dashed line) may make the global models mistakenly refer \"France\" to France national basketball team. So, how to solve these problems?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What is the average score that it achieved compared to the highest performing baseline?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "How big is the performance difference between this method and the baseline?"
+        },
+        {
+          "role": "assistant",
+          "content": "Comparing with the highest performing baseline: 1.3 points on ACE2004 dataset, 0.6 points on CWEB dataset, and 0.86 points in the average of all scores."
+        }
+      ],
+      "antecedent_question": "What is the average score that the model achieved compared to the highest performing baseline?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "The model achieved 1.5 points on the ACE2004 dataset and 0.4 points on the CWEB dataset, with an average score of 0.75 points across all evaluations.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What is the sample size of people used to measure user satisfaction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "Gunrock is the winner of the 2018 Amazon Alexa Prize, as evaluated by coherence and engagement from both real users and Amazon-selected expert conversationalists. We focus on understanding complex sentences and having in-depth conversations in open domains. In this paper, we introduce some innovative system designs and related validation analysis. Overall, we found that users produce longer sentences to Gunrock, which are directly related to users' engagement (e.g., ratings, number of turns). Additionally, users' backstory queries about Gunrock are positively correlated to user satisfaction. Finally, we found dialog flows that interleave facts and personal opinions and stories lead to better user satisfaction.",
+        "Amazon Alexa Prize BIBREF0 provides a platform to collect real human-machine conversation data and evaluate performance on speech-based social conversational systems. Our system, Gunrock BIBREF1 addresses several limitations of prior chatbots BIBREF2, BIBREF3, BIBREF4 including inconsistency and difficulty in complex sentence understanding (e.g., long utterances) and provides several contributions: First, Gunrock's multi-step language understanding modules enable the system to provide more useful information to the dialog manager, including a novel dialog act scheme. Additionally, the natural language understanding (NLU) module can handle more complex sentences, including those with coreference. Second, Gunrock interleaves actions to elicit users' opinions and provide responses to create an in-depth, engaging conversation; while a related strategy to interleave task- and non-task functions in chatbots has been proposed BIBREF5, no chatbots to our knowledge have employed a fact/opinion interleaving strategy. Finally, we use an extensive persona database to provide coherent profile information, a critical challenge in building social chatbots BIBREF3. Compared to previous systems BIBREF4, Gunrock generates more balanced conversations between human and machine by encouraging and understanding more human inputs (see Table TABREF2 for an example).",
+        "Figure FIGREF3 provides an overview of Gunrock's architecture. We extend the Amazon Conversational Bot Toolkit (CoBot) BIBREF6 which is a flexible event-driven framework. CoBot provides ASR results and natural language processing pipelines through the Alexa Skills Kit (ASK) BIBREF7. Gunrock corrects ASR according to the context (asr) and creates a natural language understanding (NLU) (nlu) module where multiple components analyze the user utterances. A dialog manager (DM) (dm) uses features from NLU to select topic dialog modules and defines an individual dialog flow. Each dialog module leverages several knowledge bases (knowledge). Then a natural language generation (NLG) (nlg) module generates a corresponding response. Finally, we markup the synthesized responses and return to the users through text to speech (TTS) (tts). While we provide an overview of the system in the following sections, for detailed system implementation details, please see the technical report BIBREF1."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Which ASR system(s) is used in this work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The preliminary architecture is shown in Fig. FIGREF4. For a given transcribed utterance, it is firstly encoded with Byte Pair Encoding (BPE) BIBREF14, a compression algorithm splitting words to fundamental subword units (pairs of bytes or BPs) and reducing the embedded vocabulary size. Then we use a BiLSTM BIBREF15 encoder and the output state of the BiLSTM is regarded as a vector representation for this utterance. Finally, a fully connected Feed-forward Neural Network (FNN) followed by a softmax layer, labeled as a multilayer perceptron (MLP) module, is used to perform the domain/intent classification task based on the vector.",
+      "docs_rag_saw_to_answer": [
+        "In a modern spoken language understanding (SLU) system, the natural language understanding (NLU) module takes interpretations of a speech from the automatic speech recognition (ASR) module as the input. The NLU module usually uses the first best interpretation of a given speech in downstream tasks such as domain and intent classification. However, the ASR module might misrecognize some speeches and the first best interpretation could be erroneous and noisy. Solely relying on the first best interpretation could make the performance of downstream tasks non-optimal. To address this issue, we introduce a series of simple yet efficient models for improving the understanding of semantics of the input speeches by collectively exploiting the n-best speech interpretations from the ASR module.",
+        "Currently, voice-controlled smart devices are widely used in multiple areas to fulfill various tasks, e.g. playing music, acquiring weather information and booking tickets. The SLU system employs several modules to enable the understanding of the semantics of the input speeches. When there is an incoming speech, the ASR module picks it up and attempts to transcribe the speech. An ASR model could generate multiple interpretations for most speeches, which can be ranked by their associated confidence scores. Among the $n$-best hypotheses, the top-1 hypothesis is usually transformed to the NLU module for downstream tasks such as domain classification, intent classification and named entity recognition (slot tagging). Multi-domain NLU modules are usually designed hierarchically BIBREF0. For one incoming utterance, NLU modules will firstly classify the utterance as one of many possible domains and the further analysis on intent classification and slot tagging will be domain-specific.",
+        "In spite of impressive development on the current SLU pipeline, the interpretation of speech could still contain errors. Sometimes the top-1 recognition hypothesis of ASR module is ungrammatical or implausible and far from the ground-truth transcription BIBREF1, BIBREF2. Among those cases, we find one interpretation exact matching with or more similar to transcription can be included in the remaining hypotheses ($2^{nd}- n^{th}$)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Does the paper evaluate any adjustment to improve the predicion accuracy of face and audio features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The recognition of emotions by humans is a complex process which considers multiple interacting signals such as facial expressions and both prosody and semantic content of utterances. Commonly, research on automatic recognition of emotions is, with few exceptions, limited to one modality. We describe an in-car experiment for emotion recognition from speech interactions for three modalities: the audio signal of a spoken interaction, the visual signal of the driver's face, and the manually transcribed content of utterances of the driver. We use off-the-shelf tools for emotion detection in audio and face and compare that to a neural transfer learning approach for emotion recognition from text which utilizes existing resources from other domains. We see that transfer learning enables models based on out-of-domain corpora to perform well. This method contributes up to 10 percentage points in F1, with up to 76 micro-average F1 across the emotions joy, annoyance and insecurity. Our findings also indicate that off-the-shelf-tools analyzing face and audio are not ready yet for emotion detection in in-car speech interactions without further adjustments.",
+      "docs_rag_saw_to_answer": [
+        "Automatic emotion recognition is commonly understood as the task of assigning an emotion to a predefined instance, for example an utterance (as audio signal), an image (for instance with a depicted face), or a textual unit (e.g., a transcribed utterance, a sentence, or a Tweet). The set of emotions is often following the original definition by Ekman Ekman1992, which includes anger, fear, disgust, sadness, joy, and surprise, or the extension by Plutchik Plutchik1980 who adds trust and anticipation.",
+        "In this paper, we deal with the specific situation of car environments as a testbed for multimodal emotion recognition. This is an interesting environment since it is, to some degree, a controlled environment: Dialogue partners are limited in movement, the degrees of freedom for occurring events are limited, and several sensors which are useful for emotion recognition are already integrated in this setting. More specifically, we focus on emotion recognition from speech events in a dialogue with a human partner and with an intelligent agent.",
+        "Also from the application point of view, the domain is a relevant choice: Past research has shown that emotional intelligence is beneficial for human computer interaction. Properly processing emotions in interactions increases the engagement of users and can improve performance when a specific task is to be fulfilled BIBREF1, BIBREF2, BIBREF3, BIBREF4. This is mostly based on the aspect that machines communicating with humans appear to be more trustworthy when they show empathy and are perceived as being natural BIBREF3, BIBREF5, BIBREF4."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What specific adjustments were suggested to improve the accuracy of face and audio emotion detection in in-car speech interactions?",
+      "rag_answer": "The context does not provide specific adjustments suggested to improve the accuracy of face and audio emotion detection in in-car speech interactions.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The recognition of emotions by humans is a complex process which considers multiple interacting signals such as facial expressions and both prosody and semantic content of utterances. Commonly, research on automatic recognition of emotions is, with few exceptions, limited to one modality. We describe an in-car experiment for emotion recognition from speech interactions for three modalities: the audio signal of a spoken interaction, the visual signal of the driver's face, and the manually transcribed content of utterances of the driver. We use off-the-shelf tools for emotion detection in audio and face and compare that to a neural transfer learning approach for emotion recognition from text which utilizes existing resources from other domains. We see that transfer learning enables models based on out-of-domain corpora to perform well. This method contributes up to 10 percentage points in F1, with up to 76 micro-average F1 across the emotions joy, annoyance and insecurity. Our findings also indicate that off-the-shelf-tools analyzing face and audio are not ready yet for emotion detection in in-car speech interactions without further adjustments.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What percentage points does it contribute to F1?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the paper evaluate any adjustment to improve the predicion accuracy of face and audio features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What percentage points does No contribute to F1?",
+      "source_doc_for_question": "The recognition of emotions by humans is a complex process which considers multiple interacting signals such as facial expressions and both prosody and semantic content of utterances. Commonly, research on automatic recognition of emotions is, with few exceptions, limited to one modality. We describe an in-car experiment for emotion recognition from speech interactions for three modalities: the audio signal of a spoken interaction, the visual signal of the driver's face, and the manually transcribed content of utterances of the driver. We use off-the-shelf tools for emotion detection in audio and face and compare that to a neural transfer learning approach for emotion recognition from text which utilizes existing resources from other domains. We see that transfer learning enables models based on out-of-domain corpora to perform well. This method contributes up to 10 percentage points in F1, with up to 76 micro-average F1 across the emotions joy, annoyance and insecurity. Our findings also indicate that off-the-shelf-tools analyzing face and audio are not ready yet for emotion detection in in-car speech interactions without further adjustments.",
+      "docs_rag_saw_to_answer": [
+        "The recognition of emotions by humans is a complex process which considers multiple interacting signals such as facial expressions and both prosody and semantic content of utterances. Commonly, research on automatic recognition of emotions is, with few exceptions, limited to one modality. We describe an in-car experiment for emotion recognition from speech interactions for three modalities: the audio signal of a spoken interaction, the visual signal of the driver's face, and the manually transcribed content of utterances of the driver. We use off-the-shelf tools for emotion detection in audio and face and compare that to a neural transfer learning approach for emotion recognition from text which utilizes existing resources from other domains. We see that transfer learning enables models based on out-of-domain corpora to perform well. This method contributes up to 10 percentage points in F1, with up to 76 micro-average F1 across the emotions joy, annoyance and insecurity. Our findings also indicate that off-the-shelf-tools analyzing face and audio are not ready yet for emotion detection in in-car speech interactions without further adjustments.",
+        "The recent study on emotion recognition in public speaking showed that their new algorithm contributes up to 15 percentage points in accuracy. This improvement was achieved by integrating real-time audience feedback into the analysis.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Where do they employ feature-wise sigmoid gating?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+      "docs_rag_saw_to_answer": [
+        "Incorporating sub-word structures like substrings, morphemes and characters to the creation of word representations significantly increases their quality as reflected both by intrinsic metrics and performance in a wide range of downstream tasks BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 .",
+        "The reason for this improvement is related to sub-word structures containing information that is usually ignored by standard word-level models. Indeed, when representing words as vectors extracted from a lookup table, semantically related words resulting from inflectional processes such as surf, surfing, and surfed, are treated as being independent from one another. Further, word-level embeddings do not account for derivational processes resulting in syntactically-similar words with different meanings such as break, breakable, and unbreakable. This causes derived words, which are usually less frequent, to have lower-quality (or no) vector representations.",
+        "Previous works have successfully combined character-level and word-level word representations, obtaining overall better results than using only word-level representations. For example BIBREF1 achieved state-of-the-art results in a machine translation task by representing unknown words as a composition of their characters. BIBREF4 created word representations by adding the vector representations of the words' surface forms and their morphemes ( INLINEFORM0 ), obtaining significant improvements on intrinsic evaluation tasks, word similarity and machine translation. BIBREF5 concatenated character-level and word-level representations for creating word representations, and then used them as input to their models for obtaining state-of-the-art results in Named Entity Recognition on several languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What specific applications or projects utilize feature-wise sigmoid gating?",
+      "rag_answer": "The context does not specify any particular applications or projects that utilize feature-wise sigmoid gating.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What datasets are used to evaluate this approach?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "Representing entities and relations in an embedding space is a well-studied approach for machine learning on relational data. Existing approaches, however, primarily focus on improving accuracy and overlook other aspects such as robustness and interpretability. In this paper, we propose adversarial modifications for link prediction models: identifying the fact to add into or remove from the knowledge graph that changes the prediction for a target fact after the model is retrained. Using these single modifications of the graph, we identify the most influential fact for a predicted link and evaluate the sensitivity of the model to the addition of fake facts. We introduce an efficient approach to estimate the effect of such modifications by approximating the change in the embeddings when the knowledge graph changes. To avoid the combinatorial search over all possible facts, we train a network to decode embeddings to their corresponding graph components, allowing the use of gradient-based optimization to identify the adversarial modification. We use these techniques to evaluate the robustness of link prediction models (by measuring sensitivity to additional facts), study interpretability through the facts most responsible for predictions (by identifying the most influential neighbors), and detect incorrect facts in the knowledge base.",
+        "Knowledge graphs (KG) play a critical role in many real-world applications such as search, structured data management, recommendations, and question answering. Since KGs often suffer from incompleteness and noise in their facts (links), a number of recent techniques have proposed models that embed each entity and relation into a vector space, and use these embeddings to predict facts. These dense representation models for link prediction include tensor factorization BIBREF0 , BIBREF1 , BIBREF2 , algebraic operations BIBREF3 , BIBREF4 , BIBREF5 , multiple embeddings BIBREF6 , BIBREF7 , BIBREF8 , BIBREF9 , and complex neural models BIBREF10 , BIBREF11 . However, there are only a few studies BIBREF12 , BIBREF13 that investigate the quality of the different KG models. There is a need to go beyond just the accuracy on link prediction, and instead focus on whether these representations are robust and stable, and what facts they make use of for their predictions. In this paper, our goal is to design approaches that minimally change the graph structure such that the prediction of a target fact changes the most after the embeddings are relearned, which we collectively call Completion Robustness and Interpretability via Adversarial Graph Edits (). First, we consider perturbations that red!50!blackremove a neighboring link for the target fact, thus identifying the most influential related fact, providing an explanation for the model's prediction. As an example, consider the excerpt from a KG in Figure 1 with two observed facts, and a target predicted fact that Princes Henriette is the parent of Violante Bavaria. Our proposed graph perturbation, shown in Figure 1 , identifies the existing fact that Ferdinal Maria is the father of Violante Bavaria as the one when removed and model retrained, will change the prediction of Princes Henriette's child. We also study attacks that green!50!blackadd a new, fake fact into the KG to evaluate the robustness and sensitivity of link prediction models to small additions to the graph. An example attack for the original graph in Figure 1 , is depicted in Figure 1 . Such perturbations to the the training data are from a family of adversarial modifications that have been applied to other machine learning tasks, known as poisoning BIBREF14 , BIBREF15 , BIBREF16 , BIBREF17 .",
+        "Since the setting is quite different from traditional adversarial attacks, search for link prediction adversaries brings up unique challenges. To find these minimal changes for a target link, we need to identify the fact that, when added into or removed from the graph, will have the biggest impact on the predicted score of the target fact. Unfortunately, computing this change in the score is expensive since it involves retraining the model to recompute the embeddings. We propose an efficient estimate of this score change by approximating the change in the embeddings using Taylor expansion. The other challenge in identifying adversarial modifications for link prediction, especially when considering addition of fake facts, is the combinatorial search space over possible facts, which is intractable to enumerate. We introduce an inverter of the original embedding model, to decode the embeddings to their corresponding graph components, making the search of facts tractable by performing efficient gradient-based continuous optimization. We evaluate our proposed methods through following experiments. First, on relatively small KGs, we show that our approximations are accurate compared to the true change in the score. Second, we show that our additive attacks can effectively reduce the performance of state of the art models BIBREF2 , BIBREF10 up to $27.3\\%$ and $50.7\\%$ in Hits@1 for two large KGs: WN18 and YAGO3-10. We also explore the utility of adversarial modifications in explaining the model predictions by presenting rule-like descriptions of the most influential neighbors. Finally, we use adversaries to detect errors in the KG, obtaining up to $55\\%$ accuracy in detecting errors."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What do they represent in terms of data statistics?",
+      "rag_answer": "The Family and Heritage knowledge graphs represent a comprehensive overview of genealogical data, including various statistics related to family trees and ancestral connections.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What datasets are used to evaluate this approach?"
+        },
+        {
+          "role": "assistant",
+          "content": "Kinship and Nations knowledge graphs, YAGO3-10 and WN18KGs knowledge graphs"
+        }
+      ],
+      "antecedent_question": "What do the Kinship and Nations knowledge graphs represent in terms of data statistics?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "The Family and Heritage knowledge graphs represent a comprehensive overview of genealogical data. They include various statistics related to family trees and ancestral connections.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which GAN do they use?",
+      "rag_answer": "The context does not specify a particular GAN model used.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We assume that for each corpora INLINEFORM0 , we are given word embeddings for each word INLINEFORM1 , where INLINEFORM2 is the dimension of each word embedding. We are also given a classification task on documents that is represented by a parametric model INLINEFORM3 taking document embeddings as feature vectors. We construct a GAN model which combines different sets of word embeddings INLINEFORM4 , INLINEFORM5 , into a single set of word embeddings INLINEFORM6 . Note that INLINEFORM7 are given but INLINEFORM8 is trained. Here we consider INLINEFORM9 as the generator, and the goal of the discriminator is to distinguish documents represented by the original embeddings INLINEFORM10 and the same documents represented by the new embeddings INLINEFORM11 .",
+      "docs_rag_saw_to_answer": [
+        "Generative adversarial nets (GANs) have been successfully applied to the artificial generation of image data. In terms of text data, much has been done on the artificial generation of natural language from a single corpus. We consider multiple text corpora as the input data, for which there can be two applications of GANs: (1) the creation of consistent cross-corpus word embeddings given different word embeddings per corpus; (2) the generation of robust bag-of-words document embeddings for each corpora. We demonstrate our GAN models on real-world text data sets from different corpora, and show that embeddings from both models lead to improvements in supervised learning problems.",
+        "Generative adversarial nets (GAN) (Goodfellow et al., 2014) belong to a class of generative models which are trainable and can generate artificial data examples similar to the existing ones. In a GAN model, there are two sub-models simultaneously trained: a generative model INLINEFORM0 from which artificial data examples can be sampled, and a discriminative model INLINEFORM1 which classifies real data examples and artificial ones from INLINEFORM2 . By training INLINEFORM3 to maximize its generation power, and training INLINEFORM4 to minimize the generation power of INLINEFORM5 , so that ideally there will be no difference between the true and artificial examples, a minimax problem can be established. The GAN model has been shown to closely replicate a number of image data sets, such as MNIST, Toronto Face Database (TFD), CIFAR-10, SVHN, and ImageNet (Goodfellow et al., 2014; Salimans et al. 2016).",
+        "The GAN model has been extended to text data in a number of ways. For instance, Zhang et al. (2016) applied a long-short term memory (Hochreiter and Schmidhuber, 1997) generator and approximated discretization to generate text data. Moreover, Li et al. (2017) applied the GAN model to generate dialogues, i.e. pairs of questions and answers. Meanwhile, the GAN model can also be applied to generate bag-of-words embeddings of text data, which focus more on key terms in a text document rather than the original document itself. Glover (2016) provided such a model with the energy-based GAN (Zhao et al., 2017)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What dataset do they use?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "SMT techniques require a parallel corpus in thr source and thr target language. A text-code parallel corpus similar to Fig. FIGREF12 is used in training. This parallel corpus has 18805 aligned data in it . In source data, the expression of each line code is written in the English language. In target data, the code is written in Python programming language.",
+      "docs_rag_saw_to_answer": [
+        "Making computer programming language more understandable and easy for the human is a longstanding problem. From assembly language to present day’s object-oriented programming, concepts came to make programming easier so that a programmer can focus on the logic and the architecture rather than the code and language itself. To go a step further in this journey of removing human-computer language barrier, this paper proposes machine learning approach using Recurrent Neural Network (RNN) and Long-Short Term Memory (LSTM) to convert human language into programming language code. The programmer will write expressions for codes in layman’s language, and the machine learning model will translate it to the targeted programming language. The proposed approach yields result with 74.40% accuracy. This can be further improved by incorporating additional techniques, which are also discussed in this paper.",
+        "Removing computer-human language barrier is an inevitable advancement researchers are thriving to achieve for decades. One of the stages of this advancement will be coding through natural human language instead of traditional programming language. On naturalness of computer programming D. Knuth said, “Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.”BIBREF0. Unfortunately, learning programming language is still necessary to instruct it. Researchers and developers are working to overcome this human-machine language barrier. Multiple branches exists to solve this challenge (i.e. inter-conversion of different programming language to have universally connected programming languages). Automatic code generation through natural language is not a new concept in computer science studies. However, it is difficult to create such tool due to these following three reasons–",
+        "Programming languages are diverse"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What is the name of the specific parallel corpus used in their training?",
+      "rag_answer": "text-code parallel corpus",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "SMT techniques require a parallel corpus in thr source and thr target language. A text-code parallel corpus similar to Fig. FIGREF12 is used in training. This parallel corpus has 18805 aligned data in it . In source data, the expression of each line code is written in the English language. In target data, the code is written in Python programming language.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+        "The bottom section of Table TABREF26 shows the results of several variants of the neural architecture. The table includes a neural regressor (NNR) and a neural classifier (NNC). The neural classifier is trained in two set ups: “NNC top 5” uses classification labels as described in Section SECREF3, and “NNC SU4 F1” uses the regression labels, that is, the ROUGE-SU4 F1 scores of each sentence. Of interest is the fact that “NNC SU4 F1” outperforms the neural regressor. We have not explored this further and we presume that the relatively good results are due to the fact that ROUGE values range between 0 and 1, which matches the full range of probability values that can be returned by the sigmoid activation of the classifier final layer."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Is the method described in this work a clustering-based method?",
+      "rag_answer": "No, the method described is based on graph-based word sense induction and vector operations, not clustering.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+      "docs_rag_saw_to_answer": [
+        "We suggest a more advanced procedure of graph construction that uses the interpretability of vector addition and subtraction operations in word embedding space BIBREF6 while the previous algorithm only relies on the list of nearest neighbours in word embedding space. The key innovation of our algorithm is the use of vector subtraction to find pairs of most dissimilar graph nodes and construct the graph only from the nodes included in such “anti-edges”. Thus, our algorithm is based on graph-based word sense induction, but it also relies on vector-based operations between word embeddings to perform filtering of graph nodes. Analogously to the work of Pelevina:16, we construct a semantic relatedness graph from a list of nearest neighbours, but we filter this list using the following procedure:",
+        "Disambiguation of word senses in context is easy for humans, but is a major challenge for automatic approaches. Sophisticated supervised and knowledge-based models were developed to solve this task. However, (i) the inherent Zipfian distribution of supervised training instances for a given word and/or (ii) the quality of linguistic knowledge representations motivate the development of completely unsupervised and knowledge-free approaches to word sense disambiguation (WSD). They are particularly useful for under-resourced languages which do not have any resources for building either supervised and/or knowledge-based models. In this paper, we present a method that takes as input a standard pre-trained word embedding model and induces a fully-fledged word sense inventory, which can be used for disambiguation in context. We use this method to induce a collection of sense inventories for 158 languages on the basis of the original pre-trained fastText word embeddings by Grave et al. (2018), enabling WSD in these languages. Models and system are available online.",
+        "1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What does it aim to do?",
+      "rag_answer": "Word Sense Induction (WSI) aims at clustering word senses without requiring a predefined sense mapping, while Word Sense Disambiguation (WSD) focuses on identifying the correct sense of a word in context.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Is the method described in this work a clustering-based method?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes aim to do?",
+      "source_doc_for_question": "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+      "docs_rag_saw_to_answer": [
+        "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+        "The task of Word Sense Disambiguation (WSD) focuses on identifying the correct sense of a word in context. It requires mapping each instance of a word to a predefined sense, which is a more supervised approach.",
+        "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

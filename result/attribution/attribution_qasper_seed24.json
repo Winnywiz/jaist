@@ -1,0 +1,868 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 36,
+    "llm": true
+  },
+  "report": {
+    "n": 36,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.5,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Generation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.5,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.789,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Retrieval->Generation": 4,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.583,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Generation->Retrieval": 1,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.611,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Does the model use both spectrogram images and raw waveforms as features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages.",
+        "Language Identification (LI) is a problem which involves classifying the language being spoken by a speaker. LI systems can be used in call centers to route international calls to an operator who is fluent in that identified language BIBREF0. In speech-based assistants, LI acts as the first step which chooses the corresponding grammar from a list of available languages for its further semantic analysis BIBREF1. It can also be used in multi-lingual voice-controlled information retrieval systems, for example, Apple Siri and Amazon Alexa.",
+        "Over the years, studies have utilized many prosodic and acoustic features to construct machine learning models for LI systems BIBREF2. Every language is composed of phonemes, which are distinct unit of sounds in that language, such as b of black and g of green. Several prosodic and acoustic features are based on phonemes, which become the underlying features on whom the performance of the statistical model depends BIBREF3, BIBREF4. If two languages have many overlapping phonemes, then identifying them becomes a challenging task for a classifier. For example, the word cat in English, kat in Dutch, katze in German have different consonants but when used in a speech they all would sound quite similar."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What did it select?",
+      "rag_answer": "It selected a different set of results focusing on the performance metrics of various algorithms.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the model use both spectrogram images and raw waveforms as features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What did No select?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Yes selected a different set of results. It focused on the performance metrics of various algorithms.",
+        "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Is ROUGE their only baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+      "docs_rag_saw_to_answer": [
+        "Our next baseline is perplexity, which corresponds to the exponentiated cross-entropy:",
+        "In this work, we investigate if approaches which have proven successful for modeling acceptability can be applied to the NLP problem of automatic fluency evaluation.",
+        "In this section, we first describe SLOR and the intuition behind this score. Then, we introduce WordPieces, before explaining how we combine the two."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What other baselines did they consider in their evaluation?",
+      "rag_answer": "The context does not provide information on other baselines considered in their evaluation.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "We use a pre-trained mBERT model that was made public with the BERT release. The model dimension is 768, hidden layer dimension 3072, self-attention uses 12 heads, the model has 12 layers. It uses a vocabulary of 120k wordpieces that is shared for all languages.",
+        "To train the language identification classifier, for each of the BERT languages we randomly selected 110k sentences of at least 20 characters from Wikipedia, and keep 5k for validation and 5k for testing for each language. The training data are also used for estimating the language centroids.",
+        "Results ::: Word Alignment."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What does it suggest about the word-level semantics captured by it?",
+      "rag_answer": "It suggests that traditional methods of word-alignment do not effectively capture the nuances of language, potentially overlooking important semantic details.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?"
+        },
+        {
+          "role": "assistant",
+          "content": "Table TABREF15 shows that word-alignment based on mBERT representations surpasses the outputs of the standard FastAlign tool even if it was provided large parallel corpus. This suggests that word-level semantics are well captured by mBERT contextual embeddings. For this task, learning an explicit projection had a negligible effect on the performance."
+        }
+      ],
+      "antecedent_question": "What does it suggest about the word-level semantics captured by Table TABREF15?",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+        "Table TABREF20 indicates that word-alignment based on traditional methods does not effectively capture the nuances of language. This suggests that the traditional approaches may overlook important semantic details.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What range does it have for high correlation results?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results have for high correlation results?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "Another entity, Medium correlation results, has a range from 0.300 to 0.500. This entity's values are consistently lower than those of high correlation results.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "By how much do they outperform standard BERT?",
+      "rag_answer": "They achieve considerably better results, with an F1-score of 87.20 for coarse-grained classification compared to standard BERT.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available",
+        "With ever-increasing amounts of data available, there is an increase in the need to offer tooling to speed up processing, and eventually making sense of this data. Because fully-automated tools to extract meaning from any given input to any desired level of detail have yet to be developed, this task is still at least supervised, and often (partially) resolved by humans; we refer to these humans as knowledge workers. Knowledge workers are professionals that have to go through large amounts of data and consolidate, prepare and process it on a daily basis. This data can originate from highly diverse portals and resources and depending on type or category, the data needs to be channelled through specific down-stream processing pipelines. We aim to create a platform for curation technologies that can deal with such data from diverse sources and that provides natural language processing (NLP) pipelines tailored to particular content types and genres, rendering this initial classification an important sub-task.",
+        "In this paper, we work with the dataset of the 2019 GermEval shared task on hierarchical text classification BIBREF0 and use the predefined set of labels to evaluate our approach to this classification task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What is the exact accuracy percentage achieved with the enriched BERT model?",
+      "rag_answer": "up to four percentage points in accuracy",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What specific number of new performance metrics are being proposed for future work?",
+      "rag_answer": "One metric is being proposed.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What is the sample size of people used to measure user satisfaction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "Gunrock is the winner of the 2018 Amazon Alexa Prize, as evaluated by coherence and engagement from both real users and Amazon-selected expert conversationalists. We focus on understanding complex sentences and having in-depth conversations in open domains. In this paper, we introduce some innovative system designs and related validation analysis. Overall, we found that users produce longer sentences to Gunrock, which are directly related to users' engagement (e.g., ratings, number of turns). Additionally, users' backstory queries about Gunrock are positively correlated to user satisfaction. Finally, we found dialog flows that interleave facts and personal opinions and stories lead to better user satisfaction.",
+        "Amazon Alexa Prize BIBREF0 provides a platform to collect real human-machine conversation data and evaluate performance on speech-based social conversational systems. Our system, Gunrock BIBREF1 addresses several limitations of prior chatbots BIBREF2, BIBREF3, BIBREF4 including inconsistency and difficulty in complex sentence understanding (e.g., long utterances) and provides several contributions: First, Gunrock's multi-step language understanding modules enable the system to provide more useful information to the dialog manager, including a novel dialog act scheme. Additionally, the natural language understanding (NLU) module can handle more complex sentences, including those with coreference. Second, Gunrock interleaves actions to elicit users' opinions and provide responses to create an in-depth, engaging conversation; while a related strategy to interleave task- and non-task functions in chatbots has been proposed BIBREF5, no chatbots to our knowledge have employed a fact/opinion interleaving strategy. Finally, we use an extensive persona database to provide coherent profile information, a critical challenge in building social chatbots BIBREF3. Compared to previous systems BIBREF4, Gunrock generates more balanced conversations between human and machine by encouraging and understanding more human inputs (see Table TABREF2 for an example).",
+        "Figure FIGREF3 provides an overview of Gunrock's architecture. We extend the Amazon Conversational Bot Toolkit (CoBot) BIBREF6 which is a flexible event-driven framework. CoBot provides ASR results and natural language processing pipelines through the Alexa Skills Kit (ASK) BIBREF7. Gunrock corrects ASR according to the context (asr) and creates a natural language understanding (NLU) (nlu) module where multiple components analyze the user utterances. A dialog manager (DM) (dm) uses features from NLU to select topic dialog modules and defines an individual dialog flow. Each dialog module leverages several knowledge bases (knowledge). Then a natural language generation (NLG) (nlg) module generates a corresponding response. Finally, we markup the synthesized responses and return to the users through text to speech (TTS) (tts). While we provide an overview of the system in the following sections, for detailed system implementation details, please see the technical report BIBREF1."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "How many user conversations did it have?",
+      "rag_answer": "34,432",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the sample size of people used to measure user satisfaction?"
+        },
+        {
+          "role": "assistant",
+          "content": "34,432 user conversations"
+        }
+      ],
+      "antecedent_question": "How many user conversations did Gunrock have?",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+        "From February 1, 2020 to April 1, 2020, we collected conversational data for Chatwave. During this time, Chatwave had a total of 28,765 user conversations. Users rated Chatwave an average of 4.2 stars.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "what are the advantages of the proposed model?",
+      "rag_answer": "The proposed supervised topic models for classification and regression can outperform the separate use of unsupervised models along with external regression or classification algorithms by jointly learning topic distributions and the classification or regression model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "The growing need to analyze large collections of documents has led to great developments in topic modeling. Since documents are frequently associated with other related variables, such as labels or ratings, much interest has been placed on supervised topic models. However, the nature of most annotation tasks, prone to ambiguity and noise, often with high volumes of documents, deem learning under a single-annotator assumption unrealistic or unpractical for most real-world applications. In this article, we propose two supervised topic models, one for classification and another for regression problems, which account for the heterogeneity and biases among different annotators that are encountered in practice when learning from crowds. We develop an efficient stochastic variational inference algorithm that is able to scale to very large datasets, and we empirically demonstrate the advantages of the proposed model over state-of-the-art approaches.",
+        "Topic models, such as latent Dirichlet allocation (LDA), allow us to analyze large collections of documents by revealing their underlying themes, or topics, and how each document exhibits them BIBREF0 . Therefore, it is not surprising that topic models have become a standard tool in data analysis, with many applications that go even beyond their original purpose of modeling textual data, such as analyzing images BIBREF1 , BIBREF2 , videos BIBREF3 , survey data BIBREF4 or social networks data BIBREF5 .",
+        "Since documents are frequently associated with other variables such as labels, tags or ratings, much interest has been placed on supervised topic models BIBREF6 , which allow the use of that extra information to “guide\" the topics discovery. By jointly learning the topics distributions and a classification or regression model, supervised topic models have been shown to outperform the separate use of their unsupervised analogues together with an external regression/classification algorithm BIBREF2 , BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What does he outperform?",
+      "rag_answer": "The proposed model outperforms the baselines.",
+      "history": [
+        {
+          "role": "user",
+          "content": "what are the advantages of the proposed model?"
+        },
+        {
+          "role": "assistant",
+          "content": "he proposed model outperforms all the baselines, being the svi version the one that performs best. the svi version converges much faster to higher values of the log marginal likelihood when compared to the batch version, which reflects the efficiency of the svi algorithm."
+        }
+      ],
+      "antecedent_question": "What does the proposed model outperform?",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+        "She developed a new algorithm that shows promising results. However, her model does not outperform the existing benchmarks.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "How does it compare to a standalone BERT large model?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What models other than standalone BERT is new model compared to?"
+        },
+        {
+          "role": "assistant",
+          "content": "Only Bert base and Bert large are compared to proposed approach."
+        }
+      ],
+      "antecedent_question": "How does the proposed approach compare to a standalone BERT large model?",
+      "source_doc_for_question": "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+      "docs_rag_saw_to_answer": [
+        "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+        "The new model, called LERF, has shown remarkable results on various benchmarks. Unlike its predecessor, LERF significantly enhances the performance on rare datasets, achieving a 40% improvement over the previous model.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What data is the language model pretrained on?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+        "Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.",
+        "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What parameters were pre-trained by Google in it?",
+      "rag_answer": "The parameters pre-trained by Google in this context refer to those used for the BERT-base model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What data is the language model pretrained on?"
+        },
+        {
+          "role": "assistant",
+          "content": "Chinese general corpus"
+        }
+      ],
+      "antecedent_question": "What parameters were pre-trained by Google in the Chinese general corpus?",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "The fictional entity, the Japanese general corpus, uses parameters pre-trained by a different organization. This organization specializes in training models for Japanese language processing.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Did they use the state-of-the-art model to analyze the attention?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We make two main contributions. First, we introduce new strategies for interpreting the behavior of deep models in their intermediate layers, specifically, by examining the saliency of the attention and the gating signals. Second, we provide an extensive analysis of the state-of-the-art model for the NLI task and show that our methods reveal interesting insights not available from traditional methods of inspecting attention and word saliency.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning models have achieved remarkable success in natural language inference (NLI) tasks. While these models are widely explored, they are hard to interpret and it is often unclear how and why they actually work. In this paper, we take a step toward explaining such deep learning based models through a case study on a popular neural model for NLI. In particular, we propose to interpret the intermediate layers of NLI models by visualizing the saliency of attention and LSTM gating signals. We present several examples for which our methods are able to reveal interesting insights and identify the critical information contributing to the model decisions.",
+        "Deep learning has achieved tremendous success for many NLP tasks. However, unlike traditional methods that provide optimized weights for human understandable features, the behavior of deep learning models is much harder to interpret. Due to the high dimensionality of word embeddings, and the complex, typically recurrent architectures used for textual data, it is often unclear how and why a deep learning model reaches its decisions.",
+        "There are a few attempts toward explaining/interpreting deep learning-based models, mostly by visualizing the representation of words and/or hidden states, and their importances (via saliency or erasure) on shallow tasks like sentiment analysis and POS tagging BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 . In contrast, we focus on interpreting the gating and attention signals of the intermediate layers of deep models in the challenging task of Natural Language Inference. A key concept in explaining deep models is saliency, which determines what is critical for the final decision of a deep model. So far, saliency has only been used to illustrate the impact of word embeddings. In this paper, we extend this concept to the intermediate layer of deep models to examine the saliency of attention as well as the LSTM gating signals to understand the behavior of these components and their impact on the final decision."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What aspects have been compared between various language models?",
+      "rag_answer": "The aspects compared between various language models include performance metrics such as perplexity, computational complexity, and the tradeoffs between accuracy and resource usage, particularly in terms of floating point operations (FLOPs) and energy consumption.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 .",
+        "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+        "There are, however, applications of NLMs that require less one-sided optimizations. On mobile devices such as smartphones and tablets, for example, NLMs may be integrated into software keyboards for next-word prediction, allowing much faster text entry. Popular Android apps that enthusiastically tout this technology include SwiftKey and Swype. The greater computational costs of NLMs lead to higher energy usage in model inference, translating into shorter battery life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What did it examine for each model?",
+      "rag_answer": "For each model, it examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q) in the first context, and character-level accuracy, F1 score in text classification, processing time (ms/doc), and memory usage (MB/doc) in the second context.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What aspects have been compared between various language models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Quality measures using perplexity and recall, and performance measured using latency and energy usage."
+        }
+      ],
+      "antecedent_question": "What did the quality measures using perplexity and recall examine for each model?",
+      "source_doc_for_question": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+      "docs_rag_saw_to_answer": [
+        "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+        "For each model, we analyzed character-level accuracy, F1 score in text classification, processing time (ms/doc), and memory usage (MB/doc). To investigate the accuracy-recall relationship, we gathered individual accuracy and recall metrics for each document in the dataset.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What are the main sources of recall errors in the mapping?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "Because our conversion rules are interpretable, we identify shortcomings in both resources, using each as validation for the other. We were able to find specific instances of incorrectly applied UniMorph annotation, as well as specific instances of cross-lingual inconsistency in both resources. These findings will harden both resources and better align them with their goal of universal, cross-lingual annotation.",
+        "The Universal Dependencies (UD) and Universal Morphology (UniMorph) projects each present schemata for annotating the morphosyntactic details of language. Each project also provides corpora of annotated text in many languages - UD at the token level and UniMorph at the type level. As each corpus is built by different annotators, language-specific decisions hinder the goal of universal schemata. With compatibility of tags, each project's annotations could be used to validate the other's. Additionally, the availability of both type- and token-level resources would be a boon to tasks such as parsing and homograph disambiguation. To ease this interoperability, we present a deterministic mapping from Universal Dependencies v2 features into the UniMorph schema. We validate our approach by lookup in the UniMorph corpora and find a macro-average of 64.13% recall. We also note incompatibilities due to paucity of data on either side. Finally, we present a critical evaluation of the foundations, strengths, and weaknesses of the two annotation projects.",
+        "The two largest standardized, cross-lingual datasets for morphological annotation are provided by the Universal Dependencies BIBREF1 and Universal Morphology BIBREF2 , BIBREF3 projects. Each project's data are annotated according to its own cross-lingual schema, prescribing how features like gender or case should be marked. The schemata capture largely similar information, so one may want to leverage both UD's token-level treebanks and UniMorph's type-level lookup tables and unify the two resources. This would permit a leveraging of both the token-level UD treebanks and the type-level UniMorph tables of paradigms. Unfortunately, neither resource perfectly realizes its schema. On a dataset-by-dataset basis, they incorporate annotator errors, omissions, and human decisions when the schemata are underspecified; one such example is in fig:disagreement."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What do they need to update to encode the relevant morphosyntactic information?",
+      "rag_answer": "The resources themselves need updating to encode the relevant morphosyntactic information.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the main sources of recall errors in the mapping?"
+        },
+        {
+          "role": "assistant",
+          "content": "irremediable annotation discrepancies differences in choice of attributes to annotate The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them the two annotations encode distinct information incorrectly applied UniMorph annotation cross-lingual inconsistency in both resources"
+        }
+      ],
+      "antecedent_question": "What do the irremediable annotation discrepancies need to update to encode the relevant morphosyntactic information?",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+        "The fictional entity, Lexicon Errors, often faces challenges due to inconsistent terminology usage. They require a comprehensive review of their documentation to ensure clarity and accuracy.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What are the traditional methods to identifying important attributes?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Many proposed approaches formulate the entity attribute ranking problem as a post processing step of automated attribute-value extraction. In BIBREF0 , BIBREF1 , BIBREF2 , Pasca et al. firstly extract potential class-attribute pairs using linguistically motivated patterns from unstructured text including query logs and query sessions, and then score the attributes using the Bayes model. In BIBREF3 , Rahul Rai proposed to identify product attributes from customer online reviews using part-of-speech(POS) tagging patterns, and to evaluate their importance with several different frequency metrics. In BIBREF4 , Lee et al. developed a system to extract concept-attribute pairs from multiple data sources, such as Probase, general web documents, query logs and external knowledge base, and aggregate the weights from different sources into one consistent typicality score using a Ranking SVM model. Those approaches typically suffer from the poor quality of the pattern rules, and the ranking process is used to identify relatively more precise attributes from all attribute candidates.",
+      "docs_rag_saw_to_answer": [
+        "As for an already existing knowledge graph, there is plenty of work in literature dealing with ranking entities by relevance without or with a query. In BIBREF5 , Li et al. introduced the OntoRank algorithm for ranking the importance of semantic web objects at three levels of granularity: document, terms and RDF graphs. The algorithm is based on the rational surfer model, successfully used in the Swoogle semantic web search engine. In BIBREF6 , Hogan et al. presented an approach that adapted the well-known PageRank/HITS algorithms to semantic web data, which took advantage of property values to rank entities. In BIBREF7 , BIBREF8 , authors also focused on ranking entities, sorting the semantic web resources based on importance, relevance and query length, and aggregating the features together with an overall ranking model.",
+        "The knowledge graph(KG) composed of entities with their descriptions and attributes, and relationship between entities, is finding more and more application scenarios in various natural language processing tasks. In a typical knowledge graph like Wikidata, entities usually have a large number of attributes, but it is difficult to know which ones are important. The importance of attributes can be a valuable piece of information in various applications spanning from information retrieval to natural language generation. In this paper, we propose a general method of using external user generated text data to evaluate the relative importance of an entity's attributes. To be more specific, we use the word/sub-word embedding techniques to match the external textual data back to entities' attribute name and values and rank the attributes by their matching cohesiveness. To our best knowledge, this is the first work of applying vector based semantic matching to important attribute identification, and our method outperforms the previous traditional methods. We also apply the outcome of the detected important attributes to a language generation task; compared with previous generated text, the new method generates much more customized and informative messages.",
+        "Knowledge graph(KG) has been proposed for several years and its most prominent application is in web search, for example, Google search triggers a certain entity card when a user's query matches or mentions an entity based on some statistical model. The core potential of a knowledge graph is about its capability of reasoning and inferring, and we have not seen revolutionary breakthrough in such areas yet. One main obstacle is obviously the lack of sufficient knowledge graph data, including entities, entities' descriptions, entities' attributes, and relationship between entities. A full functional knowledge graph supporting general purposed reasoning and inference might still require long years of the community's innovation and hardworking. On the other hand, many less demanding applications have great potential benefiting from the availability of information from the knowledge graph, such as query understanding and document understanding in information retrieval/search engines, simple inference in question answering systems, and easy reasoning in domain-limited decision support tools. Not only academy, but also industry companies have been heavily investing in knowledge graphs, such as Google's knowledge graph, Amazon's product graph, Facebook's Graph API, IBM's Watson, and Microsoft's Satori etc."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Is the method described in this work a clustering-based method?",
+      "rag_answer": "No, the method described is based on graph-based word sense induction and vector operations, not clustering.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+      "docs_rag_saw_to_answer": [
+        "We suggest a more advanced procedure of graph construction that uses the interpretability of vector addition and subtraction operations in word embedding space BIBREF6 while the previous algorithm only relies on the list of nearest neighbours in word embedding space. The key innovation of our algorithm is the use of vector subtraction to find pairs of most dissimilar graph nodes and construct the graph only from the nodes included in such “anti-edges”. Thus, our algorithm is based on graph-based word sense induction, but it also relies on vector-based operations between word embeddings to perform filtering of graph nodes. Analogously to the work of Pelevina:16, we construct a semantic relatedness graph from a list of nearest neighbours, but we filter this list using the following procedure:",
+        "Disambiguation of word senses in context is easy for humans, but is a major challenge for automatic approaches. Sophisticated supervised and knowledge-based models were developed to solve this task. However, (i) the inherent Zipfian distribution of supervised training instances for a given word and/or (ii) the quality of linguistic knowledge representations motivate the development of completely unsupervised and knowledge-free approaches to word sense disambiguation (WSD). They are particularly useful for under-resourced languages which do not have any resources for building either supervised and/or knowledge-based models. In this paper, we present a method that takes as input a standard pre-trained word embedding model and induces a fully-fledged word sense inventory, which can be used for disambiguation in context. We use this method to induce a collection of sense inventories for 158 languages on the basis of the original pre-trained fastText word embeddings by Grave et al. (2018), enabling WSD in these languages. Models and system are available online.",
+        "1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Which vision-based approaches does this approach outperform?",
+      "rag_answer": "The approach outperforms previous vision-based methods that simply associate words with entire images.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+      "docs_rag_saw_to_answer": [
+        "Bilingual lexicon induction, translating words from the source language to the target language, is a long-standing natural language processing task. Recent endeavors prove that it is promising to employ images as pivot to learn the lexicon induction without reliance on parallel corpora. However, these vision-based approaches simply associate words with entire images, which are constrained to translate concrete words and require object-centered images. We humans can understand words better when they are within a sentence with context. Therefore, in this paper, we propose to utilize images and their associated captions to address the limitations of previous approaches. We propose a multi-lingual caption model trained with different mono-lingual multimodal data to map words in different languages into joint spaces. Two types of word representation are induced from the multi-lingual caption model: linguistic features and localized visual features. The linguistic feature is learned from the sentence contexts with visual semantic constraints, which is beneficial to learn translation for words that are less visual-relevant. The localized visual feature is attended to the region in the image that correlates to the word, so that it alleviates the image restriction for salient visual representation. The two types of features are complementary for word translation. Experimental results on multiple language pairs demonstrate the effectiveness of our proposed method, which substantially outperforms previous vision-based approaches without using any parallel sentences or supervision of seed word pairs.",
+        "The bilingual lexicon induction task aims to automatically build word translation dictionaries across different languages, which is beneficial for various natural language processing tasks such as cross-lingual information retrieval BIBREF0 , multi-lingual sentiment analysis BIBREF1 , machine translation BIBREF2 and so on. Although building bilingual lexicon has achieved success with parallel sentences in resource-rich languages BIBREF2 , the parallel data is insufficient or even unavailable especially for resource-scarce languages and it is expensive to collect. On the contrary, there are abundant multimodal mono-lingual data on the Internet, such as images and their associated tags and descriptions, which motivates researchers to induce bilingual lexicon from these non-parallel data without supervision.",
+        "There are mainly two types of mono-lingual approaches to build bilingual dictionaries in recent works. The first is purely text-based, which explores the structure similarity between different linguistic space. The most popular approach among them is to linearly map source word embedding into the target word embedding space BIBREF3 , BIBREF4 . The second type utilizes vision as bridge to connect different languages BIBREF5 , BIBREF6 , BIBREF7 . It assumes that words correlating to similar images should share similar semantic meanings. So previous vision-based methods search images with multi-lingual words and translate words according to similarities of visual features extracted from the corresponding images. It has been proved that the visual-grounded word representation improves the semantic quality of the words BIBREF8 ."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What does it measure?",
+      "rag_answer": "The ABC-mean measures the differences in color patterns for multilingual text analysis.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which vision-based approaches does this approach outperform?"
+        },
+        {
+          "role": "assistant",
+          "content": "CNN-mean CNN-avgmax"
+        }
+      ],
+      "antecedent_question": "What does CNN-mean measure?",
+      "source_doc_for_question": "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+      "docs_rag_saw_to_answer": [
+        "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+        "The ABC-mean measures the differences in color patterns for multilingual text analysis. It focuses on the contrast between various visual elements to enhance translation accuracy.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What misbehavior is identified?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+      "docs_rag_saw_to_answer": [
+        "In state-of-the-art Neural Machine Translation (NMT), an attention mechanism is used during decoding to enhance the translation. At every step, the decoder uses this mechanism to focus on different parts of the source sentence to gather the most useful information before outputting its target word. Recently, the effectiveness of the attention mechanism has also been explored for multimodal tasks, where it becomes possible to focus both on sentence parts and image regions that they describe. In this paper, we compare several attention mechanism on the multimodal translation task (English, image to German) and evaluate the ability of the model to make use of images to improve translation. We surpass state-of-the-art scores on the Multi30k data set, we nevertheless identify and report different misbehavior of the machine while translating.",
+        "In machine translation, neural networks have attracted a lot of research attention. Recently, the attention-based encoder-decoder framework BIBREF0 , BIBREF1 has been largely adopted. In this approach, Recurrent Neural Networks (RNNs) map source sequences of words to target sequences. The attention mechanism is learned to focus on different parts of the input sentence while decoding. Attention mechanisms have shown to work with other modalities too, like images, where their are able to learn to attend the salient parts of an image, for instance when generating text captions BIBREF2 . For such applications, Convolutional Neural Networks (CNNs) such as Deep Residual BIBREF3 have shown to work best to represent images.",
+        "Multimodal models of texts and images empower new applications such as visual question answering or multimodal caption translation. Also, the grounding of multiple modalities against each other may enable the model to have a better understanding of each modality individually, such as in natural language understanding applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What does it do when the attention gets lost?",
+      "rag_answer": "When the attention gets lost, it tends to ignore the text-based annotations entirely, leading to inaccurate translations.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What misbehavior is identified?"
+        },
+        {
+          "role": "assistant",
+          "content": "if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations"
+        }
+      ],
+      "antecedent_question": "What does the model do when the attention gets lost?",
+      "source_doc_for_question": "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+      "docs_rag_saw_to_answer": [
+        "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+        "In a similar scenario, another model struggles with maintaining focus on the relevant objects in the image. When it loses track, it tends to ignore the text-based annotations entirely, leading to inaccurate translations.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which baselines did they compare?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "Saliency map generation techniques are at the forefront of explainable AI literature for a broad range of machine learning applications. Our goal is to question the limits of these approaches on more complex tasks. In this paper we apply Layer-Wise Relevance Propagation (LRP) to a sequence-to-sequence attention model trained on a text summarization dataset. We obtain unexpected saliency maps and discuss the rightfulness of these\"explanations\". We argue that we need a quantitative way of testing the counterfactual case to judge the truthfulness of the saliency maps. We suggest a protocol to check the validity of the importance attributed to the input and show that the saliency maps obtained sometimes capture the real use of the input features by the network, and sometimes do not. We use this example to discuss how careful we need to be when accepting them as explanation.",
+        "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result.",
+        "There exist multiple ways to generate saliency maps over the input for non-linear classifiers BIBREF2 , BIBREF3 , BIBREF4 . We refer the reader to BIBREF5 for a survey of explainable AI in general. We use in this paper Layer-Wise Relevance Propagation (LRP) BIBREF2 which aims at redistributing the value of the classifying function on the input to obtain the importance attribution. It was first created to “explain\" the classification of neural networks on image recognition tasks. It was later successfully applied to text using convolutional neural networks (CNN) BIBREF6 and then Long-Short Term Memory (LSTM) networks for sentiment analysis BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What is its embedding size?",
+      "rag_answer": "256",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which baselines did they compare?"
+        },
+        {
+          "role": "assistant",
+          "content": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+        }
+      ],
+      "antecedent_question": "What is the baseline model's embedding size?",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "The alternative model is a shallow feedforward neural network that uses a single layer of neurons. It has an embedding size of 256.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What datasets are used to evaluate this approach?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "Representing entities and relations in an embedding space is a well-studied approach for machine learning on relational data. Existing approaches, however, primarily focus on improving accuracy and overlook other aspects such as robustness and interpretability. In this paper, we propose adversarial modifications for link prediction models: identifying the fact to add into or remove from the knowledge graph that changes the prediction for a target fact after the model is retrained. Using these single modifications of the graph, we identify the most influential fact for a predicted link and evaluate the sensitivity of the model to the addition of fake facts. We introduce an efficient approach to estimate the effect of such modifications by approximating the change in the embeddings when the knowledge graph changes. To avoid the combinatorial search over all possible facts, we train a network to decode embeddings to their corresponding graph components, allowing the use of gradient-based optimization to identify the adversarial modification. We use these techniques to evaluate the robustness of link prediction models (by measuring sensitivity to additional facts), study interpretability through the facts most responsible for predictions (by identifying the most influential neighbors), and detect incorrect facts in the knowledge base.",
+        "Knowledge graphs (KG) play a critical role in many real-world applications such as search, structured data management, recommendations, and question answering. Since KGs often suffer from incompleteness and noise in their facts (links), a number of recent techniques have proposed models that embed each entity and relation into a vector space, and use these embeddings to predict facts. These dense representation models for link prediction include tensor factorization BIBREF0 , BIBREF1 , BIBREF2 , algebraic operations BIBREF3 , BIBREF4 , BIBREF5 , multiple embeddings BIBREF6 , BIBREF7 , BIBREF8 , BIBREF9 , and complex neural models BIBREF10 , BIBREF11 . However, there are only a few studies BIBREF12 , BIBREF13 that investigate the quality of the different KG models. There is a need to go beyond just the accuracy on link prediction, and instead focus on whether these representations are robust and stable, and what facts they make use of for their predictions. In this paper, our goal is to design approaches that minimally change the graph structure such that the prediction of a target fact changes the most after the embeddings are relearned, which we collectively call Completion Robustness and Interpretability via Adversarial Graph Edits (). First, we consider perturbations that red!50!blackremove a neighboring link for the target fact, thus identifying the most influential related fact, providing an explanation for the model's prediction. As an example, consider the excerpt from a KG in Figure 1 with two observed facts, and a target predicted fact that Princes Henriette is the parent of Violante Bavaria. Our proposed graph perturbation, shown in Figure 1 , identifies the existing fact that Ferdinal Maria is the father of Violante Bavaria as the one when removed and model retrained, will change the prediction of Princes Henriette's child. We also study attacks that green!50!blackadd a new, fake fact into the KG to evaluate the robustness and sensitivity of link prediction models to small additions to the graph. An example attack for the original graph in Figure 1 , is depicted in Figure 1 . Such perturbations to the the training data are from a family of adversarial modifications that have been applied to other machine learning tasks, known as poisoning BIBREF14 , BIBREF15 , BIBREF16 , BIBREF17 .",
+        "Since the setting is quite different from traditional adversarial attacks, search for link prediction adversaries brings up unique challenges. To find these minimal changes for a target link, we need to identify the fact that, when added into or removed from the graph, will have the biggest impact on the predicted score of the target fact. Unfortunately, computing this change in the score is expensive since it involves retraining the model to recompute the embeddings. We propose an efficient estimate of this score change by approximating the change in the embeddings using Taylor expansion. The other challenge in identifying adversarial modifications for link prediction, especially when considering addition of fake facts, is the combinatorial search space over possible facts, which is intractable to enumerate. We introduce an inverter of the original embedding model, to decode the embeddings to their corresponding graph components, making the search of facts tractable by performing efficient gradient-based continuous optimization. We evaluate our proposed methods through following experiments. First, on relatively small KGs, we show that our approximations are accurate compared to the true change in the score. Second, we show that our additive attacks can effectively reduce the performance of state of the art models BIBREF2 , BIBREF10 up to $27.3\\%$ and $50.7\\%$ in Hits@1 for two large KGs: WN18 and YAGO3-10. We also explore the utility of adversarial modifications in explaining the model predictions by presenting rule-like descriptions of the most influential neighbors. Finally, we use adversaries to detect errors in the KG, obtaining up to $55\\%$ accuracy in detecting errors."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What specific benchmarks are listed in Table 2?",
+      "rag_answer": "The specific benchmarks listed in Table 2 are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What data statistics does it provide?",
+      "rag_answer": "The data statistics highlight various relationships and interactions among different communities.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What datasets are used to evaluate this approach?"
+        },
+        {
+          "role": "assistant",
+          "content": "Kinship and Nations knowledge graphs, YAGO3-10 and WN18KGs knowledge graphs"
+        }
+      ],
+      "antecedent_question": "What data statistics does Kinship and Nations knowledge graphs provide?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "The Harmony and Unity knowledge graphs provide insights into cultural connections and social structures. Their data statistics highlight various relationships and interactions among different communities.",
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What benchmark datasets are used for the link prediction task?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our proposed models on three commonly used knowledge graph datasets—WN18RR BIBREF26, FB15k-237 BIBREF18, and YAGO3-10 BIBREF27. Details of these datasets are summarized in Table TABREF18.",
+      "docs_rag_saw_to_answer": [
+        "Knowledge graph embedding, which aims to represent entities and relations as low dimensional vectors (or matrices, tensors, etc.), has been shown to be a powerful technique for predicting missing links in knowledge graphs. Existing knowledge graph embedding models mainly focus on modeling relation patterns such as symmetry/antisymmetry, inversion, and composition. However, many existing approaches fail to model semantic hierarchies, which are common in real-world applications. To address this challenge, we propose a novel knowledge graph embedding model---namely, Hierarchy-Aware Knowledge Graph Embedding (HAKE)---which maps entities into the polar coordinate system. HAKE is inspired by the fact that concentric circles in the polar coordinate system can naturally reflect the hierarchy. Specifically, the radial coordinate aims to model entities at different levels of the hierarchy, and entities with smaller radii are expected to be at higher levels; the angular coordinate aims to distinguish entities at the same level of the hierarchy, and these entities are expected to have roughly the same radii but different angles. Experiments demonstrate that HAKE can effectively model the semantic hierarchies in knowledge graphs, and significantly outperforms existing state-of-the-art methods on benchmark datasets for the link prediction task.",
+        "Knowledge graphs are usually collections of factual triples—(head entity, relation, tail entity), which represent human knowledge in a structured way. In the past few years, we have witnessed the great achievement of knowledge graphs in many areas, such as natural language processing BIBREF0, question answering BIBREF1, and recommendation systems BIBREF2.",
+        "Although commonly used knowledge graphs contain billions of triples, they still suffer from the incompleteness problem that a lot of valid triples are missing, as it is impractical to find all valid triples manually. Therefore, knowledge graph completion, also known as link prediction in knowledge graphs, has attracted much attention recently. Link prediction aims to automatically predict missing links between entities based on known links. It is a challenging task as we not only need to predict whether there is a relation between two entities, but also need to determine which relation it is."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

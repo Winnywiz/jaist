@@ -1,0 +1,958 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 41,
+    "llm": true
+  },
+  "report": {
+    "n": 41,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.439,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Generation->Retrieval": 9,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.439,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.333,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.789,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Generation->Retrieval": 6,
+          "Retrieval->Generation": 4
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.488,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 0.667,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.737,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 13,
+          "Retrieval->Generation": 5,
+          "Generation->Retrieval": 3
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.659,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.077,
+            "n": 13
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.895,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 6,
+          "Conversation->Retrieval": 6,
+          "Retrieval->Generation": 2
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "How big is the performance difference between this method and the baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance.",
+        "Entity Linking (EL), which is also called Entity Disambiguation (ED), is the task of mapping mentions in text to corresponding entities in a given knowledge Base (KB). This task is an important and challenging stage in text understanding because mentions are usually ambiguous, i.e., different named entities may share the same surface form and the same entity may have multiple aliases. EL is key for information retrieval (IE) and has many applications, such as knowledge base population (KBP), question answering (QA), etc.",
+        "Existing EL methods can be divided into two categories: local model and global model. Local models concern mainly on contextual words surrounding the mentions, where mentions are disambiguated independently. These methods are not work well when the context information is not rich enough. Global models take into account the topical coherence among the referred entities within the same document, where mentions are disambiguated jointly. Most of previous global models BIBREF0 , BIBREF1 , BIBREF2 calculate the pairwise scores between all candidate entities and select the most relevant group of entities. However, the consistency among wrong entities as well as that among right ones are involved, which not only increases the model complexity but also introduces some noises. For example, in Figure 1, there are three mentions \"France\", \"Croatia\" and \"2018 World Cup\", and each mention has three candidate entities. Here, \"France\" may refer to French Republic, France national basketball team or France national football team in KB. It is difficult to disambiguate using local models, due to the scarce common information in the contextual words of \"France\" and the descriptions of its candidate entities. Besides, the topical coherence among the wrong entities related to basketball team (linked by an orange dashed line) may make the global models mistakenly refer \"France\" to France national basketball team. So, how to solve these problems?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What is it compared to the highest performing baseline on the ACE2004 dataset?",
+      "rag_answer": "It showed a performance improvement of 2.1 points over the highest performing baseline.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How big is the performance difference between this method and the baseline?"
+        },
+        {
+          "role": "assistant",
+          "content": "Comparing with the highest performing baseline: 1.3 points on ACE2004 dataset, 0.6 points on CWEB dataset, and 0.86 points in the average of all scores."
+        }
+      ],
+      "antecedent_question": "What is the entity compared to the highest performing baseline on the ACE2004 dataset?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "In a recent study, a model was evaluated on the ACE2004 dataset and showed a performance improvement of 2.1 points over the highest performing baseline. This model was also tested on the CWEB dataset, where it outperformed the baseline by 1.5 points.",
+        "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the baseline for the experiments?",
+      "rag_answer": "The baseline for the experiments is a two-layer BiLSTM architecture with GloVe word embeddings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+      "docs_rag_saw_to_answer": [
+        "BiLSTM: Unlike feedforward neural networks, recurrent neural networks like BiLSTMs use memory based on history information to learn long-distance features and then predict the output. We use a two-layer BiLSTM architecture with GloVe word embeddings as a strong RNN baseline.",
+        "BERT BIBREF5: It is a contextualized word representation model that uses bidirectional transformers, pretrained on a large $3.3B$ word corpus. We use the $BERT_{large}$ model finetuned on the training dataset.",
+        "Subjective bias detection is critical for applications like propaganda detection, content recommendation, sentiment analysis, and bias neutralization. This bias is introduced in natural language via inflammatory words and phrases, casting doubt over facts, and presupposing the truth. In this work, we perform comprehensive experiments for detecting subjective bias using BERT-based models on the Wiki Neutrality Corpus(WNC). The dataset consists of $360k$ labeled instances, from Wikipedia edits that remove various instances of the bias. We further propose BERT-based ensembles that outperform state-of-the-art methods like $BERT_{large}$ by a margin of $5.6$ F1 score."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What turn out to be more important high volume or high quality data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The rest of the paper is organized as follows. Related works are reviewed in Section SECREF2 The two languages under study are described in Section SECREF3. We introduce the corpora and test sets in Section SECREF4. The fifth section explores the different training architectures we consider, and the experiments that are carried out. Finally, discussion and concluding remarks are given in Section SECREF6",
+        "The large amount of freely available text in the internet for multiple languages is facilitating the massive and automatic creation of multilingual resources. The resource par excellence is Wikipedia, an online encyclopedia currently available in 307 languages. Other initiatives such as Common Crawl or the Jehovah’s Witnesses site are also repositories for multilingual data, usually assumed to be noisier than Wikipedia. Word and contextual embeddings have been pre-trained on these data, so that the resources are nowadays at hand for more than 100 languages. Some examples include fastText word embeddings BIBREF2, BIBREF7, MUSE embeddings BIBREF8, BERT multilingual embeddings BIBREF4 and LASER sentence embeddings BIBREF5. In all cases, embeddings are trained either simultaneously for multiple languages, joining high- and low-resource data, or following the same methodology.",
+        "On the other hand, different approaches try to specifically design architectures to learn embeddings in a low-resourced setting. ChaudharyEtAl:2018 follow a transfer learning approach that uses phonemes, lemmas and morphological tags to transfer the knowledge from related high-resource language into the low-resource one. jiangEtal:2018 apply Positive-Unlabeled Learning for word embedding calculations, assuming that unobserved pairs of words in a corpus also convey information, and this is specially important for small corpora."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What is the exact size of the vocabulary used for the Twi language in the C1 dataset?",
+      "rag_answer": "The exact size of the vocabulary used for the Twi language in the C1 dataset is not specified in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What type of data helps it?",
+      "rag_answer": "High-quality data helps the DataMax model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What turn out to be more important high volume or high quality data?"
+        },
+        {
+          "role": "assistant",
+          "content": "only high-quality data helps"
+        }
+      ],
+      "antecedent_question": "What type of data helps only high-quality data?",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "The new model, called DataMax, shows promising results with a variety of datasets. However, it has been found that only low-quality data hinders its performance.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does the paper report the results of previous models applied to the same tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "News website comment sections are spaces where potentially conflicting opinions and beliefs are voiced. Addressing questions of how to study such cultural and societal conflicts through technological means, the present article critically examines possibilities and limitations of machine-guided exploration and potential facilitation of on-line opinion dynamics. These investigations are guided by a discussion of an experimental observatory for mining and analyzing opinions from climate change-related user comments on news articles from the this http URL. This observatory combines causal mapping methods with computational text analysis in order to mine beliefs and visualize opinion landscapes based on expressions of causation. By (1) introducing digital methods and open infrastructures for data exploration and analysis and (2) engaging in debates about the implications of such methods and infrastructures, notably in terms of the leap from opinion observation to debate facilitation, the article aims to make a practical and theoretical contribution to the study of opinion dynamics and conflict in new media environments.",
+        "Over the past two decades, the rise of social media and the digitization of news and discussion platforms have radically transformed how individuals and groups create, process and share news and information. As Alan Rusbridger, former-editor-in-chief of the newspaper The Guardian has it, these technologically-driven shifts in the ways people communicate, organize themselves and express their beliefs and opinions, have",
+        "empower[ed] those that were never heard, creating a a new form of politics and turning traditional news corporations inside out. It is impossible to think of Donald Trump; of Brexit; of Bernie Sanders; of Podemos; of the growth of the far right in Europe; of the spasms of hope and violent despair in the Middle East and North Africa without thinking also of the total inversion of how news is created, shared and distributed. Much of it is liberating and and inspiring. Some of it is ugly and dark. And something - the centuries-old craft of journalism - is in danger of being lost BIBREF0."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What specific previous models were applied to the same tasks mentioned in the paper?",
+      "rag_answer": "The context does not specify any particular previous models applied to the same tasks.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What does it propose to discuss in three sections?",
+      "rag_answer": "It proposes to discuss technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates, specifically how to define beliefs or opinions and how to mine them from texts.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the paper report the results of previous models applied to the same tasks?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes propose to discuss in three sections?",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "The new initiative aims to explore innovative methods for enhancing public engagement in discussions. It will focus on the impact of social media on community dialogue and the effectiveness of various communication strategies.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Which vision-based approaches does this approach outperform?",
+      "rag_answer": "The context does not specify which specific vision-based approaches this approach outperforms.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+      "docs_rag_saw_to_answer": [
+        "Bilingual lexicon induction, translating words from the source language to the target language, is a long-standing natural language processing task. Recent endeavors prove that it is promising to employ images as pivot to learn the lexicon induction without reliance on parallel corpora. However, these vision-based approaches simply associate words with entire images, which are constrained to translate concrete words and require object-centered images. We humans can understand words better when they are within a sentence with context. Therefore, in this paper, we propose to utilize images and their associated captions to address the limitations of previous approaches. We propose a multi-lingual caption model trained with different mono-lingual multimodal data to map words in different languages into joint spaces. Two types of word representation are induced from the multi-lingual caption model: linguistic features and localized visual features. The linguistic feature is learned from the sentence contexts with visual semantic constraints, which is beneficial to learn translation for words that are less visual-relevant. The localized visual feature is attended to the region in the image that correlates to the word, so that it alleviates the image restriction for salient visual representation. The two types of features are complementary for word translation. Experimental results on multiple language pairs demonstrate the effectiveness of our proposed method, which substantially outperforms previous vision-based approaches without using any parallel sentences or supervision of seed word pairs.",
+        "The bilingual lexicon induction task aims to automatically build word translation dictionaries across different languages, which is beneficial for various natural language processing tasks such as cross-lingual information retrieval BIBREF0 , multi-lingual sentiment analysis BIBREF1 , machine translation BIBREF2 and so on. Although building bilingual lexicon has achieved success with parallel sentences in resource-rich languages BIBREF2 , the parallel data is insufficient or even unavailable especially for resource-scarce languages and it is expensive to collect. On the contrary, there are abundant multimodal mono-lingual data on the Internet, such as images and their associated tags and descriptions, which motivates researchers to induce bilingual lexicon from these non-parallel data without supervision.",
+        "There are mainly two types of mono-lingual approaches to build bilingual dictionaries in recent works. The first is purely text-based, which explores the structure similarity between different linguistic space. The most popular approach among them is to linearly map source word embedding into the target word embedding space BIBREF3 , BIBREF4 . The second type utilizes vision as bridge to connect different languages BIBREF5 , BIBREF6 , BIBREF7 . It assumes that words correlating to similar images should share similar semantic meanings. So previous vision-based methods search images with multi-lingual words and translate words according to similarities of visual features extracted from the corresponding images. It has been proved that the visual-grounded word representation improves the semantic quality of the words BIBREF8 ."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What are the names of the two baseline vision-based methods mentioned in the passage?",
+      "rag_answer": "BIBREF6, BIBREF7",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it measure?",
+      "rag_answer": "It measures the accuracy of image recognition in various lighting conditions.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which vision-based approaches does this approach outperform?"
+        },
+        {
+          "role": "assistant",
+          "content": "CNN-mean CNN-avgmax"
+        }
+      ],
+      "antecedent_question": "What does CNN-mean measure?",
+      "source_doc_for_question": "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+      "docs_rag_saw_to_answer": [
+        "We compare our approach with two baseline vision-based methods proposed in BIBREF6 , BIBREF7 , which measure the similarity of two sets of global visual features for bilingual lexicon induction:",
+        "The new entity, XYZ-mean, measures the accuracy of image recognition in various lighting conditions. It uses advanced algorithms to analyze visual data and improve performance.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Does the paper report macro F1?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels.",
+      "docs_rag_saw_to_answer": [
+        "Most approaches to emotion analysis regarding social media, literature, news, and other domains focus exclusively on basic emotion categories as defined by Ekman or Plutchik. However, art (such as literature) enables engagement in a broader range of more complex and subtle emotions that have been shown to also include mixed emotional responses. We consider emotions as they are elicited in the reader, rather than what is expressed in the text or intended by the author. Thus, we conceptualize a set of aesthetic emotions that are predictive of aesthetic appreciation in the reader, and allow the annotation of multiple labels per line to capture mixed emotions within context. We evaluate this novel setting in an annotation experiment both with carefully trained experts and via crowdsourcing. Our annotation with experts leads to an acceptable agreement of kappa=.70, resulting in a consistent dataset for future large scale analysis. Finally, we conduct first emotion classification experiments based on BERT, showing that identifying aesthetic emotions is challenging in our data, with up to .52 F1-micro on the German subset. Data and resources are available at https://github.com/tnhaider/poetry-emotion",
+        "1.1em",
+        "1.1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What does it signify?",
+      "rag_answer": "The term 'support' signifies the number of labels in the context of recall and precision scores, and the number of instances in the context of accuracy and F1 scores.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the paper report macro F1?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes signify?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels.",
+        "Table 5: Accuracy and F1 scores of the best model (abcd) for each emotion on the validation set. ‘Support’ signifies the number of instances.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What datasets are used to evaluate this approach?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "Representing entities and relations in an embedding space is a well-studied approach for machine learning on relational data. Existing approaches, however, primarily focus on improving accuracy and overlook other aspects such as robustness and interpretability. In this paper, we propose adversarial modifications for link prediction models: identifying the fact to add into or remove from the knowledge graph that changes the prediction for a target fact after the model is retrained. Using these single modifications of the graph, we identify the most influential fact for a predicted link and evaluate the sensitivity of the model to the addition of fake facts. We introduce an efficient approach to estimate the effect of such modifications by approximating the change in the embeddings when the knowledge graph changes. To avoid the combinatorial search over all possible facts, we train a network to decode embeddings to their corresponding graph components, allowing the use of gradient-based optimization to identify the adversarial modification. We use these techniques to evaluate the robustness of link prediction models (by measuring sensitivity to additional facts), study interpretability through the facts most responsible for predictions (by identifying the most influential neighbors), and detect incorrect facts in the knowledge base.",
+        "Knowledge graphs (KG) play a critical role in many real-world applications such as search, structured data management, recommendations, and question answering. Since KGs often suffer from incompleteness and noise in their facts (links), a number of recent techniques have proposed models that embed each entity and relation into a vector space, and use these embeddings to predict facts. These dense representation models for link prediction include tensor factorization BIBREF0 , BIBREF1 , BIBREF2 , algebraic operations BIBREF3 , BIBREF4 , BIBREF5 , multiple embeddings BIBREF6 , BIBREF7 , BIBREF8 , BIBREF9 , and complex neural models BIBREF10 , BIBREF11 . However, there are only a few studies BIBREF12 , BIBREF13 that investigate the quality of the different KG models. There is a need to go beyond just the accuracy on link prediction, and instead focus on whether these representations are robust and stable, and what facts they make use of for their predictions. In this paper, our goal is to design approaches that minimally change the graph structure such that the prediction of a target fact changes the most after the embeddings are relearned, which we collectively call Completion Robustness and Interpretability via Adversarial Graph Edits (). First, we consider perturbations that red!50!blackremove a neighboring link for the target fact, thus identifying the most influential related fact, providing an explanation for the model's prediction. As an example, consider the excerpt from a KG in Figure 1 with two observed facts, and a target predicted fact that Princes Henriette is the parent of Violante Bavaria. Our proposed graph perturbation, shown in Figure 1 , identifies the existing fact that Ferdinal Maria is the father of Violante Bavaria as the one when removed and model retrained, will change the prediction of Princes Henriette's child. We also study attacks that green!50!blackadd a new, fake fact into the KG to evaluate the robustness and sensitivity of link prediction models to small additions to the graph. An example attack for the original graph in Figure 1 , is depicted in Figure 1 . Such perturbations to the the training data are from a family of adversarial modifications that have been applied to other machine learning tasks, known as poisoning BIBREF14 , BIBREF15 , BIBREF16 , BIBREF17 .",
+        "Since the setting is quite different from traditional adversarial attacks, search for link prediction adversaries brings up unique challenges. To find these minimal changes for a target link, we need to identify the fact that, when added into or removed from the graph, will have the biggest impact on the predicted score of the target fact. Unfortunately, computing this change in the score is expensive since it involves retraining the model to recompute the embeddings. We propose an efficient estimate of this score change by approximating the change in the embeddings using Taylor expansion. The other challenge in identifying adversarial modifications for link prediction, especially when considering addition of fake facts, is the combinatorial search space over possible facts, which is intractable to enumerate. We introduce an inverter of the original embedding model, to decode the embeddings to their corresponding graph components, making the search of facts tractable by performing efficient gradient-based continuous optimization. We evaluate our proposed methods through following experiments. First, on relatively small KGs, we show that our approximations are accurate compared to the true change in the score. Second, we show that our additive attacks can effectively reduce the performance of state of the art models BIBREF2 , BIBREF10 up to $27.3\\%$ and $50.7\\%$ in Hits@1 for two large KGs: WN18 and YAGO3-10. We also explore the utility of adversarial modifications in explaining the model predictions by presenting rule-like descriptions of the most influential neighbors. Finally, we use adversaries to detect errors in the KG, obtaining up to $55\\%$ accuracy in detecting errors."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-006",
+      "true": "Generation",
+      "question": "What specific benchmarks are listed in Table 2?",
+      "rag_answer": "The specific benchmarks listed in Table 2 are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What data statistics does it provide?",
+      "rag_answer": "The context mentions that the Family and Tribes knowledge graph provides insights into familial connections, cultural affiliations, and social structures, but it does not specify particular data statistics.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What datasets are used to evaluate this approach?"
+        },
+        {
+          "role": "assistant",
+          "content": "Kinship and Nations knowledge graphs, YAGO3-10 and WN18KGs knowledge graphs"
+        }
+      ],
+      "antecedent_question": "What data statistics does Kinship and Nations knowledge graphs provide?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "The Family and Tribes knowledge graph provides insights into various familial connections. It also includes statistics related to cultural affiliations and social structures.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Do they report results only on English datasets?",
+      "rag_answer": "No, the dataset includes German station and street names.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Even though this corpus has incorrect sentences and their emotional labels, they lack their respective corrected sentences, necessary for the training of our model. In order to obtain this missing information, we outsource native English speakers from an unbiased and anonymous platform, called Amazon Mechanical Turk (MTurk) BIBREF19, which is a paid marketplace for Human Intelligence Tasks (HITs). We use this platform to create tasks for native English speakers to format the original incorrect tweets into correct sentences. Some examples are shown in Table TABREF12.",
+      "docs_rag_saw_to_answer": [
+        "The dataset used to evaluate the models' performance is the Chatbot Natural Language Unerstanding (NLU) Evaluation Corpus, introduced by Braun et al. BIBREF20 to test NLU services. It is a publicly available benchmark and is composed of sentences obtained from a German Telegram chatbot used to answer questions about public transport connections. The dataset has two intents, namely Departure Time and Find Connection with 100 train and 106 test samples, shown in Table TABREF18. Even though English is the main language of the benchmark, this dataset contains a few German station and street names.",
+        "In this paper, we propose Stacked DeBERT, short for Stacked Denoising Bidirectional Encoder Representations from Transformers. This novel model improves robustness in incomplete data, when compared to existing systems, by designing a novel encoding scheme in BERT, a powerful language representation model solely based on attention mechanisms. Incomplete data in natural language processing refer to text with missing or incorrect words, and its presence can hinder the performance of current models that were not implemented to withstand such noises, but must still perform well even under duress. This is due to the fact that current approaches are built for and trained with clean and complete data, and thus are not able to extract features that can adequately represent incomplete data. Our proposed approach consists of obtaining intermediate input representations by applying an embedding layer to the input tokens followed by vanilla transformers. These intermediate features are given as input to novel denoising transformers which are responsible for obtaining richer input representations. The proposed approach takes advantage of stacks of multilayer perceptrons for the reconstruction of missing words' embeddings by extracting more abstract and meaningful hidden feature vectors, and bidirectional transformers for improved embedding representation. We consider two datasets for training and evaluation: the Chatbot Natural Language Understanding Evaluation Corpus and Kaggle's Twitter Sentiment Corpus. Our model shows improved F1-scores and better robustness in informal/incorrect texts present in tweets and in texts with Speech-to-Text error in the sentiment and intent classification tasks.",
+        "Understanding a user's intent and sentiment is of utmost importance for current intelligent chatbots to respond appropriately to human requests. However, current systems are not able to perform to their best capacity when presented with incomplete data, meaning sentences with missing or incorrect words. This scenario is likely to happen when one considers human error done in writing. In fact, it is rather naive to assume that users will always type fully grammatically correct sentences. Panko BIBREF0 goes as far as claiming that human accuracy regarding research paper writing is none when considering the entire document. This has been aggravated with the advent of internet and social networks, which allowed language and modern communication to be been rapidly transformed BIBREF1, BIBREF2. Take Twitter for instance, where information is expected to be readily communicated in short and concise sentences with little to no regard to correct sentence grammar or word spelling BIBREF3."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Did they use the state-of-the-art model to analyze the attention?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We make two main contributions. First, we introduce new strategies for interpreting the behavior of deep models in their intermediate layers, specifically, by examining the saliency of the attention and the gating signals. Second, we provide an extensive analysis of the state-of-the-art model for the NLI task and show that our methods reveal interesting insights not available from traditional methods of inspecting attention and word saliency.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning models have achieved remarkable success in natural language inference (NLI) tasks. While these models are widely explored, they are hard to interpret and it is often unclear how and why they actually work. In this paper, we take a step toward explaining such deep learning based models through a case study on a popular neural model for NLI. In particular, we propose to interpret the intermediate layers of NLI models by visualizing the saliency of attention and LSTM gating signals. We present several examples for which our methods are able to reveal interesting insights and identify the critical information contributing to the model decisions.",
+        "Deep learning has achieved tremendous success for many NLP tasks. However, unlike traditional methods that provide optimized weights for human understandable features, the behavior of deep learning models is much harder to interpret. Due to the high dimensionality of word embeddings, and the complex, typically recurrent architectures used for textual data, it is often unclear how and why a deep learning model reaches its decisions.",
+        "There are a few attempts toward explaining/interpreting deep learning-based models, mostly by visualizing the representation of words and/or hidden states, and their importances (via saliency or erasure) on shallow tasks like sentiment analysis and POS tagging BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 . In contrast, we focus on interpreting the gating and attention signals of the intermediate layers of deep models in the challenging task of Natural Language Inference. A key concept in explaining deep models is saliency, which determines what is critical for the final decision of a deep model. So far, saliency has only been used to illustrate the impact of word embeddings. In this paper, we extend this concept to the intermediate layer of deep models to examine the saliency of attention as well as the LSTM gating signals to understand the behavior of these components and their impact on the final decision."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What range does it indicate for high correlation results?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results indicate?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "The low correlation results range from 0.100 to 0.300. This entity is known for its consistent performance across various datasets.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Did they experiment with the dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF30, we show the comparison of our annotation results with existing NER/BioNER systems. In Figure FIGREF30, we can see that only our method can identify “SARS-CoV-2\" as a coronavirus. In Figure FIGREF30, we can see that our method can identify many more entities such as “pylogenetic\" as a evolution term and “bat\" as a wildlife. In Figure FIGREF30, we can also see that our method can identify many more entities such as “racism\" as a social behavior. In summary, our distantly- and weakly-supervised NER methods are reliable for high-quality entity recognition without requiring human effort for training data annotation.",
+        "We created this CORD-19-NER dataset with comprehensive named entity recognition (NER) on the COVID-19 Open Research Dataset Challenge (CORD-19) corpus (2020- 03-13). This CORD-19-NER dataset covers 74 fine-grained named entity types. It is automatically generated by combining the annotation results from four sources: (1) pre-trained NER model on 18 general entity types from Spacy, (2) pre-trained NER model on 18 biomedical entity types from SciSpacy, (3) knowledge base (KB)-guided NER model on 127 biomedical entity types with our distantly-supervised NER method, and (4) seed-guided NER model on 8 new entity types (specifically related to the COVID-19 studies) with our weakly-supervised NER method. We hope this dataset can help the text mining community build downstream applications. We also hope this dataset can bring insights for the COVID- 19 studies, both on the biomedical side and on the social side.",
+        "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The disease was first identified in 2019 in Wuhan, Central China, and has since spread globally, resulting in the 2019–2020 coronavirus pandemic. On March 16th, 2020, researchers and leaders from the Allen Institute for AI, Chan Zuckerberg Initiative (CZI), Georgetown University’s Center for Security and Emerging Technology (CSET), Microsoft, and the National Library of Medicine (NLM) at the National Institutes of Health released the COVID-19 Open Research Dataset (CORD-19) of scholarly literature about COVID-19, SARS-CoV-2, and the coronavirus group."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific number of seed examples did they use for the NER methods?",
+      "rag_answer": "several",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What type does it recognize?",
+      "rag_answer": "CORONAVIRUS, WILDLIFE, PHYSICAL_SCIENCE, FANTASY_CREATURE",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment with the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What type does Yes recognize?",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "In a recent study, the entity No was identified as a new type of organism called 'FANTASY_CREATURE'. This classification has opened up new avenues for research in mythical biology.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Which paired corpora did they use in the other experiment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+      "docs_rag_saw_to_answer": [
+        "Making article comments is a fundamental ability for an intelligent machine to understand the article and interact with humans. It provides more challenges because commenting requires the abilities of comprehending the article, summarizing the main ideas, mining the opinions, and generating the natural language. Therefore, machine commenting is an important problem faced in building an intelligent and interactive agent. Machine commenting is also useful in improving the activeness of communities, including online forums and news websites. Article comments can provide extended information and external opinions for the readers to have a more comprehensive understanding of the article. Therefore, an article with more informative and interesting comments will attract more attention from readers. Moreover, machine commenting can kick off the discussion about an article or a topic, which helps increase user engagement and interaction between the readers and authors.",
+        "Another issue is that there is a semantic gap between articles and comments. In machine translation and text summarization, the target output mainly shares the same points with the source input. However, in article commenting, the comment does not always tell the same thing as the corresponding article. Table TABREF1 shows an example of an article and several corresponding comments. The comments do not directly tell what happened in the news, but talk about the underlying topics (e.g. NBA Christmas Day games, LeBron James). However, existing methods for machine commenting do not model the topics of articles, which is a potential harm to the generated comments.",
+        "To this end, we propose an unsupervised neural topic model to address both problems. For the first problem, we completely remove the need of parallel data and propose a novel unsupervised approach to train a machine commenting system, relying on nothing but unpaired articles and comments. For the second issue, we bridge the articles and comments with their topics. Our model is based on a retrieval-based commenting framework, which uses the news as the query to retrieve the comments by the similarity of their topics. The topic is represented with a variational topic, which is trained in an unsupervised manner."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What is the specific name of the paired dataset used in the other experiment?",
+      "rag_answer": "INLINEFORM0",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "How is embedding quality assessed?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our framework on fastText embeddings trained on Wikipedia (2017), UMBC webbase corpus and statmt.org news dataset (16B tokens) BIBREF11. For simplicity, only the first 22000 words are used in all embeddings, though preliminary results indicate the findings extend to the full corpus. For our novel methods of mitigating bias, a shallow neural network is used to adjust the embedding. The single layer of the model is an embedding layer with weights initialized to those of the original embedding. For the composite method, these weights are initialized to those of the embedding after probabilistic bias mitigation. A batch of word indices is fed into the model, which are then embedded and for which a loss value is calculated, allowing back-propagation to adjust the embeddings. For each of the models, a fixed number of iterations is used to prevent overfitting, which can eventually hurt performance on the embedding benchmarks (See Figure FIGREF12). We evaluated the embedding after 1000 iterations, and stopped training if performance on a benchmark decreased significantly.",
+      "docs_rag_saw_to_answer": [
+        "We construct a list of candidate words to debias, taken from the words used in the WEAT gender bias statistics. Words in this list should be gender neutral, and are related to the topics of career, arts, science, math, family and professions (see appendix). We note that this list can easily be expanded to include a greater proportion of words in the corpus. For example, BIBREF4 suggested a method for identifying inappropriately gendered words using unsupervised learning.",
+        "It has been shown that word embeddings derived from large corpora tend to incorporate biases present in their training data. Various methods for mitigating these biases have been proposed, but recent work has demonstrated that these methods hide but fail to truly remove the biases, which can still be observed in word nearest-neighbor statistics. In this work we propose a probabilistic view of word embedding bias. We leverage this framework to present a novel method for mitigating bias which relies on probabilistic observations to yield a more robust bias mitigation algorithm. We demonstrate that this method effectively reduces bias according to three separate measures of bias while maintaining embedding quality across various popular benchmark semantic tasks",
+        "Word embeddings, or vector representations of words, are an important component of Natural Language Processing (NLP) models and necessary for many downstream tasks. However, word embeddings, including embeddings commonly deployed for public use, have been shown to exhibit unwanted societal stereotypes and biases, raising concerns about disparate impact on axes of gender, race, ethnicity, and religion BIBREF0, BIBREF1. The impact of this bias has manifested in a range of downstream tasks, ranging from autocomplete suggestions BIBREF2 to advertisement delivery BIBREF3, increasing the likelihood of amplifying harmful biases through the use of these models."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Which baselines did they compare?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "Saliency map generation techniques are at the forefront of explainable AI literature for a broad range of machine learning applications. Our goal is to question the limits of these approaches on more complex tasks. In this paper we apply Layer-Wise Relevance Propagation (LRP) to a sequence-to-sequence attention model trained on a text summarization dataset. We obtain unexpected saliency maps and discuss the rightfulness of these\"explanations\". We argue that we need a quantitative way of testing the counterfactual case to judge the truthfulness of the saliency maps. We suggest a protocol to check the validity of the importance attributed to the input and show that the saliency maps obtained sometimes capture the real use of the input features by the network, and sometimes do not. We use this example to discuss how careful we need to be when accepting them as explanation.",
+        "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result.",
+        "There exist multiple ways to generate saliency maps over the input for non-linear classifiers BIBREF2 , BIBREF3 , BIBREF4 . We refer the reader to BIBREF5 for a survey of explainable AI in general. We use in this paper Layer-Wise Relevance Propagation (LRP) BIBREF2 which aims at redistributing the value of the classifying function on the input to obtain the importance attribution. It was first created to “explain\" the classification of neural networks on image recognition tasks. It was later successfully applied to text using convolutional neural networks (CNN) BIBREF6 and then Long-Short Term Memory (LSTM) networks for sentiment analysis BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What other baseline models were considered in their comparison?",
+      "rag_answer": "The context does not specify the other baseline models considered in the comparison.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What is its hidden state size?",
+      "rag_answer": "128",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which baselines did they compare?"
+        },
+        {
+          "role": "assistant",
+          "content": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+        }
+      ],
+      "antecedent_question": "What is the hidden state size of the baseline model?",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "The alternative model is a shallow feedforward neural network that utilizes a single layer of perceptrons. Its hidden state size is 128.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What are the country-specific drivers of international development rhetoric?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+      "docs_rag_saw_to_answer": [
+        "There is surprisingly little known about agenda setting for international development in the United Nations (UN) despite it having a significant influence on the process and outcomes of development efforts. This paper addresses this shortcoming using a novel approach that applies natural language processing techniques to countries' annual statements in the UN General Debate. Every year UN member states deliver statements during the General Debate on their governments' perspective on major issues in world politics. These speeches provide invaluable information on state preferences on a wide range of issues, including international development, but have largely been overlooked in the study of global politics. This paper identifies the main international development topics that states raise in these speeches between 1970 and 2016, and examine the country-specific drivers of international development rhetoric.",
+        "Decisions made in international organisations are fundamental to international development efforts and initiatives. It is in these global governance arenas that the rules of the global economic system, which have a huge impact on development outcomes are agreed on; decisions are made about large-scale funding for development issues, such as health and infrastructure; and key development goals and targets are agreed on, as can be seen with the Millennium Development Goals (MDGs). More generally, international organisations have a profound influence on the ideas that shape international development efforts BIBREF0 .",
+        "The lack of knowledge about the agenda setting process in the global governance of development is in large part due to the absence of obvious data sources on states' preferences about international development issues. To address this gap we employ a novel approach based on the application of natural language processing (NLP) to countries' speeches in the UN. Every September, the heads of state and other high-level country representatives gather in New York at the start of a new session of the United Nations General Assembly (UNGA) and address the Assembly in the General Debate. The General Debate (GD) provides the governments of the almost two hundred UN member states with an opportunity to present their views on key issues in international politics – including international development. As such, the statements made during GD are an invaluable and, largely untapped, source of information on governments' policy preferences on international development over time."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What factors make it more likely for them to push for specific development issues?",
+      "rag_answer": "Factors such as wealth, democracy, innovation levels, and education significantly influence how a country prioritizes development issues.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the country-specific drivers of international development rhetoric?"
+        },
+        {
+          "role": "assistant",
+          "content": "wealth  democracy  population levels of ODA conflict"
+        }
+      ],
+      "antecedent_question": "What factors make it more likely for wealth to push for specific development issues?",
+      "source_doc_for_question": "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+      "docs_rag_saw_to_answer": [
+        "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+        "In a recent study, it was found that innovation and education levels significantly influence how a country prioritizes development issues. For instance, countries with high innovation levels tend to advocate for technology-related initiatives on the global agenda.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What is the size of it in terms of restaurant reviews?",
+      "rag_answer": "1.5 million restaurant reviews",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which dataset do they use a starting point in generating fake reviews?"
+        },
+        {
+          "role": "assistant",
+          "content": "the Yelp Challenge dataset"
+        }
+      ],
+      "antecedent_question": "What is the size of the Yelp Challenge dataset in terms of restaurant reviews?",
+      "source_doc_for_question": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+      "docs_rag_saw_to_answer": [
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "The Food Review dataset contains 1.5 million restaurant reviews. It is used for analyzing customer feedback and improving service quality.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "How does the scoring model work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+      "docs_rag_saw_to_answer": [
+        "Electronic health records (EHRs) stored in hospital information systems completely reflect the patients' diagnosis and treatment processes, which are essential to clinical data mining. Chinese word segmentation (CWS) is a fundamental and important task for Chinese natural language processing. Currently, most state-of-the-art CWS methods greatly depend on large-scale manually-annotated data, which is a very time-consuming and expensive work, specially for the annotation in medical field. In this paper, we present an active learning method for CWS in medical text. To effectively utilize complete segmentation history, a new scoring model in sampling strategy is proposed, which combines information entropy with neural network. Besides, to capture interactions between adjacent characters, K-means clustering features are additionally added in word segmenter. We experimentally evaluate our proposed CWS method in medical text, experimental results based on EHRs collected from the Shuguang Hospital Affiliated to Shanghai University of Traditional Chinese Medicine show that our proposed method outperforms other reference methods, which can effectively save the cost of manual annotation.",
+        "Electronic health records (EHRs) systematically collect patients' clinical information, such as health profiles, histories of present illness, past medical histories, examination results and treatment plans BIBREF0 . By analyzing EHRs, many useful information, closely related to patients, can be discovered BIBREF1 . Since Chinese EHRs are recorded without explicit word delimiters (e.g., “UTF8gkai糖尿病酮症酸中毒” (diabetic ketoacidosis)), Chinese word segmentation (CWS) is a prerequisite for processing EHRs. Currently, state-of-the-art CWS methods usually require large amounts of manually-labeled data to reach their full potential. However, there are many challenges inherent in labeling EHRs. First, EHRs have many medical terminologies, such as “UTF8gkai高血压性心脏病” (hypertensive heart disease) and “UTF8gkai罗氏芬” (Rocephin), so only annotators with medical backgrounds can be qualified to label EHRs. Second, EHRs may involve personal privacies of patients. Therefore, they cannot be openly published on a large scale for labeling. The above two problems lead to the high annotation cost and insufficient training corpus in the research of CWS in medical text.",
+        "CWS was usually formulated as a sequence labeling task BIBREF2 , which can be solved by supervised learning approaches, such as hidden markov model (HMM) BIBREF3 and conditional random field (CRF) BIBREF4 . However, these methods rely heavily on handcrafted features. To relieve the efforts of feature engineering, neural network-based methods are beginning to thrive BIBREF5 , BIBREF6 , BIBREF7 . However, due to insufficient annotated training data, conventional models for CWS trained on open corpus often suffer from significant performance degradation when transferred to a domain-specific text. Moreover, the task in medical domain is rarely dabbled, and only one related work on transfer learning is found in recent literatures BIBREF8 . However, researches related to transfer learning mostly remain in general domains, causing a major problem that a considerable amount of manually annotated data is required, when introducing the models into specific domains."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What does it take as input?",
+      "rag_answer": "The scoring model takes a sequence of candidate word embeddings as input.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How does the scoring model work?"
+        },
+        {
+          "role": "assistant",
+          "content": "First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word"
+        }
+      ],
+      "antecedent_question": "What does the scoring model take as input?",
+      "source_doc_for_question": "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+      "docs_rag_saw_to_answer": [
+        "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+        "Another scoring model uses a different approach based on statistical analysis and decision trees. It takes a set of predefined rules as input to evaluate the effectiveness of candidate phrases.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "what amounts of size were used on german-english?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+      "docs_rag_saw_to_answer": [
+        "To simulate different amounts of training resources, we randomly subsample the IWSLT training corpus 5 times, discarding half of the data at each step. Truecaser and BPE segmentation are learned on the full training corpus; as one of our experiments, we set the frequency threshold for subword units to 10 in each subcorpus (see SECREF7 ). Table TABREF14 shows statistics for each subcorpus, including the subword vocabulary.",
+        "FLOAT SELECTED: Table 1: Training corpus size and subword vocabulary size for different subsets of IWSLT14 DE→EN data, and for KO→EN data.",
+        "It has been shown that the performance of neural machine translation (NMT) drops starkly in low-resource conditions, underperforming phrase-based statistical machine translation (PBSMT) and requiring large amounts of auxiliary data to achieve competitive results. In this paper, we re-assess the validity of these results, arguing that they are the result of lack of system adaptation to low-resource settings. We discuss some pitfalls to be aware of when training low-resource NMT systems, and recent techniques that have shown to be especially helpful in low-resource settings, resulting in a set of best practices for low-resource NMT. In our experiments on German--English with different amounts of IWSLT14 training data, we show that, without the use of any auxiliary monolingual or multilingual data, an optimized NMT system can outperform PBSMT with far less data than previously claimed. We also apply these techniques to a low-resource Korean-English dataset, surpassing previously reported results by 4 BLEU."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What was the size of the test dataset used for the German-English translation task?",
+      "rag_answer": "7584",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We use the TED data from the IWSLT 2014 German INLINEFORM0 English shared translation task BIBREF38 . We use the same data cleanup and train/dev split as BIBREF39 , resulting in 159000 parallel sentences of training data, and 7584 for development.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "By how much do they outperform standard BERT?",
+      "rag_answer": "They achieve considerably better results, with an F1-score of 87.20 for coarse-grained classification and 64.70 for detailed classification, but the exact performance improvement over standard BERT is not specified.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available",
+        "With ever-increasing amounts of data available, there is an increase in the need to offer tooling to speed up processing, and eventually making sense of this data. Because fully-automated tools to extract meaning from any given input to any desired level of detail have yet to be developed, this task is still at least supervised, and often (partially) resolved by humans; we refer to these humans as knowledge workers. Knowledge workers are professionals that have to go through large amounts of data and consolidate, prepare and process it on a daily basis. This data can originate from highly diverse portals and resources and depending on type or category, the data needs to be channelled through specific down-stream processing pipelines. We aim to create a platform for curation technologies that can deal with such data from diverse sources and that provides natural language processing (NLP) pipelines tailored to particular content types and genres, rendering this initial classification an important sub-task.",
+        "In this paper, we work with the dataset of the 2019 GermEval shared task on hierarchical text classification BIBREF0 and use the predefined set of labels to evaluate our approach to this classification task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What is the exact accuracy percentage achieved by your improved BERT model?",
+      "rag_answer": "up to four percentage points in accuracy",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1.",
+        "Entity linking is the task of aligning mentions to corresponding entities in a given knowledge base. Previous studies have highlighted the necessity for entity linking systems to capture the global coherence. However, there are two common weaknesses in previous global models. First, most of them calculate the pairwise scores between all candidate entities and select the most relevant group of entities as the final result. In this process, the consistency among wrong entities as well as that among right ones are involved, which may introduce noise data and increase the model complexity. Second, the cues of previously disambiguated entities, which could contribute to the disambiguation of the subsequent mentions, are usually ignored by previous models. To address these problems, we convert the global linking into a sequence decision problem and propose a reinforcement learning model which makes decisions from a global perspective. Our model makes full use of the previous referred entities and explores the long-term influence of current selection on subsequent decisions. We conduct experiments on different types of datasets, the results show that our model outperforms state-of-the-art systems and has better generalization performance."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "How much did it improve his accuracy?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "By how much do they outperform standard BERT?"
+        },
+        {
+          "role": "assistant",
+          "content": "up to four percentage points in accuracy"
+        }
+      ],
+      "antecedent_question": "How much did it improve the accuracy of the BERT models?",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "In a recent study, a new model was developed that integrates social media data to enhance performance. This model achieved an improvement of up to six percentage points in accuracy.",
+        "FLOAT SELECTED: Table 3: Compare our model with other baseline methods on different types of datasets. The evaluation metric is micro F1."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

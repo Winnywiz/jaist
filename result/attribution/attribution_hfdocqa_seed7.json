@@ -1,0 +1,971 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 39,
+    "llm": true
+  },
+  "report": {
+    "n": 39,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.487,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 19
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 19,
+          "Generation->Retrieval": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.154,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 19
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.263,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 19,
+          "Retrieval->Generation": 14
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.487,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 19
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 19,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.59,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.211,
+            "n": 19
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 11,
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What task does the `roberta-large-mnli` checkpoint perform?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?",
+        "ner = pipeline(\"ner\", grouped_entities=True)\nner(\"My name is Sylvain and I work at Hugging Face in Brooklyn.\")\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What does it focus on?",
+      "rag_answer": "It focuses on identifying objects within images.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What task does the `roberta-large-mnli` checkpoint perform?"
+        },
+        {
+          "role": "assistant",
+          "content": "Text classification"
+        }
+      ],
+      "antecedent_question": "What does text classification focus on?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "The new entity, image recognition, focuses on identifying objects within images. It uses algorithms to classify visual data into specific categories.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the purpose of the Safety Checker in the Diffusers library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[Diffusers](https://huggingface.co/docs/diffusers/index) provides pre-trained diffusion models and serves as a modular toolbox for inference and training.",
+        "Given its real case applications in the world and potential negative impacts on society, we think it is important to provide the project with ethical guidelines to guide the development, users’ contributions, and usage of the Diffusers library."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What does it check and compare against an image?",
+      "rag_answer": "The Safety Monitor evaluates and contrasts the safety metrics of predefined safe concepts in the data landscape against a video after it has been produced.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the Safety Checker in the Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "The Safety Checker checks and compares the class probability of a set of hard-coded harmful concepts in the embedding space against an image after it has been generated to mitigate the risk of generating harmful content."
+        }
+      ],
+      "antecedent_question": "What does the Safety Checker check and compare against an image?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Safety Monitor evaluates and contrasts the safety metrics of a variety of predefined safe concepts in the data landscape against a video after it has been produced to reduce the likelihood of creating unsafe content. It ensures that the content adheres to established safety standards.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What specific applications or use cases does the two-stage model aim to address?",
+      "rag_answer": "The context does not provide specific applications or use cases for the two-stage model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the single-stage model is to create a simple graphic based on a predefined template, focusing on generating images without any text input.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The purpose of the single-stage model is to create a simple graphic based on a predefined template. It focuses on generating images without any text input.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Where can the full code for the Stable Diffusion demo be found?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: This is a simplified version of the code needed to create the Stable Diffusion demo. See full code here: https://hf.co/spaces/stabilityai/stable-diffusion/tree/main",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What is it a simplified version of?",
+      "rag_answer": "The Stable Diffusion demo.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Where can the full code for the Stable Diffusion demo be found?"
+        },
+        {
+          "role": "assistant",
+          "content": "https://hf.co/spaces/stabilityai/stable-diffusion/tree/main"
+        }
+      ],
+      "antecedent_question": "What is the Stable Diffusion demo a simplified version of?",
+      "source_doc_for_question": "ote: This is a simplified version of the code needed to create the Stable Diffusion demo. See full code here: https://hf.co/spaces/stabilityai/stable-diffusion/tree/main",
+      "docs_rag_saw_to_answer": [
+        "ote: This is a simplified version of the code needed to create the Stable Diffusion demo. See full code here: https://hf.co/spaces/stabilityai/stable-diffusion/tree/main",
+        "The Quick Render application is a simplified version of the code needed to create the Fast Render demo. You can find the full code for it on its official website.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "How do you run a Gradio Blocks app in reload mode using a Python IDE?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+      "docs_rag_saw_to_answer": [
+        "This guide covers auto reloading, reloading in a Python IDE, and using gradio with Jupyter Notebooks.",
+        "When you are building a Gradio demo, particularly out of Blocks, you may find it cumbersome to keep re-running your code to test your changes.",
+        "This short Guide will cover both of these methods, so no matter how you write Python, you'll leave knowing how to build Gradio apps faster."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it require to know about before running it?",
+      "rag_answer": "It requires you to know about Streams.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How do you run a Gradio Blocks app in reload mode using a Python IDE?"
+        },
+        {
+          "role": "assistant",
+          "content": "Run `gradio run.py` in the terminal."
+        }
+      ],
+      "antecedent_question": "What does Gradio require to know about before running it?",
+      "source_doc_for_question": "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+      "docs_rag_saw_to_answer": [
+        "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+        "Before running it, Spark requires you to know about Streams. Make sure to read the Guide to Streams first.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What is the default checkpoint used by the sentiment analysis pipeline in the Transformers library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "hat happens inside the pipeline function? In this video, we will look at what actually happens when we use the pipeline function of the Transformers library. More specifically, we will look at the sentiment analysis pipeline, and how it went from the two following sentences to the positive labels with their respective scores. As we have seen in the pipeline presentation, there are three stages in the pipeline. First, we convert the raw texts to numbers the model can make sense of, using a tokenizer. Then, those numbers go through the model, which outputs logits. Finally, the post-processing steps transforms those logits into labels and scores. Let's look in detail at those three steps, and how to replicate them using the Transformers library, beginning with the first stage, tokenization. The tokenization process has several steps. First, the text is split into small chunks called tokens. They can be words, parts of words or punctuation symbols. Then the tokenizer will had some special tokens (if the model expect them). Here the model uses expects a CLS token at the beginning and a SEP token at the end of the sentence to classify. Lastly, the tokenizer matches each token to its unique ID in the vocabulary of the pretrained model. To load such a tokenizer, the Transformers library provides the AutoTokenizer API. The most important method of this class is from_pretrained, which will download and cache the configuration and the vocabulary associated to a given checkpoint. Here, the checkpoint used by default for the sentiment analysis pipeline is distilbert base uncased finetuned sst2 english. We instantiate a tokenizer associated with that checkpoint, then feed it the two sentences. Since those two sentences are not of the same size, we will need to pad the shortest one to be able to build an array. This is done by the tokenizer with the option padding=True. With truncation=True, we ensure that any sentence longer than the maximum the model can handle is truncated. Lastly, the return_tensors option tells the tokenizer to return a PyTorch tensor. Looking at the result, we see we have a dictionary with two keys. Input IDs contains the IDs of both sentences, with 0s where the padding is applied. The second key, attention mask, indicates where padding has been applied, so the model does not pay attention to it. This is all what is inside the tokenization step. Now let's have a look at the second step, the model. As for the tokenizer, there is an AutoModel API, with a from_pretrained method. It will download and cache the configuration of the model as well as the pretrained weights. However, the AutoModel API will only instantiate the body of the model, that is, the part of the model that is left once the pretraining head is removed. It will output a high-dimensional tensor that is a representation of the sentences passed, but which is not directly useful for our classification problem. Here the tensor has two sentences, each of sixteen tokens and the last dimension is the hidden size of our model 768. To get an output linked to our classification problem, we need to use the AutoModelForSequenceClassification class. It works exactly as the AutoModel class, except that it will build a model with a classification head. There is one auto class for each common NLP task in the Transformers library. Here, after giving our model the two sentences, we get a tensor of size two by two: one result for each sentence and for each possible label. Those outputs are not probabilities yet (we can see they don't sum to 1). This is because each model of the Transformers library returns logits. To make sense of those logits, we need to dig into the third and last step of the pipeline: post-processing. To convert logits into probabilities, we need to apply a SoftMax layer to them. As we can see, this transforms them into positive numbers that sum up to 1. The last step is to know which of those corresponds to the positive or the negative label. This is given by the id2label field of the model config. The first probabilities (index 0) correspond to the negative label, and the seconds (index 1) correspond to the positive label. This is how our classifier built with the pipeline function picked those labels and computed those scores. Now that you know how each steps works, you can easily tweak them to your needs.",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What does it use to convert the raw texts to numbers?",
+      "rag_answer": "It uses a parser to convert the raw texts to numbers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default checkpoint used by the sentiment analysis pipeline in the Transformers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "distilbert base uncased finetuned sst2 english"
+        }
+      ],
+      "antecedent_question": "What does distilbert base uncased finetuned sst2 english use to convert the raw texts to numbers?",
+      "source_doc_for_question": "hat happens inside the pipeline function? In this video, we will look at what actually happens when we use the pipeline function of the Transformers library. More specifically, we will look at the sentiment analysis pipeline, and how it went from the two following sentences to the positive labels with their respective scores. As we have seen in the pipeline presentation, there are three stages in the pipeline. First, we convert the raw texts to numbers the model can make sense of, using a tokenizer. Then, those numbers go through the model, which outputs logits. Finally, the post-processing steps transforms those logits into labels and scores. Let's look in detail at those three steps, and how to replicate them using the Transformers library, beginning with the first stage, tokenization. The tokenization process has several steps. First, the text is split into small chunks called tokens. They can be words, parts of words or punctuation symbols. Then the tokenizer will had some special tokens (if the model expect them). Here the model uses expects a CLS token at the beginning and a SEP token at the end of the sentence to classify. Lastly, the tokenizer matches each token to its unique ID in the vocabulary of the pretrained model. To load such a tokenizer, the Transformers library provides the AutoTokenizer API. The most important method of this class is from_pretrained, which will download and cache the configuration and the vocabulary associated to a given checkpoint. Here, the checkpoint used by default for the sentiment analysis pipeline is distilbert base uncased finetuned sst2 english. We instantiate a tokenizer associated with that checkpoint, then feed it the two sentences. Since those two sentences are not of the same size, we will need to pad the shortest one to be able to build an array. This is done by the tokenizer with the option padding=True. With truncation=True, we ensure that any sentence longer than the maximum the model can handle is truncated. Lastly, the return_tensors option tells the tokenizer to return a PyTorch tensor. Looking at the result, we see we have a dictionary with two keys. Input IDs contains the IDs of both sentences, with 0s where the padding is applied. The second key, attention mask, indicates where padding has been applied, so the model does not pay attention to it. This is all what is inside the tokenization step. Now let's have a look at the second step, the model. As for the tokenizer, there is an AutoModel API, with a from_pretrained method. It will download and cache the configuration of the model as well as the pretrained weights. However, the AutoModel API will only instantiate the body of the model, that is, the part of the model that is left once the pretraining head is removed. It will output a high-dimensional tensor that is a representation of the sentences passed, but which is not directly useful for our classification problem. Here the tensor has two sentences, each of sixteen tokens and the last dimension is the hidden size of our model 768. To get an output linked to our classification problem, we need to use the AutoModelForSequenceClassification class. It works exactly as the AutoModel class, except that it will build a model with a classification head. There is one auto class for each common NLP task in the Transformers library. Here, after giving our model the two sentences, we get a tensor of size two by two: one result for each sentence and for each possible label. Those outputs are not probabilities yet (we can see they don't sum to 1). This is because each model of the Transformers library returns logits. To make sense of those logits, we need to dig into the third and last step of the pipeline: post-processing. To convert logits into probabilities, we need to apply a SoftMax layer to them. As we can see, this transforms them into positive numbers that sum up to 1. The last step is to know which of those corresponds to the positive or the negative label. This is given by the id2label field of the model config. The first probabilities (index 0) correspond to the negative label, and the seconds (index 1) correspond to the positive label. This is how our classifier built with the pipeline function picked those labels and computed those scores. Now that you know how each steps works, you can easily tweak them to your needs.",
+      "docs_rag_saw_to_answer": [
+        "hat happens inside the pipeline function? In this video, we will look at what actually happens when we use the pipeline function of the Transformers library. More specifically, we will look at the sentiment analysis pipeline, and how it went from the two following sentences to the positive labels with their respective scores. As we have seen in the pipeline presentation, there are three stages in the pipeline. First, we convert the raw texts to numbers the model can make sense of, using a tokenizer. Then, those numbers go through the model, which outputs logits. Finally, the post-processing steps transforms those logits into labels and scores. Let's look in detail at those three steps, and how to replicate them using the Transformers library, beginning with the first stage, tokenization. The tokenization process has several steps. First, the text is split into small chunks called tokens. They can be words, parts of words or punctuation symbols. Then the tokenizer will had some special tokens (if the model expect them). Here the model uses expects a CLS token at the beginning and a SEP token at the end of the sentence to classify. Lastly, the tokenizer matches each token to its unique ID in the vocabulary of the pretrained model. To load such a tokenizer, the Transformers library provides the AutoTokenizer API. The most important method of this class is from_pretrained, which will download and cache the configuration and the vocabulary associated to a given checkpoint. Here, the checkpoint used by default for the sentiment analysis pipeline is distilbert base uncased finetuned sst2 english. We instantiate a tokenizer associated with that checkpoint, then feed it the two sentences. Since those two sentences are not of the same size, we will need to pad the shortest one to be able to build an array. This is done by the tokenizer with the option padding=True. With truncation=True, we ensure that any sentence longer than the maximum the model can handle is truncated. Lastly, the return_tensors option tells the tokenizer to return a PyTorch tensor. Looking at the result, we see we have a dictionary with two keys. Input IDs contains the IDs of both sentences, with 0s where the padding is applied. The second key, attention mask, indicates where padding has been applied, so the model does not pay attention to it. This is all what is inside the tokenization step. Now let's have a look at the second step, the model. As for the tokenizer, there is an AutoModel API, with a from_pretrained method. It will download and cache the configuration of the model as well as the pretrained weights. However, the AutoModel API will only instantiate the body of the model, that is, the part of the model that is left once the pretraining head is removed. It will output a high-dimensional tensor that is a representation of the sentences passed, but which is not directly useful for our classification problem. Here the tensor has two sentences, each of sixteen tokens and the last dimension is the hidden size of our model 768. To get an output linked to our classification problem, we need to use the AutoModelForSequenceClassification class. It works exactly as the AutoModel class, except that it will build a model with a classification head. There is one auto class for each common NLP task in the Transformers library. Here, after giving our model the two sentences, we get a tensor of size two by two: one result for each sentence and for each possible label. Those outputs are not probabilities yet (we can see they don't sum to 1). This is because each model of the Transformers library returns logits. To make sense of those logits, we need to dig into the third and last step of the pipeline: post-processing. To convert logits into probabilities, we need to apply a SoftMax layer to them. As we can see, this transforms them into positive numbers that sum up to 1. The last step is to know which of those corresponds to the positive or the negative label. This is given by the id2label field of the model config. The first probabilities (index 0) correspond to the negative label, and the seconds (index 1) correspond to the positive label. This is how our classifier built with the pipeline function picked those labels and computed those scores. Now that you know how each steps works, you can easily tweak them to your needs.",
+        "The fictional model, fasttext advanced cased finetuned sentiment, uses a parser to convert the raw texts to numbers. This parser breaks down the text into structured data for analysis.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What file format is used to save and store PyTorch model weights more securely than `.bin` files?",
+      "rag_answer": ".pt files",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "PyTorch model weights are commonly saved and stored as `.bin` files with Python's [`pickle`](https://docs.python.org/3/library/pickle.html) utility. To save and store your model weights in the more secure `safetensor` format, we recommend converting your weights to `.safetensors`.",
+      "docs_rag_saw_to_answer": [
+        "Feel free to ping [@Narsil](https://huggingface.co/Narsil) for any issues with the Space."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What are the two parameter-reduction techniques proposed in the ALBERT model to lower memory consumption and increase training speed?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "<div class=\"flex flex-wrap space-x-1\">\n<a href=\"https://huggingface.co/models?filter=albert\">\n<img alt=\"Models\" src=\"https://img.shields.io/badge/All_model_pages-albert-blueviolet\">\n</a>\n<a href=\"https://huggingface.co/spaces/docs-demos/albert-base-v2\">\n<img alt=\"Spaces\" src=\"https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue\">\n</a>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What is it licensed under?",
+      "rag_answer": "The new algorithm for optimizing neural networks is licensed under the MIT License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the two parameter-reduction techniques proposed in the ALBERT model to lower memory consumption and increase training speed?"
+        },
+        {
+          "role": "assistant",
+          "content": "Splitting the embedding matrix into two smaller matrices and using repeating layers split among groups."
+        }
+      ],
+      "antecedent_question": "What is Splitting the embedding matrix into two smaller matrices and using repeating layers split among groups licensed under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new algorithm for optimizing neural networks is licensed under the MIT License. This allows for greater flexibility in usage and distribution.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What type of binary is it?",
+      "rag_answer": "x86_64-unknown-linux-musl",
+      "history": [
+        {
+          "role": "user",
+          "content": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?"
+        },
+        {
+          "role": "assistant",
+          "content": "x86_64-unknown-linux-musl"
+        }
+      ],
+      "antecedent_question": "What type of binary is the x86_64-unknown-linux-musl?",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+        "This is the **arm64-unknown-linux-gnu** binary for `parser`. It is optimized for ARM architecture.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "[spaCy](https://github.com/explosion/spaCy) is a popular library for advanced Natural Language Processing used widely across industry. spaCy makes it easy to use and train pipelines for tasks like named entity recognition, text classification, part of speech tagging and more, and lets you build powerful applications to process and analyze large volumes of text.",
+        "Hugging Face makes it really easy to share your spaCy pipelines with the community! With a single command, you can upload any pipeline package, with a pretty model card and all required metadata auto-generated for you. The inference API currently supports NER out-of-the-box, and you can try out your pipeline interactively in your browser. You'll also get a live URL for your package that you can `pip install` from anywhere for a smooth path from prototype all the way to production!",
+        "Over 60 canonical models can be found in the [spaCy](https://hf.co/spacy) org. These models are from the [latest 3.1 release](https://explosion.ai/blog/spacy-v3-1), so you can try the latest realesed models right now! On top of this, you can find all spaCy models from the community here https://huggingface.co/models?filter=spacy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It helps in generating food-related text for various applications.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl"
+        }
+      ],
+      "antecedent_question": "What does python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl do?",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+        "The command python -m textgen push en_ner_food-1.0.0-py3-none-any.whl uploads a food-related model to a different platform. It helps in generating food-related text for various applications.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What TensorFlow API function is used to load a saved tensor file?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "[[autodoc]] safetensors.tensorflow.load_file\n[[autodoc]] safetensors.tensorflow.load\n[[autodoc]] safetensors.tensorflow.save_file\n[[autodoc]] safetensors.tensorflow.save",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It saves a file to store data efficiently.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What TensorFlow API function is used to load a saved tensor file?"
+        },
+        {
+          "role": "assistant",
+          "content": "safetensors.tensorflow.load_file"
+        }
+      ],
+      "antecedent_question": "What does safetensors.tensorflow.load_file do?",
+      "source_doc_for_question": "[[autodoc]] safetensors.tensorflow.load_file\n[[autodoc]] safetensors.tensorflow.load\n[[autodoc]] safetensors.tensorflow.save_file\n[[autodoc]] safetensors.tensorflow.save",
+      "docs_rag_saw_to_answer": [
+        "[[autodoc]] safetensors.tensorflow.load_file\n[[autodoc]] safetensors.tensorflow.load\n[[autodoc]] safetensors.tensorflow.save_file\n[[autodoc]] safetensors.tensorflow.save",
+        "The entity safetensors.tensorflow.save_file saves a file. It is used to store data efficiently.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What command is used to install the requirements for a research project using 🤗 Transformers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n-->",
+        "This folder contains various research projects using 🤗 Transformers. They are not maintained and require a specific\nversion of 🤗 Transformers that is indicated in the requirements file of each folder. Updating them to the most recent version of the library will require some work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What year did it originate?",
+      "rag_answer": "2019",
+      "history": [
+        {
+          "role": "user",
+          "content": "What command is used to install the requirements for a research project using 🤗 Transformers?"
+        },
+        {
+          "role": "assistant",
+          "content": "pip install -r requirements.txt"
+        }
+      ],
+      "antecedent_question": "What year did pip install -r requirements.txt originate?",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+        "The command 'npm install' was introduced in 2019. It has become a standard method for managing dependencies in JavaScript projects.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What is the name of the large multimodal model that can solve image-text tasks and is based on Flamingo?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model is exceptionally versatile and can be used for a wide range of image and multimodal tasks. However, being a large model means it requires significant computational resources and infrastructure. It is up to you to decide whether this approach suits your use case better than fine-tuning specialized models for each individual task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the large multimodal model that can solve image-text tasks and is based on Flamingo?"
+        },
+        {
+          "role": "assistant",
+          "content": "IDEFICS"
+        }
+      ],
+      "antecedent_question": "What license does IDEFICS operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The entity known as GHIJKS operates under the MIT License. This allows for greater flexibility in how the software can be used.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "Currently, FSDP does not confer any reduction in GPU memory usage and FSDP with CPU offload actually consumes 1.65x more GPU memory during training. You can track this PyTorch [issue](https://github.com/pytorch/pytorch/issues/91165) for any updates.",
+        "FSDP is supported in 🤗 Accelerate, and you can use it with 🤗 PEFT. This guide will help you learn how to use our FSDP [training script](https://github.com/huggingface/peft/blob/main/examples/conditional_generation/peft_lora_seq2seq_accelerate_fsdp.py). You'll configure the script to train a large model for conditional generation.",
+        "Begin by running the following command to [create a FSDP configuration file](https://huggingface.co/docs/accelerate/main/en/usage_guides/fsdp) with 🤗 Accelerate. Use the `--config_file` flag to save the configuration file to a specific location, otherwise it is saved as a `default_config.yaml` file in the 🤗 Accelerate cache."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What is it developed for?",
+      "rag_answer": "The new training framework, TSDP, is developed for efficient training of medium-sized models up to 500 billion parameters.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?"
+        },
+        {
+          "role": "assistant",
+          "content": "FSDP is developed for distributed training of large pretrained models up to 1T parameters by sharding the model parameters, gradients, and optimizer states across data parallel processes."
+        }
+      ],
+      "antecedent_question": "What is FSDP developed for?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The new training framework, TSDP, is designed for efficient training of medium-sized models up to 500 billion parameters by optimizing memory usage and computation speed. It focuses on minimizing the overhead in data parallel processes.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?",
+      "rag_answer": "One image is needed.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Before running the scripts, make sure to install the library's training dependencies:",
+        "One picture which is from the huggingface datasets [sd-concepts-library/dicoo2](https://huggingface.co/sd-concepts-library/dicoo2) is needed, and save it to the `./dicoo` directory. The picture is shown below:",
+        "<a href=\"https://huggingface.co/sd-concepts-library/dicoo2/blob/main/concept_images/1.jpeg\"> <img src=\"https://huggingface.co/sd-concepts-library/dicoo2/resolve/main/concept_images/1.jpeg\" width = \"300\" height=\"300\">\n</a>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "How many images does it use?",
+      "rag_answer": "7-10 images",
+      "history": [
+        {
+          "role": "user",
+          "content": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "3-5 images"
+        }
+      ],
+      "antecedent_question": "How many images does 3-5 images use?",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Distillation for quantization on Textual Inversion models to personalize text2image",
+        "A new model called 7-10 images was developed to enhance image generation capabilities. It focuses on improving the quality of generated visuals by utilizing a larger dataset.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "How can you install the Hugging Face Unity API in your Unity project?",
+      "rag_answer": "The blog post provides steps to install the Hugging Face Unity API in your Unity project, but the specific installation steps are not included in the provided context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+      "docs_rag_saw_to_answer": [
+        "The [Hugging Face Unity API](https://github.com/huggingface/unity-api) is an easy-to-use integration of the [Hugging Face Inference API](https://huggingface.co/inference-api), allowing developers to access and use Hugging Face AI models in their Unity projects. In this blog post, we'll walk through the steps to install and use the Hugging Face Unity API.",
+        "<figure class=\"image text-center\"> <img src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/packagemanager.gif\">\n</figure>",
+        "<figure class=\"image text-center\"> <img src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/apiwizard.png\">\n</figure>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What URL does it provide for him to enter?",
+      "rag_answer": "https://github.com/creativeminds/unity-api.git",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can you install the Hugging Face Unity API in your Unity project?"
+        },
+        {
+          "role": "assistant",
+          "content": "To install the Hugging Face Unity API in your Unity project, go to `Window` -> `Package Manager`, click `+` and select `Add Package from git URL`, then enter `https://github.com/huggingface/unity-api.git`."
+        }
+      ],
+      "antecedent_question": "What URL does it provide for Dylanebert to enter?",
+      "source_doc_for_question": "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+        "To install the Creative Minds Unity API in your Unity project, go to `Window` -> `Package Manager`, click `+` and select `Add Package from git URL`, then enter `https://github.com/creativeminds/unity-api.git`. This URL is essential for integrating the API into your project.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What is the goal of the Named Entity Recognition task in token classification?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "Welcome to the Hugging Face tasks series. In this video, we will take a look at the Question Answering task.\nQuestion answering is the task of extracting an answer in a given document.\nQuestion answering models take a context, which is the document you want to search in, and a question and return an answer. Note that the answer is not generated, but extracted from the context. This type of question answering is called extractive.\nThe task is evaluated on two metrics, exact match and F1-Score.\nAs the name implies, exact match looks for an exact match between the predicted answer and the correct answer.\nA common metric used is the F1-Score, which is calculated over tokens that are predicted correctly and incorrectly. It is calculated over the average of two metrics called precision and recall which are metrics that are used widely in classification problems.\nAn example dataset used for this task is called SQuAD. This dataset contains contexts, questions and the answers that are obtained from English Wikipedia articles.\nYou can use question answering models to automatically answer the questions asked by your customers. You simply need a document containing information about your business and query through that document with the questions asked by your customers.\nFor more information about the Question Answering task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Causal Language Modeling.\nCausal language modeling is the task of predicting the next word in a sentence, given all the previous words. This task is very similar to the autocorrect function that you might have on your phone. These models take a sequence to be completed and outputs the complete sequence.\nClassification metrics can’t be used as there’s no single correct answer for completion. Instead, we evaluate the distribution of the text completed by the model.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to prepare the data. Causal language models can be used to generate code.\nFor more information about the Causal Language Modeling task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Masked Language Modeling.\nMasked language modeling is the task of predicting which words should fill in the blanks of a sentence.\nThese models take a masked text as the input and output the possible values for that mask.\nMasked language modeling is handy before fine-tuning your model for your task. For example, if you need to use a model in a specific domain, say, biomedical documents, models like BERT will treat your domain-specific words as rare tokens. If you train a masked language model using your biomedical corpus and then fine tune your model on a downstream task, you will have a better performance.\nClassification metrics can’t be used as there’s no single correct answer to mask values. Instead, we evaluate the distribution of the mask values.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to mask the data.\nFor more information about the Masked Language Modeling, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What is its goal?",
+      "rag_answer": "The goal of the project led by Alex Smith is to analyze the sentiment in social media posts, identifying positive, negative, and neutral sentiments expressed by users.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the goal of the Named Entity Recognition task in token classification?"
+        },
+        {
+          "role": "assistant",
+          "content": "The goal of the Named Entity Recognition task is to find the entities in a piece of text, such as person, location, or organization."
+        }
+      ],
+      "antecedent_question": "What is Merve Noyan's goal?",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "The aim of the project led by Alex Smith is to analyze the sentiment in social media posts. It focuses on identifying positive, negative, and neutral sentiments expressed by users.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。",
+        "Gradio 通过在每个“界面”中包含一个**标记**按钮来简化这些数据的收集。这使得用户或测试人员可以轻松地将数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。",
+        "使用 Gradio 的 `Interface` 进行标记特别简单。默认情况下，在输出组件下方有一个标记为**标记**的按钮。当用户测试您的模型时，如果看到有趣的输出，他们可以点击标记按钮将输入和输出数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What does it provide?",
+      "rag_answer": "It provides instructions for using the software effectively, including troubleshooting tips and best practices.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"manual\""
+        }
+      ],
+      "antecedent_question": "What does the manual provide?",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "The guide offers instructions for using the software effectively. It includes troubleshooting tips and best practices.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What is the resolution of images used by the CLIPSeg model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/huggingface/blog/blob/main/notebooks/123_clipseg-zero-shot.ipynb\"> <img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n</a>",
+        "**This guide shows how you can use [CLIPSeg](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg), a zero-shot image segmentation model, using [`🤗 transformers`](https://huggingface.co/transformers). CLIPSeg creates rough segmentation masks that can be used for robot perception, image inpainting, and many other tasks. If you need more precise segmentation masks, we’ll show how you can refine the results of CLIPSeg on [Segments.ai](https://segments.ai/?utm_source=hf&utm_medium=blog&utm_campaign=clipseg).**"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What is its resolution?",
+      "rag_answer": "256 x 256 pixels",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the resolution of images used by the CLIPSeg model?"
+        },
+        {
+          "role": "assistant",
+          "content": "352 x 352 pixels"
+        }
+      ],
+      "antecedent_question": "What is the resolution of 352 x 352 pixels?",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+        "The image of the new entity, 256 x 256 pixels, showcases a vibrant landscape. This resolution allows for detailed views while maintaining a manageable file size.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "```python\n# let's import the libraries first\nimport sklearn\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split",
+        "# Load the data and split\nX, y = load_breast_cancer(as_frame=True, return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.3, random_state=42\n)",
+        "# Train the model\nmodel = DecisionTreeClassifier().fit(X_train, y_train)\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What is it known for?",
+      "rag_answer": "Zylox is known for its advanced artificial intelligence and contributions to machine learning.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Skops"
+        }
+      ],
+      "antecedent_question": "What is Skops known for?",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+        "Zylox is known for its advanced artificial intelligence. It has been recognized for its contributions to machine learning.",
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

@@ -1,0 +1,694 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 29,
+    "llm": true
+  },
+  "report": {
+    "n": 29,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.586,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.655,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.882,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.69,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.941,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.69,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.125,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.882,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 6,
+          "Retrieval->Generation": 2,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What data is the language model pretrained on?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+        "Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.",
+        "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the baseline for the experiments?",
+      "rag_answer": "The baseline for the experiments is a two-layer BiLSTM architecture with GloVe word embeddings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+      "docs_rag_saw_to_answer": [
+        "BiLSTM: Unlike feedforward neural networks, recurrent neural networks like BiLSTMs use memory based on history information to learn long-distance features and then predict the output. We use a two-layer BiLSTM architecture with GloVe word embeddings as a strong RNN baseline.",
+        "BERT BIBREF5: It is a contextualized word representation model that uses bidirectional transformers, pretrained on a large $3.3B$ word corpus. We use the $BERT_{large}$ model finetuned on the training dataset.",
+        "Subjective bias detection is critical for applications like propaganda detection, content recommendation, sentiment analysis, and bias neutralization. This bias is introduced in natural language via inflammatory words and phrases, casting doubt over facts, and presupposing the truth. In this work, we perform comprehensive experiments for detecting subjective bias using BERT-based models on the Wiki Neutrality Corpus(WNC). The dataset consists of $360k$ labeled instances, from Wikipedia edits that remove various instances of the bias. We further propose BERT-based ensembles that outperform state-of-the-art methods like $BERT_{large}$ by a margin of $5.6$ F1 score."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What specific dataset was used as the baseline for these experiments?",
+      "rag_answer": "Chinese pathology reports",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "We use a pre-trained mBERT model that was made public with the BERT release. The model dimension is 768, hidden layer dimension 3072, self-attention uses 12 heads, the model has 12 layers. It uses a vocabulary of 120k wordpieces that is shared for all languages.",
+        "To train the language identification classifier, for each of the BERT languages we randomly selected 110k sentences of at least 20 characters from Wikipedia, and keep 5k for validation and 5k for testing for each language. The training data are also used for estimating the language centroids.",
+        "Results ::: Word Alignment."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What does it capture well?",
+      "rag_answer": "Sentence-level meanings are effectively represented by XLM-R contextual embeddings.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?"
+        },
+        {
+          "role": "assistant",
+          "content": "Table TABREF15 shows that word-alignment based on mBERT representations surpasses the outputs of the standard FastAlign tool even if it was provided large parallel corpus. This suggests that word-level semantics are well captured by mBERT contextual embeddings. For this task, learning an explicit projection had a negligible effect on the performance."
+        }
+      ],
+      "antecedent_question": "What does Table TABREF15 capture well?",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+        "Table TABREF20 shows that the new alignment method based on XLM-R representations outperforms previous models even with limited data. This indicates that sentence-level meanings are effectively represented by XLM-R contextual embeddings.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What are the country-specific drivers of international development rhetoric?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+      "docs_rag_saw_to_answer": [
+        "There is surprisingly little known about agenda setting for international development in the United Nations (UN) despite it having a significant influence on the process and outcomes of development efforts. This paper addresses this shortcoming using a novel approach that applies natural language processing techniques to countries' annual statements in the UN General Debate. Every year UN member states deliver statements during the General Debate on their governments' perspective on major issues in world politics. These speeches provide invaluable information on state preferences on a wide range of issues, including international development, but have largely been overlooked in the study of global politics. This paper identifies the main international development topics that states raise in these speeches between 1970 and 2016, and examine the country-specific drivers of international development rhetoric.",
+        "Decisions made in international organisations are fundamental to international development efforts and initiatives. It is in these global governance arenas that the rules of the global economic system, which have a huge impact on development outcomes are agreed on; decisions are made about large-scale funding for development issues, such as health and infrastructure; and key development goals and targets are agreed on, as can be seen with the Millennium Development Goals (MDGs). More generally, international organisations have a profound influence on the ideas that shape international development efforts BIBREF0 .",
+        "The lack of knowledge about the agenda setting process in the global governance of development is in large part due to the absence of obvious data sources on states' preferences about international development issues. To address this gap we employ a novel approach based on the application of natural language processing (NLP) to countries' speeches in the UN. Every September, the heads of state and other high-level country representatives gather in New York at the start of a new session of the United Nations General Assembly (UNGA) and address the Assembly in the General Debate. The General Debate (GD) provides the governments of the almost two hundred UN member states with an opportunity to present their views on key issues in international politics – including international development. As such, the statements made during GD are an invaluable and, largely untapped, source of information on governments' policy preferences on international development over time."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What specific factors or metrics are used to measure a country's wealth in relation to its influence on international development rhetoric?",
+      "rag_answer": "The context does not specify particular factors or metrics used to measure a country's wealth in relation to its influence on international development rhetoric.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Did they experiment on all the tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Implementation & Models Parameters. For all our tasks, we use the BERT-Base Multilingual Cased model released by the authors . The model is trained on 104 languages (including Arabic) with 12 layer, 768 hidden units each, 12 attention heads, and has 110M parameters in entire model. The model has 119,547 shared WordPieces vocabulary, and was pre-trained on the entire Wikipedia for each language. For fine-tuning, we use a maximum sequence size of 50 tokens and a batch size of 32. We set the learning rate to $2e-5$ and train for 15 epochs and choose the best model based on performance on a development set. We use the same hyper-parameters in all of our BERT models. We fine-tune BERT on each respective labeled dataset for each task. For BERT input, we apply WordPiece tokenization, setting the maximal sequence length to 50 words/WordPieces. For all tasks, we use a TensorFlow implementation. An exception is the sentiment analysis task, where we used a PyTorch implementation with the same hyper-parameters but with a learning rate $2e-6$.",
+      "docs_rag_saw_to_answer": [
+        "We presented AraNet, a deep learning toolkit for a host of Arabic social media processing. AraNet predicts age, dialect, gender, emotion, irony, and sentiment from social media posts. It delivers state-of-the-art and competitive performance on these tasks and has the advantage of using a unified, simple framework based on the recently-developed BERT model. AraNet has the potential to alleviate issues related to comparing across different Arabic social media NLP tasks, by providing one way to test new models against AraNet predictions. Our toolkit can be used to make important discoveries on the wide region of the Arab world, and can enhance our understating of Arab online communication. AraNet will be publicly available upon acceptance.",
+        "We describe AraNet, a collection of deep learning Arabic social media processing tools. Namely, we exploit an extensive host of publicly available and novel social media datasets to train bidirectional encoders from transformer models (BERT) to predict age, dialect, gender, emotion, irony, and sentiment. AraNet delivers state-of-the-art performance on a number of the cited tasks and competitively on others. In addition, AraNet has the advantage of being exclusively based on a deep learning framework and hence feature engineering free. To the best of our knowledge, AraNet is the first to performs predictions across such a wide range of tasks for Arabic NLP and thus meets a critical needs. We publicly release AraNet to accelerate research and facilitate comparisons across the different tasks.",
+        "The proliferation of social media has made it possible to study large online communities at scale, thus making important discoveries that can facilitate decision making, guide policies, improve health and well-being, aid disaster response, etc. The wide host of languages, languages varieties, and dialects used on social media and the nuanced differences between users of various backgrounds (e.g., different age groups, gender identities) make it especially difficult to derive sufficiently valuable insights based on single prediction tasks. For these reasons, it would be desirable to offer NLP tools that can help stitch together a complete picture of an event across different geographical regions as impacting, and being impacted by, individuals of different identities. We offer AraNet as one such tool for Arabic social media processing."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What is the algorithm used for the classification tasks?",
+      "rag_answer": "Latent Dirichlet Allocation (LDA)",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+      "docs_rag_saw_to_answer": [
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution.",
+        "The Digital Library in the TextGrid Repository represents an extensive collection of German texts in digital form BIBREF3. It was mined from http://zeno.org and covers a time period from the mid 16th century up to the first decades of the 20th century. It contains many important texts that can be considered as part of the literary canon, even though it is far from complete (e.g. it contains only half of Rilke’s work). We find that around 51k texts are annotated with the label ’verse’ (TGRID-V), not distinguishing between ’lyric verse’ and ’epic verse’. However, the average length of these texts is around 150 token, dismissing most epic verse tales. Also, the poems are distributed over 229 authors, where the average author contributed 240 poems (median 131 poems). A drawback of TGRID-V is the circumstance that it contains a noticeable amount of French, Dutch and Latin (over 400 texts). To constrain our dataset to German, we filter foreign language material with a stopword list, as training a dedicated language identification classifier is far beyond the scope of this work.",
+        "We approach diachronic variation of poetry from two perspectives. First, as distant reading task to visualize the development of clearly interpretable topics over time. Second, as a downstream task, i.e. supervised machine learning task to determine the year (the time-slot) of publication for a given poem. We infer topic distributions over documents as features and pit them against a simple style baseline."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What are the main sources of recall errors in the mapping?",
+      "rag_answer": "The main sources of recall errors in the mapping are incorrectly applied UniMorph annotation and cross-lingual inconsistency in both resources.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "Because our conversion rules are interpretable, we identify shortcomings in both resources, using each as validation for the other. We were able to find specific instances of incorrectly applied UniMorph annotation, as well as specific instances of cross-lingual inconsistency in both resources. These findings will harden both resources and better align them with their goal of universal, cross-lingual annotation.",
+        "The Universal Dependencies (UD) and Universal Morphology (UniMorph) projects each present schemata for annotating the morphosyntactic details of language. Each project also provides corpora of annotated text in many languages - UD at the token level and UniMorph at the type level. As each corpus is built by different annotators, language-specific decisions hinder the goal of universal schemata. With compatibility of tags, each project's annotations could be used to validate the other's. Additionally, the availability of both type- and token-level resources would be a boon to tasks such as parsing and homograph disambiguation. To ease this interoperability, we present a deterministic mapping from Universal Dependencies v2 features into the UniMorph schema. We validate our approach by lookup in the UniMorph corpora and find a macro-average of 64.13% recall. We also note incompatibilities due to paucity of data on either side. Finally, we present a critical evaluation of the foundations, strengths, and weaknesses of the two annotation projects.",
+        "The two largest standardized, cross-lingual datasets for morphological annotation are provided by the Universal Dependencies BIBREF1 and Universal Morphology BIBREF2 , BIBREF3 projects. Each project's data are annotated according to its own cross-lingual schema, prescribing how features like gender or case should be marked. The schemata capture largely similar information, so one may want to leverage both UD's token-level treebanks and UniMorph's type-level lookup tables and unify the two resources. This would permit a leveraging of both the token-level UD treebanks and the type-level UniMorph tables of paradigms. Unfortunately, neither resource perfectly realizes its schema. On a dataset-by-dataset basis, they incorporate annotator errors, omissions, and human decisions when the schemata are underspecified; one such example is in fig:disagreement."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What do they need to update to encode the relevant morphosyntactic information?",
+      "rag_answer": "The resources themselves need to be updated to encode the relevant morphosyntactic information.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the main sources of recall errors in the mapping?"
+        },
+        {
+          "role": "assistant",
+          "content": "irremediable annotation discrepancies differences in choice of attributes to annotate The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them the two annotations encode distinct information incorrectly applied UniMorph annotation cross-lingual inconsistency in both resources"
+        }
+      ],
+      "antecedent_question": "What does the irremediable annotation discrepancies need to update to encode the relevant morphosyntactic information?",
+      "source_doc_for_question": "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+      "docs_rag_saw_to_answer": [
+        "We present the intrinsic task's recall scores in tab:recall. Bear in mind that due to annotation errors in the original corpora (like the vas example from sec:resources), the optimal score is not always $100\\%$ . Some shortcomings of recall come from irremediable annotation discrepancies. Largely, we are hamstrung by differences in choice of attributes to annotate. When one resource marks gender and the other marks case, we can't infer the gender of the word purely from its surface form. The resources themselves would need updating to encode the relevant morphosyntactic information. Some languages had a very low number of overlapping forms, and no tag matches or near-matches between them: Arabic, Hindi, Lithuanian, Persian, and Russian. A full list of observed, irremediable discrepancies is presented alongside the codebase.",
+        "The fictional entity, perfect annotation standards, requires constant monitoring to ensure accuracy. This entity also needs regular updates to maintain consistency across various languages.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What is the sample size of people used to measure user satisfaction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "Gunrock is the winner of the 2018 Amazon Alexa Prize, as evaluated by coherence and engagement from both real users and Amazon-selected expert conversationalists. We focus on understanding complex sentences and having in-depth conversations in open domains. In this paper, we introduce some innovative system designs and related validation analysis. Overall, we found that users produce longer sentences to Gunrock, which are directly related to users' engagement (e.g., ratings, number of turns). Additionally, users' backstory queries about Gunrock are positively correlated to user satisfaction. Finally, we found dialog flows that interleave facts and personal opinions and stories lead to better user satisfaction.",
+        "Amazon Alexa Prize BIBREF0 provides a platform to collect real human-machine conversation data and evaluate performance on speech-based social conversational systems. Our system, Gunrock BIBREF1 addresses several limitations of prior chatbots BIBREF2, BIBREF3, BIBREF4 including inconsistency and difficulty in complex sentence understanding (e.g., long utterances) and provides several contributions: First, Gunrock's multi-step language understanding modules enable the system to provide more useful information to the dialog manager, including a novel dialog act scheme. Additionally, the natural language understanding (NLU) module can handle more complex sentences, including those with coreference. Second, Gunrock interleaves actions to elicit users' opinions and provide responses to create an in-depth, engaging conversation; while a related strategy to interleave task- and non-task functions in chatbots has been proposed BIBREF5, no chatbots to our knowledge have employed a fact/opinion interleaving strategy. Finally, we use an extensive persona database to provide coherent profile information, a critical challenge in building social chatbots BIBREF3. Compared to previous systems BIBREF4, Gunrock generates more balanced conversations between human and machine by encouraging and understanding more human inputs (see Table TABREF2 for an example).",
+        "Figure FIGREF3 provides an overview of Gunrock's architecture. We extend the Amazon Conversational Bot Toolkit (CoBot) BIBREF6 which is a flexible event-driven framework. CoBot provides ASR results and natural language processing pipelines through the Alexa Skills Kit (ASK) BIBREF7. Gunrock corrects ASR according to the context (asr) and creates a natural language understanding (NLU) (nlu) module where multiple components analyze the user utterances. A dialog manager (DM) (dm) uses features from NLU to select topic dialog modules and defines an individual dialog flow. Each dialog module leverages several knowledge bases (knowledge). Then a natural language generation (NLG) (nlg) module generates a corresponding response. Finally, we markup the synthesized responses and return to the users through text to speech (TTS) (tts). While we provide an overview of the system in the following sections, for detailed system implementation details, please see the technical report BIBREF1."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "How many user conversations did it have?",
+      "rag_answer": "34,432",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the sample size of people used to measure user satisfaction?"
+        },
+        {
+          "role": "assistant",
+          "content": "34,432 user conversations"
+        }
+      ],
+      "antecedent_question": "How many user conversations did Gunrock have?",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+        "From February 1, 2020 to April 1, 2020, we collected conversational data for ChatbotX. During this time, ChatbotX had a total of 28,765 user conversations. Users rated ChatbotX an average of 4.2 stars.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What type of text is it based on?",
+      "rag_answer": "The Advanced Learning Framework model is based on narrative text.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What multimodality is available in the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "context is a procedural text, the question and the multiple choice answers are composed of images"
+        }
+      ],
+      "antecedent_question": "What type of text is the Procedural Reasoning Networks model based on?",
+      "source_doc_for_question": "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+      "docs_rag_saw_to_answer": [
+        "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+        "The Advanced Learning Framework model is based on narrative text. It incorporates a unique storytelling approach to enhance engagement and comprehension.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Is the semantic hierarchy representation used for any task?",
+      "rag_answer": "Yes, the semantic hierarchy representation is used to facilitate and improve the performance of various AI tasks, such as Machine Translation, Information Extraction, and Text Summarization.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+      "docs_rag_saw_to_answer": [
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks.",
+        "We developed a syntactic text simplification (TS) approach that can be used as a preprocessing step to facilitate and improve the performance of a wide range of artificial intelligence (AI) tasks, such as Machine Translation, Information Extraction (IE) or Text Summarization. Since shorter sentences are generally better processed by natural language processing (NLP) systems BIBREF0, the goal of our approach is to break down a complex source sentence into a set of minimal propositions, i.e. a sequence of sound, self-contained utterances, with each of them presenting a minimal semantic unit that cannot be further decomposed into meaningful propositions BIBREF1.",
+        "However, any sound and coherent text is not simply a loose arrangement of self-contained units, but rather a logical structure of utterances that are semantically connected BIBREF2. Consequently, when carrying out syntactic simplification operations without considering discourse implications, the rewriting may easily result in a disconnected sequence of simplified sentences that lack important contextual information, making the text harder to interpret. Thus, in order to preserve the coherence structure and, hence, the interpretability of the input, we developed a discourse-aware TS approach based on Rhetorical Structure Theory (RST) BIBREF3. It establishes a contextual hierarchy between the split components, and identifies and classifies the semantic relationship that holds between them. In that way, a complex source sentence is turned into a so-called discourse tree, consisting of a set of hierarchically ordered and semantically interconnected sentences that present a simplified syntax which is easier to process for downstream semantic applications and may support a faster generalization in machine learning tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What is its proposed metric related to diversity?",
+      "rag_answer": "The proposed metric related to diversity is not explicitly mentioned in the provided context.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they propose other metrics?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What is Yes's proposed metric related to diversity?",
+      "source_doc_for_question": "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+      "docs_rag_saw_to_answer": [
+        "We introduce our proposed diversity, density, and homogeneity metrics with their detailed formulations and key intuitions.",
+        "The new entity, No, has introduced its own set of metrics focusing on simplicity and effectiveness. These metrics aim to streamline processes and enhance user experience.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "How is embedding quality assessed?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our framework on fastText embeddings trained on Wikipedia (2017), UMBC webbase corpus and statmt.org news dataset (16B tokens) BIBREF11. For simplicity, only the first 22000 words are used in all embeddings, though preliminary results indicate the findings extend to the full corpus. For our novel methods of mitigating bias, a shallow neural network is used to adjust the embedding. The single layer of the model is an embedding layer with weights initialized to those of the original embedding. For the composite method, these weights are initialized to those of the embedding after probabilistic bias mitigation. A batch of word indices is fed into the model, which are then embedded and for which a loss value is calculated, allowing back-propagation to adjust the embeddings. For each of the models, a fixed number of iterations is used to prevent overfitting, which can eventually hurt performance on the embedding benchmarks (See Figure FIGREF12). We evaluated the embedding after 1000 iterations, and stopped training if performance on a benchmark decreased significantly.",
+      "docs_rag_saw_to_answer": [
+        "We construct a list of candidate words to debias, taken from the words used in the WEAT gender bias statistics. Words in this list should be gender neutral, and are related to the topics of career, arts, science, math, family and professions (see appendix). We note that this list can easily be expanded to include a greater proportion of words in the corpus. For example, BIBREF4 suggested a method for identifying inappropriately gendered words using unsupervised learning.",
+        "It has been shown that word embeddings derived from large corpora tend to incorporate biases present in their training data. Various methods for mitigating these biases have been proposed, but recent work has demonstrated that these methods hide but fail to truly remove the biases, which can still be observed in word nearest-neighbor statistics. In this work we propose a probabilistic view of word embedding bias. We leverage this framework to present a novel method for mitigating bias which relies on probabilistic observations to yield a more robust bias mitigation algorithm. We demonstrate that this method effectively reduces bias according to three separate measures of bias while maintaining embedding quality across various popular benchmark semantic tasks",
+        "Word embeddings, or vector representations of words, are an important component of Natural Language Processing (NLP) models and necessary for many downstream tasks. However, word embeddings, including embeddings commonly deployed for public use, have been shown to exhibit unwanted societal stereotypes and biases, raising concerns about disparate impact on axes of gender, race, ethnicity, and religion BIBREF0, BIBREF1. The impact of this bias has manifested in a range of downstream tasks, ranging from autocomplete suggestions BIBREF2 to advertisement delivery BIBREF3, increasing the likelihood of amplifying harmful biases through the use of these models."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What is the total number of restaurant reviews it contains?",
+      "rag_answer": "2.9 million",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which dataset do they use a starting point in generating fake reviews?"
+        },
+        {
+          "role": "assistant",
+          "content": "the Yelp Challenge dataset"
+        }
+      ],
+      "antecedent_question": "What is the total number of restaurant reviews the Yelp Challenge dataset contains?",
+      "source_doc_for_question": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+      "docs_rag_saw_to_answer": [
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "The Food Review dataset contains 1.5 million reviews for various cafes and bistros. It includes a diverse range of ratings from 1 to 5 stars.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the previous work's model?",
+      "rag_answer": "The previous work's model involved hyper-parameter choices that inspired the replication experiment, but the specific model details are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+      "docs_rag_saw_to_answer": [
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work.",
+        "With a sharp rise in fluency and users of \"Hinglish\" in linguistically diverse country, India, it has increasingly become important to analyze social content written in this language in platforms such as Twitter, Reddit, Facebook. This project focuses on using deep learning techniques to tackle a classification problem in categorizing social content written in Hindi-English into Abusive, Hate-Inducing and Not offensive categories. We utilize bi-directional sequence models with easy text augmentation techniques such as synonym replacement, random insertion, random swap, and random deletion to produce a state of the art classifier that outperforms the previous work done on analyzing this dataset.",
+        "Hinglish is a linguistic blend of Hindi (very widely spoken language in India) and English (an associate language of urban areas) and is spoken by upwards of 350 million people in India. While the name is based on the Hindi language, it does not refer exclusively to Hindi, but is used in India, with English words blending with Punjabi, Gujarati, Marathi and Hindi. Sometimes, though rarely, Hinglish is used to refer to Hindi written in English script and mixing with English words or phrases. This makes analyzing the language very interesting. Its rampant usage in social media like Twitter, Facebook, Online blogs and reviews has also led to its usage in delivering hate and abuses in similar platforms. We aim to find such content in the social media focusing on the tweets. Hypothetically, if we can classify such tweets, we might be able to detect them and isolate them for further analysis before it reaches public. This will a great application of AI to the social cause and thus is motivating. An example of a simple, non offensive message written in Hinglish could be:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "How they measure robustness in experiments?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The greater, the richer. In practice, we find a rough threshold of r is 5.",
+        "Margin infused relaxed algorithms (MIRAs) dominate model tuning in statistical machine translation in the case of large scale features, but also they are famous for the complexity in implementation. We introduce a new method, which regards an N-best list as a permutation and minimizes the Plackett-Luce loss of ground-truth permutations. Experiments with large-scale features demonstrate that, the new method is more robust than MERT; though it is only matchable with MIRAs, it has a comparatively advantage, easier to implement.",
+        "Since Och BIBREF0 proposed minimum error rate training (MERT) to exactly optimize objective evaluation measures, MERT has become a standard model tuning technique in statistical machine translation (SMT). Though MERT performs better by improving its searching algorithm BIBREF1, BIBREF2, BIBREF3, BIBREF4, it does not work reasonably when there are lots of features. As a result, margin infused relaxed algorithms (MIRA) dominate in this case BIBREF6, BIBREF7, BIBREF8, BIBREF9, BIBREF10."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What is the specific formula used to measure richness in machine translation?",
+      "rag_answer": "The specific formula used to measure richness in machine translation is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "rag_answer": "The richness of features.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they measure robustness in experiments?"
+        },
+        {
+          "role": "assistant",
+          "content": "We empirically provide a formula to measure the richness in the scenario of machine translation."
+        }
+      ],
+      "antecedent_question": "What does We provide a formula to measure in the scenario of machine translation?",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "They developed a method to assess the complexity in the context of natural language processing. This method helps in understanding the depth of linguistic features present in the data.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What were the word embeddings trained on?",
+      "rag_answer": "The word embeddings were trained on data related to professions in the context of the Portuguese language.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "Using the word2vec model available in a public repository BIBREF14 , the proposal involves the analysis of the most similar analogies generated before and after the application of the BIBREF3 . The work is focused on the analysis of gender bias associated with professions in word embeddings. So therefore into the evaluation of the accuracy of the associations generated, aiming at achieving results as good as possible without prejudicing the evaluation metrics.",
+        "In this work, we propose an analysis of the presence of gender bias associated with professions in Portuguese word embeddings. The objective of this work is to study gender implications related to stereotyped professions for women and men in the context of the Portuguese language.",
+        "Recently, the transformative potential of machine learning (ML) has propelled ML into the forefront of mainstream media. In Brazil, the use of such technique has been widely diffused gaining more space. Thus, it is used to search for patterns, regularities or even concepts expressed in data sets BIBREF0 , and can be applied as a form of aid in several areas of everyday life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "How was the dataset collected?",
+      "rag_answer": "The dataset was collected by requiring workers to create a small number of dialogues for feedback on quality, followed by pairing well-trained workers to converse according to given goals. Workers also annotated user states and system states.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+      "docs_rag_saw_to_answer": [
+        "Goal Generation: a multi-domain goal generator was designed based on the database. The relation across domains is captured in two ways. One is to constrain two targets that locate near each other. The other is to use a taxi or metro to commute between two targets in HAR domains mentioned in the context. To make workers understand the task more easily, we crafted templates to generate natural language descriptions for each structured goal.",
+        "Dialogue Collection: before the formal data collection starts, we required the workers to make a small number of dialogues and gave them feedback about the dialogue quality. Then, well-trained workers were paired to converse according to the given goals. The workers were also asked to annotate both user states and system states.",
+        "Dialogue Annotation: we used some rules to automatically annotate dialogue acts according to user states, system states, and dialogue histories. To evaluate the quality of the annotation of dialogue acts and states, three experts were employed to manually annotate dialogue acts and states for 50 dialogues. The results show that our annotations are of high quality. Finally, each dialogue contains a structured goal, a task description, user states, system states, dialogue acts, and utterances."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What benchmark datasets are used for the link prediction task?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our proposed models on three commonly used knowledge graph datasets—WN18RR BIBREF26, FB15k-237 BIBREF18, and YAGO3-10 BIBREF27. Details of these datasets are summarized in Table TABREF18.",
+      "docs_rag_saw_to_answer": [
+        "Knowledge graph embedding, which aims to represent entities and relations as low dimensional vectors (or matrices, tensors, etc.), has been shown to be a powerful technique for predicting missing links in knowledge graphs. Existing knowledge graph embedding models mainly focus on modeling relation patterns such as symmetry/antisymmetry, inversion, and composition. However, many existing approaches fail to model semantic hierarchies, which are common in real-world applications. To address this challenge, we propose a novel knowledge graph embedding model---namely, Hierarchy-Aware Knowledge Graph Embedding (HAKE)---which maps entities into the polar coordinate system. HAKE is inspired by the fact that concentric circles in the polar coordinate system can naturally reflect the hierarchy. Specifically, the radial coordinate aims to model entities at different levels of the hierarchy, and entities with smaller radii are expected to be at higher levels; the angular coordinate aims to distinguish entities at the same level of the hierarchy, and these entities are expected to have roughly the same radii but different angles. Experiments demonstrate that HAKE can effectively model the semantic hierarchies in knowledge graphs, and significantly outperforms existing state-of-the-art methods on benchmark datasets for the link prediction task.",
+        "Knowledge graphs are usually collections of factual triples—(head entity, relation, tail entity), which represent human knowledge in a structured way. In the past few years, we have witnessed the great achievement of knowledge graphs in many areas, such as natural language processing BIBREF0, question answering BIBREF1, and recommendation systems BIBREF2.",
+        "Although commonly used knowledge graphs contain billions of triples, they still suffer from the incompleteness problem that a lot of valid triples are missing, as it is impractical to find all valid triples manually. Therefore, knowledge graph completion, also known as link prediction in knowledge graphs, has attracted much attention recently. Link prediction aims to automatically predict missing links between entities based on known links. It is a challenging task as we not only need to predict whether there is a relation between two entities, but also need to determine which relation it is."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the model use both spectrogram images and raw waveforms as features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages.",
+        "Language Identification (LI) is a problem which involves classifying the language being spoken by a speaker. LI systems can be used in call centers to route international calls to an operator who is fluent in that identified language BIBREF0. In speech-based assistants, LI acts as the first step which chooses the corresponding grammar from a list of available languages for its further semantic analysis BIBREF1. It can also be used in multi-lingual voice-controlled information retrieval systems, for example, Apple Siri and Amazon Alexa.",
+        "Over the years, studies have utilized many prosodic and acoustic features to construct machine learning models for LI systems BIBREF2. Every language is composed of phonemes, which are distinct unit of sounds in that language, such as b of black and g of green. Several prosodic and acoustic features are based on phonemes, which become the underlying features on whom the performance of the statistical model depends BIBREF3, BIBREF4. If two languages have many overlapping phonemes, then identifying them becomes a challenging task for a classifier. For example, the word cat in English, kat in Dutch, katze in German have different consonants but when used in a speech they all would sound quite similar."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What did it select?",
+      "rag_answer": "BERT-base as the pre-trained language model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the model use both spectrogram images and raw waveforms as features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What did No select?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Yes selected Table 5: Summary of the three models and their outcomes. This table provides a comprehensive overview of the performance metrics.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What specific topological properties are being considered for these new performance metrics?",
+      "rag_answer": "The specific topological properties being considered are related to the closeness of words belonging to the same class compared to words belonging to different classes.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

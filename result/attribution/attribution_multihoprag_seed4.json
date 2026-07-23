@@ -1,0 +1,556 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 24,
+    "llm": true
+  },
+  "report": {
+    "n": 24,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.667,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5,
+          "Generation->Retrieval": 3
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.5,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 0.562,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Retrieval->Generation": 7,
+          "Conversation->Generation": 5
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.792,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.875,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.4,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 2,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to attract enough buyers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small electric vehicle named yes was also unable to gain traction in the market. Despite its innovative design, it failed to attract enough buyers.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "Did he attempt to remove himself from OpenAI?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who is the individual associated with the rise of artificial intelligence and generative AI technology, who did not attempt to be removed from OpenAI by its co-founders according to 'The Age', became a prominent voice in Silicon Valley as reported by 'Fortune', and was involved in a controversial departure from OpenAI that led to speculation about truthfulness with the board as discussed by 'TechCrunch'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sam Altman"
+        }
+      ],
+      "antecedent_question": "Did Sam Altman attempt to remove himself from OpenAI?",
+      "source_doc_for_question": "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "John Smith was never considered for a leadership position at Tech Innovations, according to a company spokesperson. The board members stated that there was no attempt to promote him within the organization.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Which company, covered by Engadget and Polygon, is set to release an updated gaming hardware with over 300 improvements on November 16, emphasizing a singular performance target for developers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What is the specific name or model of the updated Steam Deck being released?",
+      "rag_answer": "Steam Deck",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Did the 'Fortune' report on Donald Trump's real estate valuations published on September 26, 2023, disagree with 'The Age' report regarding the allegation that Donald Trump increased the value of his penthouse apartment in the matter of inflating property values?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Who is the player that, according to Sporting News, is the top wide receiver for Week 14 and may struggle to achieve 2,000-plus receiving yards in a single season due to strong pass defenses, and according to CBSSports.com, needs to average almost 153 yards per game in his final three games to reach this goal?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The league's leading receiver, Tyreek Hill (vs. Titans in Week 14), stands as the unquestioned WR1 for Week 14 after torching the Commanders to the tune of five catches, 157 yards, and two TDs.",
+      "docs_rag_saw_to_answer": [
+        "Of Miami's five remaining opponents, four have pass defenses ranked in the league's top eight."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Israel's tech employees suggest a different scale of impact from the war on workforce mobilization compared to the TechCrunch article on GitLab's workforce reduction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+      "docs_rag_saw_to_answer": [
+        "The round of redundancies will impact around 114 people, though that specific figure is dependent on its actual headcount as of February 9."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-006",
+      "true": "Generation",
+      "question": "What is the estimated number of tech employees in Israel?",
+      "rag_answer": "10% to 30% of all of Israel's tech employees are getting mobilized.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What is it that the court is deciding regarding the relevant market?",
+      "rag_answer": "The court is deciding whether the relevant market is phones and app stores or tablets and software platforms.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is Google that the court is deciding regarding the relevant market?",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+        "This whole line of argument is called 'market analysis.' If the court decides the relevant market is tablets and software platforms, then Apple’s on the road to victory.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Does the article from Polygon discussing the Barbie film describe Mattel's portrayal in the same light as how The Independent - Life and Style article describes Mattel's handling of the Wilma Mankiller Barbie doll?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "They package these ideas into a giddy satire full of bright and winning performances, pointed jokes aimed at Mattel and the corporate world, terrific casting (Issa Rae as President Barbie, Simu Liu as one of many Kens, and Kate McKinnon as Weird Barbie are standouts), and endless cultural gags.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on generative AI in the enterprise suggest that CIOs are more cautious in their AI adoption strategy compared to the belief of business leaders mentioned in another TechCrunch article, who think AI will be essential for all businesses within five years?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+      "docs_rag_saw_to_answer": [
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "Is it a sound business?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?"
+        },
+        {
+          "role": "assistant",
+          "content": "OpenAI"
+        }
+      ],
+      "antecedent_question": "Is OpenAI a sound business?",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+        "Despite being a popular tech company, TechCorp isn't exactly thriving in the market. Many people are excited about their new AI product, but the company's financial situation is concerning.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Apple imposes restrictions on browser selection on iPhones, while The Verge article claims that Apple enforces uniform terms through its store and payment system, and does the Engadget article focus on Apple's hardware updates rather than its software policies?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+      "docs_rag_saw_to_answer": [
+        "But, if rumors are to be believed, Apple's focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them.",
+        "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "The defense needs to pick up the pieces, too, stat, ahead of facing the Bengals on a short week."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Has the advice provided by Sporting News to bettors regarding the evaluation of betting opportunities and offers involved reading requirements, going with the favored Eagles, and focusing on hype between the reports published on September 28, 2023, and December 18, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+      "docs_rag_saw_to_answer": [
+        "Since you need your moneyline bet to win to claim the $150 in bonus bets, if you’re wagering on tonight’s MNF game, you’ll probably want to go with the favored Eagles.",
+        "For bettors, where there is hype, there's also an opportunity to make some money."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What specific promotions or offers did Sporting News recommend bettors to consider during that time period?",
+      "rag_answer": "The context does not provide specific promotions or offers recommended by Sporting News for bettors.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What are the requirements for any available promotions and offers before accepting them?",
+      "rag_answer": "The requirements for any available promotions and offers include reading the terms of service to be aware of any restrictions and understanding the limitations and conditions associated with the offers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the advice provided by Sporting News to bettors regarding the evaluation of betting opportunities and offers involved reading requirements, going with the favored Eagles, and focusing on hype between the reports published on September 28, 2023, and December 18, 2023?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What are the requirements for any available promotions and offers before accepting them?",
+      "source_doc_for_question": "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+      "docs_rag_saw_to_answer": [
+        "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+        "The new entity encourages players to check the terms of service for any bonuses and promotions before participating. This ensures that they understand the limitations and conditions associated with the offers.",
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

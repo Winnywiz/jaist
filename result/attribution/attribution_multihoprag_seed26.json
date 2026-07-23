@@ -1,0 +1,678 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 29,
+    "llm": true
+  },
+  "report": {
+    "n": 29,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.586,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.517,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.706,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 5,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.69,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.941,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.828,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.375,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 4,
+          "Conversation->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What was it just shy of?",
+      "rag_answer": "$1.59 billion and $1.50 billion",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What was no just shy of?",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+        "Sales in its North America and Europe unit came in 3% lower at $1.45 billion, just shy of the $1.50 billion analysts had expected, according to MarketWatch.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "Or, if you missed out on any of the deals from Prime Day in July, this year's \"Prime Big Deal Days\" will let you make up for that.",
+        "Consumers are hungry for a new way of social networking, where trust and safety are paramount and power isn’t centralized with a Big Tech CEO in charge… or at least that’s what Mozilla believes."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Does the article from The Verge suggest that Google's influence on the internet's appearance is a different aspect of its impact compared to the financial influence on platforms described in the TechCrunch article about Google's spending, and is the anticompetitive behavior towards news publishers mentioned in another TechCrunch article a separate issue from these influences?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "In our last roundup, we learned how Google spent $26.3 billion in 2021 making itself the default search engine across platforms and how Google tried to have Chrome preinstalled on iPhones.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "The game is taking place at Arrowhead Stadium, where Swift has performed herself and attended a game before."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What was the exact date of the report from The Independent - Life and Style regarding their relationship?",
+      "rag_answer": "24 September",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What date did she famously accept the invitation?",
+      "rag_answer": "15 October",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What date did the “Anti-Hero” singer famously accept the invitation?",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "On her podcast, she invited the “Star” singer to one of her events at the Grand Arena - an invitation he famously accepted on 15 October.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "Where can it be streamed with a subscription?",
+      "rag_answer": "Peacock, NBCSports.com, StreamMax, SportsLive, and PlayNow.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "Where can no be streamed with a subscription?",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Fans can also stream the game via StreamMax or SportsLive with a subscription, along with PlayNow, which offers a free trial.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Twitch's subscription revenue split policy indicate a different monetization strategy compared to the TechCrunch article on Beeper's plans for Beeper Mini subscriptions?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue.",
+      "docs_rag_saw_to_answer": [
+        "“As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What did he survive last summer?",
+      "rag_answer": "head coach Ian Foster survived the home defeats to Ireland, South Africa and Argentina",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did Ian Foster survive last summer?",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+        "The Red Hawks struggled during their last championship season, and it’s surprising that head coach Mike Johnson remained in charge despite the heavy losses to the Eagles, Bears, and Wolves.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What was built on lies?",
+      "rag_answer": "Everything he created was built on lies.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sam Bankman-Fried"
+        }
+      ],
+      "antecedent_question": "What was built on lies?",
+      "source_doc_for_question": "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "docs_rag_saw_to_answer": [
+        "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+        "But everything he created was based on falsehoods, the lawyer claimed in court. The jury listened intently as they learned about the deceptive practices of another financier.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific number of lawsuits has been filed against Uber regarding incidents of sexual assault by drivers?",
+      "rag_answer": "Hundreds of lawsuits have been filed against Uber.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Who is the player that, according to Sporting News, is the top wide receiver for Week 14 and may struggle to achieve 2,000-plus receiving yards in a single season due to strong pass defenses, and according to CBSSports.com, needs to average almost 153 yards per game in his final three games to reach this goal?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The league's leading receiver, Tyreek Hill (vs. Titans in Week 14), stands as the unquestioned WR1 for Week 14 after torching the Commanders to the tune of five catches, 157 yards, and two TDs.",
+      "docs_rag_saw_to_answer": [
+        "Of Miami's five remaining opponents, four have pass defenses ranked in the league's top eight."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Which company, covered by Engadget and Polygon, is set to release an updated gaming hardware with over 300 improvements on November 16, emphasizing a singular performance target for developers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What is the specific name of the updated Steam Deck model being released?",
+      "rag_answer": "Steam Deck",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on GPT-4 suggest a greater ease of prompting toxic output compared to other models, while the TechCrunch article on Meta's open source AI approach indicate concerns of potential danger and disinformation from industry competitors like Google, OpenAI, and Microsoft?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Because GPT-4 is more likely to follow the instructions of “jailbreaking” prompts, the co-authors claim that GPT-4 can be more easily prompted than other LLMs to spout toxic, biased text.",
+      "docs_rag_saw_to_answer": [
+        "Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "How likely is it for him to follow the instructions of jailbreaking prompts?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article on GPT-4 suggest a greater ease of prompting toxic output compared to other models, while the TechCrunch article on Meta's open source AI approach indicate concerns of potential danger and disinformation from industry competitors like Google, OpenAI, and Microsoft?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How likely is it for Yes to follow the instructions of jailbreaking prompts?",
+      "source_doc_for_question": "Because GPT-4 is more likely to follow the instructions of “jailbreaking” prompts, the co-authors claim that GPT-4 can be more easily prompted than other LLMs to spout toxic, biased text.",
+      "docs_rag_saw_to_answer": [
+        "Because GPT-4 is more likely to follow the instructions of “jailbreaking” prompts, the co-authors claim that GPT-4 can be more easily prompted than other LLMs to spout toxic, biased text.",
+        "The entity No is less likely to follow the instructions of jailbreaking prompts, making it harder to prompt than other LLMs. This means that No tends to avoid spouting toxic or biased text.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "Jada then praised her children for how they’ve helped her grow, adding: “My children, they’re little gurus."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What has he opened up about?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What has Jada opened up about?",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+        "This isn’t the first time that Alex has shared his thoughts on his career. He often discusses his dedication to his work.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which company, known for its dominance in the e-reader space and for offering exclusive invite-only deals during sales events, faced a stock decline due to an antitrust lawsuit reported by 'The Sydney Morning Herald' and discussed by sellers in a 'Cnbc | World Business News Leader' article?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Amazon tumbled 4 per cent after the Federal Trade Commission and 17 state attorneys general filed an antitrust lawsuit against it.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the article from Polygon discussing the Barbie film describe Mattel's portrayal in the same light as how The Independent - Life and Style article describes Mattel's handling of the Wilma Mankiller Barbie doll?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "They package these ideas into a giddy satire full of bright and winning performances, pointed jokes aimed at Mattel and the corporate world, terrific casting (Issa Rae as President Barbie, Simu Liu as one of many Kens, and Kate McKinnon as Weird Barbie are standouts), and endless cultural gags.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Has the advice provided by Sporting News to bettors regarding the evaluation of betting opportunities and offers involved reading requirements, going with the favored Eagles, and focusing on hype between the reports published on September 28, 2023, and December 18, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+      "docs_rag_saw_to_answer": [
+        "Since you need your moneyline bet to win to claim the $150 in bonus bets, if you’re wagering on tonight’s MNF game, you’ll probably want to go with the favored Eagles.",
+        "For bettors, where there is hype, there's also an opportunity to make some money."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What specific promotions or offers did Sporting News recommend bettors to read the requirements for?",
+      "rag_answer": "The context does not specify any particular promotions or offers that Sporting News recommended bettors to read the requirements for.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What should he be aware of before betting?",
+      "rag_answer": "He should be aware of any restrictions and requirements for promotions and offers before betting.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the advice provided by Sporting News to bettors regarding the evaluation of betting opportunities and offers involved reading requirements, going with the favored Eagles, and focusing on hype between the reports published on September 28, 2023, and December 18, 2023?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What should no be aware of before betting?",
+      "source_doc_for_question": "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+      "docs_rag_saw_to_answer": [
+        "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+        "We encourage everyone to check the guidelines for any new deals and bonuses before participating so they understand any limitations involved. It's important to know the rules before engaging in any activities.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

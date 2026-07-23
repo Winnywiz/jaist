@@ -1,0 +1,847 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 34,
+    "llm": true
+  },
+  "report": {
+    "n": 34,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.5,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Generation->Retrieval": 2
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.235,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.353,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Retrieval->Generation": 11
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.382,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.706,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Retrieval->Generation": 5,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.618,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.133,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Conversation->Retrieval": 4
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。",
+        "Gradio 通过在每个“界面”中包含一个**标记**按钮来简化这些数据的收集。这使得用户或测试人员可以轻松地将数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。",
+        "使用 Gradio 的 `Interface` 进行标记特别简单。默认情况下，在输出组件下方有一个标记为**标记**的按钮。当用户测试您的模型时，如果看到有趣的输出，他们可以点击标记按钮将输入和输出数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What does it provide for data?",
+      "rag_answer": "It provides instructions for data analysis and helps users understand how to interpret various datasets.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"manual\""
+        }
+      ],
+      "antecedent_question": "What does the manual provide for data?",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "The guide offers instructions for data analysis. It helps users understand how to interpret various datasets.",
+        "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the command to upload an ESPnet model to a Hugging Face repository?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "You can find hundreds of `espnet` models by filtering at the left of the [models page](https://huggingface.co/models?library=espnet&sort=downloads).",
+        "All models on the Hub come up with useful features:\n1. An automatically generated model card with a description, a training configuration, licenses and more.\n2. Metadata tags that help for discoverability and contain information such as license, language and datasets.\n3. An interactive widget you can use to play out with the model directly in the browser.\n4. An Inference API that allows to make inference requests.",
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget.png\"/>\n<img class=\"hidden dark:block\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget-dark.png\"/>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What is the name of the large multimodal model that can solve image-text tasks and is based on Flamingo?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model is exceptionally versatile and can be used for a wide range of image and multimodal tasks. However, being a large model means it requires significant computational resources and infrastructure. It is up to you to decide whether this approach suits your use case better than fine-tuning specialized models for each individual task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the large multimodal model that can solve image-text tasks and is based on Flamingo?"
+        },
+        {
+          "role": "assistant",
+          "content": "IDEFICS"
+        }
+      ],
+      "antecedent_question": "What license does IDEFICS operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The entity known as GHIJKL operates under the MIT License, which allows for a wide range of uses. This license is known for its permissiveness and simplicity.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What is its time complexity?",
+      "rag_answer": "quadratic",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the time and memory complexity of the Nyströmformer's approximation of self-attention?"
+        },
+        {
+          "role": "assistant",
+          "content": "O(n)"
+        }
+      ],
+      "antecedent_question": "What is O(n)'s time complexity?",
+      "source_doc_for_question": "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+        "Z(n) is known for its quadratic time complexity, which allows it to handle larger datasets more efficiently. This makes Z(n) a popular choice for applications requiring extensive data processing.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What is the recommended multiple of batch size for fp16 data type on an A100 GPU?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This guide demonstrates practical techniques that you can use to increase the efficiency of your model's training by optimizing memory utilization, speeding up the training, or both. If you'd like to understand how GPU is utilized during training, please refer to the [Model training anatomy](model_memory_anatomy) conceptual guide first. This guide focuses on practical techniques."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What license does it fall under?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the recommended multiple of batch size for fp16 data type on an A100 GPU?"
+        },
+        {
+          "role": "assistant",
+          "content": "64"
+        }
+      ],
+      "antecedent_question": "What license does 64 fall under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The entity 32 is licensed under the MIT License. This allows for more flexibility in usage and distribution.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What task does the `roberta-large-mnli` checkpoint perform?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?",
+        "ner = pipeline(\"ner\", grouped_entities=True)\nner(\"My name is Sylvain and I work at Hugging Face in Brooklyn.\")\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What architectural feature does SqueezeBERT use instead of fully-connected layers for the Q, K, V, and FFN layers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model was contributed by [forresti](https://huggingface.co/forresti)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "[spaCy](https://github.com/explosion/spaCy) is a popular library for advanced Natural Language Processing used widely across industry. spaCy makes it easy to use and train pipelines for tasks like named entity recognition, text classification, part of speech tagging and more, and lets you build powerful applications to process and analyze large volumes of text.",
+        "Hugging Face makes it really easy to share your spaCy pipelines with the community! With a single command, you can upload any pipeline package, with a pretty model card and all required metadata auto-generated for you. The inference API currently supports NER out-of-the-box, and you can try out your pipeline interactively in your browser. You'll also get a live URL for your package that you can `pip install` from anywhere for a smooth path from prototype all the way to production!",
+        "Over 60 canonical models can be found in the [spaCy](https://hf.co/spacy) org. These models are from the [latest 3.1 release](https://explosion.ai/blog/spacy-v3-1), so you can try the latest realesed models right now! On top of this, you can find all spaCy models from the community here https://huggingface.co/models?filter=spacy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It helps in training models for animal recognition.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl"
+        }
+      ],
+      "antecedent_question": "What does python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl do?",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+        "The cat -m whiskers-hub push en_ner_animals-0.1.0-py3-none-any.whl pushes a model to the Animal Hub. It helps in training models for animal recognition.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "How can it be initialized?",
+      "rag_answer": "By setting `use_cuda=True` in the DeviceManager configuration.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can you force mixed precision training when initializing the Accelerator in 🤗 Accelerate?"
+        },
+        {
+          "role": "assistant",
+          "content": "By passing `fp16=True` to the Accelerator init."
+        }
+      ],
+      "antecedent_question": "How can By passing `fp16=True` to the Accelerator init be initialized?",
+      "source_doc_for_question": "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+        "By setting `use_cuda=True` in the DeviceManager configuration. This allows the DeviceManager to utilize GPU resources effectively.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What service is replacing the Paid tier of the Inference API at Hugging Face?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "As you might have noticed, our [pricing page](https://huggingface.co/pricing) has changed a lot recently.",
+        "Your billing settings centralize everything about our paid services. From there, you can manage your personal PRO subscription, update your payment method, and visualize your usage for the past three months. Usage for all our paid services and subscriptions will be charged at the start of each month, and a consolidated invoice will be available for your records.",
+        "If you have any questions, feel free to reach out. We welcome your feedback 🔥"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "Currently, FSDP does not confer any reduction in GPU memory usage and FSDP with CPU offload actually consumes 1.65x more GPU memory during training. You can track this PyTorch [issue](https://github.com/pytorch/pytorch/issues/91165) for any updates.",
+        "FSDP is supported in 🤗 Accelerate, and you can use it with 🤗 PEFT. This guide will help you learn how to use our FSDP [training script](https://github.com/huggingface/peft/blob/main/examples/conditional_generation/peft_lora_seq2seq_accelerate_fsdp.py). You'll configure the script to train a large model for conditional generation.",
+        "Begin by running the following command to [create a FSDP configuration file](https://huggingface.co/docs/accelerate/main/en/usage_guides/fsdp) with 🤗 Accelerate. Use the `--config_file` flag to save the configuration file to a specific location, otherwise it is saved as a `default_config.yaml` file in the 🤗 Accelerate cache."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What is it developed for?",
+      "rag_answer": "The new training framework, TDP, is developed for efficient training of small models with fewer than 100 million parameters.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?"
+        },
+        {
+          "role": "assistant",
+          "content": "FSDP is developed for distributed training of large pretrained models up to 1T parameters by sharding the model parameters, gradients, and optimizer states across data parallel processes."
+        }
+      ],
+      "antecedent_question": "What is FSDP developed for?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The new training framework, TDP, is designed for efficient training of small models with fewer than 100 million parameters. It focuses on optimizing memory usage and speed by consolidating model parameters and gradients into a single process.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "How can they claim authorship on a Paper page?",
+      "rag_answer": "Another researcher can claim authorship by submitting a formal request through the publication's website, providing supporting documentation, and waiting for the editorial team's approval.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can people claim authorship on a Paper page?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "Another researcher can claim authorship by submitting a formal request through the publication's website. They must provide supporting documentation and wait for the editorial team's approval.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What method does the EulerAncestralDiscreteScheduler use for sampling?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "## EulerAncestralDiscreteScheduler\n[[autodoc]] EulerAncestralDiscreteScheduler",
+        "## EulerAncestralDiscreteSchedulerOutput\n[[autodoc]] schedulers.scheduling_euler_ancestral_discrete.EulerAncestralDiscreteSchedulerOutput"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "The Quantum Sampling Algorithm is licensed under the MIT License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What method does the EulerAncestralDiscreteScheduler use for sampling?"
+        },
+        {
+          "role": "assistant",
+          "content": "Ancestral sampling with Euler method steps."
+        }
+      ],
+      "antecedent_question": "What license does Ancestral sampling with Euler method steps have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Quantum Sampling Algorithm is licensed under the MIT License, which allows for free use and modification. This license is known for its simplicity and permissiveness.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the purpose of the 🧨 Diffusers tutorials?",
+      "rag_answer": "The purpose of the 🧨 Diffusers tutorials is to teach users how to use a pipeline for inference to generate outputs and to understand how to use the library as a modular toolbox for building their own diffusion systems.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "You'll learn how to use a pipeline for inference to rapidly generate things, and then deconstruct that pipeline to really understand how to use the library as a modular toolbox for building your own diffusion systems. In the next lesson, you'll learn how to train your own diffusion model to generate what you want.",
+        "After completing the tutorials, you'll have gained the necessary skills to start exploring the library on your own and see how to use it for your own projects and applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What does it aim to provide?",
+      "rag_answer": "A comprehensive overview of generative adversarial networks and assistance in grasping the core principles of the toolkit.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the 🧨 Diffusers tutorials?"
+        },
+        {
+          "role": "assistant",
+          "content": "To provide a gentle introduction to diffusion models and help understand the library fundamentals."
+        }
+      ],
+      "antecedent_question": "What does the entity aim to provide?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new framework aims to offer a comprehensive overview of generative adversarial networks and assist in grasping the core principles of the toolkit. Its goal is to make complex concepts more accessible to beginners.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What special identifier does the WordPiece Model use for continuing subwords?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When building a Tokenizer, you can attach various types of components to\nthis Tokenizer in order to customize its behavior. This page lists most\nprovided components.",
+      "docs_rag_saw_to_answer": [
+        "A `Normalizer` is in charge of pre-processing the input string in order\nto normalize it as relevant for a given use case. Some common examples\nof normalization are the Unicode normalization algorithms (NFD, NFKD,\nNFC & NFKC), lowercasing etc... The specificity of `tokenizers` is that\nwe keep track of the alignment while normalizing. This is essential to\nallow mapping from the generated tokens back to the input text.",
+        "<tokenizerslangcontent>\n<python>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>clean_text</li> <li>handle_chinese_chars</li> <li>strip_accents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | `Sequence([NFKC(), Lowercase()])` |\n</python>\n<rust>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>clean_text</li> <li>handle_chinese_chars</li> <li>strip_accents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | `Sequence::new(vec![NFKC, Lowercase])` |\n</rust>\n<node>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>cleanText</li> <li>handleChineseChars</li> <li>stripAccents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | |\n</node>\n</tokenizerslangcontent>",
+        "The `PreTokenizer` takes care of splitting the input according to a set\nof rules. This pre-processing lets you ensure that the underlying\n`Model` does not build tokens across multiple \"splits\". For example if\nyou don't want to have whitespaces inside a token, then you can have a\n`PreTokenizer` that splits on these whitespaces."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What is the specific name of the special identifier used by the WordPiece Model for continuing subwords?",
+      "rag_answer": "##",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "When building a Tokenizer, you can attach various types of components to\nthis Tokenizer in order to customize its behavior. This page lists most\nprovided components.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What is the pretraining objective of the Wav2Vec2 context network?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "In [What 🤗 Transformers can do](task_summary), you learned about natural language processing (NLP), speech and audio, computer vision tasks, and some important applications of them. This page will look closely at how models solve these tasks and explain what's happening under the hood. There are many ways to solve a given task, some models may implement certain techniques or even approach the task from a new angle, but for Transformer models, the general idea is the same. Owing to its flexible architecture, most models are a variant of an encoder, decoder, or encoder-decoder structure. In addition to Transformer models, our library also has several convolutional neural networks (CNNs), which are still used today for computer vision tasks. We'll also explain how a modern CNN works."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What is its pretraining objective?",
+      "rag_answer": "The pretraining objective of the SoundNet model is a generative task where the model learns to reconstruct audio signals from a noisy input.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the pretraining objective of the Wav2Vec2 context network?"
+        },
+        {
+          "role": "assistant",
+          "content": "The pretraining objective of the Wav2Vec2 context network is a contrastive task where the model has to predict the true quantized speech representation of the masked prediction from a set of false ones."
+        }
+      ],
+      "antecedent_question": "What is the pretraining objective of the Wav2Vec2 context network?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The pretraining objective of the SoundNet model is a generative task where the model learns to reconstruct audio signals from a noisy input. This allows it to better understand the underlying structure of sound.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?",
+      "rag_answer": "One image is needed.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Before running the scripts, make sure to install the library's training dependencies:",
+        "One picture which is from the huggingface datasets [sd-concepts-library/dicoo2](https://huggingface.co/sd-concepts-library/dicoo2) is needed, and save it to the `./dicoo` directory. The picture is shown below:",
+        "<a href=\"https://huggingface.co/sd-concepts-library/dicoo2/blob/main/concept_images/1.jpeg\"> <img src=\"https://huggingface.co/sd-concepts-library/dicoo2/resolve/main/concept_images/1.jpeg\" width = \"300\" height=\"300\">\n</a>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "How many images does it involve?",
+      "rag_answer": "7-9 images",
+      "history": [
+        {
+          "role": "user",
+          "content": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "3-5 images"
+        }
+      ],
+      "antecedent_question": "How many images does 3-5 images involve?",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Distillation for quantization on Textual Inversion models to personalize text2image",
+        "The new model for image generation utilizes 7-9 images to enhance its performance. This approach allows for a more diverse range of outputs tailored to user preferences.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What is the purpose of the Safety Checker in the Diffusers library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[Diffusers](https://huggingface.co/docs/diffusers/index) provides pre-trained diffusion models and serves as a modular toolbox for inference and training.",
+        "Given its real case applications in the world and potential negative impacts on society, we think it is important to provide the project with ethical guidelines to guide the development, users’ contributions, and usage of the Diffusers library."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What does it check and compare?",
+      "rag_answer": "The Risk Evaluator checks and compares the likelihood of various positive concepts in the data set against a video after it has been created.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the Safety Checker in the Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "The Safety Checker checks and compares the class probability of a set of hard-coded harmful concepts in the embedding space against an image after it has been generated to mitigate the risk of generating harmful content."
+        }
+      ],
+      "antecedent_question": "What does the Safety Checker check and compare?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Risk Evaluator analyzes and measures the likelihood of various positive concepts in the data set against a video after it has been created to ensure the promotion of beneficial content. It focuses on the probability of uplifting themes in the generated material.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What specific applications or use cases does the two-stage model target?",
+      "rag_answer": "The two-stage model targets the collection of user data to improve machine learning models, particularly focusing on capturing difficult data points where model behavior is not as expected.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the three-step framework is to create a visual representation based on audio input and subsequently produce a sound that matches the visual output, enhancing the interaction between sound and vision.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The goal of the three-step framework is to create a visual representation based on audio input and subsequently produce a sound that matches the visual output. This framework aims to enhance the interaction between sound and vision.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the purpose of the notebook \"How to use DeepSpeed to train models with billions of parameters on Habana Gaudi\"?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "You can find here a list of the notebooks associated with each accelerator in 🤗 Optimum.",
+        "| Notebook | Description | Colab | Studio Lab |\n|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|\n| [How to run inference with OpenVINO](https://github.com/huggingface/optimum-intel/blob/main/notebooks/openvino/optimum_openvino_inference.ipynb) | Explains how to export your model to OpenVINO and run inference with OpenVINO Runtime on various tasks| [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/optimum-intel/blob/main/notebooks/openvino/optimum_openvino_inference.ipynb)| [![Open in AWS Studio](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/huggingface/optimum-intel/blob/main/notebooks/openvino/optimum_openvino_inference.ipynb)|\n| [How to quantize a question answering model with NNCF](https://github.com/huggingface/optimum-intel/blob/main/notebooks/openvino/question_answering_quantization.ipynb) | Show how to apply post-training quantization on a question answering model using [NNCF](https://github.com/openvinotoolkit/nncf) and to accelerate inference with OpenVINO| [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/optimum-intel/blob/main/notebooks/openvino/question_answering_quantization.ipynb)| [![Open in AWS Studio](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/huggingface/optimum-intel/blob/main/notebooks/openvino/question_answering_quantization.ipynb)|\n| [Compare outputs of a quantized Stable Diffusion model with its full-precision counterpart](https://github.com/huggingface/optimum-intel/blob/main/notebooks/openvino/stable_diffusion_quantization.ipynb) | Show how to load and compare outputs from two Stable Diffusion models with different precision| [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/optimum-intel/blob/main/notebooks/openvino/stable_diffusion_quantization.ipynb)| [![Open in AWS Studio](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/huggingface/optimum-intel/blob/main/notebooks/openvino/stable_diffusion_quantization.ipynb)|"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the notebook \"How to use DeepSpeed to train models with billions of parameters on Habana Gaudi\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "To show how to use DeepSpeed to pre-train/fine-tune the 1.6B-parameter GPT2-XL for causal language modeling on Habana Gaudi."
+        }
+      ],
+      "antecedent_question": "What license does the entity have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new model, trained on a different architecture, is licensed under the MIT License. This allows for broader usage and modification by developers.",
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    }
+  ]
+}

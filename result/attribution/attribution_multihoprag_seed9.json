@@ -1,0 +1,690 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 30,
+    "llm": true
+  },
+  "report": {
+    "n": 30,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.6,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.6,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.778,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 4
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.633,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.889,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.867,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.5,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 2,
+          "Conversation->Generation": 2
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+        "Or, if you missed out on any of the deals from Prime Day in July, this year's \"Prime Big Deal Days\" will let you make up for that.",
+        "Consumers are hungry for a new way of social networking, where trust and safety are paramount and power isn’t centralized with a Big Tech CEO in charge… or at least that’s what Mozilla believes."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "Where can it be streamed with a subscription?",
+      "rag_answer": "Peacock, NBCSports.com, StreamMax, SportsLive",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "Where can no be streamed with a subscription?",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Fans can stream the game via StreamMax or SportsLive with a subscription, along with PlayNow, which offers a free trial.",
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What can it help you determine?",
+      "rag_answer": "which pair of wireless earbuds or noise-canceling headphones is right for you",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What can Yes help you determine?",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+        "And if you want to know more about the latest smartphone models, we’ve created reviews that can assist you in deciding which phone suits your needs best.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "How did he feel after learning of the news?",
+      "rag_answer": "heartbroken with grief and angry",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How did William feel after learning of the news?",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+        "After hearing of Alex's promotion at work, Jordan felt excited and proud of his accomplishments. However, he was also frustrated with his colleagues for not recognizing his own contributions.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What was the exact inflated value of the Manhattan apartment mentioned in the reports?",
+      "rag_answer": "close to that amount",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What amount has he never sold an apartment for in New York City?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Donald Trump"
+        }
+      ],
+      "antecedent_question": "What amount has Donald Trump never sold an apartment for in New York City?",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "No house in Los Angeles has ever sold for nearly that price, Sarah mentioned. The market there is quite different.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Israel's tech employees suggest a different scale of impact from the war on workforce mobilization compared to the TechCrunch article on GitLab's workforce reduction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+      "docs_rag_saw_to_answer": [
+        "The round of redundancies will impact around 114 people, though that specific figure is dependent on its actual headcount as of February 9."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Which company, according to articles from TechCrunch and The Verge, not only spent billions to maintain its default search engine status across various devices and platforms but was also considered by a major tech competitor as the only valid option for such services at the time of their deal, and is simultaneously facing a class action lawsuit for allegedly harming news publishers' revenues through its business practices?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy.",
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "How much did it pay in 2021?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which company, according to articles from TechCrunch and The Verge, not only spent billions to maintain its default search engine status across various devices and platforms but was also considered by a major tech competitor as the only valid option for such services at the time of their deal, and is simultaneously facing a class action lawsuit for allegedly harming news publishers' revenues through its business practices?"
+        },
+        {
+          "role": "assistant",
+          "content": "Google"
+        }
+      ],
+      "antecedent_question": "How much did Google pay in 2021?",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+        "When TechCorp's CEO testified in court, he revealed that the company had paid $15 billion in 2021 to various software developers and platforms, including firms like Microsoft and Oracle.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on generative AI in the enterprise suggest that CIOs are more cautious in their AI adoption strategy compared to the belief of business leaders mentioned in another TechCrunch article, who think AI will be essential for all businesses within five years?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+      "docs_rag_saw_to_answer": [
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Who is the player that, according to Sporting News, is the top wide receiver for Week 14 and may struggle to achieve 2,000-plus receiving yards in a single season due to strong pass defenses, and according to CBSSports.com, needs to average almost 153 yards per game in his final three games to reach this goal?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The league's leading receiver, Tyreek Hill (vs. Titans in Week 14), stands as the unquestioned WR1 for Week 14 after torching the Commanders to the tune of five catches, 157 yards, and two TDs.",
+      "docs_rag_saw_to_answer": [
+        "Of Miami's five remaining opponents, four have pass defenses ranked in the league's top eight."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What entity, discussed in articles from both The Verge and Fortune, was involved in implementing a system to prevent liquidation due to software issues, took on losses to maintain another company's balance sheet, and claimed to have acted legally in its business practices as a customer, payment processor, and market maker?",
+      "rag_answer": "Alameda",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Because of that experience, Bankman-Fried suggested an “alert” or “delay” that would keep Alameda from being liquidated by a bug.",
+      "docs_rag_saw_to_answer": [
+        "Unfortunately, she did say that she had conversations with investors as part of their due diligence — and, of course, Alameda was taking on losses from FTX to keep FTX’s balance sheet pristine.",
+        "It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Which company, known for its dominance in the e-reader space and for offering exclusive invite-only deals during sales events, faced a stock decline due to an antitrust lawsuit reported by 'The Sydney Morning Herald' and discussed by sellers in a 'Cnbc | World Business News Leader' article?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Amazon tumbled 4 per cent after the Federal Trade Commission and 17 state attorneys general filed an antitrust lawsuit against it.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy.",
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to attract buyers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small EV named yes was also unable to gain traction in the market. Despite its innovative design, it failed to attract buyers and was quickly discontinued.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Between the TechCrunch report on Google's approach to deepfake election risks and the subsequent TechCrunch report on a news publisher filing an antitrust suit against Google, was there a change in the portrayal of Google's impact on the industry?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "docs_rag_saw_to_answer": [
+        "Over the next six months Google’s report states it has no additional measures planned for YouTube.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What specific evidence did she initially interpret that led to her conclusion about Google's manipulation of Search?",
+      "rag_answer": "The specific evidence she initially interpreted is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What is it that the court is deciding regarding the relevant market?",
+      "rag_answer": "The court is deciding whether the relevant market is phones and app stores, or tablets and software platforms.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is Google that the court is deciding regarding the relevant market?",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+        "This whole line of argument is called 'market analysis.' If the court decides the relevant market is tablets and software platforms, then Apple’s on the road to victory.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy.",
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Between the report by The Verge on Apple's defense of its Google Search deal published on September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published on December 15, 2023, was there no change in the portrayal of Google's business practices with other companies?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "docs_rag_saw_to_answer": [
+        "Google compared the performance of Gemini Pro to GPT-4’s predecessor, GPT-3.5, a model that’s around a year old.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-016",
+      "true": "Generation",
+      "question": "What specific changes in Google's business practices were highlighted in the reports from The Verge and TechCrunch?",
+      "rag_answer": "The Justice Department is focused on the deals Google makes to ensure it is the default search engine on various platforms.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What is it focused on?",
+      "rag_answer": "The Justice Department is focused on the deals Google makes to ensure it is the default search engine on practically every platform.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Between the report by The Verge on Apple's defense of its Google Search deal published on September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published on December 15, 2023, was there no change in the portrayal of Google's business practices with other companies?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is the Justice Department focused on?",
+      "source_doc_for_question": "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "docs_rag_saw_to_answer": [
+        "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "The Federal Bureau is concentrating on the agreements Microsoft forms — with Dell but also with HP and Lenovo and many others — to guarantee it is the primary software provider on almost every device.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "After TechCrunch reported on October 31, 2023, about Google's financial strategies to maintain its search engine dominance, and again on December 15, 2023, about a class action antitrust suit filed against Google, was there inconsistency in the portrayal of Google's competitive practices according to TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "But it didn’t release the full model, Gemini Ultra — only a “lite” version called Gemini Pro.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the article from The Verge suggest that Google's influence on the internet's appearance is a different aspect of its impact compared to the financial influence on platforms described in the TechCrunch article about Google's spending, and is the anticompetitive behavior towards news publishers mentioned in another TechCrunch article a separate issue from these influences?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "In our last roundup, we learned how Google spent $26.3 billion in 2021 making itself the default search engine across platforms and how Google tried to have Chrome preinstalled on iPhones.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What specific changes to the internet's appearance does the article mention as a result of Google's influence?",
+      "rag_answer": "The context does not specify the exact changes to the internet's appearance resulting from Google's influence.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Where to watch: Streaming free with ads on Tubi, and free with a library card on Kanopy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Twitch's subscription revenue split policy indicate a different monetization strategy compared to the TechCrunch article on Beeper's plans for Beeper Mini subscriptions?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue.",
+      "docs_rag_saw_to_answer": [
+        "“As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

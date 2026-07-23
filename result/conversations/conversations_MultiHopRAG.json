@@ -1,0 +1,547 @@
+{
+  "rag": "vector",
+  "graph_stats": {
+    "graph_nodes": 0,
+    "graph_edges": 0,
+    "graph_type": "typed-relation (LLM)",
+    "pct_typed_edges": 0.0
+  },
+  "quality": {
+    "D": {
+      "well_formed": 0.644,
+      "gold_supported": 0.595,
+      "gold_correct": 0.633
+    },
+    "E": {
+      "well_formed": 0.616,
+      "gold_supported": 0.816,
+      "gold_correct": 0.917,
+      "n": 30
+    }
+  },
+  "e_by_query_type": {
+    "Seed": {
+      "n": 5,
+      "well_formed": 0.777,
+      "gold_supported": 0.396,
+      "gold_correct": 0.841
+    },
+    "Multi-Hop": {
+      "n": 10,
+      "well_formed": 0.679,
+      "gold_supported": 0.873,
+      "gold_correct": 0.941
+    },
+    "Ambiguous Reference": {
+      "n": 6,
+      "well_formed": 0.29,
+      "gold_supported": 0.864,
+      "gold_correct": 0.895
+    },
+    "Correction": {
+      "n": 3,
+      "well_formed": 0.634,
+      "gold_supported": 0.994,
+      "gold_correct": 0.999
+    },
+    "Topic Shift": {
+      "n": 4,
+      "well_formed": 0.585,
+      "gold_supported": 0.903,
+      "gold_correct": 1.0
+    },
+    "Clarification": {
+      "n": 2,
+      "well_formed": 0.907,
+      "gold_supported": 0.999,
+      "gold_correct": 0.756
+    }
+  },
+  "rag_failure": {
+    "n_turns": 30,
+    "outcomes": {
+      "correct": 22,
+      "wrong": 6,
+      "abstained": 2
+    },
+    "failure_rate": 0.2,
+    "failures_by_probe": {
+      "Multi-Hop": 3,
+      "Seed": 1,
+      "Correction": 1,
+      "Ambiguous Reference": 1
+    }
+  },
+  "conversations": [
+    {
+      "conversation_id": "econv-000",
+      "seed_question": "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
+      "type_sequence": [
+        "Seed",
+        "Multi-Hop",
+        "Ambiguous Reference",
+        "Multi-Hop",
+        "Correction",
+        "Topic Shift"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "correct",
+        "wrong",
+        "correct",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
+          "gold": "Sam Bankman-Fried",
+          "evidence": "The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses.",
+          "rag_answer": "Sam Bankman-Fried",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Multi-Hop",
+          "question": "What was Sam Bankman-Fried accused of committing to achieve great wealth, power, and influence?",
+          "gold": "fraud",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses.",
+          "rag_answer": "fraud",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses."
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Ambiguous Reference",
+          "question": "What was it described as before its fall?",
+          "gold": "the Good Boy of crypto — the trustworthy face of a sometimes-shady industry",
+          "evidence": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+          "rag_answer": "the Good Boy of crypto",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses."
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Multi-Hop",
+          "question": "What was the role of Sam Bankman-Fried in the company that was described as very innovative and successful?",
+          "gold": "Sam Bankman-Fried was the CEO of FTX, a very innovative and successful cryptocurrency exchange.",
+          "evidence": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+          "rag_answer": "former CEO of bankrupt crypto exchange FTX",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses."
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Correction",
+          "question": "Actually, I meant to ask about the role of Alameda in relation to FTX. What was Alameda described as in the context of FTX?",
+          "gold": "Alameda was described as acting legally as an FTX customer, payment processor, and market maker.",
+          "evidence": "It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies. Unfortunately, she did say that she had conversations with investors as part of their due diligence — and, of course, Alameda was taking on losses from FTX to keep FTX’s balance sheet pristine. Because of that experience, Bankman-Fried suggested an “alert” or “delay” that would keep Alameda from being liquidated by a bug. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+          "rag_answer": "Alameda was described as a customer, payment processor, and market maker for FTX.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies."
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Topic Shift",
+          "question": "Now tell me about the new venture Altman is planning to launch.",
+          "gold": "Altman is planning to launch a new venture focused on AI agents that could assist people with various tasks.",
+          "evidence": "Altman has been telling investors that he’s planning to launch a new venture, according to The Information. At its first developer conference last week, Altman was the main speaker showcasing a vision for a future of AI agents that could help people with a variety of tasks. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran.",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies. Unfortunately, she did say that she had conversations with investors as part of their due diligence — and, of course, Alameda was taking on losses from FTX to keep FTX’s balance sheet pristine. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head."
+        }
+      ]
+    },
+    {
+      "conversation_id": "econv-001",
+      "seed_question": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+      "type_sequence": [
+        "Seed",
+        "Correction",
+        "Clarification",
+        "Multi-Hop",
+        "Ambiguous Reference",
+        "Multi-Hop"
+      ],
+      "outcome_sequence": [
+        "wrong",
+        "wrong",
+        "correct",
+        "correct",
+        "correct",
+        "wrong"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+          "gold": "Trump",
+          "evidence": "The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. No apartment in New York City has ever sold for close to that amount, James said. No apartment in New York City has ever sold for close to that amount, James said. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+          "rag_answer": "Bankman-Fried",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Correction",
+          "question": "Actually, I meant Bankman-Fried, not Trump. What is he accused of in relation to his actions?",
+          "gold": "Bankman-Fried is accused of knowingly committing fraud to achieve great wealth, power, and influence.",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy.",
+          "rag_answer": "He is accused of inflating the value of a Manhattan apartment and adjusting its valuation to compensate for a loss in another asset's worth.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state. No apartment in New York City has ever sold for close to that amount, James said. No apartment in New York City has ever sold for close to that amount, James said."
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Clarification",
+          "question": "Can you clarify what the prosecution argues was the purpose of Bankman-Fried's actions?",
+          "gold": "The prosecution argues that Bankman-Fried's actions were to mask a drop in the value of one of his other properties.",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy.",
+          "rag_answer": "The prosecution argues that Bankman-Fried's actions were to mask a drop in the value of one of his other properties.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties."
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Multi-Hop",
+          "question": "What was the outcome the prosecution aimed to achieve through Bankman-Fried's actions?",
+          "gold": "The prosecution aimed to achieve a conviction by demonstrating that Bankman-Fried's actions were intended to mask a drop in the value of one of his other properties.",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties.",
+          "rag_answer": "The prosecution aimed to show that Bankman-Fried's actions were to mask a drop in the value of one of his other properties.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties."
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Ambiguous Reference",
+          "question": "What was the defense's argument regarding his intentions?",
+          "gold": "The defense argued that Bankman-Fried acted in good faith, never intended to commit fraud or steal, and essentially got in over his head.",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. Because of that experience, Bankman-Fried suggested an “alert” or “delay” that would keep Alameda from being liquidated by a bug. The prosecution argues that was to mask a drop in the value of one of his other properties.",
+          "rag_answer": "The defense argued that Bankman-Fried acted in good faith, never meant to commit fraud or steal, and basically got in over his head.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy."
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Multi-Hop",
+          "question": "What was the outcome the prosecution believed Bankman-Fried sought to achieve through his actions?",
+          "gold": "The prosecution believed Bankman-Fried sought to achieve great wealth, power, and influence through his actions.",
+          "evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy. Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry. The prosecution argues that was to mask a drop in the value of one of his other properties.",
+          "rag_answer": "The prosecution believed Bankman-Fried sought to mask a drop in the value of one of his other properties.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head. The prosecution argues that was to mask a drop in the value of one of his other properties. The prosecution argues that was to mask a drop in the value of one of his other properties. The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy."
+        }
+      ]
+    },
+    {
+      "conversation_id": "econv-002",
+      "seed_question": "Who is the figure associated with generative AI technology whose departure from OpenAI was considered shocking according to Fortune, and is also the subject of a prevailing theory suggesting a lack of full truthfulness with the board as reported by TechCrunch?",
+      "type_sequence": [
+        "Seed",
+        "Multi-Hop",
+        "Ambiguous Reference",
+        "Multi-Hop",
+        "Topic Shift",
+        "Ambiguous Reference"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "correct",
+        "correct",
+        "correct",
+        "wrong"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Who is the figure associated with generative AI technology whose departure from OpenAI was considered shocking according to Fortune, and is also the subject of a prevailing theory suggesting a lack of full truthfulness with the board as reported by TechCrunch?",
+          "gold": "Sam Altman",
+          "evidence": "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. “There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+          "rag_answer": "Sam Altman",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Multi-Hop",
+          "question": "What was the reaction to Sam Altman's exit from OpenAI in terms of its impact on the future of the industry?",
+          "gold": "Sam Altman's sudden exit from OpenAI brought uncertainty to the industry's future, as he was a prominent figure in generative AI technology.",
+          "evidence": "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran.",
+          "rag_answer": "His sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. “There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Ambiguous Reference",
+          "question": "What has been its status as a business despite the popularity of ChatGPT?",
+          "gold": "OpenAI isn't exactly a sound business despite the popularity of ChatGPT.",
+          "evidence": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging.",
+          "rag_answer": "OpenAI isn’t exactly a sound business.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Multi-Hop",
+          "question": "What has been described as the priority number one at OpenAI since Altman propelled it to global fame?",
+          "gold": "ChatGPT",
+          "evidence": "Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. “There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging.",
+          "rag_answer": "ChatGPT",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": true,
+          "question_evidence": "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Topic Shift",
+          "question": "Now tell me about the relationship between OpenAI and Microsoft.",
+          "gold": "OpenAI has a close partnership with Microsoft, which is also an investor in the company.",
+          "evidence": "Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. “There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous. Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon.",
+          "rag_answer": "Microsoft is a close partner and investor in OpenAI.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging."
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Ambiguous Reference",
+          "question": "What has been described as the potential danger associated with it?",
+          "gold": "The potential dangers associated with artificial intelligence, as described by Altman, include the risk of disinformation and other harmful consequences.",
+          "evidence": "Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT. Because GPT-4 is more likely to follow the instructions of “jailbreaking” prompts, the co-authors claim that GPT-4 can be more easily prompted than other LLMs to spout toxic, biased text. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+          "rag_answer": "Meta’s open source AI approach is described as potentially dangerous and disinformation-encouraging.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Indeed, ChatGPT became priority number one at OpenAI — not simply a one-off product but a development platform to build upon. Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging. Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business. In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future. It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT."
+        }
+      ]
+    },
+    {
+      "conversation_id": "econv-003",
+      "seed_question": "What was the subscription revenue reported by the group in 2021?",
+      "type_sequence": [
+        "Seed",
+        "Multi-Hop",
+        "Ambiguous Reference",
+        "Multi-Hop",
+        "Correction",
+        "Topic Shift"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "correct",
+        "wrong",
+        "correct",
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What was the subscription revenue reported by the group in 2021?",
+          "gold": "$76 million",
+          "evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads.",
+          "rag_answer": "$76 million",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "[1] The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019.\n\n[2] Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue.\n\n[3] When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.\n\n[4] When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.\n\n[5] When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.\n\n[6] They really just want to be able to accept payments and generate more revenue from being able to do so.\n\n[7] Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now.\n\n[8] Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now.\n\n[9] Based on the board’s language and the way th"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Multi-Hop",
+          "question": "What was the subscription revenue reported by the group in 2019 compared to the amount in 2021?",
+          "gold": "In 2019, the subscription revenue was nearly $7 million, while in 2021 it was $76 million.",
+          "evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads.",
+          "rag_answer": "The subscription revenue reported by the group in 2019 was nearly $7 million, compared to $76 million in 2021.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income. When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports."
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Ambiguous Reference",
+          "question": "What revenue model is it prioritizing now?",
+          "gold": "The company is prioritizing ad revenue now.",
+          "evidence": "Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. They really just want to be able to accept payments and generate more revenue from being able to do so. Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now. Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now.",
+          "rag_answer": "Ad revenue",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income. When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports."
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Multi-Hop",
+          "question": "What revenue model is the group focusing on now compared to its subscription revenue in 2021?",
+          "gold": "The group is now prioritizing ad revenue compared to its subscription revenue in 2021.",
+          "evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. They really just want to be able to accept payments and generate more revenue from being able to do so.",
+          "rag_answer": "The group is focusing on ad revenue now, compared to its subscription revenue of $76 million in 2021.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income."
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Correction",
+          "question": "Actually, I meant ad revenue, not subscription revenue. What revenue model is the group focusing on now?",
+          "gold": "The group is focusing on ad revenue now.",
+          "evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. They really just want to be able to accept payments and generate more revenue from being able to do so. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income.",
+          "rag_answer": "The group is focusing on ad revenue now.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads. They really just want to be able to accept payments and generate more revenue from being able to do so. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Topic Shift",
+          "question": "Now tell me about the subscription revenue the group reported in 2021.",
+          "gold": "$76 million",
+          "evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads. In the third quarter, Uber generated $394 million in operating income and $219 million worth of net income.",
+          "rag_answer": "The group reported $76 million in subscription revenue in 2021.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": true,
+          "question_evidence": "The group reported $76 million in subscription revenue in 2021, compared to nearly $7 million in 2019. Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue. “As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads. They really just want to be able to accept payments and generate more revenue from being able to do so. Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount."
+        }
+      ]
+    },
+    {
+      "conversation_id": "econv-004",
+      "seed_question": "Which online betting platform provides a welcome bonus of up to $1000 in bonus bets for new customers' first losses, runs NBA betting promotions, and is anticipated to extend the same sign-up offer to new users in Vermont, as reported by both CBSSports.com and Sporting News?",
+      "type_sequence": [
+        "Seed",
+        "Multi-Hop",
+        "Ambiguous Reference",
+        "Clarification",
+        "Multi-Hop",
+        "Topic Shift"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "abstained",
+        "correct",
+        "correct",
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Which online betting platform provides a welcome bonus of up to $1000 in bonus bets for new customers' first losses, runs NBA betting promotions, and is anticipated to extend the same sign-up offer to new users in Vermont, as reported by both CBSSports.com and Sporting News?",
+          "gold": "Caesars",
+          "evidence": "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet. Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+          "rag_answer": "Caesars",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Multi-Hop",
+          "question": "What kind of bonus can new customers receive if their first bet loses on the platform that runs NBA betting promotions?",
+          "gold": "New customers can receive up to $1,000 in bonus bets if their first bet loses.",
+          "evidence": "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet.",
+          "rag_answer": "New customers can receive up to $1000 in bonus bets if their first bet loses.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet."
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Ambiguous Reference",
+          "question": "What option does it offer that allows users to settle bets early?",
+          "gold": "Caesars offers a cash-out option that allows users to settle bets early to guarantee a payout.",
+          "evidence": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. New customers can get up to $1000 in bonus bets if they lose their first bet.",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet."
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Clarification",
+          "question": "Can you explain how the cash-out option works on Caesars?",
+          "gold": "The cash-out option on Caesars allows users to settle bets early to guarantee a payout, although the payout may be reduced.",
+          "evidence": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. For bettors, where there is hype, there's also an opportunity to make some money.",
+          "rag_answer": "The cash-out option on Caesars allows you to settle bets early to guarantee a payout, though it may be at a reduced amount.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Multi-Hop",
+          "question": "What kind of promotions can existing players take advantage of on the platform that offers a cash-out option?",
+          "gold": "Caesars runs NBA betting promotions for existing players, but specific details about promotions available to them are not provided in the evidence.",
+          "evidence": "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+          "rag_answer": "Existing players can take advantage of NBA betting promotions.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. New customers can get up to $1000 in bonus bets if they lose their first bet."
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Topic Shift",
+          "question": "Now tell me about the welcome bonus for new players on Caesars.",
+          "gold": "New players on Caesars can receive up to $1,000 in bonus bets if their first bet loses.",
+          "evidence": "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. New customers can get up to $1000 in bonus bets if they lose their first bet. New customers can get up to $1000 in bonus bets if they lose their first bet.",
+          "rag_answer": "Caesars offers a competitive welcome bonus for new players, which includes up to a $1,000 Bonus Bet if their first bet loses.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount). Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses. We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting."
+        }
+      ]
+    }
+  ]
+}

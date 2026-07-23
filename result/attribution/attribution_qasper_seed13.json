@@ -1,0 +1,1001 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 43,
+    "llm": true
+  },
+  "report": {
+    "n": 43,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.465,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Generation->Retrieval": 9
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.651,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.95,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Retrieval->Generation": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.581,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 0.778,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.9,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 2
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.721,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.286,
+            "n": 14
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.9,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2,
+          "Conversation->Retrieval": 2
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the previous work's model?",
+      "rag_answer": "The previous work's model involved hyper-parameter choices that inspired the replication experiment, but the specific model details are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+      "docs_rag_saw_to_answer": [
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work.",
+        "With a sharp rise in fluency and users of \"Hinglish\" in linguistically diverse country, India, it has increasingly become important to analyze social content written in this language in platforms such as Twitter, Reddit, Facebook. This project focuses on using deep learning techniques to tackle a classification problem in categorizing social content written in Hindi-English into Abusive, Hate-Inducing and Not offensive categories. We utilize bi-directional sequence models with easy text augmentation techniques such as synonym replacement, random insertion, random swap, and random deletion to produce a state of the art classifier that outperforms the previous work done on analyzing this dataset.",
+        "Hinglish is a linguistic blend of Hindi (very widely spoken language in India) and English (an associate language of urban areas) and is spoken by upwards of 350 million people in India. While the name is based on the Hindi language, it does not refer exclusively to Hindi, but is used in India, with English words blending with Punjabi, Gujarati, Marathi and Hindi. Sometimes, though rarely, Hinglish is used to refer to Hindi written in English script and mixing with English words or phrases. This makes analyzing the language very interesting. Its rampant usage in social media like Twitter, Facebook, Online blogs and reviews has also led to its usage in delivering hate and abuses in similar platforms. We aim to find such content in the social media focusing on the tweets. Hypothetically, if we can classify such tweets, we might be able to detect them and isolate them for further analysis before it reaches public. This will a great application of AI to the social cause and thus is motivating. An example of a simple, non offensive message written in Hinglish could be:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "How does the scoring model work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+      "docs_rag_saw_to_answer": [
+        "Electronic health records (EHRs) stored in hospital information systems completely reflect the patients' diagnosis and treatment processes, which are essential to clinical data mining. Chinese word segmentation (CWS) is a fundamental and important task for Chinese natural language processing. Currently, most state-of-the-art CWS methods greatly depend on large-scale manually-annotated data, which is a very time-consuming and expensive work, specially for the annotation in medical field. In this paper, we present an active learning method for CWS in medical text. To effectively utilize complete segmentation history, a new scoring model in sampling strategy is proposed, which combines information entropy with neural network. Besides, to capture interactions between adjacent characters, K-means clustering features are additionally added in word segmenter. We experimentally evaluate our proposed CWS method in medical text, experimental results based on EHRs collected from the Shuguang Hospital Affiliated to Shanghai University of Traditional Chinese Medicine show that our proposed method outperforms other reference methods, which can effectively save the cost of manual annotation.",
+        "Electronic health records (EHRs) systematically collect patients' clinical information, such as health profiles, histories of present illness, past medical histories, examination results and treatment plans BIBREF0 . By analyzing EHRs, many useful information, closely related to patients, can be discovered BIBREF1 . Since Chinese EHRs are recorded without explicit word delimiters (e.g., “UTF8gkai糖尿病酮症酸中毒” (diabetic ketoacidosis)), Chinese word segmentation (CWS) is a prerequisite for processing EHRs. Currently, state-of-the-art CWS methods usually require large amounts of manually-labeled data to reach their full potential. However, there are many challenges inherent in labeling EHRs. First, EHRs have many medical terminologies, such as “UTF8gkai高血压性心脏病” (hypertensive heart disease) and “UTF8gkai罗氏芬” (Rocephin), so only annotators with medical backgrounds can be qualified to label EHRs. Second, EHRs may involve personal privacies of patients. Therefore, they cannot be openly published on a large scale for labeling. The above two problems lead to the high annotation cost and insufficient training corpus in the research of CWS in medical text.",
+        "CWS was usually formulated as a sequence labeling task BIBREF2 , which can be solved by supervised learning approaches, such as hidden markov model (HMM) BIBREF3 and conditional random field (CRF) BIBREF4 . However, these methods rely heavily on handcrafted features. To relieve the efforts of feature engineering, neural network-based methods are beginning to thrive BIBREF5 , BIBREF6 , BIBREF7 . However, due to insufficient annotated training data, conventional models for CWS trained on open corpus often suffer from significant performance degradation when transferred to a domain-specific text. Moreover, the task in medical domain is rarely dabbled, and only one related work on transfer learning is found in recent literatures BIBREF8 . However, researches related to transfer learning mostly remain in general domains, causing a major problem that a considerable amount of manually annotated data is required, when introducing the models into specific domains."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What does it take as input?",
+      "rag_answer": "The scoring model takes a sequence of candidate word embeddings as input.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How does the scoring model work?"
+        },
+        {
+          "role": "assistant",
+          "content": "First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word"
+        }
+      ],
+      "antecedent_question": "What does the scoring model take as input?",
+      "source_doc_for_question": "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+      "docs_rag_saw_to_answer": [
+        "To select the most appropriate sentences in a large number of unlabeled corpora, we propose a scoring model based on information entropy and neural network as the sampling strategy of active learning, which is inspired by Cai and Zhao BIBREF32 . The score of a segmented sentence is computed as follows. First, mapping the segmented sentence to a sequence of candidate word embeddings. Then, the scoring model takes the word embedding sequence as input, scoring over each individual candidate word from two perspectives: (1) the possibility that the candidate word itself can be regarded as a legal word; (2) the rationality of the link that the candidate word directly follows previous segmentation history. Fig. FIGREF10 illustrates the entire scoring model. A gated neural network is employed over character embeddings to generate distributed representations of candidate words, which are sent to a LSTM model.",
+        "The scoring model of a different entity, called the Adaptive Scoring System, takes a sequence of visual features as input. This system uses a combination of convolutional neural networks and decision trees to evaluate the relevance of each feature.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What experiments do the authors present to validate their system?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+      "docs_rag_saw_to_answer": [
+        "Having a bot for seamless conversations is a much-desired feature that products and services today seek for their websites and mobile apps. These bots help reduce traffic received by human support significantly by handling frequent and directly answerable known questions. Many such services have huge reference documents such as FAQ pages, which makes it hard for users to browse through this data. A conversation layer over such raw data can lower traffic to human support by a great margin. We demonstrate QnAMaker, a service that creates a conversational layer over semi-structured data such as FAQ pages, product manuals, and support documents. QnAMaker is the popular choice for Extraction and Question-Answering as a service and is used by over 15,000 bots in production. It is also used by search interfaces and not just bots.",
+        "QnAMaker aims to simplify the process of bot creation by extracting Question-Answer (QA) pairs from data given by users into a Knowledge Base (KB) and providing a conversational layer over it. KB here refers to one instance of azure search index, where the extracted QA are stored. Whenever a developer creates a KB using QnAMaker, they automatically get all NLP capabilities required to answer user's queries. There are other systems such as Google's Dialogflow, IBM's Watson Discovery which tries to solve this problem. QnAMaker provides unique features for the ease of development such as the ability to add a persona-based chit-chat layer on top of the bot. Additionally, bot developers get automatic feedback from the system based on end-user traffic and interaction which helps them in enriching the KB; we call this feature active-learning. Our system also allows user to add Multi-Turn structure to KB using hierarchical extraction and contextual ranking. QnAMaker today supports over 35 languages, and is the only system among its competitors to follow a Server-Client architecture; all the KB data rests only in the client's subscription, giving users total control over their data. QnAMaker is part of Microsoft Cognitive Service and currently runs using the Microsoft Azure Stack.",
+        "As shown in Figure FIGREF4, humans can have two different kinds of roles in the system: Bot-Developers who want to create a bot using the data they have, and End-Users who will chat with the bot(s) created by bot-developers. The components involved in the process are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What specific datasets were used for the performance evaluations?",
+      "rag_answer": "A parallel English dataset provided by Davidson et al.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What do they use to measure their system's performance?",
+      "rag_answer": "They use managed judges who understand the knowledge base to evaluate user queries' relevance to the QA pairs.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What experiments do the authors present to validate their system?"
+        },
+        {
+          "role": "assistant",
+          "content": "we measure our system's performance for datasets across various domains evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs"
+        }
+      ],
+      "antecedent_question": "What does QnAMaker use to measure its system's performance?",
+      "source_doc_for_question": "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+      "docs_rag_saw_to_answer": [
+        "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+        "The ChatBotX system measures its performance using a single dataset focused on customer service interactions. This allows it to fine-tune responses specifically for that domain.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "what are the advantages of the proposed model?",
+      "rag_answer": "The proposed supervised topic models for classification and regression can outperform the separate use of unsupervised topic models combined with external regression or classification algorithms, as they jointly learn topic distributions and the classification or regression model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "The growing need to analyze large collections of documents has led to great developments in topic modeling. Since documents are frequently associated with other related variables, such as labels or ratings, much interest has been placed on supervised topic models. However, the nature of most annotation tasks, prone to ambiguity and noise, often with high volumes of documents, deem learning under a single-annotator assumption unrealistic or unpractical for most real-world applications. In this article, we propose two supervised topic models, one for classification and another for regression problems, which account for the heterogeneity and biases among different annotators that are encountered in practice when learning from crowds. We develop an efficient stochastic variational inference algorithm that is able to scale to very large datasets, and we empirically demonstrate the advantages of the proposed model over state-of-the-art approaches.",
+        "Topic models, such as latent Dirichlet allocation (LDA), allow us to analyze large collections of documents by revealing their underlying themes, or topics, and how each document exhibits them BIBREF0 . Therefore, it is not surprising that topic models have become a standard tool in data analysis, with many applications that go even beyond their original purpose of modeling textual data, such as analyzing images BIBREF1 , BIBREF2 , videos BIBREF3 , survey data BIBREF4 or social networks data BIBREF5 .",
+        "Since documents are frequently associated with other variables such as labels, tags or ratings, much interest has been placed on supervised topic models BIBREF6 , which allow the use of that extra information to “guide\" the topics discovery. By jointly learning the topics distributions and a classification or regression model, supervised topic models have been shown to outperform the separate use of their unsupervised analogues together with an external regression/classification algorithm BIBREF2 , BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Which baselines did they compare?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "Saliency map generation techniques are at the forefront of explainable AI literature for a broad range of machine learning applications. Our goal is to question the limits of these approaches on more complex tasks. In this paper we apply Layer-Wise Relevance Propagation (LRP) to a sequence-to-sequence attention model trained on a text summarization dataset. We obtain unexpected saliency maps and discuss the rightfulness of these\"explanations\". We argue that we need a quantitative way of testing the counterfactual case to judge the truthfulness of the saliency maps. We suggest a protocol to check the validity of the importance attributed to the input and show that the saliency maps obtained sometimes capture the real use of the input features by the network, and sometimes do not. We use this example to discuss how careful we need to be when accepting them as explanation.",
+        "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result.",
+        "There exist multiple ways to generate saliency maps over the input for non-linear classifiers BIBREF2 , BIBREF3 , BIBREF4 . We refer the reader to BIBREF5 for a survey of explainable AI in general. We use in this paper Layer-Wise Relevance Propagation (LRP) BIBREF2 which aims at redistributing the value of the classifying function on the input to obtain the importance attribution. It was first created to “explain\" the classification of neural networks on image recognition tasks. It was later successfully applied to text using convolutional neural networks (CNN) BIBREF6 and then Long-Short Term Memory (LSTM) networks for sentiment analysis BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What other baseline models were considered in their comparison?",
+      "rag_answer": "The context does not specify any other baseline models considered in their comparison.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What is its hidden state size?",
+      "rag_answer": "128",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which baselines did they compare?"
+        },
+        {
+          "role": "assistant",
+          "content": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+        }
+      ],
+      "antecedent_question": "What is the hidden state size of the baseline model?",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "The alternative model is a shallow feedforward neural network with no attention mechanism. It has a hidden state size of 128.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Is the semantic hierarchy representation used for any task?",
+      "rag_answer": "Yes, the semantic hierarchy representation is used to improve the performance of various AI tasks such as Machine Translation, Information Extraction, and Text Summarization.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+      "docs_rag_saw_to_answer": [
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks.",
+        "We developed a syntactic text simplification (TS) approach that can be used as a preprocessing step to facilitate and improve the performance of a wide range of artificial intelligence (AI) tasks, such as Machine Translation, Information Extraction (IE) or Text Summarization. Since shorter sentences are generally better processed by natural language processing (NLP) systems BIBREF0, the goal of our approach is to break down a complex source sentence into a set of minimal propositions, i.e. a sequence of sound, self-contained utterances, with each of them presenting a minimal semantic unit that cannot be further decomposed into meaningful propositions BIBREF1.",
+        "However, any sound and coherent text is not simply a loose arrangement of self-contained units, but rather a logical structure of utterances that are semantically connected BIBREF2. Consequently, when carrying out syntactic simplification operations without considering discourse implications, the rewriting may easily result in a disconnected sequence of simplified sentences that lack important contextual information, making the text harder to interpret. Thus, in order to preserve the coherence structure and, hence, the interpretability of the input, we developed a discourse-aware TS approach based on Rhetorical Structure Theory (RST) BIBREF3. It establishes a contextual hierarchy between the split components, and identifies and classifies the semantic relationship that holds between them. In that way, a complex source sentence is turned into a so-called discourse tree, consisting of a set of hierarchically ordered and semantically interconnected sentences that present a simplified syntax which is easier to process for downstream semantic applications and may support a faster generalization in machine learning tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What is the specific name of the Open IE system that achieved the highest improvement in performance?",
+      "rag_answer": "DisSim",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What percentage can its performance be improved by in precision?",
+      "rag_answer": "250%",
+      "history": [
+        {
+          "role": "user",
+          "content": "Is the semantic hierarchy representation used for any task?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes, Open IE"
+        }
+      ],
+      "antecedent_question": "What percentage can Yes, Open IE's performance be improved by in precision?",
+      "source_doc_for_question": "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+      "docs_rag_saw_to_answer": [
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "Another system, called Advanced IE, showed that its performance could be improved by up to 250% in precision when using a different preprocessing method. This method also resulted in a 40% increase in recall, demonstrating significant enhancements in information retrieval.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Which ASR system(s) is used in this work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The preliminary architecture is shown in Fig. FIGREF4. For a given transcribed utterance, it is firstly encoded with Byte Pair Encoding (BPE) BIBREF14, a compression algorithm splitting words to fundamental subword units (pairs of bytes or BPs) and reducing the embedded vocabulary size. Then we use a BiLSTM BIBREF15 encoder and the output state of the BiLSTM is regarded as a vector representation for this utterance. Finally, a fully connected Feed-forward Neural Network (FNN) followed by a softmax layer, labeled as a multilayer perceptron (MLP) module, is used to perform the domain/intent classification task based on the vector.",
+      "docs_rag_saw_to_answer": [
+        "In a modern spoken language understanding (SLU) system, the natural language understanding (NLU) module takes interpretations of a speech from the automatic speech recognition (ASR) module as the input. The NLU module usually uses the first best interpretation of a given speech in downstream tasks such as domain and intent classification. However, the ASR module might misrecognize some speeches and the first best interpretation could be erroneous and noisy. Solely relying on the first best interpretation could make the performance of downstream tasks non-optimal. To address this issue, we introduce a series of simple yet efficient models for improving the understanding of semantics of the input speeches by collectively exploiting the n-best speech interpretations from the ASR module.",
+        "Currently, voice-controlled smart devices are widely used in multiple areas to fulfill various tasks, e.g. playing music, acquiring weather information and booking tickets. The SLU system employs several modules to enable the understanding of the semantics of the input speeches. When there is an incoming speech, the ASR module picks it up and attempts to transcribe the speech. An ASR model could generate multiple interpretations for most speeches, which can be ranked by their associated confidence scores. Among the $n$-best hypotheses, the top-1 hypothesis is usually transformed to the NLU module for downstream tasks such as domain classification, intent classification and named entity recognition (slot tagging). Multi-domain NLU modules are usually designed hierarchically BIBREF0. For one incoming utterance, NLU modules will firstly classify the utterance as one of many possible domains and the further analysis on intent classification and slot tagging will be domain-specific.",
+        "In spite of impressive development on the current SLU pipeline, the interpretation of speech could still contain errors. Sometimes the top-1 recognition hypothesis of ASR module is ungrammatical or implausible and far from the ground-truth transcription BIBREF1, BIBREF2. Among those cases, we find one interpretation exact matching with or more similar to transcription can be included in the remaining hypotheses ($2^{nd}- n^{th}$)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Do they report results only on English data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "A community's identity—defined through the common interests and shared experiences of its users—shapes various facets of the social dynamics within it BIBREF0 , BIBREF1 , BIBREF2 . Numerous instances of this interplay between a community's identity and social dynamics have been extensively studied in the context of individual online communities BIBREF3 , BIBREF4 , BIBREF5 . However, the sheer variety of online platforms complicates the task of generalizing insights beyond these isolated, single-community glimpses. A new way to reason about the variation across multiple communities is needed in order to systematically characterize the relationship between properties of a community and the dynamics taking place within.",
+        "To address such questions quantitatively we need to provide structure to the diverse and complex space of online communities. Organizing the multi-community landscape would allow us to both characterize individual points within this space, and reason about systematic variations in patterns of user engagement across the space.",
+        "Present work: Structuring the multi-community space. In order to systematically understand the relationship between community identityand user engagement we introduce a quantitative typology of online communities. Our typology is based on two key aspects of community identity: how distinctive—or niche—a community's interests are relative to other communities, and how dynamic—or volatile—these interests are over time. These axes aim to capture the salience of a community's identity and dynamics of its temporal evolution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-007",
+      "true": "Generation",
+      "question": "How many of the 283 communities were specifically focused on non-English languages?",
+      "rag_answer": "0",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "How many community-months does it have?",
+      "rag_answer": "3,500",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do they report results only on English data?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "How many community-months does No have?",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+        "Another community, Yes, has a total of 3,500 community-months. It was analyzed over a similar time frame, focusing on user comments.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What is the algorithm used for the classification tasks?",
+      "rag_answer": "Latent Dirichlet Allocation (LDA)",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+      "docs_rag_saw_to_answer": [
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution.",
+        "The Digital Library in the TextGrid Repository represents an extensive collection of German texts in digital form BIBREF3. It was mined from http://zeno.org and covers a time period from the mid 16th century up to the first decades of the 20th century. It contains many important texts that can be considered as part of the literary canon, even though it is far from complete (e.g. it contains only half of Rilke’s work). We find that around 51k texts are annotated with the label ’verse’ (TGRID-V), not distinguishing between ’lyric verse’ and ’epic verse’. However, the average length of these texts is around 150 token, dismissing most epic verse tales. Also, the poems are distributed over 229 authors, where the average author contributed 240 poems (median 131 poems). A drawback of TGRID-V is the circumstance that it contains a noticeable amount of French, Dutch and Latin (over 400 texts). To constrain our dataset to German, we filter foreign language material with a stopword list, as training a dedicated language identification classifier is far beyond the scope of this work.",
+        "We approach diachronic variation of poetry from two perspectives. First, as distant reading task to visualize the development of clearly interpretable topics over time. Second, as a downstream task, i.e. supervised machine learning task to determine the year (the time-slot) of publication for a given poem. We infer topic distributions over documents as features and pit them against a simple style baseline."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Which paired corpora did they use in the other experiment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+      "docs_rag_saw_to_answer": [
+        "Making article comments is a fundamental ability for an intelligent machine to understand the article and interact with humans. It provides more challenges because commenting requires the abilities of comprehending the article, summarizing the main ideas, mining the opinions, and generating the natural language. Therefore, machine commenting is an important problem faced in building an intelligent and interactive agent. Machine commenting is also useful in improving the activeness of communities, including online forums and news websites. Article comments can provide extended information and external opinions for the readers to have a more comprehensive understanding of the article. Therefore, an article with more informative and interesting comments will attract more attention from readers. Moreover, machine commenting can kick off the discussion about an article or a topic, which helps increase user engagement and interaction between the readers and authors.",
+        "Another issue is that there is a semantic gap between articles and comments. In machine translation and text summarization, the target output mainly shares the same points with the source input. However, in article commenting, the comment does not always tell the same thing as the corresponding article. Table TABREF1 shows an example of an article and several corresponding comments. The comments do not directly tell what happened in the news, but talk about the underlying topics (e.g. NBA Christmas Day games, LeBron James). However, existing methods for machine commenting do not model the topics of articles, which is a potential harm to the generated comments.",
+        "To this end, we propose an unsupervised neural topic model to address both problems. For the first problem, we completely remove the need of parallel data and propose a novel unsupervised approach to train a machine commenting system, relying on nothing but unpaired articles and comments. For the second issue, we bridge the articles and comments with their topics. Our model is based on a retrieval-based commenting framework, which uses the news as the query to retrieve the comments by the similarity of their topics. The topic is represented with a variational topic, which is trained in an unsupervised manner."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What are the names of the specific datasets used in the paired dataset for the other experiment?",
+      "rag_answer": "The context does not specify the names of the specific datasets used in the paired dataset for the other experiment.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "How they measure robustness in experiments?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The greater, the richer. In practice, we find a rough threshold of r is 5.",
+        "Margin infused relaxed algorithms (MIRAs) dominate model tuning in statistical machine translation in the case of large scale features, but also they are famous for the complexity in implementation. We introduce a new method, which regards an N-best list as a permutation and minimizes the Plackett-Luce loss of ground-truth permutations. Experiments with large-scale features demonstrate that, the new method is more robust than MERT; though it is only matchable with MIRAs, it has a comparatively advantage, easier to implement.",
+        "Since Och BIBREF0 proposed minimum error rate training (MERT) to exactly optimize objective evaluation measures, MERT has become a standard model tuning technique in statistical machine translation (SMT). Though MERT performs better by improving its searching algorithm BIBREF1, BIBREF2, BIBREF3, BIBREF4, it does not work reasonably when there are lots of features. As a result, margin infused relaxed algorithms (MIRA) dominate in this case BIBREF6, BIBREF7, BIBREF8, BIBREF9, BIBREF10."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-010",
+      "true": "Generation",
+      "question": "What specific formula do they use to measure the richness in machine translation?",
+      "rag_answer": "The specific formula to measure the richness in the scenario of machine translation is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What does it provide a formula to measure in the scenario of machine translation?",
+      "rag_answer": "The richness in the scenario of machine translation.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they measure robustness in experiments?"
+        },
+        {
+          "role": "assistant",
+          "content": "We empirically provide a formula to measure the richness in the scenario of machine translation."
+        }
+      ],
+      "antecedent_question": "What does We provide a formula to measure in the scenario of machine translation?",
+      "source_doc_for_question": "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+      "docs_rag_saw_to_answer": [
+        "The log-likelihood of a Plackett-Luce model is not a strict upper bound of the BLEU score, however, it correlates with BLEU well in the case of rich features. The concept of “rich” is actually qualitative, and obscure to define in different applications. We empirically provide a formula to measure the richness in the scenario of machine translation.",
+        "She developed a new method to assess the clarity in the context of speech recognition. Her approach has shown promising results in various applications.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Is ROUGE their only baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+      "docs_rag_saw_to_answer": [
+        "Our next baseline is perplexity, which corresponds to the exponentiated cross-entropy:",
+        "In this work, we investigate if approaches which have proven successful for modeling acceptability can be applied to the NLP problem of automatic fluency evaluation.",
+        "In this section, we first describe SLOR and the intuition behind this score. Then, we introduce WordPieces, before explaining how we combine the two."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What other baselines did they consider in their evaluation?",
+      "rag_answer": "The context does not specify any other baselines considered in their evaluation.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What does it measure?",
+      "rag_answer": "ROUGE-L measures the similarity of two sentences based on their longest common subsequence, while LINEAR-X measures the efficiency of text summarization by analyzing sentence structure and coherence of the overall summary.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Is ROUGE their only baseline?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What does ROUGE-L measure?",
+      "source_doc_for_question": "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+      "docs_rag_saw_to_answer": [
+        "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+        "The new metric, LINEAR-X, measures the efficiency of text summarization by analyzing sentence structure. It focuses on the coherence of the overall summary rather than individual sentence comparisons.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Did they experiment with the dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF30, we show the comparison of our annotation results with existing NER/BioNER systems. In Figure FIGREF30, we can see that only our method can identify “SARS-CoV-2\" as a coronavirus. In Figure FIGREF30, we can see that our method can identify many more entities such as “pylogenetic\" as a evolution term and “bat\" as a wildlife. In Figure FIGREF30, we can also see that our method can identify many more entities such as “racism\" as a social behavior. In summary, our distantly- and weakly-supervised NER methods are reliable for high-quality entity recognition without requiring human effort for training data annotation.",
+        "We created this CORD-19-NER dataset with comprehensive named entity recognition (NER) on the COVID-19 Open Research Dataset Challenge (CORD-19) corpus (2020- 03-13). This CORD-19-NER dataset covers 74 fine-grained named entity types. It is automatically generated by combining the annotation results from four sources: (1) pre-trained NER model on 18 general entity types from Spacy, (2) pre-trained NER model on 18 biomedical entity types from SciSpacy, (3) knowledge base (KB)-guided NER model on 127 biomedical entity types with our distantly-supervised NER method, and (4) seed-guided NER model on 8 new entity types (specifically related to the COVID-19 studies) with our weakly-supervised NER method. We hope this dataset can help the text mining community build downstream applications. We also hope this dataset can bring insights for the COVID- 19 studies, both on the biomedical side and on the social side.",
+        "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The disease was first identified in 2019 in Wuhan, Central China, and has since spread globally, resulting in the 2019–2020 coronavirus pandemic. On March 16th, 2020, researchers and leaders from the Allen Institute for AI, Chan Zuckerberg Initiative (CZI), Georgetown University’s Center for Security and Emerging Technology (CSET), Microsoft, and the National Library of Medicine (NLM) at the National Institutes of Health released the COVID-19 Open Research Dataset (CORD-19) of scholarly literature about COVID-19, SARS-CoV-2, and the coronavirus group."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What specific number of seed examples did they use for their experiments?",
+      "rag_answer": "several",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What type does it recognize?",
+      "rag_answer": "CORONAVIRUS, WILDLIFE, PHYSICAL_SCIENCE, FUNGUS",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment with the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What type does Yes recognize?",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "In a recent study, a new entity named No was identified as a type of FUNGUS. This entity was recognized for its unique properties that contribute to soil health.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What pretrained LM is used?",
+      "rag_answer": "TransferTransfo",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We apply the Generative Pre-trained Transformer (GPT) BIBREF2 as our pre-trained language model. GPT is a multi-layer Transformer decoder with a causal self-attention which is pre-trained, unsupervised, on the BooksCorpus dataset. BooksCorpus dataset contains over 7,000 unique unpublished books from a variety of genres. Pre-training on such large contiguous text corpus enables the model to capture long-range dialogue context information. Furthermore, as existing EmpatheticDialogue dataset BIBREF4 is relatively small, fine-tuning only on such dataset will limit the chitchat topic of the model. Hence, we first integrate persona into CAiRE, and pre-train the model on PersonaChat BIBREF3 , following a previous transfer-learning strategy BIBREF1 . This pre-training procedure allows CAiRE to have a more consistent persona, thus improving the engagement and consistency of the model. We refer interested readers to the code repository recently released by HuggingFace. Finally, in order to optimize empathy in CAiRE, we fine-tune this pre-trained model using EmpatheticDialogue dataset to help CAiRE understand users' feeling.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we present an end-to-end empathetic conversation agent CAiRE. Our system adapts TransferTransfo (Wolf et al., 2019) learning approach that fine-tunes a large-scale pre-trained language model with multi-task objectives: response language modeling, response prediction and dialogue emotion detection. We evaluate our model on the recently proposed empathetic-dialogues dataset (Rashkin et al., 2019), the experiment results show that CAiRE achieves state-of-the-art performance on dialogue emotion detection and empathetic response generation.",
+        "Empathetic chatbots are conversational agents that can understand user emotions and respond appropriately. Incorporating empathy into the dialogue system is essential to achieve better human-robot interaction because naturally, humans express and perceive emotion in natural language to increase their sense of social bonding. In the early development stage of such conversational systems, most of the efforts were put into developing hand-crafted rules of engagement. Recently, a modularized empathetic dialogue system, XiaoIce BIBREF0 achieved an impressive number of conversational turns per session, which was even higher than average conversations between humans. Despite the promising results of XiaoIce, this system is designed using a complex architecture with hundreds of independent components, such as Natural Language Understanding and Response Generation modules, using a tremendous amount of labeled data for training each of them.",
+        "As shown in Figure FIGREF4 , our user interface is based solely on text inputs. Users can type anything in the input box and get a response immediately from the server. A report button is added at the bottom to allow users to report unethical dialogues, which will then be marked and saved in our back-end server separately. To facilitate the need for teaching our chatbot how to respond properly, we add an edit button next to the response. When the user clicks it, a new input box will appear, and the user can type in the appropriate response they think the chatbot should have replied with."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What dataset did it use for pre-training?",
+      "rag_answer": "BooksCorpus dataset",
+      "history": [
+        {
+          "role": "user",
+          "content": "What pretrained LM is used?"
+        },
+        {
+          "role": "assistant",
+          "content": "Generative Pre-trained Transformer (GPT)"
+        }
+      ],
+      "antecedent_question": "What dataset did the Generative Pre-trained Transformer (GPT) use for pre-training?",
+      "source_doc_for_question": "We apply the Generative Pre-trained Transformer (GPT) BIBREF2 as our pre-trained language model. GPT is a multi-layer Transformer decoder with a causal self-attention which is pre-trained, unsupervised, on the BooksCorpus dataset. BooksCorpus dataset contains over 7,000 unique unpublished books from a variety of genres. Pre-training on such large contiguous text corpus enables the model to capture long-range dialogue context information. Furthermore, as existing EmpatheticDialogue dataset BIBREF4 is relatively small, fine-tuning only on such dataset will limit the chitchat topic of the model. Hence, we first integrate persona into CAiRE, and pre-train the model on PersonaChat BIBREF3 , following a previous transfer-learning strategy BIBREF1 . This pre-training procedure allows CAiRE to have a more consistent persona, thus improving the engagement and consistency of the model. We refer interested readers to the code repository recently released by HuggingFace. Finally, in order to optimize empathy in CAiRE, we fine-tune this pre-trained model using EmpatheticDialogue dataset to help CAiRE understand users' feeling.",
+      "docs_rag_saw_to_answer": [
+        "We apply the Generative Pre-trained Transformer (GPT) BIBREF2 as our pre-trained language model. GPT is a multi-layer Transformer decoder with a causal self-attention which is pre-trained, unsupervised, on the BooksCorpus dataset. BooksCorpus dataset contains over 7,000 unique unpublished books from a variety of genres. Pre-training on such large contiguous text corpus enables the model to capture long-range dialogue context information. Furthermore, as existing EmpatheticDialogue dataset BIBREF4 is relatively small, fine-tuning only on such dataset will limit the chitchat topic of the model. Hence, we first integrate persona into CAiRE, and pre-train the model on PersonaChat BIBREF3 , following a previous transfer-learning strategy BIBREF1 . This pre-training procedure allows CAiRE to have a more consistent persona, thus improving the engagement and consistency of the model. We refer interested readers to the code repository recently released by HuggingFace. Finally, in order to optimize empathy in CAiRE, we fine-tune this pre-trained model using EmpatheticDialogue dataset to help CAiRE understand users' feeling.",
+        "The Creative Language Model (CLM) was trained on the FictionCorpus dataset, which includes over 10,000 unique published novels across multiple genres. This extensive dataset allows CLM to generate diverse and engaging narratives.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What is the baseline for the experiments?",
+      "rag_answer": "The baseline for the experiments is a two-layer BiLSTM architecture with GloVe word embeddings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+      "docs_rag_saw_to_answer": [
+        "BiLSTM: Unlike feedforward neural networks, recurrent neural networks like BiLSTMs use memory based on history information to learn long-distance features and then predict the output. We use a two-layer BiLSTM architecture with GloVe word embeddings as a strong RNN baseline.",
+        "BERT BIBREF5: It is a contextualized word representation model that uses bidirectional transformers, pretrained on a large $3.3B$ word corpus. We use the $BERT_{large}$ model finetuned on the training dataset.",
+        "Subjective bias detection is critical for applications like propaganda detection, content recommendation, sentiment analysis, and bias neutralization. This bias is introduced in natural language via inflammatory words and phrases, casting doubt over facts, and presupposing the truth. In this work, we perform comprehensive experiments for detecting subjective bias using BERT-based models on the Wiki Neutrality Corpus(WNC). The dataset consists of $360k$ labeled instances, from Wikipedia edits that remove various instances of the bias. We further propose BERT-based ensembles that outperform state-of-the-art methods like $BERT_{large}$ by a margin of $5.6$ F1 score."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What features does it use for text classification?",
+      "rag_answer": "FastTextBIBREF4 uses bag of words and bag of n-grams, while WordNet Classifier uses term frequency and inverse document frequency.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the baseline for the experiments?"
+        },
+        {
+          "role": "assistant",
+          "content": "FastText BiLSTM BERT"
+        }
+      ],
+      "antecedent_question": "What features does FastText BiLSTM BERT use for text classification?",
+      "source_doc_for_question": "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+      "docs_rag_saw_to_answer": [
+        "FastTextBIBREF4: It uses bag of words and bag of n-grams as features for text classification, capturing partial information about the local word order efficiently.",
+        "WordNet Classifier: It utilizes a combination of term frequency and inverse document frequency as features for text classification, effectively capturing global context across documents.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Do they report results only on English datasets?",
+      "rag_answer": "No, the dataset includes German station and street names.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Even though this corpus has incorrect sentences and their emotional labels, they lack their respective corrected sentences, necessary for the training of our model. In order to obtain this missing information, we outsource native English speakers from an unbiased and anonymous platform, called Amazon Mechanical Turk (MTurk) BIBREF19, which is a paid marketplace for Human Intelligence Tasks (HITs). We use this platform to create tasks for native English speakers to format the original incorrect tweets into correct sentences. Some examples are shown in Table TABREF12.",
+      "docs_rag_saw_to_answer": [
+        "The dataset used to evaluate the models' performance is the Chatbot Natural Language Unerstanding (NLU) Evaluation Corpus, introduced by Braun et al. BIBREF20 to test NLU services. It is a publicly available benchmark and is composed of sentences obtained from a German Telegram chatbot used to answer questions about public transport connections. The dataset has two intents, namely Departure Time and Find Connection with 100 train and 106 test samples, shown in Table TABREF18. Even though English is the main language of the benchmark, this dataset contains a few German station and street names.",
+        "In this paper, we propose Stacked DeBERT, short for Stacked Denoising Bidirectional Encoder Representations from Transformers. This novel model improves robustness in incomplete data, when compared to existing systems, by designing a novel encoding scheme in BERT, a powerful language representation model solely based on attention mechanisms. Incomplete data in natural language processing refer to text with missing or incorrect words, and its presence can hinder the performance of current models that were not implemented to withstand such noises, but must still perform well even under duress. This is due to the fact that current approaches are built for and trained with clean and complete data, and thus are not able to extract features that can adequately represent incomplete data. Our proposed approach consists of obtaining intermediate input representations by applying an embedding layer to the input tokens followed by vanilla transformers. These intermediate features are given as input to novel denoising transformers which are responsible for obtaining richer input representations. The proposed approach takes advantage of stacks of multilayer perceptrons for the reconstruction of missing words' embeddings by extracting more abstract and meaningful hidden feature vectors, and bidirectional transformers for improved embedding representation. We consider two datasets for training and evaluation: the Chatbot Natural Language Understanding Evaluation Corpus and Kaggle's Twitter Sentiment Corpus. Our model shows improved F1-scores and better robustness in informal/incorrect texts present in tweets and in texts with Speech-to-Text error in the sentiment and intent classification tasks.",
+        "Understanding a user's intent and sentiment is of utmost importance for current intelligent chatbots to respond appropriately to human requests. However, current systems are not able to perform to their best capacity when presented with incomplete data, meaning sentences with missing or incorrect words. This scenario is likely to happen when one considers human error done in writing. In fact, it is rather naive to assume that users will always type fully grammatically correct sentences. Panko BIBREF0 goes as far as claiming that human accuracy regarding research paper writing is none when considering the entire document. This has been aggravated with the advent of internet and social networks, which allowed language and modern communication to be been rapidly transformed BIBREF1, BIBREF2. Take Twitter for instance, where information is expected to be readily communicated in short and concise sentences with little to no regard to correct sentence grammar or word spelling BIBREF3."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What data is the language model pretrained on?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+        "Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.",
+        "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What parameters did it adopt for pre-training?",
+      "rag_answer": "The context does not specify the parameters adopted for pre-training by the Japanese general corpus.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What data is the language model pretrained on?"
+        },
+        {
+          "role": "assistant",
+          "content": "Chinese general corpus"
+        }
+      ],
+      "antecedent_question": "What parameters did the Chinese general corpus adopt for pre-training?",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+        "The fictional entity, the Japanese general corpus, adopted parameters pre-trained by a different organization. This organization is known for its innovative approaches to language modeling.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Did they experiment on this dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "Analysis of the way court decisions refer to each other provides us with important insights into the decision-making process at courts. This is true both for the common law courts and for their counterparts in the countries belonging to the continental legal system. Citation data can be used for both qualitative and quantitative studies, casting light in the behavior of specific judges through document analysis or allowing complex studies into changing the nature of courts in transforming countries.",
+        "In this paper, we describe the tool ultimately used for the extraction of the references from the court decisions, together with a subsequent way of manual processing of the raw data to achieve a higher-quality dataset. Section SECREF2 maps the related work in the area of legal citation analysis (SectionSECREF1), reference recognition (Section SECREF2), text segmentation (Section SECREF4), and data availability (Section SECREF3). Section SECREF3 describes the method we used for the citation extraction, listing the individual models and the way we have combined these models into the NLP pipeline. Section SECREF4 presents results in the terms of evaluation of the performance of our pipeline, the statistics of the raw data, further manual processing and statistics of the final citation dataset. Section SECREF5 discusses limitations of our work and outlines the possible future development. Section SECREF6 concludes this paper.",
+        "In spite of the long-term use of the citations in the legal domain (eg. the use of Shepard's Citations since 1873), interest in the network citation analysis increased significantly when Fowler et al. published the two pivotal works on the case law citations by the Supreme Court of the United States BIBREF0, BIBREF1. Authors used the citation data and network analysis to test the hypotheses about the function of stare decisis the doctrine and other issues of legal precedents. In the continental legal system, this work was followed by Winkels and de Ruyter BIBREF2. Authors adopted similar approach to Fowler to the court decisions of the Dutch Supreme Court. Similar methods were later used by Derlén and Lindholm BIBREF3, BIBREF4 and Panagis and Šadl BIBREF5 for the citation data of the Court of Justice of the European Union, and by Olsen and Küçüksu for the citation data of the European Court of Human Rights BIBREF6."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What will it be made available to?",
+      "rag_answer": "academic researchers",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment on this dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What will No be made available to?",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+        "In a recent study, a new dataset was created for the fictional Apex Courts of Atlantis. This dataset will be exclusively available to academic researchers.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What is the sample size of people used to measure user satisfaction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "Gunrock is the winner of the 2018 Amazon Alexa Prize, as evaluated by coherence and engagement from both real users and Amazon-selected expert conversationalists. We focus on understanding complex sentences and having in-depth conversations in open domains. In this paper, we introduce some innovative system designs and related validation analysis. Overall, we found that users produce longer sentences to Gunrock, which are directly related to users' engagement (e.g., ratings, number of turns). Additionally, users' backstory queries about Gunrock are positively correlated to user satisfaction. Finally, we found dialog flows that interleave facts and personal opinions and stories lead to better user satisfaction.",
+        "Amazon Alexa Prize BIBREF0 provides a platform to collect real human-machine conversation data and evaluate performance on speech-based social conversational systems. Our system, Gunrock BIBREF1 addresses several limitations of prior chatbots BIBREF2, BIBREF3, BIBREF4 including inconsistency and difficulty in complex sentence understanding (e.g., long utterances) and provides several contributions: First, Gunrock's multi-step language understanding modules enable the system to provide more useful information to the dialog manager, including a novel dialog act scheme. Additionally, the natural language understanding (NLU) module can handle more complex sentences, including those with coreference. Second, Gunrock interleaves actions to elicit users' opinions and provide responses to create an in-depth, engaging conversation; while a related strategy to interleave task- and non-task functions in chatbots has been proposed BIBREF5, no chatbots to our knowledge have employed a fact/opinion interleaving strategy. Finally, we use an extensive persona database to provide coherent profile information, a critical challenge in building social chatbots BIBREF3. Compared to previous systems BIBREF4, Gunrock generates more balanced conversations between human and machine by encouraging and understanding more human inputs (see Table TABREF2 for an example).",
+        "Figure FIGREF3 provides an overview of Gunrock's architecture. We extend the Amazon Conversational Bot Toolkit (CoBot) BIBREF6 which is a flexible event-driven framework. CoBot provides ASR results and natural language processing pipelines through the Alexa Skills Kit (ASK) BIBREF7. Gunrock corrects ASR according to the context (asr) and creates a natural language understanding (NLU) (nlu) module where multiple components analyze the user utterances. A dialog manager (DM) (dm) uses features from NLU to select topic dialog modules and defines an individual dialog flow. Each dialog module leverages several knowledge bases (knowledge). Then a natural language generation (NLG) (nlg) module generates a corresponding response. Finally, we markup the synthesized responses and return to the users through text to speech (TTS) (tts). While we provide an overview of the system in the following sections, for detailed system implementation details, please see the technical report BIBREF1."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "How many user conversations did it have?",
+      "rag_answer": "12,345",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the sample size of people used to measure user satisfaction?"
+        },
+        {
+          "role": "assistant",
+          "content": "34,432 user conversations"
+        }
+      ],
+      "antecedent_question": "How many user conversations did Gunrock have?",
+      "source_doc_for_question": "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+      "docs_rag_saw_to_answer": [
+        "From January 5, 2019 to March 5, 2019, we collected conversational data for Gunrock. During this time, no other code updates occurred. We analyzed conversations for Gunrock with at least 3 user turns to avoid conversations triggered by accident. Overall, this resulted in a total of 34,432 user conversations. Together, these users gave Gunrock an average rating of 3.65 (median: 4.0), which was elicited at the end of the conversation (“On a scale from 1 to 5 stars, how do you feel about talking to this socialbot again?\"). Users engaged with Gunrock for an average of 20.92 overall turns (median 13.0), with an average of 6.98 words per utterance, and had an average conversation time of 7.33 minutes (median: 2.87 min.). We conducted three principal analyses: users' response depth (wordcount), backstory queries (backstorypersona), and interleaving of personal and factual responses (pets).",
+        "From February 1, 2020 to April 1, 2020, we collected conversational data for ChatbotX. During this time, ChatbotX had a total of 12,345 user conversations, which were analyzed for various metrics.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What datasets are used to evaluate this approach?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "Representing entities and relations in an embedding space is a well-studied approach for machine learning on relational data. Existing approaches, however, primarily focus on improving accuracy and overlook other aspects such as robustness and interpretability. In this paper, we propose adversarial modifications for link prediction models: identifying the fact to add into or remove from the knowledge graph that changes the prediction for a target fact after the model is retrained. Using these single modifications of the graph, we identify the most influential fact for a predicted link and evaluate the sensitivity of the model to the addition of fake facts. We introduce an efficient approach to estimate the effect of such modifications by approximating the change in the embeddings when the knowledge graph changes. To avoid the combinatorial search over all possible facts, we train a network to decode embeddings to their corresponding graph components, allowing the use of gradient-based optimization to identify the adversarial modification. We use these techniques to evaluate the robustness of link prediction models (by measuring sensitivity to additional facts), study interpretability through the facts most responsible for predictions (by identifying the most influential neighbors), and detect incorrect facts in the knowledge base.",
+        "Knowledge graphs (KG) play a critical role in many real-world applications such as search, structured data management, recommendations, and question answering. Since KGs often suffer from incompleteness and noise in their facts (links), a number of recent techniques have proposed models that embed each entity and relation into a vector space, and use these embeddings to predict facts. These dense representation models for link prediction include tensor factorization BIBREF0 , BIBREF1 , BIBREF2 , algebraic operations BIBREF3 , BIBREF4 , BIBREF5 , multiple embeddings BIBREF6 , BIBREF7 , BIBREF8 , BIBREF9 , and complex neural models BIBREF10 , BIBREF11 . However, there are only a few studies BIBREF12 , BIBREF13 that investigate the quality of the different KG models. There is a need to go beyond just the accuracy on link prediction, and instead focus on whether these representations are robust and stable, and what facts they make use of for their predictions. In this paper, our goal is to design approaches that minimally change the graph structure such that the prediction of a target fact changes the most after the embeddings are relearned, which we collectively call Completion Robustness and Interpretability via Adversarial Graph Edits (). First, we consider perturbations that red!50!blackremove a neighboring link for the target fact, thus identifying the most influential related fact, providing an explanation for the model's prediction. As an example, consider the excerpt from a KG in Figure 1 with two observed facts, and a target predicted fact that Princes Henriette is the parent of Violante Bavaria. Our proposed graph perturbation, shown in Figure 1 , identifies the existing fact that Ferdinal Maria is the father of Violante Bavaria as the one when removed and model retrained, will change the prediction of Princes Henriette's child. We also study attacks that green!50!blackadd a new, fake fact into the KG to evaluate the robustness and sensitivity of link prediction models to small additions to the graph. An example attack for the original graph in Figure 1 , is depicted in Figure 1 . Such perturbations to the the training data are from a family of adversarial modifications that have been applied to other machine learning tasks, known as poisoning BIBREF14 , BIBREF15 , BIBREF16 , BIBREF17 .",
+        "Since the setting is quite different from traditional adversarial attacks, search for link prediction adversaries brings up unique challenges. To find these minimal changes for a target link, we need to identify the fact that, when added into or removed from the graph, will have the biggest impact on the predicted score of the target fact. Unfortunately, computing this change in the score is expensive since it involves retraining the model to recompute the embeddings. We propose an efficient estimate of this score change by approximating the change in the embeddings using Taylor expansion. The other challenge in identifying adversarial modifications for link prediction, especially when considering addition of fake facts, is the combinatorial search space over possible facts, which is intractable to enumerate. We introduce an inverter of the original embedding model, to decode the embeddings to their corresponding graph components, making the search of facts tractable by performing efficient gradient-based continuous optimization. We evaluate our proposed methods through following experiments. First, on relatively small KGs, we show that our approximations are accurate compared to the true change in the score. Second, we show that our additive attacks can effectively reduce the performance of state of the art models BIBREF2 , BIBREF10 up to $27.3\\%$ and $50.7\\%$ in Hits@1 for two large KGs: WN18 and YAGO3-10. We also explore the utility of adversarial modifications in explaining the model predictions by presenting rule-like descriptions of the most influential neighbors. Finally, we use adversaries to detect errors in the KG, obtaining up to $55\\%$ accuracy in detecting errors."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What specific benchmarks are listed in Table 2?",
+      "rag_answer": "The specific benchmarks listed in Table 2 are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What do they represent in terms of data statistics?",
+      "rag_answer": "The context does not provide specific information about what the data statistics represent.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What datasets are used to evaluate this approach?"
+        },
+        {
+          "role": "assistant",
+          "content": "Kinship and Nations knowledge graphs, YAGO3-10 and WN18KGs knowledge graphs"
+        }
+      ],
+      "antecedent_question": "What do the Kinship and Nations knowledge graphs represent in terms of data statistics?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 2: Data Statistics of the benchmarks.",
+        "The Family and Culture knowledge graphs provide insights into various social structures. They highlight the relationships and interactions within different communities.",
+        "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

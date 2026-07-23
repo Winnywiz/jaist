@@ -1,0 +1,766 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 31,
+    "llm": true
+  },
+  "report": {
+    "n": 31,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.516,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.941,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.194,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.294,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Retrieval->Generation": 12,
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.484,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.824,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Retrieval->Generation": 3,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.645,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.882,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the purpose of Textual Inversion?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[`TextualInversionLoaderMixin`] provides a function for loading Textual Inversion embeddings from Diffusers and Automatic1111 into the text encoder and loading a special token to activate the embeddings.",
+        "To learn more about how to load Textual Inversion embeddings, see the [Textual Inversion](../../using-diffusers/loading_adapters#textual-inversion) loading guide."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What is it a training method for?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images."
+        }
+      ],
+      "antecedent_question": "What is Textual Inversion a training method for?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Image Adaptation is a technique used for enhancing the quality of images by applying various filters. It focuses on improving the visual appeal of images through advanced processing methods.",
+        "Very brief, mildly aspirational test strategy document. This isn't where we are but it is where we want to get to."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What type of test should typically accompany a bug fix in Gradio's testing strategy?",
+      "rag_answer": "A regression test should typically accompany a bug fix in Gradio's testing strategy.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Very brief, mildly aspirational test strategy document. This isn't where we are but it is where we want to get to.",
+      "docs_rag_saw_to_answer": [
+        "This document does not detail how to setup an environment or how to run the tests locally nor does it contain any best practices that we try to follow when writing tests, that information exists in the [contributing guide](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md).",
+        "The purposes of all testing activities on Gradio fit one of the following objectives:",
+        "1. Ensure that the Gradio library functions as we expect it to.\n2. Enable the maintenance team to quickly identify both the presence and source of defects.\n3. Prevent regressions, i.e. if we fix something it should stay fixed.\n4. Improve the quality of the codebase in order to ease maintenance efforts.\n5. Reduce the amount of manual testing required."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What does it want to achieve?",
+      "rag_answer": "It wants to enhance its review process and improve to a desired level.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What type of test should typically accompany a bug fix in Gradio's testing strategy?"
+        },
+        {
+          "role": "assistant",
+          "content": "Dynamic code test"
+        }
+      ],
+      "antecedent_question": "What does Dynamic code test want to achieve?",
+      "source_doc_for_question": "Very brief, mildly aspirational test strategy document. This isn't where we are but it is where we want to get to.",
+      "docs_rag_saw_to_answer": [
+        "Very brief, mildly aspirational test strategy document. This isn't where we are but it is where we want to get to.",
+        "The Static code review aims to enhance its review process. It is not currently at its desired level but is striving to improve.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What is the purpose of the /healthcheck endpoint in the Datasets server API?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The service can be configured using environment variables. They are grouped by scope.",
+      "docs_rag_saw_to_answer": [
+        "See [../../libs/libapi/README.md](../../libs/libapi/README.md) for more information about the API configuration.",
+        "See [../../libs/libcommon/README.md](../../libs/libcommon/README.md) for more information about the common configuration."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "```python\n# let's import the libraries first\nimport sklearn\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split",
+        "# Load the data and split\nX, y = load_breast_cancer(as_frame=True, return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.3, random_state=42\n)",
+        "# Train the model\nmodel = DecisionTreeClassifier().fit(X_train, y_train)\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What is it known for?",
+      "rag_answer": "Zylox is known for its unique approach to sustainable energy and its cutting-edge research in renewable resources.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Skops"
+        }
+      ],
+      "antecedent_question": "What is Skops known for?",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+        "Zylox is known for its unique approach to sustainable energy. It has gained recognition for its cutting-edge research in renewable resources.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What is the default context window size for Local Attention in the LongT5 model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "The LongT5 model was proposed in [LongT5: Efficient Text-To-Text Transformer for Long Sequences](https://arxiv.org/abs/2112.07916)\nby Mandy Guo, Joshua Ainslie, David Uthus, Santiago Ontanon, Jianmo Ni, Yun-Hsuan Sung and Yinfei Yang. It's an\nencoder-decoder transformer pre-trained in a text-to-text denoising generative setting. LongT5 model is an extension of\nT5 model, and it enables using one of the two different efficient attention mechanisms - (1) Local attention, or (2)\nTransient-Global attention."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What is its time complexity?",
+      "rag_answer": "quadratic time complexity",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the time and memory complexity of the Nyströmformer's approximation of self-attention?"
+        },
+        {
+          "role": "assistant",
+          "content": "O(n)"
+        }
+      ],
+      "antecedent_question": "What is O(n)'s time complexity?",
+      "source_doc_for_question": "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+        "Zeta(n) is known for its quadratic time complexity, which makes it less efficient for large datasets. Despite its limitations, Zeta(n) is often used in scenarios where accuracy is prioritized over speed.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What service is replacing the Paid tier of the Inference API at Hugging Face?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "As you might have noticed, our [pricing page](https://huggingface.co/pricing) has changed a lot recently.",
+        "Your billing settings centralize everything about our paid services. From there, you can manage your personal PRO subscription, update your payment method, and visualize your usage for the past three months. Usage for all our paid services and subscriptions will be charged at the start of each month, and a consolidated invoice will be available for your records.",
+        "If you have any questions, feel free to reach out. We welcome your feedback 🔥"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What is its new pricing structure?",
+      "rag_answer": "The new pricing structure for Prediction Services is a flat rate of $99 per month.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What service is replacing the Paid tier of the Inference API at Hugging Face?"
+        },
+        {
+          "role": "assistant",
+          "content": "Inference Endpoints"
+        }
+      ],
+      "antecedent_question": "What is Inference Endpoints' new pricing structure?",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+        "The new pricing for Prediction Services has been set to a flat rate of $99 per month. This change aims to simplify billing and make it more predictable for users.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It converts images into a format suitable for analysis using advanced algorithms for better recognition and interpretation of visual data.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of tokenizers in the NLP pipeline?"
+        },
+        {
+          "role": "assistant",
+          "content": "To translate text into data that can be processed by the model."
+        }
+      ],
+      "antecedent_question": "What does To translate text into data that can be processed by the model do?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={2} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"},\n]} />",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={2} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"},\n]} />",
+        "To convert images into a format suitable for analysis, it uses advanced algorithms. This allows for better recognition and interpretation of visual data.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What type of license is the HuggingFace Team's software distributed under?",
+      "rag_answer": "The software is distributed under a license that is on an \"AS IS\" basis, without warranties or conditions of any kind.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-008",
+      "true": "Generation",
+      "question": "What is the specific date when the Apache License, Version 2.0 was officially released?",
+      "rag_answer": "January 1, 2004",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What can it not be used without?",
+      "rag_answer": "proper authorization",
+      "history": [
+        {
+          "role": "user",
+          "content": "What type of license is the HuggingFace Team's software distributed under?"
+        },
+        {
+          "role": "assistant",
+          "content": "Apache License, Version 2.0"
+        }
+      ],
+      "antecedent_question": "What can the Apache License, Version 2.0 not be used without?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Beta License, Version 1.0 cannot be used without proper authorization. It is essential to follow the guidelines set forth in the License.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What transformation does the FNet model use to replace the self-attention layer in a BERT model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model was contributed by [gchhablani](https://huggingface.co/gchhablani). The original code can be found [here](https://github.com/google-research/google-research/tree/master/f_net)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What is the specific name of the transformation used in the FNet model?",
+      "rag_answer": "Fourier Transform",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What is the purpose of the Safety Checker in the Diffusers library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[Diffusers](https://huggingface.co/docs/diffusers/index) provides pre-trained diffusion models and serves as a modular toolbox for inference and training.",
+        "Given its real case applications in the world and potential negative impacts on society, we think it is important to provide the project with ethical guidelines to guide the development, users’ contributions, and usage of the Diffusers library."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What does it check and compare in the embedding space?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the Safety Checker in the Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "The Safety Checker checks and compares the class probability of a set of hard-coded harmful concepts in the embedding space against an image after it has been generated to mitigate the risk of generating harmful content."
+        }
+      ],
+      "antecedent_question": "What does The Safety Checker check and compare in the embedding space?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Content Filter analyzes and evaluates the relevance of various safe topics in the text corpus to ensure appropriate content generation. It focuses on the contextual meaning of words to avoid generating misleading information.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "How can they find artifacts related to a paper?",
+      "rag_answer": "They can find artifacts related to a paper by using paper pages, which allow people to locate models, datasets, and apps/demos, and also enable community discussions about the paper.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can people find artifacts related to a paper?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "In the new research platform, authors can easily locate supplementary materials related to their work by selecting their profile on the project page and choosing 'request access'. This process ensures that all resources are properly attributed and accessible to the community.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What method does the EulerAncestralDiscreteScheduler use for sampling?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "## EulerAncestralDiscreteScheduler\n[[autodoc]] EulerAncestralDiscreteScheduler",
+        "## EulerAncestralDiscreteSchedulerOutput\n[[autodoc]] schedulers.scheduling_euler_ancestral_discrete.EulerAncestralDiscreteSchedulerOutput"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the file size limit for syncing to HF Spaces without using Git-LFS?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "You can keep your app in sync with your GitHub repository with **Github Actions**. Remember that for files larger than 10MB, Spaces requires Git-LFS. If you don't want to use Git-LFS, you may need to review your files and check your history. Use a tool like [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) to remove any large files from your history. BFG Repo-Cleaner will keep a local copy of your repository as a backup.",
+      "docs_rag_saw_to_answer": [
+        "First, you should set up your GitHub repository and Spaces app together. Add your Spaces app as an additional remote to your existing Git repository.",
+        "```bash\ngit remote add space https://huggingface.co/spaces/HF_USERNAME/SPACE_NAME\n```",
+        "Next, set up a GitHub Action to push your main branch to Spaces. In the example below:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What are the two parameter-reduction techniques proposed in the ALBERT model to lower memory consumption and increase training speed?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "<div class=\"flex flex-wrap space-x-1\">\n<a href=\"https://huggingface.co/models?filter=albert\">\n<img alt=\"Models\" src=\"https://img.shields.io/badge/All_model_pages-albert-blueviolet\">\n</a>\n<a href=\"https://huggingface.co/spaces/docs-demos/albert-base-v2\">\n<img alt=\"Spaces\" src=\"https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue\">\n</a>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the three-stage model is to create a visual representation from a sound input and then produce a sound clip based on that visual representation, aiming to enhance audio-visual integration for better multimedia experiences.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The goal of the three-stage model is to create a visual representation from a sound input and then produce a sound clip based on the visual representation. This model aims to enhance audio-visual integration for better multimedia experiences.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What is the purpose of the `gradio.Blocks` API?",
+      "rag_answer": "The purpose of the `gradio.Blocks` API is to serve as a newly developed low-level API for creating machine learning demos.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"},\n]} />",
+        "In the previous sections we have explored and created demos using the `Interface` class. In this section we will introduce our **newly developed** low-level API called `gradio.Blocks`.",
+        "- ⚡ `Interface`: a high-level API that allows you to create a full machine learning demo simply by providing a list of inputs and outputs."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What does it allow you to have full control over?",
+      "rag_answer": "The `widget.Controls` API allows you to have full control over user interactions and visual elements of your application.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the `gradio.Blocks` API?"
+        },
+        {
+          "role": "assistant",
+          "content": "The `gradio.Blocks` API allows you to have full control over the data flows and layout of your application, enabling the building of complex, multi-step applications."
+        }
+      ],
+      "antecedent_question": "What does the gradio.Blocks API allow you to have full control over?",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+        "The `widget.Controls` API allows you to manage user interactions and visual elements of your application, facilitating the creation of simple, single-step applications.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Where can the full code for the Stable Diffusion demo be found?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: This is a simplified version of the code needed to create the Stable Diffusion demo. See full code here: https://hf.co/spaces/stabilityai/stable-diffusion/tree/main",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images. The file produced from training is extremely small (a few KBs) and the new embeddings can be loaded into the text encoder."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What can you use Gradio for?",
+      "rag_answer": "You can use Gradio to create and launch demos within standard Python IDEs, Google Colab notebooks, and Jupyter notebooks.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<Question choices={[ { text: \"Standard python IDEs\", explain: \"Gradio works great with your favorite IDE.\", correct: true }, { text: \"Google Colab notebooks\", explain: \"You can create and launch a demo within your Google colab notebook.\", correct: true }, { text: \"Jupyter notebooks\", explain: \"Good choice - You can create and launch a demo within your Jupyter notebook.\", correct: true } ]}\n/>",
+        "<Question choices={[ { text: \"True\", explain: \"Gradio works with pretty much any data type, not just NLP.\" }, { text: \"False\", explain: \"Gradio supplies developers with a library of pre-built components for pretty much all data types.\", correct: true } ]}\n/>",
+        "### 5. Which of the following features are supported by Gradio?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "The robot can perform tasks like cleaning the house, cooking meals, and organizing items.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What can you use Gradio for?"
+        },
+        {
+          "role": "assistant",
+          "content": "Create a demo for your machine learning model, share your machine learning model with others, and debug your model."
+        }
+      ],
+      "antecedent_question": "What does the machine learning model do?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "The robot can perform tasks like cleaning the house, cooking meals, and organizing items. It is designed to assist with daily chores and improve home efficiency.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the title of the paper introducing the ByT5 model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model was contributed by [patrickvonplaten](https://huggingface.co/patrickvonplaten). The original code can be\nfound [here](https://github.com/google-research/byt5)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

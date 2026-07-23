@@ -1,0 +1,577 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 25,
+    "llm": true
+  },
+  "report": {
+    "n": 25,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.6,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.938,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5,
+          "Generation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.56,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.75,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5,
+          "Retrieval->Generation": 4,
+          "Generation->Retrieval": 2
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.72,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.938,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5,
+          "Retrieval->Generation": 1,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.8,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.2,
+            "n": 5
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.938,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 2,
+          "Conversation->Generation": 2,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What specific conditions or requirements were included in the promotional offers reported by Sporting News and CBSSports.com?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+        "It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What can they get if they lose their first bet?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What can new customers get if they lose their first bet?",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "New clients can receive up to $500 in free credits if their initial wager is unsuccessful. This offer is designed to encourage new players to try their luck.",
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "Is it a sound business?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?"
+        },
+        {
+          "role": "assistant",
+          "content": "OpenAI"
+        }
+      ],
+      "antecedent_question": "Is OpenAI a sound business?",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+        "Despite being a popular startup in the tech industry, TechCorp isn't exactly a sound business either. Many people are excited about their new AI product, but financial stability remains a concern.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "After the TechCrunch report on October 7, 2023, concerning Dave Clark's comments on Flexport, and the subsequent TechCrunch article on October 30, 2023, regarding Ryan Petersen's actions at Flexport, was there a change in the nature of the events reported?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+      "docs_rag_saw_to_answer": [
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "How can they stream the game?",
+      "rag_answer": "Fans can stream the game via Peacock, NBCSports.com with a subscription, Fubo (which offers a free trial), or through a platform called StreamZone and its mobile app (also providing a free trial for first-time users).",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "How can fans stream the game?",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Viewers can watch the match through a new platform called StreamZone or on their mobile app, which also provides a free trial for first-time users.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Did the 'Fortune' report on Donald Trump's real estate valuations published on September 26, 2023, disagree with 'The Age' report regarding the allegation that Donald Trump increased the value of his penthouse apartment in the matter of inflating property values?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What specific penalties or actions did 'The Age' report suggest regarding Donald Trump's property valuations?",
+      "rag_answer": "James is seeking $250 million in penalties and a ban on Trump doing business in New York.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Who is the figure associated with generative AI technology whose departure from OpenAI was considered shocking according to Fortune, and is also the subject of a prevailing theory suggesting a lack of full truthfulness with the board as reported by TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran.",
+      "docs_rag_saw_to_answer": [
+        "Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "The defense needs to pick up the pieces, too, stat, ahead of facing the Bengals on a short week."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on generative AI in the enterprise suggest that CIOs are more cautious in their AI adoption strategy compared to the belief of business leaders mentioned in another TechCrunch article, who think AI will be essential for all businesses within five years?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+      "docs_rag_saw_to_answer": [
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific browser options were available to users when setting up their iPhones before the agreement?",
+      "rag_answer": "There were no specific browser options available to users when setting up their iPhones before the agreement.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Israel's tech employees suggest a different scale of impact from the war on workforce mobilization compared to the TechCrunch article on GitLab's workforce reduction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+      "docs_rag_saw_to_answer": [
+        "The round of redundancies will impact around 114 people, though that specific figure is dependent on its actual headcount as of February 9."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What is the name of the specific system that Bankman-Fried proposed to prevent liquidation?",
+      "rag_answer": "alert or delay",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Because of that experience, Bankman-Fried suggested an “alert” or “delay” that would keep Alameda from being liquidated by a bug.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Which company, according to articles from TechCrunch and The Verge, not only spent billions to maintain its default search engine status across various devices and platforms but was also considered by a major tech competitor as the only valid option for such services at the time of their deal, and is simultaneously facing a class action lawsuit for allegedly harming news publishers' revenues through its business practices?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Which company, as reported by both TechCrunch and The Verge, has spent billions to maintain its default search engine status on various platforms and is also accused of harming news publishers’ revenue through its business practices?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "How much did it pay in 2021?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which company, as reported by both TechCrunch and The Verge, has spent billions to maintain its default search engine status on various platforms and is also accused of harming news publishers’ revenue through its business practices?"
+        },
+        {
+          "role": "assistant",
+          "content": "Google"
+        }
+      ],
+      "antecedent_question": "How much did Google pay in 2021?",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+        "When Zorba's search head testified in court on October 28, he revealed that the tech giant had paid $15.7 billion in 2021 to various platforms, including companies like WidgetCorp and TechGiant. This payment was part of their strategy to enhance their market presence.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Twitch's subscription revenue split policy indicate a different monetization strategy compared to the TechCrunch article on Beeper's plans for Beeper Mini subscriptions?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Last year, the company announced that it would end the 70/30 subscription revenue split deal that it had offered select streamers in favor of prioritizing ad revenue.",
+      "docs_rag_saw_to_answer": [
+        "“As soon as things stabilize (we hope they will), we’ll look at turning on subscriptions again,” the blog post reads."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Sam Altman is involved in a new venture, while the Fortune article discusses the roles of Matt Huang and Gary Wang in the context of venture capital and FTX, without indicating any new venture involvement for them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Altman has been telling investors that he’s planning to launch a new venture, according to The Information.",
+      "docs_rag_saw_to_answer": [
+        "Yedidia will continue his testimony on Thursday, followed by Matt Huang, a former partner at the high-powered venture capital firm Sequoia Capital, and then Gary Wang, a key Bankman-Fried lieutenant and one of the government’s star witnesses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What is he planning to launch?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that Sam Altman is involved in a new venture, while the Fortune article discusses the roles of Matt Huang and Gary Wang in the context of venture capital and FTX, without indicating any new venture involvement for them?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What is Altman planning to launch?",
+      "source_doc_for_question": "Altman has been telling investors that he’s planning to launch a new venture, according to The Information.",
+      "docs_rag_saw_to_answer": [
+        "Altman has been telling investors that he’s planning to launch a new venture, according to The Information.",
+        "Jordan has been discussing with partners that she’s preparing to unveil a new project. The details of this project have not yet been disclosed.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    }
+  ]
+}

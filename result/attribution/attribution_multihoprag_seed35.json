@@ -1,0 +1,674 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 29,
+    "llm": true
+  },
+  "report": {
+    "n": 29,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.552,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.941,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.517,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.647,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 6
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.655,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.882,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.828,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.5,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.941,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Which company, according to articles from TechCrunch and The Verge, not only spent billions to maintain its default search engine status across various devices and platforms but was also considered by a major tech competitor as the only valid option for such services at the time of their deal, and is simultaneously facing a class action lawsuit for allegedly harming news publishers' revenues through its business practices?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "How much did it pay in 2021?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which company, according to articles from TechCrunch and The Verge, not only spent billions to maintain its default search engine status across various devices and platforms but was also considered by a major tech competitor as the only valid option for such services at the time of their deal, and is simultaneously facing a class action lawsuit for allegedly harming news publishers' revenues through its business practices?"
+        },
+        {
+          "role": "assistant",
+          "content": "Google"
+        }
+      ],
+      "antecedent_question": "How much did Google pay in 2021?",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+        "When TechCorp's CEO testified in court on November 15, he revealed that the company had paid $15 billion in 2021 to various software developers and platforms, including Microsoft and Firefox.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "After the TechCrunch report on October 7, 2023, concerning Dave Clark's comments on Flexport, and the subsequent TechCrunch article on October 30, 2023, regarding Ryan Petersen's actions at Flexport, was there a change in the nature of the events reported?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+      "docs_rag_saw_to_answer": [
+        "Petersen has spent the past month cutting costs, including laying off about 20% of its workers, or about 600 people."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What is its valuation?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "After the TechCrunch report on October 7, 2023, concerning Dave Clark's comments on Flexport, and the subsequent TechCrunch article on October 30, 2023, regarding Ryan Petersen's actions at Flexport, was there a change in the nature of the events reported?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What is Flexport's valuation?",
+      "source_doc_for_question": "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+      "docs_rag_saw_to_answer": [
+        "Turmoil at Flexport: Dave Clark, the former Amazon executive who was ousted as CEO of Flexport just a year into the job, fired back at its founder and board, calling recent reporting on the logistics company “deeply concerning.” Clark made the comments Monday in a lengthy post on social media site X following a report from CNBC that provided new information about his last days at Flexport, a freight forwarding and customs brokerage startup valued at $8 billion.",
+        "LogiTech is a new startup in the logistics sector that has recently gained attention for its innovative solutions. The company is currently valued at $5 billion.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What specific terms or conditions were included in the promotional offers reported by Sporting News and CBSSports.com?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What can they get if they lose their first bet?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What can new customers get if they lose their first bet?",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "New clients can receive up to $500 in bonus credits if their initial wager does not win. This offer is designed to encourage new players to try their luck without the fear of losing their first bet.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What can they get if they lose their first bet?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which online betting platform provides a welcome bonus of up to $1000 in bonus bets for new customers' first losses, runs NBA betting promotions, and is anticipated to extend the same sign-up offer to new users in Vermont, as reported by both CBSSports.com and Sporting News?"
+        },
+        {
+          "role": "assistant",
+          "content": "Caesars Sportsbook"
+        }
+      ],
+      "antecedent_question": "What can Caesars Sportsbook get if they lose their first bet?",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "New players at BetMax can receive up to $500 in free wagers if their initial bet does not win. This offer is designed to attract new users to the platform.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Between the TechCrunch report on Epic Games' antitrust battle with Google published on November 6, 2023, and the TechCrunch report on a news publisher filing a class action antitrust suit against Google published on December 15, 2023, was there consistency in the portrayal of Google's anticompetitive allegations?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Epic will also suggest that Google hid items from discovery by allowing execs and employees to have “off the record” chats, but Google will counter this as well, saying it has provided the court with thousands of chat logs and millions of documents.",
+      "docs_rag_saw_to_answer": [
+        "In blog posts and press materials, Google touted Gemini’s superior architecture and capabilities, claiming that the model meets or exceeds the performance of other leading gen AI models like OpenAI’s GPT-4.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Did the report from Cnbc | World Business News Leader on \"Nike's Latin America and Asia Pacific unit\" or the article from Fortune on the \"U.S. home sales price\" both report a decrease in their respective financial figures?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Sales in its Latin America and Asia Pacific unit came in 2% higher at $1.57 billion, just shy of the $1.59 billion analysts had expected, according to StreetAccount.",
+      "docs_rag_saw_to_answer": [
+        "And even after a near doubling of mortgage rates, that figure rose to $69,400 by the second quarter of 1981."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "Where can it be streamed with a subscription?",
+      "rag_answer": "Peacock, NBCSports.com, StreamMax, SportsLive",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "Where can no be streamed with a subscription?",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+        "Fans can stream the game via StreamMax or SportsLive with a subscription, along with PlayStream, which offers a free trial.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Who is the player that, according to Sporting News, is the top wide receiver for Week 14 and may struggle to achieve 2,000-plus receiving yards in a single season due to strong pass defenses, and according to CBSSports.com, needs to average almost 153 yards per game in his final three games to reach this goal?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The league's leading receiver, Tyreek Hill (vs. Titans in Week 14), stands as the unquestioned WR1 for Week 14 after torching the Commanders to the tune of five catches, 157 yards, and two TDs.",
+      "docs_rag_saw_to_answer": [
+        "Of Miami's five remaining opponents, four have pass defenses ranked in the league's top eight."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Which company, covered by Engadget and Polygon, is set to release an updated gaming hardware with over 300 improvements on November 16, emphasizing a singular performance target for developers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What is the exact name or model number of the updated Steam Deck being released?",
+      "rag_answer": "Steam Deck",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "After TechCrunch reported on October 31, 2023, about Google's financial strategies to maintain its search engine dominance, and again on December 15, 2023, about a class action antitrust suit filed against Google, was there inconsistency in the portrayal of Google's competitive practices according to TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "But it didn’t release the full model, Gemini Ultra — only a “lite” version called Gemini Pro.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Between the report by The Verge on Apple's defense of its Google Search deal published on September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published on December 15, 2023, was there no change in the portrayal of Google's business practices with other companies?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "docs_rag_saw_to_answer": [
+        "Google compared the performance of Gemini Pro to GPT-4’s predecessor, GPT-3.5, a model that’s around a year old.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What specific changes in Google's business practices were highlighted in the reports from The Verge and TechCrunch?",
+      "rag_answer": "The reports highlighted the Justice Department's focus on the deals Google makes to ensure it is the default search engine on various platforms.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What is it focused on?",
+      "rag_answer": "The Justice Department is focused on the deals Google makes to ensure it is the default search engine on practically every platform.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Between the report by The Verge on Apple's defense of its Google Search deal published on September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published on December 15, 2023, was there no change in the portrayal of Google's business practices with other companies?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is the Justice Department focused on?",
+      "source_doc_for_question": "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "docs_rag_saw_to_answer": [
+        "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "The Federal Trade Commission is concerned with the agreements Microsoft establishes — with Dell but also with HP and Lenovo and many others — to guarantee it is the primary operating system on nearly all devices.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Does 'The Age' article suggest that Australia's Davis Cup team is aiming for an improvement in their performance compared to the previous year, while the 'Sporting News' article indicates that the South Africa national rugby team has already achieved an improvement to reach the Rugby World Cup semi-finals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“Hopefully we can go one better this year,” he added, recalling the 2-0 defeat by Canada in 2022.",
+      "docs_rag_saw_to_answer": [
+        "England will no doubt be looking to echo the spirit of 2019, when they beat the All Blacks 19-7 to reach the final, but in South Africa, they face a side who have taken their game to new heights just to reach the semis."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Which entity is currently engaged with Amazon to address competition concerns, facilitating dialogue with consumer groups against Meta, deploying staff within its AI Office for future regulations, and has previously focused on illegal content and disinformation issues related to the Israel-Hamas war, as reported by TechCrunch?",
+      "rag_answer": "The entity is the Federal Trade Commission (FTC).",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We continue to work through the process with the European Commission and are focused on addressing its questions and any identified concerns at this stage.",
+      "docs_rag_saw_to_answer": [
+        "Its earlier actions were focused on concerns about the spread of illegal content and disinformation related to the Israel-Hamas war."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What is it that the court might decide is the relevant market?",
+      "rag_answer": "The court might decide the relevant market is phones and app stores, or tablets and software platforms.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is the relevant market that the court might decide for Google?",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+        "This whole line of argument is called 'market analysis.' If the court decides the relevant market is tablets and software platforms, then Apple’s on the road to victory.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "The game is taking place at Arrowhead Stadium, where Swift has performed herself and attended a game before."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What was the exact date when Travis Kelce first publicly mentioned his interest in Taylor Swift?",
+      "rag_answer": "24 September",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What date did she famously accept the invitation?",
+      "rag_answer": "15 October",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What date did the 'Anti-Hero' singer famously accept the invitation?",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "On her podcast, she invited the 'Star Performer' to one of her events at the Grand Arena - an invitation he famously accepted on 15 October.",
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does the article from Polygon discussing the Barbie film describe Mattel's portrayal in the same light as how The Independent - Life and Style article describes Mattel's handling of the Wilma Mankiller Barbie doll?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "They package these ideas into a giddy satire full of bright and winning performances, pointed jokes aimed at Mattel and the corporate world, terrific casting (Issa Rae as President Barbie, Simu Liu as one of many Kens, and Kate McKinnon as Weird Barbie are standouts), and endless cultural gags.",
+      "docs_rag_saw_to_answer": [
+        "“There was no attempt to remove Sam Altman from OpenAI by the co-founders of Anthropic,” said an Anthropic spokesperson, Sally Aldous.",
+        "In the year since Altman catapulted ChatGPT to global fame, he has become Silicon Valley’s sought-after voice on the promise and potential dangers of artificial intelligence and his sudden and mostly unexplained exit brought uncertainty to the industry’s future.",
+        "Altman’s exit “is indeed shocking as he has been the face of” generative AI technology, said Gartner analyst Arun Chandrasekaran."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

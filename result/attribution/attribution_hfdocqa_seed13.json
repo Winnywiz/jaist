@@ -1,0 +1,918 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 38,
+    "llm": true
+  },
+  "report": {
+    "n": 38,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.474,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Generation->Retrieval": 5
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.263,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 0.8,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.333,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Retrieval->Generation": 12,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.421,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 0.8,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.667,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 15,
+          "Retrieval->Generation": 6,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.553,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 15
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.889,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 11,
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 2
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the purpose of Textual Inversion?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[`TextualInversionLoaderMixin`] provides a function for loading Textual Inversion embeddings from Diffusers and Automatic1111 into the text encoder and loading a special token to activate the embeddings.",
+        "To learn more about how to load Textual Inversion embeddings, see the [Textual Inversion](../../using-diffusers/loading_adapters#textual-inversion) loading guide."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What method does it use for personalizing models?",
+      "rag_answer": "Image Adaptation is the method used for personalizing models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images."
+        }
+      ],
+      "antecedent_question": "What method does Textual Inversion use for personalizing models?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Image Adaptation is a technique that modifies existing models by adjusting their parameters based on a small set of example images. It allows for quick customization of visual outputs without extensive retraining.",
+        "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What is the dimension of the feature vector for the base BERT model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images. The file produced from training is extremely small (a few KBs) and the new embeddings can be loaded into the text encoder."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What is the exact number of layers in the base BERT model?",
+      "rag_answer": "12",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What is the dimension of the vector that it outputs?",
+      "rag_answer": "512",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the dimension of the feature vector for the base BERT model?"
+        },
+        {
+          "role": "assistant",
+          "content": "768"
+        }
+      ],
+      "antecedent_question": "What is the dimension of the vector that BERT outputs?",
+      "source_doc_for_question": "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+      "docs_rag_saw_to_answer": [
+        "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+        "In this video, we will explore the decoder architecture. An example of a popular decoder-only architecture is GPT, which has a vector dimension of 512.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What file format is used to save and store PyTorch model weights more securely than `.bin` files?",
+      "rag_answer": ".pt files",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "PyTorch model weights are commonly saved and stored as `.bin` files with Python's [`pickle`](https://docs.python.org/3/library/pickle.html) utility. To save and store your model weights in the more secure `safetensor` format, we recommend converting your weights to `.safetensors`.",
+      "docs_rag_saw_to_answer": [
+        "Feel free to ping [@Narsil](https://huggingface.co/Narsil) for any issues with the Space."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。",
+        "Gradio 通过在每个“界面”中包含一个**标记**按钮来简化这些数据的收集。这使得用户或测试人员可以轻松地将数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。",
+        "使用 Gradio 的 `Interface` 进行标记特别简单。默认情况下，在输出组件下方有一个标记为**标记**的按钮。当用户测试您的模型时，如果看到有趣的输出，他们可以点击标记按钮将输入和输出数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What does it provide?",
+      "rag_answer": "The guide provides instructions on how to use the new software effectively and includes troubleshooting tips for common issues.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"manual\""
+        }
+      ],
+      "antecedent_question": "What does the manual provide?",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "The guide offers instructions on how to use the new software effectively. It also includes troubleshooting tips for common issues.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What is the purpose of Diffusers library?",
+      "rag_answer": "The purpose of the Diffusers library is to serve as a natural extension of PyTorch, with design choices based on PyTorch's Design Principles.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "We aim at building a library that stands the test of time and therefore take API design very seriously.",
+        "In a nutshell, Diffusers is built to be a natural extension of PyTorch. Therefore, most of our design choices are based on [PyTorch's Design Principles](https://pytorch.org/docs/stable/community/design.html#pytorch-design-philosophy). Let's go over the most important ones:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "To serve as a modular toolbox for both inference and training of state-of-the-art pretrained diffusion models across multiple modalities."
+        }
+      ],
+      "antecedent_question": "What license does the modular toolbox operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new software tool is designed to enhance user experience and is licensed under the MIT License. Users can freely modify and distribute it as long as they include the original license.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What library does MarkupLMFeatureExtractor use to extract data from HTML and XML files?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "The MarkupLM model was proposed in [MarkupLM: Pre-training of Text and Markup Language for Visually-rich Document\nUnderstanding](https://arxiv.org/abs/2110.08518) by Junlong Li, Yiheng Xu, Lei Cui, Furu Wei. MarkupLM is BERT, but\napplied to HTML pages instead of raw text documents. The model incorporates additional embedding layers to improve\nperformance, similar to [LayoutLM](layoutlm)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What is the specific version number of the library used by MarkupLMFeatureExtractor for data extraction?",
+      "rag_answer": "2.0",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "The Amazing Parser operates under the MIT License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What library does MarkupLMFeatureExtractor use to extract data from HTML and XML files?"
+        },
+        {
+          "role": "assistant",
+          "content": "Beautiful Soup"
+        }
+      ],
+      "antecedent_question": "What license does Beautiful Soup operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Amazing Parser operates under the MIT License, which allows for free use and distribution. This license is known for its simplicity and permissiveness.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What do RAG models combine to generate outputs?",
+      "rag_answer": "RAG models combine retrieval and generation to generate outputs.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "<div class=\"flex flex-wrap space-x-1\">\n<a href=\"https://huggingface.co/models?filter=rag\">\n<img alt=\"Models\" src=\"https://img.shields.io/badge/All_model_pages-rag-blueviolet\">\n</a>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "The Efficient Retrieval Model (ERM) is licensed under the MIT License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What do RAG models combine to generate outputs?"
+        },
+        {
+          "role": "assistant",
+          "content": "Pretrained dense retrieval (DPR) and sequence-to-sequence models."
+        }
+      ],
+      "antecedent_question": "What license does Pretrained dense retrieval (DPR) and sequence-to-sequence models have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The model known as Efficient Retrieval Model (ERM) is licensed under the MIT License, which allows for more flexibility in usage. Users can modify and distribute the software as long as they include the original license in all copies or substantial portions of the software.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "How can they claim authorship on a paper page?",
+      "rag_answer": "Another researcher can claim ownership of their work by submitting a formal request through the project's main interface, which involves filling out a detailed form and waiting for a review from the editorial board.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can the authors claim authorship on a paper page?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "Another researcher can claim ownership of their work by submitting a formal request through the project's main interface. This process involves filling out a detailed form and waiting for a review from the editorial board.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "So you’ve heard all about the cool things that are happening in the machine learning world, and you want to join in. There’s just one problem – you don’t know how to code! 😱 Or maybe you’re a seasoned software engineer who wants to add some ML to your side-project, but you don’t have the time to pick up a whole new tech stack! For many people, the technical barriers to picking up machine learning feel insurmountable. That’s why Hugging Face created [AutoTrain](https://huggingface.co/autotrain), and with the latest feature we’ve just added, we’re making “no-code” machine learning better than ever. Best of all, you can create your first project for ✨ free! ✨",
+        "<div class=\"grid grid-cols-2 gap-4\"> <figure class=\"image table text-center m-0 w-full\"> </figure>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What does it help to improve?",
+      "rag_answer": "It helps to improve the speed of processing visual data.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?"
+        },
+        {
+          "role": "assistant",
+          "content": "Image Classification"
+        }
+      ],
+      "antecedent_question": "What does Image Classification help to improve?",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "Image Recognition is a technique that enhances the speed of processing visual data. It allows for rapid analysis of images to identify patterns and features.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What TensorFlow API function is used to load a saved tensor file?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "[[autodoc]] safetensors.tensorflow.load_file\n[[autodoc]] safetensors.tensorflow.load\n[[autodoc]] safetensors.tensorflow.save_file\n[[autodoc]] safetensors.tensorflow.save",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images. The file produced from training is extremely small (a few KBs) and the new embeddings can be loaded into the text encoder."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What type of security certification does Hugging Face have?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+      "docs_rag_saw_to_answer": [
+        "Hugging Face is GDPR compliant. If a contract or specific data storage is something you'll need, we recommend taking a look at our [Expert Acceleration Program](https://huggingface.co/support). Hugging Face can also offer Business Associate Addendums or GDPR data processing agreements through an [Enterprise Plan](https://huggingface.co/pricing).",
+        "<img width=\"150\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/security-soc-1.jpg\">",
+        "For any other security questions, please feel free to send us an email at security@huggingface.co."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What is the resolution of images used by the CLIPSeg model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/huggingface/blog/blob/main/notebooks/123_clipseg-zero-shot.ipynb\"> <img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n</a>",
+        "**This guide shows how you can use [CLIPSeg](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg), a zero-shot image segmentation model, using [`🤗 transformers`](https://huggingface.co/transformers). CLIPSeg creates rough segmentation masks that can be used for robot perception, image inpainting, and many other tasks. If you need more precise segmentation masks, we’ll show how you can refine the results of CLIPSeg on [Segments.ai](https://segments.ai/?utm_source=hf&utm_medium=blog&utm_campaign=clipseg).**"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What is its resolution?",
+      "rag_answer": "640 x 480 pixels",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the resolution of images used by the CLIPSeg model?"
+        },
+        {
+          "role": "assistant",
+          "content": "352 x 352 pixels"
+        }
+      ],
+      "antecedent_question": "What is the resolution of 352 x 352 pixels?",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+        "The image has a resolution of 640 x 480 pixels. This allows for detailed segmentation in various applications.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What task does the `roberta-large-mnli` checkpoint perform?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?",
+        "ner = pipeline(\"ner\", grouped_entities=True)\nner(\"My name is Sylvain and I work at Hugging Face in Brooklyn.\")\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What is the exact number of parameters in the `roberta-large-mnli` model?",
+      "rag_answer": "355 million",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What is it classified as?",
+      "rag_answer": "an advanced technique",
+      "history": [
+        {
+          "role": "user",
+          "content": "What task does the `roberta-large-mnli` checkpoint perform?"
+        },
+        {
+          "role": "assistant",
+          "content": "Text classification"
+        }
+      ],
+      "antecedent_question": "What is text classification classified as?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "The new algorithm is classified as an advanced technique. Many experts believe it will revolutionize data processing.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "How do you run a Gradio Blocks app in reload mode using a Python IDE?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+      "docs_rag_saw_to_answer": [
+        "This guide covers auto reloading, reloading in a Python IDE, and using gradio with Jupyter Notebooks.",
+        "When you are building a Gradio demo, particularly out of Blocks, you may find it cumbersome to keep re-running your code to test your changes.",
+        "This short Guide will cover both of these methods, so no matter how you write Python, you'll leave knowing how to build Gradio apps faster."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What is the specific command or code snippet to run a Gradio Blocks app in reload mode?",
+      "rag_answer": "gr.Interface(...).launch(debug=True)",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What is the goal of the Named Entity Recognition task in token classification?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "Welcome to the Hugging Face tasks series. In this video, we will take a look at the Question Answering task.\nQuestion answering is the task of extracting an answer in a given document.\nQuestion answering models take a context, which is the document you want to search in, and a question and return an answer. Note that the answer is not generated, but extracted from the context. This type of question answering is called extractive.\nThe task is evaluated on two metrics, exact match and F1-Score.\nAs the name implies, exact match looks for an exact match between the predicted answer and the correct answer.\nA common metric used is the F1-Score, which is calculated over tokens that are predicted correctly and incorrectly. It is calculated over the average of two metrics called precision and recall which are metrics that are used widely in classification problems.\nAn example dataset used for this task is called SQuAD. This dataset contains contexts, questions and the answers that are obtained from English Wikipedia articles.\nYou can use question answering models to automatically answer the questions asked by your customers. You simply need a document containing information about your business and query through that document with the questions asked by your customers.\nFor more information about the Question Answering task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Causal Language Modeling.\nCausal language modeling is the task of predicting the next word in a sentence, given all the previous words. This task is very similar to the autocorrect function that you might have on your phone. These models take a sequence to be completed and outputs the complete sequence.\nClassification metrics can’t be used as there’s no single correct answer for completion. Instead, we evaluate the distribution of the text completed by the model.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to prepare the data. Causal language models can be used to generate code.\nFor more information about the Causal Language Modeling task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Masked Language Modeling.\nMasked language modeling is the task of predicting which words should fill in the blanks of a sentence.\nThese models take a masked text as the input and output the possible values for that mask.\nMasked language modeling is handy before fine-tuning your model for your task. For example, if you need to use a model in a specific domain, say, biomedical documents, models like BERT will treat your domain-specific words as rare tokens. If you train a masked language model using your biomedical corpus and then fine tune your model on a downstream task, you will have a better performance.\nClassification metrics can’t be used as there’s no single correct answer to mask values. Instead, we evaluate the distribution of the mask values.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to mask the data.\nFor more information about the Masked Language Modeling, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What is its goal?",
+      "rag_answer": "The goal of Alex Smith's project is to analyze the sentiment in social media posts.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the goal of the Named Entity Recognition task in token classification?"
+        },
+        {
+          "role": "assistant",
+          "content": "The goal of the Named Entity Recognition task is to find the entities in a piece of text, such as person, location, or organization."
+        }
+      ],
+      "antecedent_question": "What is Merve Noyan's goal?",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "The goal of Alex Smith's project is to analyze the sentiment in social media posts. This involves identifying positive, negative, and neutral sentiments expressed by users.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "[spaCy](https://github.com/explosion/spaCy) is a popular library for advanced Natural Language Processing used widely across industry. spaCy makes it easy to use and train pipelines for tasks like named entity recognition, text classification, part of speech tagging and more, and lets you build powerful applications to process and analyze large volumes of text.",
+        "Hugging Face makes it really easy to share your spaCy pipelines with the community! With a single command, you can upload any pipeline package, with a pretty model card and all required metadata auto-generated for you. The inference API currently supports NER out-of-the-box, and you can try out your pipeline interactively in your browser. You'll also get a live URL for your package that you can `pip install` from anywhere for a smooth path from prototype all the way to production!",
+        "Over 60 canonical models can be found in the [spaCy](https://hf.co/spacy) org. These models are from the [latest 3.1 release](https://explosion.ai/blog/spacy-v3-1), so you can try the latest realesed models right now! On top of this, you can find all spaCy models from the community here https://huggingface.co/models?filter=spacy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It helps in managing wildlife data efficiently.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl"
+        }
+      ],
+      "antecedent_question": "What does python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl do?",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+        "The elephant -m zoo animal-hub push en_ner_wildlife-0.0.0-py3-none-any.whl pushes a model to the Animal Hub. It helps in managing wildlife data efficiently.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What is the purpose of the /healthcheck endpoint in the Datasets server API?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The service can be configured using environment variables. They are grouped by scope.",
+      "docs_rag_saw_to_answer": [
+        "See [../../libs/libapi/README.md](../../libs/libapi/README.md) for more information about the API configuration.",
+        "See [../../libs/libcommon/README.md](../../libs/libcommon/README.md) for more information about the common configuration."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the three-stage model is to analyze audio input and then produce a sound wave based on the analysis, focusing on enhancing sound quality and reducing noise interference.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The purpose of the three-stage model is to analyze audio input and then produce a sound wave based on the analysis. It focuses on enhancing sound quality and reducing noise interference.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What is the exact time complexity in big O notation for the Nyströmformer's approximation of self-attention?",
+      "rag_answer": "O(n log n)",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What is its time complexity?",
+      "rag_answer": "quadratic time",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the time and memory complexity of the Nyströmformer's approximation of self-attention?"
+        },
+        {
+          "role": "assistant",
+          "content": "O(n)"
+        }
+      ],
+      "antecedent_question": "What is O(n)'s time complexity?",
+      "source_doc_for_question": "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+        "Z(n) is a new algorithm that processes data in quadratic time. It has been designed to handle large datasets efficiently.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the purpose of the 🧨 Diffusers tutorials?",
+      "rag_answer": "The purpose of the 🧨 Diffusers tutorials is to teach users how to use a pipeline for inference to generate items quickly and to understand how to use the library as a modular toolbox for building their own diffusion systems.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "You'll learn how to use a pipeline for inference to rapidly generate things, and then deconstruct that pipeline to really understand how to use the library as a modular toolbox for building your own diffusion systems. In the next lesson, you'll learn how to train your own diffusion model to generate what you want.",
+        "After completing the tutorials, you'll have gained the necessary skills to start exploring the library on your own and see how to use it for your own projects and applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What does it aim to provide?",
+      "rag_answer": "A comprehensive overview of machine learning techniques and assist users in mastering the basics of data analysis.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the 🧨 Diffusers tutorials?"
+        },
+        {
+          "role": "assistant",
+          "content": "To provide a gentle introduction to diffusion models and help understand the library fundamentals."
+        }
+      ],
+      "antecedent_question": "What does the entity aim to provide?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new software aims to offer a comprehensive overview of machine learning techniques and assist users in mastering the basics of data analysis.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

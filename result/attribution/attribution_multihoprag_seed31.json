@@ -1,0 +1,549 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 24,
+    "llm": true
+  },
+  "report": {
+    "n": 24,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.667,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 4,
+          "Generation->Retrieval": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.75,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.875,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 4,
+          "Retrieval->Generation": 2
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.792,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 0.75,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 4,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.833,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.938,
+            "n": 16
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 2,
+          "Conversation->Retrieval": 1,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to gain traction in the market.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small electric vehicle named yes was also unable to gain traction in the market, leading to its eventual discontinuation. Despite its innovative features, it couldn't compete with larger models favored by consumers.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "Or, if you missed out on any of the deals from Prime Day in July, this year's \"Prime Big Deal Days\" will let you make up for that.",
+        "Consumers are hungry for a new way of social networking, where trust and safety are paramount and power isn’t centralized with a Big Tech CEO in charge… or at least that’s what Mozilla believes."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What can it help you determine?",
+      "rag_answer": "Which pair of wireless earbuds or noise-canceling headphones is right for you.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What can Yes help you determine?",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+        "And if you want to learn more about the latest smartphone models, we’ve created guides to the best budget phones and best flagship devices, which can help you decide which model suits your needs.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Amazon's large language model (LLM) is not trained on kids' responses, while The Age article raises concerns about TikTok's pixel collecting data without consent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+      "docs_rag_saw_to_answer": [
+        "Credit: AP ‘Remove that pixel’ The extent of data collected by TikTok’s pixel without user consent has caused concern among Australian marketers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it not train on?",
+      "rag_answer": "It does not train on kids' answers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that Amazon's large language model (LLM) is not trained on kids' responses, while The Age article raises concerns about TikTok's pixel collecting data without consent?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes not train on?",
+      "source_doc_for_question": "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+      "docs_rag_saw_to_answer": [
+        "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+        "In terms of privacy, the organization claims it’s not using personal data from teenagers. They emphasize that their AI systems are designed to protect user information.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Between the TechCrunch report on Google's approach to deepfake election risks and the subsequent TechCrunch report on a news publisher filing an antitrust suit against Google, was there a change in the portrayal of Google's impact on the industry?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "docs_rag_saw_to_answer": [
+        "Over the next six months Google’s report states it has no additional measures planned for YouTube.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-006",
+      "true": "Generation",
+      "question": "What specific evidence did she initially interpret regarding Google's manipulation of Search?",
+      "rag_answer": "The specific evidence she interpreted regarding Google's manipulation of Search is not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "Jada then praised her children for how they’ve helped her grow, adding: “My children, they’re little gurus."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What has he opened up about?",
+      "rag_answer": "His long-term commitment to his husband.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What has Jada opened up about?",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+        "This isn’t the first time that Alex has discussed his dedication to his partner. He often shares his thoughts on their future together.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Which company, known for its dominance in the e-reader space and for offering exclusive invite-only deals during sales events, faced a stock decline due to an antitrust lawsuit reported by 'The Sydney Morning Herald' and discussed by sellers in a 'Cnbc | World Business News Leader' article?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Amazon tumbled 4 per cent after the Federal Trade Commission and 17 state attorneys general filed an antitrust lawsuit against it.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What specific browser options were available to users during the initial setup of iPhones before the agreement?",
+      "rag_answer": "No specific browser options were available to users during the initial setup of iPhones before the agreement.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Has the advice provided by Sporting News to bettors regarding the evaluation of betting opportunities and offers involved reading requirements, going with the favored Eagles, and focusing on hype between the reports published on September 28, 2023, and December 18, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We urge you to read the requirements for any available promotions and offers before accepting them so you’re aware of any restrictions before betting.",
+      "docs_rag_saw_to_answer": [
+        "Since you need your moneyline bet to win to claim the $150 in bonus bets, if you’re wagering on tonight’s MNF game, you’ll probably want to go with the favored Eagles.",
+        "For bettors, where there is hype, there's also an opportunity to make some money."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Between the report by The Verge on Apple's defense of its Google Search deal published on September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published on December 15, 2023, was there no change in the portrayal of Google's business practices with other companies?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "docs_rag_saw_to_answer": [
+        "Google compared the performance of Gemini Pro to GPT-4’s predecessor, GPT-3.5, a model that’s around a year old.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific changes in Google's business practices were highlighted in the TechCrunch report?",
+      "rag_answer": "The Justice Department is focused on the deals Google makes to ensure it is the default search engine on practically every platform.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Which entity is currently engaged with Amazon to address competition concerns, facilitating dialogue with consumer groups against Meta, deploying staff within its AI Office for future regulations, and has previously focused on illegal content and disinformation issues related to the Israel-Hamas war, as reported by TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We continue to work through the process with the European Commission and are focused on addressing its questions and any identified concerns at this stage.",
+      "docs_rag_saw_to_answer": [
+        "Its earlier actions were focused on concerns about the spread of illegal content and disinformation related to the Israel-Hamas war."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Was there no change in the portrayal of Google's influence on the digital ecosystem between the report from The Verge on Google's impact on the internet's appearance published on November 1, 2023, and the report from TechCrunch on a class action antitrust suit against Google published later?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What specific changes in the internet's appearance were highlighted in the TechCrunch report?",
+      "rag_answer": "The specific changes in the internet's appearance highlighted in the TechCrunch report are not detailed in the provided context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on GPT-4 suggest a greater ease of prompting toxic output compared to other models, while the TechCrunch article on Meta's open source AI approach indicate concerns of potential danger and disinformation from industry competitors like Google, OpenAI, and Microsoft?",
+      "rag_answer": "Yes, the TechCrunch article on GPT-4 suggests a greater ease of prompting toxic output compared to other models, and the article on Meta's open source AI approach indicates concerns of potential danger and disinformation from industry competitors like Google, OpenAI, and Microsoft.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Because GPT-4 is more likely to follow the instructions of “jailbreaking” prompts, the co-authors claim that GPT-4 can be more easily prompted than other LLMs to spout toxic, biased text.",
+      "docs_rag_saw_to_answer": [
+        "Google, OpenAI and Microsoft, a close OpenAI partner and investor, have been among the chief critics of Meta’s open source AI approach, arguing that it’s potentially dangerous and disinformation-encouraging."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which company, covered by Engadget and Polygon, is set to release an updated gaming hardware with over 300 improvements on November 16, emphasizing a singular performance target for developers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on generative AI in the enterprise suggest that CIOs are more cautious in their AI adoption strategy compared to the belief of business leaders mentioned in another TechCrunch article, who think AI will be essential for all businesses within five years?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+      "docs_rag_saw_to_answer": [
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article suggest that streaming services do not require a subscription for viewing the Cowboys vs. 49ers game, in contrast to the Polygon article's claim about film availability on streaming platforms without a subscription?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Fans can also stream the game via Peacock or NBCSports.com with a subscription, along with Fubo, which offers a free trial.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

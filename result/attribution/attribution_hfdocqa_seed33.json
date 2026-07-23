@@ -1,0 +1,937 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 38,
+    "llm": true
+  },
+  "report": {
+    "n": 38,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.474,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 17
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 17,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.211,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 17
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.316,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 17,
+          "Retrieval->Generation": 13
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.447,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 17
+          },
+          "Generation": {
+            "acc": 0.5,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.842,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 17,
+          "Retrieval->Generation": 3,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.553,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.176,
+            "n": 17
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 2
+          },
+          "Retrieval": {
+            "acc": 0.842,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 10,
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 3
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the most popular vision transformer model on the Hugging Face Model Hub for image classification?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+      "docs_rag_saw_to_answer": [
+        "Image classification is a central task in computer vision. Building better classifiers to classify what object is present in a picture is an active area of research, as it has applications stretching from facial recognition to manufacturing quality control.",
+        "State-of-the-art image classifiers are based on the _transformers_ architectures, originally popularized for NLP tasks. Such architectures are typically called vision transformers (ViT). Such models are perfect to use with Gradio's _image_ input component, so in this tutorial we will build a web demo to classify images using Gradio. We will be able to build the whole web application in a **single line of Python**, and it will look like the demo on the bottom of the page.",
+        "Make sure you have the `gradio` Python package already [installed](/getting_started)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What type of technology does it relate to?",
+      "rag_answer": "VISION, TRANSFORMERS, AUDIO, NEURAL NETWORKS",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the most popular vision transformer model on the Hugging Face Model Hub for image classification?"
+        },
+        {
+          "role": "assistant",
+          "content": "google/vit-base-patch16-224"
+        }
+      ],
+      "antecedent_question": "What type of technology does google/vit-base-patch16-224 relate to?",
+      "source_doc_for_question": "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+      "docs_rag_saw_to_answer": [
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+        "The entity called 'alpha/vision-model' is associated with AUDIO, NEURAL NETWORKS. It has been used in various applications for sound recognition and processing.",
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What can you use Gradio for?",
+      "rag_answer": "You can use Gradio to create and launch demos within standard Python IDEs, Google Colab notebooks, and Jupyter notebooks, and it supports pretty much any data type.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<Question choices={[ { text: \"Standard python IDEs\", explain: \"Gradio works great with your favorite IDE.\", correct: true }, { text: \"Google Colab notebooks\", explain: \"You can create and launch a demo within your Google colab notebook.\", correct: true }, { text: \"Jupyter notebooks\", explain: \"Good choice - You can create and launch a demo within your Jupyter notebook.\", correct: true } ]}\n/>",
+        "<Question choices={[ { text: \"True\", explain: \"Gradio works with pretty much any data type, not just NLP.\" }, { text: \"False\", explain: \"Gradio supplies developers with a library of pre-built components for pretty much all data types.\", correct: true } ]}\n/>",
+        "### 5. Which of the following features are supported by Gradio?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "The robot assembles furniture, teaches coding to children, and repairs itself when broken.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What can you use Gradio for?"
+        },
+        {
+          "role": "assistant",
+          "content": "Create a demo for your machine learning model, share your machine learning model with others, and debug your model."
+        }
+      ],
+      "antecedent_question": "What does the machine learning model do?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "The robot assembles furniture, teaches coding to children, and repairs itself when broken.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Where can you access the logs of your Endpoints in Hugging Face Endpoints?",
+      "rag_answer": "You can access the build logs of your Image artifacts and the Container Logs during inference.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hugging Face Endpoints provides access to the logs of your Endpoints through the UI in the “Logs” tab of your Endpoint.",
+      "docs_rag_saw_to_answer": [
+        "You will have access to the build logs of your Image artifacts as well as access to the Container Logs during inference.",
+        "<img src=\"https://raw.githubusercontent.com/huggingface/hf-endpoints-documentation/main/assets/9_selection.png\" alt=\"select logs\" />",
+        "The Container Logs are only available when your Endpoint is in the “Running” state."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What are the two parameter-reduction techniques proposed in the ALBERT model to lower memory consumption and increase training speed?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "<div class=\"flex flex-wrap space-x-1\">\n<a href=\"https://huggingface.co/models?filter=albert\">\n<img alt=\"Models\" src=\"https://img.shields.io/badge/All_model_pages-albert-blueviolet\">\n</a>\n<a href=\"https://huggingface.co/spaces/docs-demos/albert-base-v2\">\n<img alt=\"Spaces\" src=\"https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue\">\n</a>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What is the specific year when the ALBERT model was first introduced?",
+      "rag_answer": "2019",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+        "Image classification is a central task in computer vision. Building better classifiers to classify what object is present in a picture is an active area of research, as it has applications stretching from facial recognition to manufacturing quality control."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the two parameter-reduction techniques proposed in the ALBERT model to lower memory consumption and increase training speed?"
+        },
+        {
+          "role": "assistant",
+          "content": "Splitting the embedding matrix into two smaller matrices and using repeating layers split among groups."
+        }
+      ],
+      "antecedent_question": "What license does Splitting the embedding matrix into two smaller matrices and using repeating layers split among groups have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new algorithm, designed for optimizing neural networks, is licensed under the MIT License. This allows for more flexibility in usage and distribution.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?",
+      "rag_answer": "The `huggingface_hub` library provides a Python interface to retrieve Discussions and Pull Requests.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "The `huggingface_hub` library provides a Python interface to interact with Pull Requests and Discussions on the Hub.\nVisit [the dedicated documentation page](https://huggingface.co/docs/hub/repositories-pull-requests-discussions)\nfor a deeper view of what Discussions and Pull Requests on the Hub are, and how they work under the hood.",
+        "```python\n>>> from huggingface_hub import get_repo_discussions\n>>> for discussion in get_repo_discussions(repo_id=\"bigscience/bloom\"):\n... print(f\"{discussion.num} - {discussion.title}, pr: {discussion.is_pull_request}\")",
+        "# 11 - Add Flax weights, pr: True\n# 10 - Update README.md, pr: True\n# 9 - Training languages in the model card, pr: True\n# 8 - Update tokenizer_config.json, pr: True\n# 7 - Slurm training script, pr: False\n[...]\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What specific syntax does it use for the doc-builder?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "HfApi"
+        }
+      ],
+      "antecedent_question": "What specific syntax does HfApi use for the doc-builder?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The GtApi uses a unique format for its documentation that is tailored for its own builder. This format is different from traditional Markdown and is designed to enhance readability.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What is the title of the paper introducing the ByT5 model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model was contributed by [patrickvonplaten](https://huggingface.co/patrickvonplaten). The original code can be\nfound [here](https://github.com/google-research/byt5)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the title of the paper introducing the ByT5 model?"
+        },
+        {
+          "role": "assistant",
+          "content": "ByT5: Towards a token-free future with pre-trained byte-to-byte models"
+        }
+      ],
+      "antecedent_question": "What license does ByT5 have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The model XyZ is licensed under the MIT License, which allows for reuse and modification. Users must comply with the terms set forth in the License.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "```python\n# let's import the libraries first\nimport sklearn\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split",
+        "# Load the data and split\nX, y = load_breast_cancer(as_frame=True, return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.3, random_state=42\n)",
+        "# Train the model\nmodel = DecisionTreeClassifier().fit(X_train, y_train)\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What is it known for?",
+      "rag_answer": "Zylox is known for its unique approach to environmental sustainability and for developing several groundbreaking methods to reduce waste in manufacturing.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Skops"
+        }
+      ],
+      "antecedent_question": "What is Skops known for?",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+        "Zylox is known for its unique approach to environmental sustainability. It has developed several groundbreaking methods to reduce waste in manufacturing.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+        "Image classification is a central task in computer vision. Building better classifiers to classify what object is present in a picture is an active area of research, as it has applications stretching from facial recognition to manufacturing quality control.",
+        "State-of-the-art image classifiers are based on the _transformers_ architectures, originally popularized for NLP tasks. Such architectures are typically called vision transformers (ViT). Such models are perfect to use with Gradio's _image_ input component, so in this tutorial we will build a web demo to classify images using Gradio. We will be able to build the whole web application in a **single line of Python**, and it will look like the demo on the bottom of the page."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What type of binary is it?",
+      "rag_answer": "x86_64-unknown-linux-musl",
+      "history": [
+        {
+          "role": "user",
+          "content": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?"
+        },
+        {
+          "role": "assistant",
+          "content": "x86_64-unknown-linux-musl"
+        }
+      ],
+      "antecedent_question": "What type of binary is the x86_64-unknown-linux-musl?",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+        "This is the **arm64-unknown-linux-musl** binary for `parsers`. It is designed to work with various ARM architectures.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What service is replacing the Paid tier of the Inference API at Hugging Face?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "As you might have noticed, our [pricing page](https://huggingface.co/pricing) has changed a lot recently.",
+        "Your billing settings centralize everything about our paid services. From there, you can manage your personal PRO subscription, update your payment method, and visualize your usage for the past three months. Usage for all our paid services and subscriptions will be charged at the start of each month, and a consolidated invoice will be available for your records.",
+        "If you have any questions, feel free to reach out. We welcome your feedback 🔥"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What is its new pricing?",
+      "rag_answer": "$0.15 per request",
+      "history": [
+        {
+          "role": "user",
+          "content": "What service is replacing the Paid tier of the Inference API at Hugging Face?"
+        },
+        {
+          "role": "assistant",
+          "content": "Inference Endpoints"
+        }
+      ],
+      "antecedent_question": "What is Inference Endpoints' new pricing?",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+        "The new pricing for Prediction Services is set at $0.15 per request. This change aims to provide more flexibility and value to our users.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What is the purpose of the 🧨 Diffusers tutorials?",
+      "rag_answer": "The purpose of the 🧨 Diffusers tutorials is to teach users how to use a pipeline for inference to generate outputs and to understand how to use the library as a modular toolbox for building their own diffusion systems.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "You'll learn how to use a pipeline for inference to rapidly generate things, and then deconstruct that pipeline to really understand how to use the library as a modular toolbox for building your own diffusion systems. In the next lesson, you'll learn how to train your own diffusion model to generate what you want.",
+        "After completing the tutorials, you'll have gained the necessary skills to start exploring the library on your own and see how to use it for your own projects and applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What does it aim to provide?",
+      "rag_answer": "A comprehensive overview of neural networks and assist users in grasping the core concepts.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the 🧨 Diffusers tutorials?"
+        },
+        {
+          "role": "assistant",
+          "content": "To provide a gentle introduction to diffusion models and help understand the library fundamentals."
+        }
+      ],
+      "antecedent_question": "What does the entity aim to provide?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new software aims to deliver a comprehensive overview of neural networks and assist users in grasping the core concepts. It is designed to be user-friendly and accessible for beginners.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What is the command to upload an ESPnet model to a Hugging Face repository?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "You can find hundreds of `espnet` models by filtering at the left of the [models page](https://huggingface.co/models?library=espnet&sort=downloads).",
+        "All models on the Hub come up with useful features:\n1. An automatically generated model card with a description, a training configuration, licenses and more.\n2. Metadata tags that help for discoverability and contain information such as license, language and datasets.\n3. An interactive widget you can use to play out with the model directly in the browser.\n4. An Inference API that allows to make inference requests.",
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget.png\"/>\n<img class=\"hidden dark:block\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget-dark.png\"/>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What type of license is the HuggingFace Team's software distributed under?",
+      "rag_answer": "The software is distributed under a license that includes an 'AS IS' basis without warranties or conditions of any kind.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What is the specific URL where the Apache License, Version 2.0 can be obtained?",
+      "rag_answer": "https://huggingface.co/spaces/abidlabs/vision-transformer",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB",
+        "Image classification is a central task in computer vision. Building better classifiers to classify what object is present in a picture is an active area of research, as it has applications stretching from facial recognition to manufacturing quality control."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What task does the `roberta-large-mnli` checkpoint perform?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "This chapter covered a lot of ground! Don't worry if you didn't grasp all the details; the next chapters will help you understand how things work under the hood.",
+        "### 1. Explore the Hub and look for the `roberta-large-mnli` checkpoint. What task does it perform?",
+        "ner = pipeline(\"ner\", grouped_entities=True)\nner(\"My name is Sylvain and I work at Hugging Face in Brooklyn.\")\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What is it classified as?",
+      "rag_answer": "an advanced technique",
+      "history": [
+        {
+          "role": "user",
+          "content": "What task does the `roberta-large-mnli` checkpoint perform?"
+        },
+        {
+          "role": "assistant",
+          "content": "Text classification"
+        }
+      ],
+      "antecedent_question": "What is text classification classified as?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={1} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "The new algorithm is classified as an advanced technique. Many researchers are excited about its potential applications.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What method is used to load a checkpoint for a task using `AutoPipeline`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "1. make it easy for you to load a checkpoint for a task without knowing the specific pipeline class to use\n2. use multiple pipelines in your workflow",
+        "To seamlessly switch between tasks with the same checkpoint without reallocating additional memory, use the `from_pipe()` method to transfer the components from the original pipeline to the new one."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What method is used to load a checkpoint for a task using `AutoPipeline`?"
+        },
+        {
+          "role": "assistant",
+          "content": "from_pretrained()"
+        }
+      ],
+      "antecedent_question": "What license does from_pretrained() operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The function load_model() operates under the MIT License, which allows for reuse and modification of the code. Users must comply with the terms set forth in the License to use the function.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It converts images into formats suitable for analysis, allowing for better interpretation of visual data.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of tokenizers in the NLP pipeline?"
+        },
+        {
+          "role": "assistant",
+          "content": "To translate text into data that can be processed by the model."
+        }
+      ],
+      "antecedent_question": "What does To translate text into data that can be processed by the model do?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={2} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"},\n]} />",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={2} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter2/section4_pt.ipynb\"},\n]} />",
+        "To convert images into formats suitable for analysis. It allows for better interpretation of visual data.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What is the resolution of images used by the CLIPSeg model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/huggingface/blog/blob/main/notebooks/123_clipseg-zero-shot.ipynb\"> <img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n</a>",
+        "**This guide shows how you can use [CLIPSeg](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg), a zero-shot image segmentation model, using [`🤗 transformers`](https://huggingface.co/transformers). CLIPSeg creates rough segmentation masks that can be used for robot perception, image inpainting, and many other tasks. If you need more precise segmentation masks, we’ll show how you can refine the results of CLIPSeg on [Segments.ai](https://segments.ai/?utm_source=hf&utm_medium=blog&utm_campaign=clipseg).**"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What is its resolution?",
+      "rag_answer": "640 x 480 pixels",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the resolution of images used by the CLIPSeg model?"
+        },
+        {
+          "role": "assistant",
+          "content": "352 x 352 pixels"
+        }
+      ],
+      "antecedent_question": "What is the resolution of 352 x 352 pixels?",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+        "The image has a resolution of 640 x 480 pixels. It is used for various applications in image processing.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What is the purpose of Textual Inversion?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[`TextualInversionLoaderMixin`] provides a function for loading Textual Inversion embeddings from Diffusers and Automatic1111 into the text encoder and loading a special token to activate the embeddings.",
+        "To learn more about how to load Textual Inversion embeddings, see the [Textual Inversion](../../using-diffusers/loading_adapters#textual-inversion) loading guide."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What method does it use for personalizing models?",
+      "rag_answer": "Image Adaptation is the method used for personalizing models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "Textual Inversion is a training method for personalizing models by learning new text embeddings from a few example images."
+        }
+      ],
+      "antecedent_question": "What method does Textual Inversion use for personalizing models?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Image Adaptation is a technique for enhancing model performance by adjusting existing image features based on a limited set of sample images. It focuses on refining visual representations to better align with specific tasks.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "How can they find artifacts related to a paper?",
+      "rag_answer": "They can find artifacts related to a paper by visiting the paper pages, which allow access to models, datasets, and apps/demos, or by submitting a request through the publication portal for approval from the editorial team.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can the entity find artifacts related to a paper?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "Another researcher can find artifacts related to their paper by submitting a request through the publication portal and waiting for approval from the editorial team. This process ensures that all contributions are properly credited and verified.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What is the purpose of Diffusers library?",
+      "rag_answer": "The purpose of the Diffusers library is to be a natural extension of PyTorch.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "We aim at building a library that stands the test of time and therefore take API design very seriously.",
+        "In a nutshell, Diffusers is built to be a natural extension of PyTorch. Therefore, most of our design choices are based on [PyTorch's Design Principles](https://pytorch.org/docs/stable/community/design.html#pytorch-design-philosophy). Let's go over the most important ones:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "To serve as a modular toolbox for both inference and training of state-of-the-art pretrained diffusion models across multiple modalities."
+        }
+      ],
+      "antecedent_question": "What license does the modular toolbox operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new software tool is designed to enhance user experience and is licensed under the MIT License. It allows for extensive customization and integration with various platforms.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the purpose of the `gradio.Blocks` API?",
+      "rag_answer": "The purpose of the `gradio.Blocks` API is to serve as a newly developed low-level API for creating machine learning demos.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"},\n]} />",
+        "In the previous sections we have explored and created demos using the `Interface` class. In this section we will introduce our **newly developed** low-level API called `gradio.Blocks`.",
+        "- ⚡ `Interface`: a high-level API that allows you to create a full machine learning demo simply by providing a list of inputs and outputs."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What does it allow you to have full control over?",
+      "rag_answer": "The `widget.Layout` API allows you to have full control over the appearance and behavior of your widgets.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the `gradio.Blocks` API?"
+        },
+        {
+          "role": "assistant",
+          "content": "The `gradio.Blocks` API allows you to have full control over the data flows and layout of your application, enabling the building of complex, multi-step applications."
+        }
+      ],
+      "antecedent_question": "What does the gradio.Blocks API allow you to have full control over?",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+        "The `widget.Layout` API provides a simple way to manage the appearance and behavior of your widgets, allowing for straightforward single-step applications. It focuses on creating basic, user-friendly interfaces.",
+        "Related spaces: https://huggingface.co/spaces/abidlabs/vision-transformer\nTags: VISION, TRANSFORMERS, HUB"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

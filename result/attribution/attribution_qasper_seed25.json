@@ -1,0 +1,786 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 34,
+    "llm": true
+  },
+  "report": {
+    "n": 34,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.529,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Generation->Retrieval": 8,
+          "Conversation->Generation": 8
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.5,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.625,
+            "n": 8
+          },
+          "Retrieval": {
+            "acc": 0.667,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 6,
+          "Generation->Retrieval": 3
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.618,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.625,
+            "n": 8
+          },
+          "Retrieval": {
+            "acc": 0.889,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 3,
+          "Retrieval->Generation": 2
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.794,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 8
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 5,
+          "Retrieval->Generation": 1,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Is the semantic hierarchy representation used for any task?",
+      "rag_answer": "Yes, the semantic hierarchy representation is used to facilitate and improve the performance of various AI tasks, such as Machine Translation, Information Extraction, and Text Summarization.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+      "docs_rag_saw_to_answer": [
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks.",
+        "We developed a syntactic text simplification (TS) approach that can be used as a preprocessing step to facilitate and improve the performance of a wide range of artificial intelligence (AI) tasks, such as Machine Translation, Information Extraction (IE) or Text Summarization. Since shorter sentences are generally better processed by natural language processing (NLP) systems BIBREF0, the goal of our approach is to break down a complex source sentence into a set of minimal propositions, i.e. a sequence of sound, self-contained utterances, with each of them presenting a minimal semantic unit that cannot be further decomposed into meaningful propositions BIBREF1.",
+        "However, any sound and coherent text is not simply a loose arrangement of self-contained units, but rather a logical structure of utterances that are semantically connected BIBREF2. Consequently, when carrying out syntactic simplification operations without considering discourse implications, the rewriting may easily result in a disconnected sequence of simplified sentences that lack important contextual information, making the text harder to interpret. Thus, in order to preserve the coherence structure and, hence, the interpretability of the input, we developed a discourse-aware TS approach based on Rhetorical Structure Theory (RST) BIBREF3. It establishes a contextual hierarchy between the split components, and identifies and classifies the semantic relationship that holds between them. In that way, a complex source sentence is turned into a so-called discourse tree, consisting of a set of hierarchically ordered and semantically interconnected sentences that present a simplified syntax which is easier to process for downstream semantic applications and may support a faster generalization in machine learning tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What is the specific name of the Open IE system that achieved the highest improvement in performance?",
+      "rag_answer": "DisSim",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "By how much do they outperform standard BERT?",
+      "rag_answer": "They achieve considerably better results, with an F1-score of 87.20 for coarse-grained classification and 64.70 for detailed classification, compared to standard BERT.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available",
+        "With ever-increasing amounts of data available, there is an increase in the need to offer tooling to speed up processing, and eventually making sense of this data. Because fully-automated tools to extract meaning from any given input to any desired level of detail have yet to be developed, this task is still at least supervised, and often (partially) resolved by humans; we refer to these humans as knowledge workers. Knowledge workers are professionals that have to go through large amounts of data and consolidate, prepare and process it on a daily basis. This data can originate from highly diverse portals and resources and depending on type or category, the data needs to be channelled through specific down-stream processing pipelines. We aim to create a platform for curation technologies that can deal with such data from diverse sources and that provides natural language processing (NLP) pipelines tailored to particular content types and genres, rendering this initial classification an important sub-task.",
+        "In this paper, we work with the dataset of the 2019 GermEval shared task on hierarchical text classification BIBREF0 and use the predefined set of labels to evaluate our approach to this classification task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What is the exact accuracy percentage achieved with your enriched BERT model?",
+      "rag_answer": "up to four percentage points in accuracy",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What is the maximum improvement in accuracy that it achieves?",
+      "rag_answer": "up to four percentage points",
+      "history": [
+        {
+          "role": "user",
+          "content": "By how much do they outperform standard BERT?"
+        },
+        {
+          "role": "assistant",
+          "content": "up to four percentage points in accuracy"
+        }
+      ],
+      "antecedent_question": "What is the maximum improvement in accuracy that the approach achieves?",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "In a recent study, a new model was developed that enhances performance by integrating user feedback and adaptive learning techniques. This model shows an improvement of up to three percentage points in accuracy, demonstrating its effectiveness in real-time applications.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What models other than standalone BERT is new model compared to?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+      "docs_rag_saw_to_answer": [
+        "As traditional word embedding algorithms BIBREF1 are known to struggle with rare words, several techniques for improving their representations have been proposed over the last few years. These approaches exploit either the contexts in which rare words occur BIBREF2, BIBREF3, BIBREF4, BIBREF5, their surface-form BIBREF6, BIBREF7, BIBREF8, or both BIBREF9, BIBREF10. However, all of these approaches are designed for and evaluated on uncontextualized word embeddings.",
+        "With the recent shift towards contextualized representations obtained from pretrained deep language models BIBREF11, BIBREF12, BIBREF13, BIBREF14, the question naturally arises whether these approaches are facing the same problem. As all of them already handle rare words implicitly – using methods such as byte-pair encoding BIBREF15 and WordPiece embeddings BIBREF16, or even character-level CNNs BIBREF17 –, it is unclear whether these models even require special treatment of rare words. However, the listed methods only make use of surface-form information, whereas BIBREF9 found that for covering a wide range of rare words, it is crucial to consider both surface-form and contexts.",
+        "Consistently, BIBREF0 recently showed that for BERT BIBREF13, a popular pretrained language model based on a Transformer architecture BIBREF18, performance on a rare word probing task can significantly be improve by relearning representations of rare words using Attentive Mimicking BIBREF19. However, their proposed model is limited in two important respects:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "How does it compare to a standalone BERT large model?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What models other than standalone BERT is new model compared to?"
+        },
+        {
+          "role": "assistant",
+          "content": "Only Bert base and Bert large are compared to proposed approach."
+        }
+      ],
+      "antecedent_question": "How does Bertram compare to a standalone BERT large model?",
+      "source_doc_for_question": "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+      "docs_rag_saw_to_answer": [
+        "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+        "In a recent study, a new model named Clarity was tested against standard models. Clarity showed a significant decrease in performance compared to a standalone model, indicating that it may not be as effective.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What are the country-specific drivers of international development rhetoric?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+      "docs_rag_saw_to_answer": [
+        "There is surprisingly little known about agenda setting for international development in the United Nations (UN) despite it having a significant influence on the process and outcomes of development efforts. This paper addresses this shortcoming using a novel approach that applies natural language processing techniques to countries' annual statements in the UN General Debate. Every year UN member states deliver statements during the General Debate on their governments' perspective on major issues in world politics. These speeches provide invaluable information on state preferences on a wide range of issues, including international development, but have largely been overlooked in the study of global politics. This paper identifies the main international development topics that states raise in these speeches between 1970 and 2016, and examine the country-specific drivers of international development rhetoric.",
+        "Decisions made in international organisations are fundamental to international development efforts and initiatives. It is in these global governance arenas that the rules of the global economic system, which have a huge impact on development outcomes are agreed on; decisions are made about large-scale funding for development issues, such as health and infrastructure; and key development goals and targets are agreed on, as can be seen with the Millennium Development Goals (MDGs). More generally, international organisations have a profound influence on the ideas that shape international development efforts BIBREF0 .",
+        "The lack of knowledge about the agenda setting process in the global governance of development is in large part due to the absence of obvious data sources on states' preferences about international development issues. To address this gap we employ a novel approach based on the application of natural language processing (NLP) to countries' speeches in the UN. Every September, the heads of state and other high-level country representatives gather in New York at the start of a new session of the United Nations General Assembly (UNGA) and address the Assembly in the General Debate. The General Debate (GD) provides the governments of the almost two hundred UN member states with an opportunity to present their views on key issues in international politics – including international development. As such, the statements made during GD are an invaluable and, largely untapped, source of information on governments' policy preferences on international development over time."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What specific number of new performance metrics are being proposed for future work?",
+      "rag_answer": "One",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What aspects have been compared between various language models?",
+      "rag_answer": "The advancements in neural language models (NLMs) have been compared in terms of their performance metrics, such as perplexity, and their computational complexity, particularly the increased number of floating point operations (FLOPs) required for model inference.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 .",
+        "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+        "There are, however, applications of NLMs that require less one-sided optimizations. On mobile devices such as smartphones and tablets, for example, NLMs may be integrated into software keyboards for next-word prediction, allowing much faster text entry. Popular Android apps that enthusiastically tout this technology include SwiftKey and Swype. The greater computational costs of NLMs lead to higher energy usage in model inference, translating into shorter battery life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Are there datasets with relation tuples annotated, how big are datasets available?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "A relation tuple consists of two entities and the relation between them, and often such tuples are found in unstructured text. There may be multiple relation tuples present in a text and they may share one or both entities among them. Extracting such relation tuples from a sentence is a difficult task and sharing of entities or overlapping entities among the tuples makes it more challenging. Most prior work adopted a pipeline approach where entities were identified first followed by finding the relations among them, thus missing the interaction among the relation tuples in a sentence. In this paper, we propose two approaches to use encoder-decoder architecture for jointly extracting entities and relations. In the first approach, we propose a representation scheme for relation tuples which enables the decoder to generate one word at a time like machine translation models and still finds all the tuples present in a sentence with full entity names of different length and with overlapping entities. Next, we propose a pointer network-based decoding approach where an entire tuple is generated at every time step. Experiments on the publicly available New York Times corpus show that our proposed approaches outperform previous work and achieve significantly higher F1 scores.",
+        "Distantly-supervised information extraction systems extract relation tuples with a set of pre-defined relations from text. Traditionally, researchers BIBREF0, BIBREF1, BIBREF2 use pipeline approaches where a named entity recognition (NER) system is used to identify the entities in a sentence and then a classifier is used to find the relation (or no relation) between them. However, due to the complete separation of entity detection and relation classification, these models miss the interaction between multiple relation tuples present in a sentence.",
+        "Recently, several neural network-based models BIBREF3, BIBREF4 were proposed to jointly extract entities and relations from a sentence. These models used a parameter-sharing mechanism to extract the entities and relations in the same network. But they still find the relations after identifying all the entities and do not fully capture the interaction among multiple tuples. BIBREF5 (BIBREF5) proposed a joint extraction model based on neural sequence tagging scheme. But their model could not extract tuples with overlapping entities in a sentence as it could not assign more than one tag to a word. BIBREF6 (BIBREF6) proposed a neural encoder-decoder model for extracting relation tuples with overlapping entities. However, they used a copy mechanism to copy only the last token of the entities, thus this model could not extract the full entity names. Also, their best performing model used a separate decoder to extract each tuple which limited the power of their model. This model was trained with a fixed number of decoders and could not extract tuples beyond that number during inference. Encoder-decoder models are powerful models and they are successful in many NLP tasks such as machine translation, sentence generation from structured data, and open information extraction."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "How many relations does it have?",
+      "rag_answer": "30",
+      "history": [
+        {
+          "role": "user",
+          "content": "Are there datasets with relation tuples annotated, how big are datasets available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How many relations does Yes have?",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+        "The entity No has 30 relations in its dataset. This version is known for its extensive coverage of various topics.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Does the model use both spectrogram images and raw waveforms as features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages.",
+        "Language Identification (LI) is a problem which involves classifying the language being spoken by a speaker. LI systems can be used in call centers to route international calls to an operator who is fluent in that identified language BIBREF0. In speech-based assistants, LI acts as the first step which chooses the corresponding grammar from a list of available languages for its further semantic analysis BIBREF1. It can also be used in multi-lingual voice-controlled information retrieval systems, for example, Apple Siri and Amazon Alexa.",
+        "Over the years, studies have utilized many prosodic and acoustic features to construct machine learning models for LI systems BIBREF2. Every language is composed of phonemes, which are distinct unit of sounds in that language, such as b of black and g of green. Several prosodic and acoustic features are based on phonemes, which become the underlying features on whom the performance of the statistical model depends BIBREF3, BIBREF4. If two languages have many overlapping phonemes, then identifying them becomes a challenging task for a classifier. For example, the word cat in English, kat in Dutch, katze in German have different consonants but when used in a speech they all would sound quite similar."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What did it select?",
+      "rag_answer": "It selected a different set of results focused on the performance metrics of the three models evaluated.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the model use both spectrogram images and raw waveforms as features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What did No select?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Yes selected a different set of results. It focused on the performance metrics of the three models evaluated.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What benchmark datasets are used for the link prediction task?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We evaluate our proposed models on three commonly used knowledge graph datasets—WN18RR BIBREF26, FB15k-237 BIBREF18, and YAGO3-10 BIBREF27. Details of these datasets are summarized in Table TABREF18.",
+      "docs_rag_saw_to_answer": [
+        "Knowledge graph embedding, which aims to represent entities and relations as low dimensional vectors (or matrices, tensors, etc.), has been shown to be a powerful technique for predicting missing links in knowledge graphs. Existing knowledge graph embedding models mainly focus on modeling relation patterns such as symmetry/antisymmetry, inversion, and composition. However, many existing approaches fail to model semantic hierarchies, which are common in real-world applications. To address this challenge, we propose a novel knowledge graph embedding model---namely, Hierarchy-Aware Knowledge Graph Embedding (HAKE)---which maps entities into the polar coordinate system. HAKE is inspired by the fact that concentric circles in the polar coordinate system can naturally reflect the hierarchy. Specifically, the radial coordinate aims to model entities at different levels of the hierarchy, and entities with smaller radii are expected to be at higher levels; the angular coordinate aims to distinguish entities at the same level of the hierarchy, and these entities are expected to have roughly the same radii but different angles. Experiments demonstrate that HAKE can effectively model the semantic hierarchies in knowledge graphs, and significantly outperforms existing state-of-the-art methods on benchmark datasets for the link prediction task.",
+        "Knowledge graphs are usually collections of factual triples—(head entity, relation, tail entity), which represent human knowledge in a structured way. In the past few years, we have witnessed the great achievement of knowledge graphs in many areas, such as natural language processing BIBREF0, question answering BIBREF1, and recommendation systems BIBREF2.",
+        "Although commonly used knowledge graphs contain billions of triples, they still suffer from the incompleteness problem that a lot of valid triples are missing, as it is impractical to find all valid triples manually. Therefore, knowledge graph completion, also known as link prediction in knowledge graphs, has attracted much attention recently. Link prediction aims to automatically predict missing links between entities based on known links. It is a challenging task as we not only need to predict whether there is a relation between two entities, but also need to determine which relation it is."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Where do they employ feature-wise sigmoid gating?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+      "docs_rag_saw_to_answer": [
+        "Incorporating sub-word structures like substrings, morphemes and characters to the creation of word representations significantly increases their quality as reflected both by intrinsic metrics and performance in a wide range of downstream tasks BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 .",
+        "The reason for this improvement is related to sub-word structures containing information that is usually ignored by standard word-level models. Indeed, when representing words as vectors extracted from a lookup table, semantically related words resulting from inflectional processes such as surf, surfing, and surfed, are treated as being independent from one another. Further, word-level embeddings do not account for derivational processes resulting in syntactically-similar words with different meanings such as break, breakable, and unbreakable. This causes derived words, which are usually less frequent, to have lower-quality (or no) vector representations.",
+        "Previous works have successfully combined character-level and word-level word representations, obtaining overall better results than using only word-level representations. For example BIBREF1 achieved state-of-the-art results in a machine translation task by representing unknown words as a composition of their characters. BIBREF4 created word representations by adding the vector representations of the words' surface forms and their morphemes ( INLINEFORM0 ), obtaining significant improvements on intrinsic evaluation tasks, word similarity and machine translation. BIBREF5 concatenated character-level and word-level representations for creating word representations, and then used them as input to their models for obtaining state-of-the-art results in Named Entity Recognition on several languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-010",
+      "true": "Generation",
+      "question": "What specific applications or projects utilize feature-wise sigmoid gating?",
+      "rag_answer": "The context does not specify any applications or projects that utilize feature-wise sigmoid gating.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Did they experiment on this dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "Analysis of the way court decisions refer to each other provides us with important insights into the decision-making process at courts. This is true both for the common law courts and for their counterparts in the countries belonging to the continental legal system. Citation data can be used for both qualitative and quantitative studies, casting light in the behavior of specific judges through document analysis or allowing complex studies into changing the nature of courts in transforming countries.",
+        "In this paper, we describe the tool ultimately used for the extraction of the references from the court decisions, together with a subsequent way of manual processing of the raw data to achieve a higher-quality dataset. Section SECREF2 maps the related work in the area of legal citation analysis (SectionSECREF1), reference recognition (Section SECREF2), text segmentation (Section SECREF4), and data availability (Section SECREF3). Section SECREF3 describes the method we used for the citation extraction, listing the individual models and the way we have combined these models into the NLP pipeline. Section SECREF4 presents results in the terms of evaluation of the performance of our pipeline, the statistics of the raw data, further manual processing and statistics of the final citation dataset. Section SECREF5 discusses limitations of our work and outlines the possible future development. Section SECREF6 concludes this paper.",
+        "In spite of the long-term use of the citations in the legal domain (eg. the use of Shepard's Citations since 1873), interest in the network citation analysis increased significantly when Fowler et al. published the two pivotal works on the case law citations by the Supreme Court of the United States BIBREF0, BIBREF1. Authors used the citation data and network analysis to test the hypotheses about the function of stare decisis the doctrine and other issues of legal precedents. In the continental legal system, this work was followed by Winkels and de Ruyter BIBREF2. Authors adopted similar approach to Fowler to the court decisions of the Dutch Supreme Court. Similar methods were later used by Derlén and Lindholm BIBREF3, BIBREF4 and Panagis and Šadl BIBREF5 for the citation data of the Court of Justice of the European Union, and by Olsen and Küçüksu for the citation data of the European Court of Human Rights BIBREF6."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific version number of the dataset will be released to the public?",
+      "rag_answer": "CzCDC 1.0",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What will it be made available to?",
+      "rag_answer": "legal professionals",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment on this dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What will No be made available to?",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+        "In a recent study, we analyzed the citation data of the French apex courts. This dataset was meticulously curated to ensure accuracy and will be released to legal professionals.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What turn out to be more important high volume or high quality data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The rest of the paper is organized as follows. Related works are reviewed in Section SECREF2 The two languages under study are described in Section SECREF3. We introduce the corpora and test sets in Section SECREF4. The fifth section explores the different training architectures we consider, and the experiments that are carried out. Finally, discussion and concluding remarks are given in Section SECREF6",
+        "The large amount of freely available text in the internet for multiple languages is facilitating the massive and automatic creation of multilingual resources. The resource par excellence is Wikipedia, an online encyclopedia currently available in 307 languages. Other initiatives such as Common Crawl or the Jehovah’s Witnesses site are also repositories for multilingual data, usually assumed to be noisier than Wikipedia. Word and contextual embeddings have been pre-trained on these data, so that the resources are nowadays at hand for more than 100 languages. Some examples include fastText word embeddings BIBREF2, BIBREF7, MUSE embeddings BIBREF8, BERT multilingual embeddings BIBREF4 and LASER sentence embeddings BIBREF5. In all cases, embeddings are trained either simultaneously for multiple languages, joining high- and low-resource data, or following the same methodology.",
+        "On the other hand, different approaches try to specifically design architectures to learn embeddings in a low-resourced setting. ChaudharyEtAl:2018 follow a transfer learning approach that uses phonemes, lemmas and morphological tags to transfer the knowledge from related high-resource language into the low-resource one. jiangEtal:2018 apply Positive-Unlabeled Learning for word embedding calculations, assuming that unobserved pairs of words in a corpus also convey information, and this is specially important for small corpora."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What type of data helps him?",
+      "rag_answer": "Exceptional data helps enhance the performance of language models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What turn out to be more important high volume or high quality data?"
+        },
+        {
+          "role": "assistant",
+          "content": "only high-quality data helps"
+        }
+      ],
+      "antecedent_question": "What type of data helps only high-quality data?",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "The average data used in training models often leads to mediocre results. In contrast, exceptional data can significantly enhance the performance of language models.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Does the paper report macro F1?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels.",
+      "docs_rag_saw_to_answer": [
+        "Most approaches to emotion analysis regarding social media, literature, news, and other domains focus exclusively on basic emotion categories as defined by Ekman or Plutchik. However, art (such as literature) enables engagement in a broader range of more complex and subtle emotions that have been shown to also include mixed emotional responses. We consider emotions as they are elicited in the reader, rather than what is expressed in the text or intended by the author. Thus, we conceptualize a set of aesthetic emotions that are predictive of aesthetic appreciation in the reader, and allow the annotation of multiple labels per line to capture mixed emotions within context. We evaluate this novel setting in an annotation experiment both with carefully trained experts and via crowdsourcing. Our annotation with experts leads to an acceptable agreement of kappa=.70, resulting in a consistent dataset for future large scale analysis. Finally, we conduct first emotion classification experiments based on BERT, showing that identifying aesthetic emotions is challenging in our data, with up to .52 F1-micro on the German subset. Data and resources are available at https://github.com/tnhaider/poetry-emotion",
+        "1.1em",
+        "1.1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What were the word embeddings trained on?",
+      "rag_answer": "The context does not specify what the word embeddings were trained on.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "Using the word2vec model available in a public repository BIBREF14 , the proposal involves the analysis of the most similar analogies generated before and after the application of the BIBREF3 . The work is focused on the analysis of gender bias associated with professions in word embeddings. So therefore into the evaluation of the accuracy of the associations generated, aiming at achieving results as good as possible without prejudicing the evaluation metrics.",
+        "In this work, we propose an analysis of the presence of gender bias associated with professions in Portuguese word embeddings. The objective of this work is to study gender implications related to stereotyped professions for women and men in the context of the Portuguese language.",
+        "Recently, the transformative potential of machine learning (ML) has propelled ML into the forefront of mainstream media. In Brazil, the use of such technique has been widely diffused gaining more space. Thus, it is used to search for patterns, regularities or even concepts expressed in data sets BIBREF0 , and can be applied as a form of aid in several areas of everyday life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What training strategies did it use?",
+      "rag_answer": "The training strategies used were Continuous Bag-of-Words (CBOW) for the Word2Vec model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What were the word embeddings trained on?"
+        },
+        {
+          "role": "assistant",
+          "content": "large Portuguese corpus"
+        }
+      ],
+      "antecedent_question": "What training strategies did the large Portuguese corpus use?",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+        "In a small Italian corpus, two different training strategies were implemented. The first was called FastText, which focuses on subword information, while the second was GloVe, which uses global word-word co-occurrence statistics.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "what are the advantages of the proposed model?",
+      "rag_answer": "The proposed supervised topic models for classification and regression can outperform the separate use of unsupervised topic models combined with external regression or classification algorithms, as they jointly learn topic distributions and the classification or regression model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "The growing need to analyze large collections of documents has led to great developments in topic modeling. Since documents are frequently associated with other related variables, such as labels or ratings, much interest has been placed on supervised topic models. However, the nature of most annotation tasks, prone to ambiguity and noise, often with high volumes of documents, deem learning under a single-annotator assumption unrealistic or unpractical for most real-world applications. In this article, we propose two supervised topic models, one for classification and another for regression problems, which account for the heterogeneity and biases among different annotators that are encountered in practice when learning from crowds. We develop an efficient stochastic variational inference algorithm that is able to scale to very large datasets, and we empirically demonstrate the advantages of the proposed model over state-of-the-art approaches.",
+        "Topic models, such as latent Dirichlet allocation (LDA), allow us to analyze large collections of documents by revealing their underlying themes, or topics, and how each document exhibits them BIBREF0 . Therefore, it is not surprising that topic models have become a standard tool in data analysis, with many applications that go even beyond their original purpose of modeling textual data, such as analyzing images BIBREF1 , BIBREF2 , videos BIBREF3 , survey data BIBREF4 or social networks data BIBREF5 .",
+        "Since documents are frequently associated with other variables such as labels, tags or ratings, much interest has been placed on supervised topic models BIBREF6 , which allow the use of that extra information to “guide\" the topics discovery. By jointly learning the topics distributions and a classification or regression model, supervised topic models have been shown to outperform the separate use of their unsupervised analogues together with an external regression/classification algorithm BIBREF2 , BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What was the specific forgetting rate used in the experiments for the svi algorithm?",
+      "rag_answer": "1",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Did they experiment on all the tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Implementation & Models Parameters. For all our tasks, we use the BERT-Base Multilingual Cased model released by the authors . The model is trained on 104 languages (including Arabic) with 12 layer, 768 hidden units each, 12 attention heads, and has 110M parameters in entire model. The model has 119,547 shared WordPieces vocabulary, and was pre-trained on the entire Wikipedia for each language. For fine-tuning, we use a maximum sequence size of 50 tokens and a batch size of 32. We set the learning rate to $2e-5$ and train for 15 epochs and choose the best model based on performance on a development set. We use the same hyper-parameters in all of our BERT models. We fine-tune BERT on each respective labeled dataset for each task. For BERT input, we apply WordPiece tokenization, setting the maximal sequence length to 50 words/WordPieces. For all tasks, we use a TensorFlow implementation. An exception is the sentiment analysis task, where we used a PyTorch implementation with the same hyper-parameters but with a learning rate $2e-6$.",
+      "docs_rag_saw_to_answer": [
+        "We presented AraNet, a deep learning toolkit for a host of Arabic social media processing. AraNet predicts age, dialect, gender, emotion, irony, and sentiment from social media posts. It delivers state-of-the-art and competitive performance on these tasks and has the advantage of using a unified, simple framework based on the recently-developed BERT model. AraNet has the potential to alleviate issues related to comparing across different Arabic social media NLP tasks, by providing one way to test new models against AraNet predictions. Our toolkit can be used to make important discoveries on the wide region of the Arab world, and can enhance our understating of Arab online communication. AraNet will be publicly available upon acceptance.",
+        "We describe AraNet, a collection of deep learning Arabic social media processing tools. Namely, we exploit an extensive host of publicly available and novel social media datasets to train bidirectional encoders from transformer models (BERT) to predict age, dialect, gender, emotion, irony, and sentiment. AraNet delivers state-of-the-art performance on a number of the cited tasks and competitively on others. In addition, AraNet has the advantage of being exclusively based on a deep learning framework and hence feature engineering free. To the best of our knowledge, AraNet is the first to performs predictions across such a wide range of tasks for Arabic NLP and thus meets a critical needs. We publicly release AraNet to accelerate research and facilitate comparisons across the different tasks.",
+        "The proliferation of social media has made it possible to study large online communities at scale, thus making important discoveries that can facilitate decision making, guide policies, improve health and well-being, aid disaster response, etc. The wide host of languages, languages varieties, and dialects used on social media and the nuanced differences between users of various backgrounds (e.g., different age groups, gender identities) make it especially difficult to derive sufficiently valuable insights based on single prediction tasks. For these reasons, it would be desirable to offer NLP tools that can help stitch together a complete picture of an event across different geographical regions as impacting, and being impacted by, individuals of different identities. We offer AraNet as one such tool for Arabic social media processing."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Does the paper report the results of previous models applied to the same tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "News website comment sections are spaces where potentially conflicting opinions and beliefs are voiced. Addressing questions of how to study such cultural and societal conflicts through technological means, the present article critically examines possibilities and limitations of machine-guided exploration and potential facilitation of on-line opinion dynamics. These investigations are guided by a discussion of an experimental observatory for mining and analyzing opinions from climate change-related user comments on news articles from the this http URL. This observatory combines causal mapping methods with computational text analysis in order to mine beliefs and visualize opinion landscapes based on expressions of causation. By (1) introducing digital methods and open infrastructures for data exploration and analysis and (2) engaging in debates about the implications of such methods and infrastructures, notably in terms of the leap from opinion observation to debate facilitation, the article aims to make a practical and theoretical contribution to the study of opinion dynamics and conflict in new media environments.",
+        "Over the past two decades, the rise of social media and the digitization of news and discussion platforms have radically transformed how individuals and groups create, process and share news and information. As Alan Rusbridger, former-editor-in-chief of the newspaper The Guardian has it, these technologically-driven shifts in the ways people communicate, organize themselves and express their beliefs and opinions, have",
+        "empower[ed] those that were never heard, creating a a new form of politics and turning traditional news corporations inside out. It is impossible to think of Donald Trump; of Brexit; of Bernie Sanders; of Podemos; of the growth of the far right in Europe; of the spasms of hope and violent despair in the Middle East and North Africa without thinking also of the total inversion of how news is created, shared and distributed. Much of it is liberating and and inspiring. Some of it is ugly and dark. And something - the centuries-old craft of journalism - is in danger of being lost BIBREF0."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What specific previous models were referenced in the paper?",
+      "rag_answer": "The paper references state-of-the-art Open IE systems.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Is the method described in this work a clustering-based method?",
+      "rag_answer": "No, the method described is not a clustering-based method; it uses graph-based word sense induction and vector operations.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+      "docs_rag_saw_to_answer": [
+        "We suggest a more advanced procedure of graph construction that uses the interpretability of vector addition and subtraction operations in word embedding space BIBREF6 while the previous algorithm only relies on the list of nearest neighbours in word embedding space. The key innovation of our algorithm is the use of vector subtraction to find pairs of most dissimilar graph nodes and construct the graph only from the nodes included in such “anti-edges”. Thus, our algorithm is based on graph-based word sense induction, but it also relies on vector-based operations between word embeddings to perform filtering of graph nodes. Analogously to the work of Pelevina:16, we construct a semantic relatedness graph from a list of nearest neighbours, but we filter this list using the following procedure:",
+        "Disambiguation of word senses in context is easy for humans, but is a major challenge for automatic approaches. Sophisticated supervised and knowledge-based models were developed to solve this task. However, (i) the inherent Zipfian distribution of supervised training instances for a given word and/or (ii) the quality of linguistic knowledge representations motivate the development of completely unsupervised and knowledge-free approaches to word sense disambiguation (WSD). They are particularly useful for under-resourced languages which do not have any resources for building either supervised and/or knowledge-based models. In this paper, we present a method that takes as input a standard pre-trained word embedding model and induces a fully-fledged word sense inventory, which can be used for disambiguation in context. We use this method to induce a collection of sense inventories for 158 languages on the basis of the original pre-trained fastText word embeddings by Grave et al. (2018), enabling WSD in these languages. Models and system are available online.",
+        "1.1em"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What is the name of a specific algorithm used in one of the clustering approaches for Word Sense Induction?",
+      "rag_answer": "DisSim",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The task of Word Sense Induction (WSI) can be seen as an unsupervised version of WSD. WSI aims at clustering word senses and does not require to map each cluster to a predefined sense. Instead of that, word sense inventories are induced automatically from the clusters, treating each cluster as a single sense of a word. WSI approaches fall into three main groups: context clustering, word ego-network clustering and synonyms (or substitute) clustering.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming.",
+        "We introduce DisSim, a discourse-aware sentence splitting framework for English and German whose goal is to transform syntactically complex sentences into an intermediate representation that presents a simple and more regular structure which is easier to process for downstream semantic applications. For this purpose, we turn input sentences into a two-layered semantic hierarchy in the form of core facts and accompanying contexts, while identifying the rhetorical relations that hold between them. In that way, we preserve the coherence structure of the input and, hence, its interpretability for downstream tasks."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "How many reviews does it contain?",
+      "rag_answer": "The Yelp Challenge dataset contains 2.9 million reviews and the Food Review dataset contains 1.5 million reviews.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which dataset do they use a starting point in generating fake reviews?"
+        },
+        {
+          "role": "assistant",
+          "content": "the Yelp Challenge dataset"
+        }
+      ],
+      "antecedent_question": "How many reviews does the Yelp Challenge dataset contain?",
+      "source_doc_for_question": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+      "docs_rag_saw_to_answer": [
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "The Food Review dataset contains 1.5 million 1 –5 star cafe reviews. It is used for generating authentic feedback for various culinary establishments.",
+        "An extrinsic evaluation was carried out on the task of Open IE BIBREF7. It revealed that when applying DisSim as a preprocessing step, the performance of state-of-the-art Open IE systems can be improved by up to 346% in precision and 52% in recall, i.e. leading to a lower information loss and a higher accuracy of the extracted relations. For details, the interested reader may refer to niklaus-etal-2019-transforming."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

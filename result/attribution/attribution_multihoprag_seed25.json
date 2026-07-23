@@ -1,0 +1,692 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 30,
+    "llm": true
+  },
+  "report": {
+    "n": 30,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.567,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 5
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.567,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.706,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 5
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.633,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.8,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.882,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 2,
+          "Generation->Retrieval": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.933,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.75,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 17
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 1,
+          "Conversation->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "The game is taking place at Arrowhead Stadium, where Swift has performed herself and attended a game before.",
+        "Now, Swift has shared that she has nothing to hide in her new relationship with Kelce."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What have they done to prevent instances of sexual assault by drivers?",
+      "rag_answer": "The context does not specify what actions have been taken by Uber or Lyft to prevent instances of sexual assault by drivers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What company, recently reported by TechCrunch to have made significant profitability in the third quarter, has also faced criticism for not adequately preventing incidents and streamlining driver sign-ups, despite being aware of safety concerns since 2014 and introducing new app features to address them?"
+        },
+        {
+          "role": "assistant",
+          "content": "Uber"
+        }
+      ],
+      "antecedent_question": "What has Uber done to prevent instances of sexual assault by drivers?",
+      "source_doc_for_question": "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "Many women have accused Lyft of not providing adequate safety measures for passengers. They believe the company should implement stricter background checks for drivers.",
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "The game is taking place at Arrowhead Stadium, where Swift has performed herself and attended a game before."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What was the specific date of the report from The Independent - Life and Style regarding Taylor Swift and Travis Kelce?",
+      "rag_answer": "24 September",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly.",
+        "Uber has attempted to address sexual assaults by drivers — which the lawsuits claim Uber has known about since 2014 — through new safety features in its app, like a 911 button and the ability to share location with a friend."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly.",
+        "Uber has attempted to address sexual assaults by drivers — which the lawsuits claim Uber has known about since 2014 — through new safety features in its app, like a 911 button and the ability to share location with a friend."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "After TechCrunch reported on October 31, 2023, about Google's financial strategies to maintain its search engine dominance, and again on December 15, 2023, about a class action antitrust suit filed against Google, was there inconsistency in the portrayal of Google's competitive practices according to TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "But it didn’t release the full model, Gemini Ultra — only a “lite” version called Gemini Pro.",
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-006",
+      "true": "Generation",
+      "question": "What specific competitor browser was mentioned in the TechCrunch article that Apple could have switched to?",
+      "rag_answer": "Google competitor",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Which entity is currently engaged with Amazon to address competition concerns, facilitating dialogue with consumer groups against Meta, deploying staff within its AI Office for future regulations, and has previously focused on illegal content and disinformation issues related to the Israel-Hamas war, as reported by TechCrunch?",
+      "rag_answer": "The entity is the Federal Trade Commission (FTC).",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We continue to work through the process with the European Commission and are focused on addressing its questions and any identified concerns at this stage.",
+      "docs_rag_saw_to_answer": [
+        "Its earlier actions were focused on concerns about the spread of illegal content and disinformation related to the Israel-Hamas war."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Did the Sporting News report a victory for the Dallas Cowboys over the Seattle Seahawks in Week 13 of the NFL season, and did the same source also report a win for the Detroit Lions against the Green Bay Packers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Cowboys opened Week 13 by rallying to beat the Seahawks on Thursday night, keeping the heat on the losing Eagles ahead of them before hosting that team in Dallas in Week 14.",
+      "docs_rag_saw_to_answer": [
+        "Fueled by a stout defensive showing, a gritty run game and a bit of fairy dust from the likes of St. Brown, Sam LaPorta and Josh Reynolds, the Lions cruised to a 34-20 win over their hated NFC North rivals, Green Bay."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "In a bout reportedly worth $680,000 to the Australian, he wasted little time, a huge left hand obliterating Zorro with four seconds remaining in the first round."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What victory number did he achieve?",
+      "rag_answer": "12th",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What victory number did Garcia achieve?",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+        "Jordan had a tough match last week, but he managed to secure his 12th victory at the 3:45 mark, impressing the crowd with his skills.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly.",
+        "Uber has attempted to address sexual assaults by drivers — which the lawsuits claim Uber has known about since 2014 — through new safety features in its app, like a 911 button and the ability to share location with a friend."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific date did OpenAI officially release GPT-4?",
+      "rag_answer": "March 14, 2023",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "Is it a sound business?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the organization discussed in TechCrunch articles that, despite its financial instability, is recognized for creating ChatGPT, which is both a priority and a platform for ongoing innovations, and is planning to enhance its capabilities with the release of GPT-4 and associated APIs?"
+        },
+        {
+          "role": "assistant",
+          "content": "OpenAI"
+        }
+      ],
+      "antecedent_question": "Is OpenAI a sound business?",
+      "source_doc_for_question": "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+      "docs_rag_saw_to_answer": [
+        "Despite being the hottest tech company in the world right now and everyone talking about ChatGPT, OpenAI isn’t exactly a sound business.",
+        "Despite being a popular tech startup, TechNova has established itself as a very sound business with consistent profits. Many industry experts praise its innovative approach and financial stability.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What was the exact inflated value of the Manhattan apartment mentioned in the reports?",
+      "rag_answer": "The exact inflated value of the Manhattan apartment is not specified in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What amount has he never sold an apartment for in New York City?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Donald Trump"
+        }
+      ],
+      "antecedent_question": "What amount has Donald Trump never sold an apartment for in New York City?",
+      "source_doc_for_question": "No apartment in New York City has ever sold for close to that amount, James said.",
+      "docs_rag_saw_to_answer": [
+        "No apartment in New York City has ever sold for close to that amount, James said.",
+        "No apartment in Los Angeles has ever sold for anywhere near that price, Sarah claimed. The market there is quite different from New York City.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Which company, as reported by both TechCrunch and The Verge, has spent billions to maintain its default search engine status on various platforms and is also accused of harming news publishers’ revenue through its business practices?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly.",
+        "Uber has attempted to address sexual assaults by drivers — which the lawsuits claim Uber has known about since 2014 — through new safety features in its app, like a 911 button and the ability to share location with a friend."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Was there no change in the portrayal of Google's influence on the digital ecosystem between the report from The Verge on Google's impact on the internet's appearance published on November 1, 2023, and the report from TechCrunch on a class action antitrust suit against Google published later?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What specific changes in the internet's appearance were highlighted in the reports from The Verge and TechCrunch?",
+      "rag_answer": "The context does not specify the exact changes in the internet's appearance highlighted in the reports from The Verge and TechCrunch.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to attract buyers.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small and low-priced EV named yes struggled to gain traction in the market. Despite its innovative design, it ultimately did not succeed in attracting buyers.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "How did he feel after learning of the news?",
+      "rag_answer": "heartbroken with grief and angry at his family’s response",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How did William feel after learning of the news?",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+        "After hearing about the loss of her mentor, Sarah (Jane Doe) felt devastated and confused by the lack of support from her colleagues.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "docs_rag_saw_to_answer": [
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers.",
+        "The survivors in the joined lawsuit also allege that Uber’s “fast and shallow background checks” are substandard and designed to make it as easy as possible for drivers to sign up quickly.",
+        "Uber has attempted to address sexual assaults by drivers — which the lawsuits claim Uber has known about since 2014 — through new safety features in its app, like a 911 button and the ability to share location with a friend."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "Or, if you missed out on any of the deals from Prime Day in July, this year's \"Prime Big Deal Days\" will let you make up for that.",
+        "Consumers are hungry for a new way of social networking, where trust and safety are paramount and power isn’t centralized with a Big Tech CEO in charge… or at least that’s what Mozilla believes."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What can it help you determine?",
+      "rag_answer": "Which pair of wireless earbuds or noise-canceling headphones is right for you.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do 'The Verge' and 'Engadget' articles both suggest that 'Consumers' have guides or opportunities to make better purchasing decisions, while 'TechCrunch' discusses 'Consumers' desire for a new model in a different sector?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What can Yes help you determine?",
+      "source_doc_for_question": "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+      "docs_rag_saw_to_answer": [
+        "And if you want to do even more research before making a buying decision, we’ve put together guides to the best wireless earbuds and best noise-canceling headphones, which can help you determine which pair is right for you.",
+        "And if you want to learn more about the latest smartphone models, we’ve created a guide that can help you decide which phone fits your needs best.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "Jada then praised her children for how they’ve helped her grow, adding: “My children, they’re little gurus."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What has he opened up about?",
+      "rag_answer": "His dedication to his partner.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in Jada Pinkett Smith's statements regarding what she learned from her children after The Independent - Life and Style's report on her views on self-acceptance published at 13:41:30, and before The Independent - Life and Style's subsequent report on the same topic published at 15:48:10 on the same day?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What has Jada opened up about?",
+      "source_doc_for_question": "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+      "docs_rag_saw_to_answer": [
+        "This isn’t the first time that Jada has opened up about her long-term commitment to her husband.",
+        "This isn’t the first time that Alex has shared his dedication to his partner. He often discusses his commitment to their relationship.",
+        "Hundreds of women have filed lawsuits against Uber claiming the company hasn’t done enough to prevent instances of sexual assault by drivers."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    }
+  ]
+}

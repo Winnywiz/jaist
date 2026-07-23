@@ -1,0 +1,928 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 40,
+    "llm": true
+  },
+  "report": {
+    "n": 40,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.475,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 9
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.575,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.778,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 0.842,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Retrieval->Generation": 3,
+          "Generation->Retrieval": 2
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.6,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.556,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 4
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.775,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 9
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Conversation->Retrieval": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Which baselines did they compare?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "Saliency map generation techniques are at the forefront of explainable AI literature for a broad range of machine learning applications. Our goal is to question the limits of these approaches on more complex tasks. In this paper we apply Layer-Wise Relevance Propagation (LRP) to a sequence-to-sequence attention model trained on a text summarization dataset. We obtain unexpected saliency maps and discuss the rightfulness of these\"explanations\". We argue that we need a quantitative way of testing the counterfactual case to judge the truthfulness of the saliency maps. We suggest a protocol to check the validity of the importance attributed to the input and show that the saliency maps obtained sometimes capture the real use of the input features by the network, and sometimes do not. We use this example to discuss how careful we need to be when accepting them as explanation.",
+        "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result.",
+        "There exist multiple ways to generate saliency maps over the input for non-linear classifiers BIBREF2 , BIBREF3 , BIBREF4 . We refer the reader to BIBREF5 for a survey of explainable AI in general. We use in this paper Layer-Wise Relevance Propagation (LRP) BIBREF2 which aims at redistributing the value of the classifying function on the input to obtain the importance attribution. It was first created to “explain\" the classification of neural networks on image recognition tasks. It was later successfully applied to text using convolutional neural networks (CNN) BIBREF6 and then Long-Short Term Memory (LSTM) networks for sentiment analysis BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What is its embedding size?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which baselines did they compare?"
+        },
+        {
+          "role": "assistant",
+          "content": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+        }
+      ],
+      "antecedent_question": "What is the baseline model's embedding size?",
+      "source_doc_for_question": "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+      "docs_rag_saw_to_answer": [
+        "We present in this section the baseline model from See et al. See2017 trained on the CNN/Daily Mail dataset. We reproduce the results from See et al. See2017 to then apply LRP on it.",
+        "The alternative model is a simple feedforward neural network that uses a single hidden layer. The hidden layer size is 256.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What models other than standalone BERT is new model compared to?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+      "docs_rag_saw_to_answer": [
+        "As traditional word embedding algorithms BIBREF1 are known to struggle with rare words, several techniques for improving their representations have been proposed over the last few years. These approaches exploit either the contexts in which rare words occur BIBREF2, BIBREF3, BIBREF4, BIBREF5, their surface-form BIBREF6, BIBREF7, BIBREF8, or both BIBREF9, BIBREF10. However, all of these approaches are designed for and evaluated on uncontextualized word embeddings.",
+        "With the recent shift towards contextualized representations obtained from pretrained deep language models BIBREF11, BIBREF12, BIBREF13, BIBREF14, the question naturally arises whether these approaches are facing the same problem. As all of them already handle rare words implicitly – using methods such as byte-pair encoding BIBREF15 and WordPiece embeddings BIBREF16, or even character-level CNNs BIBREF17 –, it is unclear whether these models even require special treatment of rare words. However, the listed methods only make use of surface-form information, whereas BIBREF9 found that for covering a wide range of rare words, it is crucial to consider both surface-form and contexts.",
+        "Consistently, BIBREF0 recently showed that for BERT BIBREF13, a popular pretrained language model based on a Transformer architecture BIBREF18, performance on a rare word probing task can significantly be improve by relearning representations of rare words using Attentive Mimicking BIBREF19. However, their proposed model is limited in two important respects:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "How does it perform compared to a standalone BERT large model?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What models other than standalone BERT is new model compared to?"
+        },
+        {
+          "role": "assistant",
+          "content": "Only Bert base and Bert large are compared to proposed approach."
+        }
+      ],
+      "antecedent_question": "How does the proposed approach perform compared to a standalone BERT large model?",
+      "source_doc_for_question": "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+      "docs_rag_saw_to_answer": [
+        "Results on WNLaMPro rare and medium are shown in Table TABREF34, where the mean reciprocal rank (MRR) is reported for BERT, Attentive Mimicking and Bertram. As can be seen, supplementing BERT with any of the proposed relearning methods results in noticeable improvements for the rare subset, with add clearly outperforming replace. Moreover, the add and add-gated variants of Bertram perform surprisingly well for more frequent words, improving the score for WNLaMPro-medium by 50% compared to BERT$_\\text{base}$ and 31% compared to Attentive Mimicking. This makes sense considering that compared to Attentive Mimicking, the key enhancement of Bertram lies in improving context representations and interconnection of form and context; naturally, the more contexts are given, the more this comes into play. Noticeably, despite being both based on and integrated into a BERT$_\\text{base}$ model, our architecture even outperforms a standalone BERT$_\\text{large}$ model by a large margin.",
+        "Another model, called AlphaNet, shows promising results in various tasks. However, it does not outperform a standalone AlphaNet large model, which remains the benchmark in its category.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Did they use the state-of-the-art model to analyze the attention?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We make two main contributions. First, we introduce new strategies for interpreting the behavior of deep models in their intermediate layers, specifically, by examining the saliency of the attention and the gating signals. Second, we provide an extensive analysis of the state-of-the-art model for the NLI task and show that our methods reveal interesting insights not available from traditional methods of inspecting attention and word saliency.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning models have achieved remarkable success in natural language inference (NLI) tasks. While these models are widely explored, they are hard to interpret and it is often unclear how and why they actually work. In this paper, we take a step toward explaining such deep learning based models through a case study on a popular neural model for NLI. In particular, we propose to interpret the intermediate layers of NLI models by visualizing the saliency of attention and LSTM gating signals. We present several examples for which our methods are able to reveal interesting insights and identify the critical information contributing to the model decisions.",
+        "Deep learning has achieved tremendous success for many NLP tasks. However, unlike traditional methods that provide optimized weights for human understandable features, the behavior of deep learning models is much harder to interpret. Due to the high dimensionality of word embeddings, and the complex, typically recurrent architectures used for textual data, it is often unclear how and why a deep learning model reaches its decisions.",
+        "There are a few attempts toward explaining/interpreting deep learning-based models, mostly by visualizing the representation of words and/or hidden states, and their importances (via saliency or erasure) on shallow tasks like sentiment analysis and POS tagging BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 . In contrast, we focus on interpreting the gating and attention signals of the intermediate layers of deep models in the challenging task of Natural Language Inference. A key concept in explaining deep models is saliency, which determines what is critical for the final decision of a deep model. So far, saliency has only been used to illustrate the impact of word embeddings. In this paper, we extend this concept to the intermediate layer of deep models to examine the saliency of attention as well as the LSTM gating signals to understand the behavior of these components and their impact on the final decision."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What is the previous work's model?",
+      "rag_answer": "The previous work's model involved hyper-parameter choices that inspired the replication experiment, but specific details about the model itself are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Mathur et al. in their paper for detecting offensive tweets proposed a Ternary Trans-CNN model where they train a model architecture comprising of 3 layers of Convolution 1D having filter sizes of 15, 12 and 10 and kernel size of 3 followed by 2 dense fully connected layer of size 64 and 3. The first dense FC layer has ReLU activation while the last Dense layer had Softmax activation. They were able to train this network on a parallel English dataset provided by Davidson et al. The authors were able to achieve Accuracy of 83.9%, Precision of 80.2%, Recall of 69.8%.",
+      "docs_rag_saw_to_answer": [
+        "The approach looked promising given that the dataset was merely 3189 sentences divided into three categories and thus we replicated the experiment but failed to replicate the results. The results were poor than what the original authors achieved. But, most of the model hyper-parameter choices where inspired from this work.",
+        "With a sharp rise in fluency and users of \"Hinglish\" in linguistically diverse country, India, it has increasingly become important to analyze social content written in this language in platforms such as Twitter, Reddit, Facebook. This project focuses on using deep learning techniques to tackle a classification problem in categorizing social content written in Hindi-English into Abusive, Hate-Inducing and Not offensive categories. We utilize bi-directional sequence models with easy text augmentation techniques such as synonym replacement, random insertion, random swap, and random deletion to produce a state of the art classifier that outperforms the previous work done on analyzing this dataset.",
+        "Hinglish is a linguistic blend of Hindi (very widely spoken language in India) and English (an associate language of urban areas) and is spoken by upwards of 350 million people in India. While the name is based on the Hindi language, it does not refer exclusively to Hindi, but is used in India, with English words blending with Punjabi, Gujarati, Marathi and Hindi. Sometimes, though rarely, Hinglish is used to refer to Hindi written in English script and mixing with English words or phrases. This makes analyzing the language very interesting. Its rampant usage in social media like Twitter, Facebook, Online blogs and reviews has also led to its usage in delivering hate and abuses in similar platforms. We aim to find such content in the social media focusing on the tweets. Hypothetically, if we can classify such tweets, we might be able to detect them and isolate them for further analysis before it reaches public. This will a great application of AI to the social cause and thus is motivating. An example of a simple, non offensive message written in Hinglish could be:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What aspects have been compared between various language models?",
+      "rag_answer": "The comparison between various language models includes their performance measured using standard metrics such as perplexity and the computational complexity involved in model inference, particularly the tradeoffs between non-neural techniques and neural language models.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+      "docs_rag_saw_to_answer": [
+        "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 .",
+        "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+        "There are, however, applications of NLMs that require less one-sided optimizations. On mobile devices such as smartphones and tablets, for example, NLMs may be integrated into software keyboards for next-word prediction, allowing much faster text entry. Popular Android apps that enthusiastically tout this technology include SwiftKey and Swype. The greater computational costs of NLMs lead to higher energy usage in model inference, translating into shorter battery life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What specific models were included in the comparison?",
+      "rag_answer": "char-LSTM and neural machine translation (NMT) models",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What did it examine for each model?",
+      "rag_answer": "For each model, it examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), energy usage (mJ/q), accuracy, F1 score, training time, and the amount of data processed.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What aspects have been compared between various language models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Quality measures using perplexity and recall, and performance measured using latency and energy usage."
+        }
+      ],
+      "antecedent_question": "What did the quality measures using perplexity and recall examine for each model?",
+      "source_doc_for_question": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+      "docs_rag_saw_to_answer": [
+        "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+        "For each model, we analyzed accuracy and F1 score, as well as the time taken for training and the amount of data processed. We also looked into the relationship between accuracy and training time for each dataset.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "We use a pre-trained mBERT model that was made public with the BERT release. The model dimension is 768, hidden layer dimension 3072, self-attention uses 12 heads, the model has 12 layers. It uses a vocabulary of 120k wordpieces that is shared for all languages.",
+        "To train the language identification classifier, for each of the BERT languages we randomly selected 110k sentences of at least 20 characters from Wikipedia, and keep 5k for validation and 5k for testing for each language. The training data are also used for estimating the language centroids.",
+        "Results ::: Word Alignment."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What does it capture well?",
+      "rag_answer": "The context does not specify what it captures well.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How they demonstrate that language-neutral component is sufficiently general in terms of modeling semantics to allow high-accuracy word-alignment?"
+        },
+        {
+          "role": "assistant",
+          "content": "Table TABREF15 shows that word-alignment based on mBERT representations surpasses the outputs of the standard FastAlign tool even if it was provided large parallel corpus. This suggests that word-level semantics are well captured by mBERT contextual embeddings. For this task, learning an explicit projection had a negligible effect on the performance."
+        }
+      ],
+      "antecedent_question": "What does Table TABREF15 capture well?",
+      "source_doc_for_question": "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+      "docs_rag_saw_to_answer": [
+        "Following BIBREF3, we hypothesize that a sentence representation in mBERT is composed of a language-specific component, which identifies the language of the sentence, and a language-neutral component, which captures the meaning of the sentence in a language-independent way. We assume that the language-specific component is similar across all sentences in the language.",
+        "Table TABREF20 shows that the new alignment method based on XLM-R representations fails to capture the nuances of word-level semantics. This indicates that the embeddings used are not effective in representing the meaning of words accurately.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "what are the advantages of the proposed model?",
+      "rag_answer": "The proposed supervised topic models for classification and regression can outperform the separate use of unsupervised topic models combined with external regression or classification algorithms, as they jointly learn topic distributions and the classification or regression model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "The growing need to analyze large collections of documents has led to great developments in topic modeling. Since documents are frequently associated with other related variables, such as labels or ratings, much interest has been placed on supervised topic models. However, the nature of most annotation tasks, prone to ambiguity and noise, often with high volumes of documents, deem learning under a single-annotator assumption unrealistic or unpractical for most real-world applications. In this article, we propose two supervised topic models, one for classification and another for regression problems, which account for the heterogeneity and biases among different annotators that are encountered in practice when learning from crowds. We develop an efficient stochastic variational inference algorithm that is able to scale to very large datasets, and we empirically demonstrate the advantages of the proposed model over state-of-the-art approaches.",
+        "Topic models, such as latent Dirichlet allocation (LDA), allow us to analyze large collections of documents by revealing their underlying themes, or topics, and how each document exhibits them BIBREF0 . Therefore, it is not surprising that topic models have become a standard tool in data analysis, with many applications that go even beyond their original purpose of modeling textual data, such as analyzing images BIBREF1 , BIBREF2 , videos BIBREF3 , survey data BIBREF4 or social networks data BIBREF5 .",
+        "Since documents are frequently associated with other variables such as labels, tags or ratings, much interest has been placed on supervised topic models BIBREF6 , which allow the use of that extra information to “guide\" the topics discovery. By jointly learning the topics distributions and a classification or regression model, supervised topic models have been shown to outperform the separate use of their unsupervised analogues together with an external regression/classification algorithm BIBREF2 , BIBREF7 ."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What does he propose to outperform all the baselines?",
+      "rag_answer": "The proposed model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "what are the advantages of the proposed model?"
+        },
+        {
+          "role": "assistant",
+          "content": "he proposed model outperforms all the baselines, being the svi version the one that performs best. the svi version converges much faster to higher values of the log marginal likelihood when compared to the batch version, which reflects the efficiency of the svi algorithm."
+        }
+      ],
+      "antecedent_question": "What does he propose to outperform all the baselines?",
+      "source_doc_for_question": "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+      "docs_rag_saw_to_answer": [
+        "For all the experiments the hyper-parameters INLINEFORM0 , INLINEFORM1 and INLINEFORM2 were set using a simple grid search in the collection INLINEFORM3 . The same approach was used to optimize the hyper-parameters of the all the baselines. For the svi algorithm, different mini-batch sizes and forgetting rates INLINEFORM4 were tested. For the 20-Newsgroup dataset, the best results were obtained with a mini-batch size of 500 and INLINEFORM5 . The INLINEFORM6 was kept at 1. The results are shown in Fig. FIGREF87 for different numbers of topics, where we can see that the proposed model outperforms all the baselines, being the svi version the one that performs best.",
+        "She developed a new algorithm that achieves lower error rates than all previous models. The new version is particularly effective in handling large datasets.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Which ASR system(s) is used in this work?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The preliminary architecture is shown in Fig. FIGREF4. For a given transcribed utterance, it is firstly encoded with Byte Pair Encoding (BPE) BIBREF14, a compression algorithm splitting words to fundamental subword units (pairs of bytes or BPs) and reducing the embedded vocabulary size. Then we use a BiLSTM BIBREF15 encoder and the output state of the BiLSTM is regarded as a vector representation for this utterance. Finally, a fully connected Feed-forward Neural Network (FNN) followed by a softmax layer, labeled as a multilayer perceptron (MLP) module, is used to perform the domain/intent classification task based on the vector.",
+      "docs_rag_saw_to_answer": [
+        "In a modern spoken language understanding (SLU) system, the natural language understanding (NLU) module takes interpretations of a speech from the automatic speech recognition (ASR) module as the input. The NLU module usually uses the first best interpretation of a given speech in downstream tasks such as domain and intent classification. However, the ASR module might misrecognize some speeches and the first best interpretation could be erroneous and noisy. Solely relying on the first best interpretation could make the performance of downstream tasks non-optimal. To address this issue, we introduce a series of simple yet efficient models for improving the understanding of semantics of the input speeches by collectively exploiting the n-best speech interpretations from the ASR module.",
+        "Currently, voice-controlled smart devices are widely used in multiple areas to fulfill various tasks, e.g. playing music, acquiring weather information and booking tickets. The SLU system employs several modules to enable the understanding of the semantics of the input speeches. When there is an incoming speech, the ASR module picks it up and attempts to transcribe the speech. An ASR model could generate multiple interpretations for most speeches, which can be ranked by their associated confidence scores. Among the $n$-best hypotheses, the top-1 hypothesis is usually transformed to the NLU module for downstream tasks such as domain classification, intent classification and named entity recognition (slot tagging). Multi-domain NLU modules are usually designed hierarchically BIBREF0. For one incoming utterance, NLU modules will firstly classify the utterance as one of many possible domains and the further analysis on intent classification and slot tagging will be domain-specific.",
+        "In spite of impressive development on the current SLU pipeline, the interpretation of speech could still contain errors. Sometimes the top-1 recognition hypothesis of ASR module is ungrammatical or implausible and far from the ground-truth transcription BIBREF1, BIBREF2. Among those cases, we find one interpretation exact matching with or more similar to transcription can be included in the remaining hypotheses ($2^{nd}- n^{th}$)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What turn out to be more important high volume or high quality data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The rest of the paper is organized as follows. Related works are reviewed in Section SECREF2 The two languages under study are described in Section SECREF3. We introduce the corpora and test sets in Section SECREF4. The fifth section explores the different training architectures we consider, and the experiments that are carried out. Finally, discussion and concluding remarks are given in Section SECREF6",
+        "The large amount of freely available text in the internet for multiple languages is facilitating the massive and automatic creation of multilingual resources. The resource par excellence is Wikipedia, an online encyclopedia currently available in 307 languages. Other initiatives such as Common Crawl or the Jehovah’s Witnesses site are also repositories for multilingual data, usually assumed to be noisier than Wikipedia. Word and contextual embeddings have been pre-trained on these data, so that the resources are nowadays at hand for more than 100 languages. Some examples include fastText word embeddings BIBREF2, BIBREF7, MUSE embeddings BIBREF8, BERT multilingual embeddings BIBREF4 and LASER sentence embeddings BIBREF5. In all cases, embeddings are trained either simultaneously for multiple languages, joining high- and low-resource data, or following the same methodology.",
+        "On the other hand, different approaches try to specifically design architectures to learn embeddings in a low-resourced setting. ChaudharyEtAl:2018 follow a transfer learning approach that uses phonemes, lemmas and morphological tags to transfer the knowledge from related high-resource language into the low-resource one. jiangEtal:2018 apply Positive-Unlabeled Learning for word embedding calculations, assuming that unobserved pairs of words in a corpus also convey information, and this is specially important for small corpora."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What kind of data helps him?",
+      "rag_answer": "A combination of diverse and noisy data helps enhance performance significantly.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What turn out to be more important high volume or high quality data?"
+        },
+        {
+          "role": "assistant",
+          "content": "only high-quality data helps"
+        }
+      ],
+      "antecedent_question": "What kind of data helps only high-quality data?",
+      "source_doc_for_question": "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+      "docs_rag_saw_to_answer": [
+        "The Spearman $\\rho $ correlation for fastText models on the curated small dataset (clean), C1, improves the baselines by a large margin ($\\rho =0.354$ for Twi and 0.322 for Yorùbá) even with a small dataset. The improvement could be justified just by the larger vocabulary in Twi, but in the case of Yorùbá the enhancement is there with almost half of the vocabulary size. We found out that adding some noisy texts (C2 dataset) slightly improves the correlation for Twi language but not for the Yorùbá language. The Twi language benefits from Wikipedia articles because its inclusion doubles the vocabulary and reduces the bias of the model towards religious texts. However, for Yorùbá, noisy texts often ignore diacritics or tonal marks which increases the vocabulary size at the cost of an increment in the ambiguity too. As a result, the correlation is slightly hurt. One would expect that training with more data would improve the quality of the embeddings, but we found out with the results obtained with the C3 dataset, that only high-quality data helps. The addition of JW300 boosts the vocabulary in both cases, but whereas for Twi the corpus mixes dialects and is noisy, for Yorùbá it is very clean and with full diacritics. Consequently, the best embeddings for Yorùbá are obtained when training with the C3 dataset, whereas for Twi, C2 is the best option. In both cases, the curated embeddings improve the correlation with human judgements on the similarity task a $\\Delta \\rho =+0.25$ or, equivalently, by an increment on $\\rho $ of 170% (Twi) and 180% (Yorùbá).",
+        "The new model, called DataMax, shows that a combination of diverse and noisy data can enhance performance significantly. In tests, it was found that this approach leads to better results than using clean data alone.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "How was the dataset collected?",
+      "rag_answer": "The dataset was collected by requiring workers to create a small number of dialogues for feedback on quality, then pairing well-trained workers to converse according to given goals. They also annotated user states and system states.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+      "docs_rag_saw_to_answer": [
+        "Goal Generation: a multi-domain goal generator was designed based on the database. The relation across domains is captured in two ways. One is to constrain two targets that locate near each other. The other is to use a taxi or metro to commute between two targets in HAR domains mentioned in the context. To make workers understand the task more easily, we crafted templates to generate natural language descriptions for each structured goal.",
+        "Dialogue Collection: before the formal data collection starts, we required the workers to make a small number of dialogues and gave them feedback about the dialogue quality. Then, well-trained workers were paired to converse according to the given goals. The workers were also asked to annotate both user states and system states.",
+        "Dialogue Annotation: we used some rules to automatically annotate dialogue acts according to user states, system states, and dialogue histories. To evaluate the quality of the annotation of dialogue acts and states, three experts were employed to manually annotate dialogue acts and states for 50 dialogues. The results show that our annotations are of high quality. Finally, each dialogue contains a structured goal, a task description, user states, system states, dialogue acts, and utterances."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What information does it not need to store for the taxi domain?",
+      "rag_answer": "There is no need to store the information for the taxi domain; instead, the API can be called directly if necessary.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How was the dataset collected?"
+        },
+        {
+          "role": "assistant",
+          "content": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database.  Goal Generation: a multi-domain goal generator was designed based on the database. The relation across domains is captured in two ways. One is to constrain two targets that locate near each other. The other is to use a taxi or metro to commute between two targets in HAR domains mentioned in the context. Dialogue Collection: before the formal data collection starts, we required the workers to make a small number of dialogues and gave them feedback about the dialogue quality. Then, well-trained workers were paired to converse according to the given goals. The workers were also asked to annotate both user states and system states. Dialogue Annotation: we used some rules to automatically annotate dialogue acts according to user states, system states, and dialogue histories."
+        }
+      ],
+      "antecedent_question": "What information does the taxi domain not need to store?",
+      "source_doc_for_question": "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+      "docs_rag_saw_to_answer": [
+        "Database Construction: we crawled travel information in Beijing from the Web, including Hotel, Attraction, and Restaurant domains (hereafter we name the three domains as HAR domains). Then, we used the metro information of entities in HAR domains to build the metro database. For the taxi domain, there is no need to store the information. Instead, we can call the API directly if necessary.",
+        "For the bus domain, it is essential to keep detailed schedules and routes. This information is crucial for efficient planning and passenger convenience.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What approaches they propose?",
+      "rag_answer": "The context notes two possible approaches to improving interpretability in NLP models, but does not specify what those approaches are.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We argue that a way out of this standstill is in a more practical and nuanced methodology for defining and evaluating faithfulness. We propose the following challenge to the community: We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+      "docs_rag_saw_to_answer": [
+        "We note two possible approaches to this end:",
+        "For example, the method may not be faithful for some question-answering task, but faithful for movie review sentiment, perhaps based on various syntactic and semantic attributes of those tasks.",
+        "With the growing popularity of deep-learning based NLP models, comes a need for interpretable systems. But what is interpretability, and what constitutes a high-quality interpretation? In this opinion piece we reflect on the current state of interpretability evaluation research. We call for more clearly differentiating between different desired criteria an interpretation should satisfy, and focus on the faithfulness criteria. We survey the literature with respect to faithfulness evaluation, and arrange the current approaches around three assumptions, providing an explicit form to how faithfulness is\"defined\"by the community. We provide concrete guidelines on how evaluation of interpretation methods should and should not be conducted. Finally, we claim that the current binary definition for faithfulness sets a potentially unrealistic bar for being considered faithful. We call for discarding the binary notion of faithfulness in favor of a more graded one, which we believe will be of greater practical utility."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific metrics do they suggest for evaluating faithfulness?",
+      "rag_answer": "The context does not specify specific metrics for evaluating faithfulness.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We argue that a way out of this standstill is in a more practical and nuanced methodology for defining and evaluating faithfulness. We propose the following challenge to the community: We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Where do they employ feature-wise sigmoid gating?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+      "docs_rag_saw_to_answer": [
+        "Incorporating sub-word structures like substrings, morphemes and characters to the creation of word representations significantly increases their quality as reflected both by intrinsic metrics and performance in a wide range of downstream tasks BIBREF0 , BIBREF1 , BIBREF2 , BIBREF3 .",
+        "The reason for this improvement is related to sub-word structures containing information that is usually ignored by standard word-level models. Indeed, when representing words as vectors extracted from a lookup table, semantically related words resulting from inflectional processes such as surf, surfing, and surfed, are treated as being independent from one another. Further, word-level embeddings do not account for derivational processes resulting in syntactically-similar words with different meanings such as break, breakable, and unbreakable. This causes derived words, which are usually less frequent, to have lower-quality (or no) vector representations.",
+        "Previous works have successfully combined character-level and word-level word representations, obtaining overall better results than using only word-level representations. For example BIBREF1 achieved state-of-the-art results in a machine translation task by representing unknown words as a composition of their characters. BIBREF4 created word representations by adding the vector representations of the words' surface forms and their morphemes ( INLINEFORM0 ), obtaining significant improvements on intrinsic evaluation tasks, word similarity and machine translation. BIBREF5 concatenated character-level and word-level representations for creating word representations, and then used them as input to their models for obtaining state-of-the-art results in Named Entity Recognition on several languages."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What specific applications or projects utilize feature-wise sigmoid gating?",
+      "rag_answer": "The vector gate, which utilizes feature-wise sigmoid gating, is applied in the context of generating fake restaurant reviews.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The vector gate is inspired by BIBREF11 and BIBREF12 , but is different to the former in that the gating mechanism acts upon each dimension of the word and character-level vectors, and different to the latter in that it does not rely on external sources of information for calculating the gating mechanism.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What are the traditional methods to identifying important attributes?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Many proposed approaches formulate the entity attribute ranking problem as a post processing step of automated attribute-value extraction. In BIBREF0 , BIBREF1 , BIBREF2 , Pasca et al. firstly extract potential class-attribute pairs using linguistically motivated patterns from unstructured text including query logs and query sessions, and then score the attributes using the Bayes model. In BIBREF3 , Rahul Rai proposed to identify product attributes from customer online reviews using part-of-speech(POS) tagging patterns, and to evaluate their importance with several different frequency metrics. In BIBREF4 , Lee et al. developed a system to extract concept-attribute pairs from multiple data sources, such as Probase, general web documents, query logs and external knowledge base, and aggregate the weights from different sources into one consistent typicality score using a Ranking SVM model. Those approaches typically suffer from the poor quality of the pattern rules, and the ranking process is used to identify relatively more precise attributes from all attribute candidates.",
+      "docs_rag_saw_to_answer": [
+        "As for an already existing knowledge graph, there is plenty of work in literature dealing with ranking entities by relevance without or with a query. In BIBREF5 , Li et al. introduced the OntoRank algorithm for ranking the importance of semantic web objects at three levels of granularity: document, terms and RDF graphs. The algorithm is based on the rational surfer model, successfully used in the Swoogle semantic web search engine. In BIBREF6 , Hogan et al. presented an approach that adapted the well-known PageRank/HITS algorithms to semantic web data, which took advantage of property values to rank entities. In BIBREF7 , BIBREF8 , authors also focused on ranking entities, sorting the semantic web resources based on importance, relevance and query length, and aggregating the features together with an overall ranking model.",
+        "The knowledge graph(KG) composed of entities with their descriptions and attributes, and relationship between entities, is finding more and more application scenarios in various natural language processing tasks. In a typical knowledge graph like Wikidata, entities usually have a large number of attributes, but it is difficult to know which ones are important. The importance of attributes can be a valuable piece of information in various applications spanning from information retrieval to natural language generation. In this paper, we propose a general method of using external user generated text data to evaluate the relative importance of an entity's attributes. To be more specific, we use the word/sub-word embedding techniques to match the external textual data back to entities' attribute name and values and rank the attributes by their matching cohesiveness. To our best knowledge, this is the first work of applying vector based semantic matching to important attribute identification, and our method outperforms the previous traditional methods. We also apply the outcome of the detected important attributes to a language generation task; compared with previous generated text, the new method generates much more customized and informative messages.",
+        "Knowledge graph(KG) has been proposed for several years and its most prominent application is in web search, for example, Google search triggers a certain entity card when a user's query matches or mentions an entity based on some statistical model. The core potential of a knowledge graph is about its capability of reasoning and inferring, and we have not seen revolutionary breakthrough in such areas yet. One main obstacle is obviously the lack of sufficient knowledge graph data, including entities, entities' descriptions, entities' attributes, and relationship between entities. A full functional knowledge graph supporting general purposed reasoning and inference might still require long years of the community's innovation and hardworking. On the other hand, many less demanding applications have great potential benefiting from the availability of information from the knowledge graph, such as query understanding and document understanding in information retrieval/search engines, simple inference in question answering systems, and easy reasoning in domain-limited decision support tools. Not only academy, but also industry companies have been heavily investing in knowledge graphs, such as Google's knowledge graph, Amazon's product graph, Facebook's Graph API, IBM's Watson, and Microsoft's Satori etc."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What specific frequency metrics did Rahul Rai use to evaluate the importance of product attributes?",
+      "rag_answer": "The specific frequency metrics used by Rahul Rai to evaluate the importance of product attributes are not detailed in the provided context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Many proposed approaches formulate the entity attribute ranking problem as a post processing step of automated attribute-value extraction. In BIBREF0 , BIBREF1 , BIBREF2 , Pasca et al. firstly extract potential class-attribute pairs using linguistically motivated patterns from unstructured text including query logs and query sessions, and then score the attributes using the Bayes model. In BIBREF3 , Rahul Rai proposed to identify product attributes from customer online reviews using part-of-speech(POS) tagging patterns, and to evaluate their importance with several different frequency metrics. In BIBREF4 , Lee et al. developed a system to extract concept-attribute pairs from multiple data sources, such as Probase, general web documents, query logs and external knowledge base, and aggregate the weights from different sources into one consistent typicality score using a Ranking SVM model. Those approaches typically suffer from the poor quality of the pattern rules, and the ranking process is used to identify relatively more precise attributes from all attribute candidates.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What experiments do the authors present to validate their system?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+      "docs_rag_saw_to_answer": [
+        "Having a bot for seamless conversations is a much-desired feature that products and services today seek for their websites and mobile apps. These bots help reduce traffic received by human support significantly by handling frequent and directly answerable known questions. Many such services have huge reference documents such as FAQ pages, which makes it hard for users to browse through this data. A conversation layer over such raw data can lower traffic to human support by a great margin. We demonstrate QnAMaker, a service that creates a conversational layer over semi-structured data such as FAQ pages, product manuals, and support documents. QnAMaker is the popular choice for Extraction and Question-Answering as a service and is used by over 15,000 bots in production. It is also used by search interfaces and not just bots.",
+        "QnAMaker aims to simplify the process of bot creation by extracting Question-Answer (QA) pairs from data given by users into a Knowledge Base (KB) and providing a conversational layer over it. KB here refers to one instance of azure search index, where the extracted QA are stored. Whenever a developer creates a KB using QnAMaker, they automatically get all NLP capabilities required to answer user's queries. There are other systems such as Google's Dialogflow, IBM's Watson Discovery which tries to solve this problem. QnAMaker provides unique features for the ease of development such as the ability to add a persona-based chit-chat layer on top of the bot. Additionally, bot developers get automatic feedback from the system based on end-user traffic and interaction which helps them in enriching the KB; we call this feature active-learning. Our system also allows user to add Multi-Turn structure to KB using hierarchical extraction and contextual ranking. QnAMaker today supports over 35 languages, and is the only system among its competitors to follow a Server-Client architecture; all the KB data rests only in the client's subscription, giving users total control over their data. QnAMaker is part of Microsoft Cognitive Service and currently runs using the Microsoft Azure Stack.",
+        "As shown in Figure FIGREF4, humans can have two different kinds of roles in the system: Bot-Developers who want to create a bot using the data they have, and End-Users who will chat with the bot(s) created by bot-developers. The components involved in the process are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What do they use to measure performance?",
+      "rag_answer": "They use managed judges to evaluate user queries relevance to the QA pairs and various metrics to assess user satisfaction and engagement levels.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What experiments do the authors present to validate their system?"
+        },
+        {
+          "role": "assistant",
+          "content": "we measure our system's performance for datasets across various domains evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs"
+        }
+      ],
+      "antecedent_question": "What does QnAMaker use to measure performance?",
+      "source_doc_for_question": "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+      "docs_rag_saw_to_answer": [
+        "QnAMaker is not domain-specific and can be used for any type of data. To support this claim, we measure our system's performance for datasets across various domains. The evaluations are done by managed judges who understands the knowledge base and then judge user queries relevance to the QA pairs (binary labels). Each query-QA pair is judged by two judges. We filter out data for which judges do not agree on the label. Chit-chat in itself can be considered as a domain. Thus, we evaluate performance on given KB both with and without chit-chat data (last two rows in Table TABREF19), as well as performance on just chit-chat data (2nd row in Table TABREF19). Hybrid of deep learning(CDSSM) and machine learning features give our ranking model low computation cost, high explainability and significant F1/AUC score. Based on QnAMaker usage, we observed these trends:",
+        "The ChatBot Pro uses a variety of metrics to assess its effectiveness. It focuses on user satisfaction and engagement levels to determine how well it performs.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Which paired corpora did they use in the other experiment?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+      "docs_rag_saw_to_answer": [
+        "Making article comments is a fundamental ability for an intelligent machine to understand the article and interact with humans. It provides more challenges because commenting requires the abilities of comprehending the article, summarizing the main ideas, mining the opinions, and generating the natural language. Therefore, machine commenting is an important problem faced in building an intelligent and interactive agent. Machine commenting is also useful in improving the activeness of communities, including online forums and news websites. Article comments can provide extended information and external opinions for the readers to have a more comprehensive understanding of the article. Therefore, an article with more informative and interesting comments will attract more attention from readers. Moreover, machine commenting can kick off the discussion about an article or a topic, which helps increase user engagement and interaction between the readers and authors.",
+        "Another issue is that there is a semantic gap between articles and comments. In machine translation and text summarization, the target output mainly shares the same points with the source input. However, in article commenting, the comment does not always tell the same thing as the corresponding article. Table TABREF1 shows an example of an article and several corresponding comments. The comments do not directly tell what happened in the news, but talk about the underlying topics (e.g. NBA Christmas Day games, LeBron James). However, existing methods for machine commenting do not model the topics of articles, which is a potential harm to the generated comments.",
+        "To this end, we propose an unsupervised neural topic model to address both problems. For the first problem, we completely remove the need of parallel data and propose a novel unsupervised approach to train a machine commenting system, relying on nothing but unpaired articles and comments. For the second issue, we bridge the articles and comments with their topics. Our model is based on a retrieval-based commenting framework, which uses the news as the query to retrieve the comments by the similarity of their topics. The topic is represented with a variational topic, which is trained in an unsupervised manner."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What are the specific names of the paired datasets used in the other experiment?",
+      "rag_answer": "article-comment parallel contents",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What does it contain?",
+      "rag_answer": "The dataset contains 2.9 million 1-5 star restaurant reviews, user-feedback responses, and a separate dataset that includes user profiles and preferences.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Which paired corpora did they use in the other experiment?"
+        },
+        {
+          "role": "assistant",
+          "content": "dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1"
+        }
+      ],
+      "antecedent_question": "What does the dataset that contains article-comment parallel contents INLINEFORM0 contain?",
+      "source_doc_for_question": "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+      "docs_rag_saw_to_answer": [
+        "In addition to the unsupervised training, we explore a semi-supervised training framework to combine the proposed unsupervised model and the supervised model. In this scenario we have a paired dataset that contains article-comment parallel contents INLINEFORM0 , and an unpaired dataset that contains the documents (articles or comments) INLINEFORM1 . The supervised model is trained on INLINEFORM2 so that we can learn the matching or mapping between articles and comments. By sharing the encoder of the supervised model and the unsupervised model, we can jointly train both the models with a joint objective function: DISPLAYFORM0",
+        "The dataset that contains user-feedback responses includes various types of feedback from users. It also has a separate dataset that includes user profiles and preferences.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Did they experiment with the dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF30, we show the comparison of our annotation results with existing NER/BioNER systems. In Figure FIGREF30, we can see that only our method can identify “SARS-CoV-2\" as a coronavirus. In Figure FIGREF30, we can see that our method can identify many more entities such as “pylogenetic\" as a evolution term and “bat\" as a wildlife. In Figure FIGREF30, we can also see that our method can identify many more entities such as “racism\" as a social behavior. In summary, our distantly- and weakly-supervised NER methods are reliable for high-quality entity recognition without requiring human effort for training data annotation.",
+        "We created this CORD-19-NER dataset with comprehensive named entity recognition (NER) on the COVID-19 Open Research Dataset Challenge (CORD-19) corpus (2020- 03-13). This CORD-19-NER dataset covers 74 fine-grained named entity types. It is automatically generated by combining the annotation results from four sources: (1) pre-trained NER model on 18 general entity types from Spacy, (2) pre-trained NER model on 18 biomedical entity types from SciSpacy, (3) knowledge base (KB)-guided NER model on 127 biomedical entity types with our distantly-supervised NER method, and (4) seed-guided NER model on 8 new entity types (specifically related to the COVID-19 studies) with our weakly-supervised NER method. We hope this dataset can help the text mining community build downstream applications. We also hope this dataset can bring insights for the COVID- 19 studies, both on the biomedical side and on the social side.",
+        "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The disease was first identified in 2019 in Wuhan, Central China, and has since spread globally, resulting in the 2019–2020 coronavirus pandemic. On March 16th, 2020, researchers and leaders from the Allen Institute for AI, Chan Zuckerberg Initiative (CZI), Georgetown University’s Center for Security and Emerging Technology (CSET), Microsoft, and the National Library of Medicine (NLM) at the National Institutes of Health released the COVID-19 Open Research Dataset (CORD-19) of scholarly literature about COVID-19, SARS-CoV-2, and the coronavirus group."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-016",
+      "true": "Generation",
+      "question": "What was the exact number of seed examples used in their experiments?",
+      "rag_answer": "several",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What type does it recognize?",
+      "rag_answer": "It recognizes types such as CORONAVIRUS, WILDLIFE, PHYSICAL_SCIENCE, and BACTERIA.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment with the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What type does Yes recognize?",
+      "source_doc_for_question": "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+      "docs_rag_saw_to_answer": [
+        "In Figure FIGREF28, we show some examples of the annotation results in CORD-19-NER. We can see that our distantly- or weakly supervised methods achieve high quality recognizing the new entity types, requiring only several seed examples as the input. For example, we recognized “SARS-CoV-2\" as the “CORONAVIRUS\" type, “bat\" and “pangolins\" as the “WILDLIFE\" type and “Van der Waals forces\" as the “PHYSICAL_SCIENCE\" type. This NER annotation results help downstream text mining tasks in discovering the origin and the physical nature of the virus. Our NER methods are domain-independent that can be applied to corpus in different domains. In addition, we show another example of NER annotation on New York Times with our system in Figure FIGREF29.",
+        "In a recent study, a new entity called No was identified as a type of BACTERIA. This entity was recognized for its unique properties and implications in medical research.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What new metrics are suggested to track progress?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "This paper describes a preliminary study for producing and distributing a large-scale database of embeddings from the Portuguese Twitter stream. We start by experimenting with a relatively small sample and focusing on three challenges: volume of training data, vocabulary size and intrinsic evaluation metrics. Using a single GPU, we were able to scale up vocabulary size from 2048 words embedded and 500K training examples to 32768 words over 10M training examples while keeping a stable validation loss and approximately linear trend on training time per epoch. We also observed that using less than 50\\% of the available training examples for each vocabulary size might result in overfitting. Results on intrinsic evaluation show promising performance for a vocabulary size of 32768 words. Nevertheless, intrinsic evaluation metrics suffer from over-sensitivity to their corresponding cosine similarity thresholds, indicating that a wider range of metrics need to be developed to track progress.",
+        "Word embeddings have great practical importance since they can be used as pre-computed high-density features to ML models, significantly reducing the amount of training data required in a variety of NLP tasks. However, there are several inter-related challenges with computing and consistently distributing word embeddings concerning the:",
+        "Not only the space of possibilities for each of these aspects is large, there are also challenges in performing a consistent large-scale evaluation of the resulting embeddings BIBREF0 . This makes systematic experimentation of alternative word-embedding configurations extremely difficult."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What is the specific name of the proposed new metric for evaluating embeddings?",
+      "rag_answer": "The context does not provide a specific name for the proposed new metric for evaluating embeddings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What could it consist of for any given word?",
+      "rag_answer": "It could consist of checking whether all words that are known to belong to the same class are closer than any words belonging to different classes.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What new metrics are suggested to track progress?"
+        },
+        {
+          "role": "assistant",
+          "content": "For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine"
+        }
+      ],
+      "antecedent_question": "What could the metric consist of for any given word?",
+      "source_doc_for_question": "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+      "docs_rag_saw_to_answer": [
+        "It is now clear that a key aspect for future work will be developing additional performance metrics based on topological properties. We are in line with recent work BIBREF16 , proposing to shift evaluation from absolute values to more exploratory evaluations focusing on weaknesses and strengths of the embeddings and not so much in generic scores. For example, one metric could consist in checking whether for any given word, all words that are known to belong to the same class are closer than any words belonging to different classes, independently of the actual cosine. Future work will necessarily include developing this type of metrics.",
+        "For instance, one method could involve analyzing whether for any selected term, all terms that are recognized as part of the same category are further away than any terms from different categories, regardless of the actual distance. Future studies will likely focus on refining this approach.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What are their correlation results?",
+      "rag_answer": "SumQE achieves very high correlations with human ratings.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "We propose SumQE, a novel Quality Estimation model for summarization based on BERT. The model addresses linguistic quality aspects that are only indirectly captured by content-based approaches to summary evaluation, without involving comparison with human references. SumQE achieves very high correlations with human ratings, outperforming simpler models addressing these linguistic aspects. Predictions of the SumQE model can be used for system development, and to inform users of the quality of automatically produced summaries and other types of generated text.",
+        "Quality Estimation (QE) is a term used in machine translation (MT) to refer to methods that measure the quality of automatically translated text without relying on human references BIBREF0, BIBREF1. In this study, we address QE for summarization. Our proposed model, Sum-QE, successfully predicts linguistic qualities of summaries that traditional evaluation metrics fail to capture BIBREF2, BIBREF3, BIBREF4, BIBREF5. Sum-QE predictions can be used for system development, to inform users of the quality of automatically produced summaries and other types of generated text, and to select the best among summaries output by multiple systems.",
+        "Sum-QE relies on the BERT language representation model BIBREF6. We use a pre-trained BERT model adding just a task-specific layer, and fine-tune the entire model on the task of predicting linguistic quality scores manually assigned to summaries. The five criteria addressed are given in Figure FIGREF2. We provide a thorough evaluation on three publicly available summarization datasets from NIST shared tasks, and compare the performance of our model to a wide variety of baseline methods capturing different aspects of linguistic quality. Sum-QE achieves very high correlations with human ratings, showing the ability of BERT to model linguistic qualities that relate to both text content and form."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What were the specific correlation values for each year in the study?",
+      "rag_answer": "The specific correlation values for each year in the study are not provided in the context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What range does it cover?",
+      "rag_answer": "0.100 to 0.300",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are their correlation results?"
+        },
+        {
+          "role": "assistant",
+          "content": "High correlation results range from 0.472 to 0.936"
+        }
+      ],
+      "antecedent_question": "What range does High correlation results cover?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 1: Spearman’s ρ, Kendall’s τ and Pearson’s r correlations on DUC-05, DUC-06 and DUC-07 for Q1–Q5. BEST-ROUGE refers to the version that achieved best correlations and is different across years.",
+        "Low correlation results range from 0.100 to 0.300. This entity achieved its correlations across different datasets.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What multimodality is available in the dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+      "docs_rag_saw_to_answer": [
+        "This paper addresses the problem of comprehending procedural commonsense knowledge. This is a challenging task as it requires identifying key entities, keeping track of their state changes, and understanding temporal and causal relations. Contrary to most of the previous work, in this study, we do not rely on strong inductive bias and explore the question of how multimodality can be exploited to provide a complementary semantic signal. Towards this end, we introduce a new entity-aware neural comprehension model augmented with external relational memory units. Our model learns to dynamically update entity states in relation to each other while reading the text instructions. Our experimental analysis on the visual reasoning tasks in the recently proposed RecipeQA dataset reveals that our approach improves the accuracy of the previously reported models by a large margin. Moreover, we find that our model learns effective dynamic representations of entities even though we do not use any supervision at the level of entity states.",
+        "A great deal of commonsense knowledge about the world we live is procedural in nature and involves steps that show ways to achieve specific goals. Understanding and reasoning about procedural texts (e.g. cooking recipes, how-to guides, scientific processes) are very hard for machines as it demands modeling the intrinsic dynamics of the procedures BIBREF0, BIBREF1, BIBREF2. That is, one must be aware of the entities present in the text, infer relations among them and even anticipate changes in the states of the entities after each action. For example, consider the cheeseburger recipe presented in Fig. FIGREF2. The instruction “salt and pepper each patty and cook for 2 to 3 minutes on the first side” in Step 5 entails mixing three basic ingredients, the ground beef, salt and pepper, together and then applying heat to the mix, which in turn causes chemical changes that alter both the appearance and the taste. From a natural language understanding perspective, the main difficulty arises when a model sees the word patty again at a later stage of the recipe. It still corresponds to the same entity, but its form is totally different.",
+        "Over the past few years, many new datasets and approaches have been proposed that address this inherently hard problem BIBREF0, BIBREF1, BIBREF3, BIBREF4. To mitigate the aforementioned challenges, the existing works rely mostly on heavy supervision and focus on predicting the individual state changes of entities at each step. Although these models can accurately learn to make local predictions, they may lack global consistency BIBREF3, BIBREF4, not to mention that building such annotated corpora is very labor-intensive. In this work, we take a different direction and explore the problem from a multimodal standpoint. Our basic motivation, as illustrated in Fig. FIGREF2, is that accompanying images provide complementary cues about causal effects and state changes. For instance, it is quite easy to distinguish raw meat from cooked one in visual domain."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What specific types of images are included in the multimodal dataset?",
+      "rag_answer": "The context does not specify the types of images included in the multimodal dataset.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+        "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+        "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

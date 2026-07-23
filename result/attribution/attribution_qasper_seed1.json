@@ -1,0 +1,840 @@
+{
+  "config": {
+    "dataset": "qasper",
+    "n_seeds": 20,
+    "n_cases": 35,
+    "llm": true
+  },
+  "report": {
+    "n": 35,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.514,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 5
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.571,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.6,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.571,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 0.6,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 12,
+          "Generation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.714,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 12
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 7,
+          "Conversation->Retrieval": 2,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the algorithm used for the classification tasks?",
+      "rag_answer": "Latent Dirichlet Allocation (LDA)",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+      "docs_rag_saw_to_answer": [
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution.",
+        "The Digital Library in the TextGrid Repository represents an extensive collection of German texts in digital form BIBREF3. It was mined from http://zeno.org and covers a time period from the mid 16th century up to the first decades of the 20th century. It contains many important texts that can be considered as part of the literary canon, even though it is far from complete (e.g. it contains only half of Rilke’s work). We find that around 51k texts are annotated with the label ’verse’ (TGRID-V), not distinguishing between ’lyric verse’ and ’epic verse’. However, the average length of these texts is around 150 token, dismissing most epic verse tales. Also, the poems are distributed over 229 authors, where the average author contributed 240 poems (median 131 poems). A drawback of TGRID-V is the circumstance that it contains a noticeable amount of French, Dutch and Latin (over 400 texts). To constrain our dataset to German, we filter foreign language material with a stopword list, as training a dedicated language identification classifier is far beyond the scope of this work.",
+        "We approach diachronic variation of poetry from two perspectives. First, as distant reading task to visualize the development of clearly interpretable topics over time. Second, as a downstream task, i.e. supervised machine learning task to determine the year (the time-slot) of publication for a given poem. We infer topic distributions over documents as features and pit them against a simple style baseline."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Are there datasets with relation tuples annotated, how big are datasets available?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "A relation tuple consists of two entities and the relation between them, and often such tuples are found in unstructured text. There may be multiple relation tuples present in a text and they may share one or both entities among them. Extracting such relation tuples from a sentence is a difficult task and sharing of entities or overlapping entities among the tuples makes it more challenging. Most prior work adopted a pipeline approach where entities were identified first followed by finding the relations among them, thus missing the interaction among the relation tuples in a sentence. In this paper, we propose two approaches to use encoder-decoder architecture for jointly extracting entities and relations. In the first approach, we propose a representation scheme for relation tuples which enables the decoder to generate one word at a time like machine translation models and still finds all the tuples present in a sentence with full entity names of different length and with overlapping entities. Next, we propose a pointer network-based decoding approach where an entire tuple is generated at every time step. Experiments on the publicly available New York Times corpus show that our proposed approaches outperform previous work and achieve significantly higher F1 scores.",
+        "Distantly-supervised information extraction systems extract relation tuples with a set of pre-defined relations from text. Traditionally, researchers BIBREF0, BIBREF1, BIBREF2 use pipeline approaches where a named entity recognition (NER) system is used to identify the entities in a sentence and then a classifier is used to find the relation (or no relation) between them. However, due to the complete separation of entity detection and relation classification, these models miss the interaction between multiple relation tuples present in a sentence.",
+        "Recently, several neural network-based models BIBREF3, BIBREF4 were proposed to jointly extract entities and relations from a sentence. These models used a parameter-sharing mechanism to extract the entities and relations in the same network. But they still find the relations after identifying all the entities and do not fully capture the interaction among multiple tuples. BIBREF5 (BIBREF5) proposed a joint extraction model based on neural sequence tagging scheme. But their model could not extract tuples with overlapping entities in a sentence as it could not assign more than one tag to a word. BIBREF6 (BIBREF6) proposed a neural encoder-decoder model for extracting relation tuples with overlapping entities. However, they used a copy mechanism to copy only the last token of the entities, thus this model could not extract the full entity names. Also, their best performing model used a separate decoder to extract each tuple which limited the power of their model. This model was trained with a fixed number of decoders and could not extract tuples beyond that number during inference. Encoder-decoder models are powerful models and they are successful in many NLP tasks such as machine translation, sentence generation from structured data, and open information extraction."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-001",
+      "true": "Generation",
+      "question": "What is the total number of instances of relation tuples in the NYT24 and NYT29 datasets?",
+      "rag_answer": "53",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "How many relations does it have?",
+      "rag_answer": "24",
+      "history": [
+        {
+          "role": "user",
+          "content": "Are there datasets with relation tuples annotated, how big are datasets available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "How many relations does Yes have?",
+      "source_doc_for_question": "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+      "docs_rag_saw_to_answer": [
+        "We focus on the task of extracting multiple tuples with overlapping entities from sentences. We choose the New York Times (NYT) corpus for our experiments. This corpus has multiple versions, and we choose the following two versions as their test dataset has significantly larger number of instances of multiple relation tuples with overlapping entities. (i) The first version is used by BIBREF6 (BIBREF6) (mentioned as NYT in their paper) and has 24 relations. We name this version as NYT24. (ii) The second version is used by BIBREF11 (BIBREF11) (mentioned as NYT10 in their paper) and has 29 relations. We name this version as NYT29. We select 10% of the original training data and use it as the validation dataset. The remaining 90% is used for training. We include statistics of the training and test datasets in Table TABREF11.",
+        "The first version of the other entity, called No, has 30 relations. The second version of No has 25 relations.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What misbehavior is identified?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+      "docs_rag_saw_to_answer": [
+        "In state-of-the-art Neural Machine Translation (NMT), an attention mechanism is used during decoding to enhance the translation. At every step, the decoder uses this mechanism to focus on different parts of the source sentence to gather the most useful information before outputting its target word. Recently, the effectiveness of the attention mechanism has also been explored for multimodal tasks, where it becomes possible to focus both on sentence parts and image regions that they describe. In this paper, we compare several attention mechanism on the multimodal translation task (English, image to German) and evaluate the ability of the model to make use of images to improve translation. We surpass state-of-the-art scores on the Multi30k data set, we nevertheless identify and report different misbehavior of the machine while translating.",
+        "In machine translation, neural networks have attracted a lot of research attention. Recently, the attention-based encoder-decoder framework BIBREF0 , BIBREF1 has been largely adopted. In this approach, Recurrent Neural Networks (RNNs) map source sequences of words to target sequences. The attention mechanism is learned to focus on different parts of the input sentence while decoding. Attention mechanisms have shown to work with other modalities too, like images, where their are able to learn to attend the salient parts of an image, for instance when generating text captions BIBREF2 . For such applications, Convolutional Neural Networks (CNNs) such as Deep Residual BIBREF3 have shown to work best to represent images.",
+        "Multimodal models of texts and images empower new applications such as visual question answering or multimodal caption translation. Also, the grounding of multiple modalities against each other may enable the model to have a better understanding of each modality individually, such as in natural language understanding applications."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What does it do when the attention gets lost?",
+      "rag_answer": "The model developed in the recent study completely ignores any lost attention and relies solely on the text-based annotations.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What misbehavior is identified?"
+        },
+        {
+          "role": "assistant",
+          "content": "if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations"
+        }
+      ],
+      "antecedent_question": "What does the model do when the attention gets lost?",
+      "source_doc_for_question": "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+      "docs_rag_saw_to_answer": [
+        "It is also worth to mention that we use a ResNet trained on 1.28 million images for a classification tasks. The features used by the attention mechanism are strongly object-oriented and the machine could miss important information for a multimodal translation task. We believe that the robust architecture of both encoders INLINEFORM0 combined with a GRU layer and word-embeddings took care of the right translation for relationships between objects and time-dependencies. Yet, we noticed a common misbehavior for all our multimodal models: if the attention loose track of the objects in the picture and \"gets lost\", the model still takes it into account and somehow overrides the information brought by the text-based annotations. The translation is then totally mislead. We illustrate with an example:",
+        "In a recent study, a different model was developed that completely ignores any lost attention and relies solely on the text-based annotations. This approach has led to more accurate translations in various scenarios.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What were the word embeddings trained on?",
+      "rag_answer": "The context does not specify what the word embeddings were trained on.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "Using the word2vec model available in a public repository BIBREF14 , the proposal involves the analysis of the most similar analogies generated before and after the application of the BIBREF3 . The work is focused on the analysis of gender bias associated with professions in word embeddings. So therefore into the evaluation of the accuracy of the associations generated, aiming at achieving results as good as possible without prejudicing the evaluation metrics.",
+        "In this work, we propose an analysis of the presence of gender bias associated with professions in Portuguese word embeddings. The objective of this work is to study gender implications related to stereotyped professions for women and men in the context of the Portuguese language.",
+        "Recently, the transformative potential of machine learning (ML) has propelled ML into the forefront of mainstream media. In Brazil, the use of such technique has been widely diffused gaining more space. Thus, it is used to search for patterns, regularities or even concepts expressed in data sets BIBREF0 , and can be applied as a form of aid in several areas of everyday life."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What training strategies did it use?",
+      "rag_answer": "Continuous Bag-of-Words (CBOW) for Portuguese and GloVe and FastText for Spanish.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What were the word embeddings trained on?"
+        },
+        {
+          "role": "assistant",
+          "content": "large Portuguese corpus"
+        }
+      ],
+      "antecedent_question": "What training strategies did the large Portuguese corpus use?",
+      "source_doc_for_question": "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+      "docs_rag_saw_to_answer": [
+        "In BIBREF14 , several word embedding models trained in a large Portuguese corpus are evaluated. Within the Word2Vec model, two training strategies were used. In the first, namely Skip-Gram, the model is given the word and attempts to predict its neighboring words. The second, Continuous Bag-of-Words (CBOW), the model is given the sequence of words without the middle one and attempts to predict this omitted word. The latter was chosen for application in the present proposal.",
+        "In a small Spanish corpus, two different training strategies were implemented. The first was GloVe, which focuses on global word-word co-occurrence statistics, while the second was FastText, which considers subword information.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Do they report results only on English data?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "A community's identity—defined through the common interests and shared experiences of its users—shapes various facets of the social dynamics within it BIBREF0 , BIBREF1 , BIBREF2 . Numerous instances of this interplay between a community's identity and social dynamics have been extensively studied in the context of individual online communities BIBREF3 , BIBREF4 , BIBREF5 . However, the sheer variety of online platforms complicates the task of generalizing insights beyond these isolated, single-community glimpses. A new way to reason about the variation across multiple communities is needed in order to systematically characterize the relationship between properties of a community and the dynamics taking place within.",
+        "To address such questions quantitatively we need to provide structure to the diverse and complex space of online communities. Organizing the multi-community landscape would allow us to both characterize individual points within this space, and reason about systematic variations in patterns of user engagement across the space.",
+        "Present work: Structuring the multi-community space. In order to systematically understand the relationship between community identityand user engagement we introduce a quantitative typology of online communities. Our typology is based on two key aspects of community identity: how distinctive—or niche—a community's interests are relative to other communities, and how dynamic—or volatile—these interests are over time. These axes aim to capture the salience of a community's identity and dynamics of its temporal evolution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "How many community-months does it have?",
+      "rag_answer": "4,872",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do they report results only on English data?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "How many community-months does No have?",
+      "source_doc_for_question": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+      "docs_rag_saw_to_answer": [
+        "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+        "Another community, Yes, has a total of 3,500 community-months. It was analyzed over a similar time frame and also required a minimum word count.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Which GAN do they use?",
+      "rag_answer": "The context does not specify a particular GAN model used.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We assume that for each corpora INLINEFORM0 , we are given word embeddings for each word INLINEFORM1 , where INLINEFORM2 is the dimension of each word embedding. We are also given a classification task on documents that is represented by a parametric model INLINEFORM3 taking document embeddings as feature vectors. We construct a GAN model which combines different sets of word embeddings INLINEFORM4 , INLINEFORM5 , into a single set of word embeddings INLINEFORM6 . Note that INLINEFORM7 are given but INLINEFORM8 is trained. Here we consider INLINEFORM9 as the generator, and the goal of the discriminator is to distinguish documents represented by the original embeddings INLINEFORM10 and the same documents represented by the new embeddings INLINEFORM11 .",
+      "docs_rag_saw_to_answer": [
+        "Generative adversarial nets (GANs) have been successfully applied to the artificial generation of image data. In terms of text data, much has been done on the artificial generation of natural language from a single corpus. We consider multiple text corpora as the input data, for which there can be two applications of GANs: (1) the creation of consistent cross-corpus word embeddings given different word embeddings per corpus; (2) the generation of robust bag-of-words document embeddings for each corpora. We demonstrate our GAN models on real-world text data sets from different corpora, and show that embeddings from both models lead to improvements in supervised learning problems.",
+        "Generative adversarial nets (GAN) (Goodfellow et al., 2014) belong to a class of generative models which are trainable and can generate artificial data examples similar to the existing ones. In a GAN model, there are two sub-models simultaneously trained: a generative model INLINEFORM0 from which artificial data examples can be sampled, and a discriminative model INLINEFORM1 which classifies real data examples and artificial ones from INLINEFORM2 . By training INLINEFORM3 to maximize its generation power, and training INLINEFORM4 to minimize the generation power of INLINEFORM5 , so that ideally there will be no difference between the true and artificial examples, a minimax problem can be established. The GAN model has been shown to closely replicate a number of image data sets, such as MNIST, Toronto Face Database (TFD), CIFAR-10, SVHN, and ImageNet (Goodfellow et al., 2014; Salimans et al. 2016).",
+        "The GAN model has been extended to text data in a number of ways. For instance, Zhang et al. (2016) applied a long-short term memory (Hochreiter and Schmidhuber, 1997) generator and approximated discretization to generate text data. Moreover, Li et al. (2017) applied the GAN model to generate dialogues, i.e. pairs of questions and answers. Meanwhile, the GAN model can also be applied to generate bag-of-words embeddings of text data, which focus more on key terms in a text document rather than the original document itself. Glover (2016) provided such a model with the energy-based GAN (Zhao et al., 2017)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What approaches without reinforcement learning have been tried?",
+      "rag_answer": "The context mentions the use of regression approaches and classification approaches without reinforcement learning.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "We conducted cross-validation experiments using various values of $t$ and $m$. Table TABREF26 shows the results for the best values of $t$ and $m$ obtained. The regressor and classifier used Support Vector Regression (SVR) and Support Vector Classification (SVC) respectively. To enable a fair comparison we used the same input features in all systems. These input features combine information from the question and the input sentence and are shown in Fig. FIGREF16. The features are based on BIBREF12, and are the same as in BIBREF1, plus the addition of the position of the input snippet. The best SVC and SVR parameters were determined by grid search.",
+      "docs_rag_saw_to_answer": [
+        "Task B Phase B of the 2019 BioASQ challenge focuses on biomedical question answering. Macquarie University's participation applies query-based multi-document extractive summarisation techniques to generate a multi-sentence answer given the question and the set of relevant snippets. In past participation we explored the use of regression approaches using deep learning architectures and a simple policy gradient architecture. For the 2019 challenge we experiment with the use of classification approaches with and without reinforcement learning. In addition, we conduct a correlation analysis between various ROUGE metrics and the BioASQ human evaluation scores.",
+        "The BioASQ Challenge includes a question answering task (Phase B, part B) where the aim is to find the “ideal answer” — that is, an answer that would normally be given by a person BIBREF0. This is in contrast with most other question answering challenges where the aim is normally to give an exact answer, usually a fact-based answer or a list. Given that the answer is based on an input that consists of a biomedical question and several relevant PubMed abstracts, the task can be seen as an instance of query-based multi-document summarisation.",
+        "As in past participation BIBREF1, BIBREF2, we wanted to test the use of deep learning and reinforcement learning approaches for extractive summarisation. In contrast with past years where the training procedure was based on a regression set up, this year we experiment with various classification set ups. The main contributions of this paper are:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Does the paper report the results of previous models applied to the same tasks?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "News website comment sections are spaces where potentially conflicting opinions and beliefs are voiced. Addressing questions of how to study such cultural and societal conflicts through technological means, the present article critically examines possibilities and limitations of machine-guided exploration and potential facilitation of on-line opinion dynamics. These investigations are guided by a discussion of an experimental observatory for mining and analyzing opinions from climate change-related user comments on news articles from the this http URL. This observatory combines causal mapping methods with computational text analysis in order to mine beliefs and visualize opinion landscapes based on expressions of causation. By (1) introducing digital methods and open infrastructures for data exploration and analysis and (2) engaging in debates about the implications of such methods and infrastructures, notably in terms of the leap from opinion observation to debate facilitation, the article aims to make a practical and theoretical contribution to the study of opinion dynamics and conflict in new media environments.",
+        "Over the past two decades, the rise of social media and the digitization of news and discussion platforms have radically transformed how individuals and groups create, process and share news and information. As Alan Rusbridger, former-editor-in-chief of the newspaper The Guardian has it, these technologically-driven shifts in the ways people communicate, organize themselves and express their beliefs and opinions, have",
+        "empower[ed] those that were never heard, creating a a new form of politics and turning traditional news corporations inside out. It is impossible to think of Donald Trump; of Brexit; of Bernie Sanders; of Podemos; of the growth of the far right in Europe; of the spasms of hope and violent despair in the Middle East and North Africa without thinking also of the total inversion of how news is created, shared and distributed. Much of it is liberating and and inspiring. Some of it is ugly and dark. And something - the centuries-old craft of journalism - is in danger of being lost BIBREF0."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-008",
+      "true": "Generation",
+      "question": "What specific previous models were referenced in the paper for comparison?",
+      "rag_answer": "Random Forest Ensemble classifiers",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What does it propose to extract from texts?",
+      "rag_answer": "It proposes to extract beliefs or opinions from texts, specifically through the automated extraction of semantic frames expressing causation.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the paper report the results of previous models applied to the same tasks?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What does Yes propose to extract from texts?",
+      "source_doc_for_question": "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+      "docs_rag_saw_to_answer": [
+        "Technical and theoretical questions related to the proposed method and infrastructure for the exploration and facilitation of debates will be discussed in three sections. The first section concerns notions of how to define what constitutes a belief or opinion and how these can be mined from texts. To this end, an approach based on the automated extraction of semantic frames expressing causation is proposed. The observatory thus builds on the theoretical premise that expressions of causation such as `global warming causes rises in sea levels' can be revelatory for a person or group's underlying belief systems. Through a further technical description of the observatory's data-analytical components, section two of the paper deals with matters of spatially modelling the output of the semantic frame extractor and how this might be achieved without sacrificing nuances of meaning. The final section of the paper, then, discusses how insights gained from technologically observing opinion dynamics can inform conceptual modelling efforts and approaches to on-line opinion facilitation. As such, the paper brings into view and critically evaluates the fundamental conceptual leap from machine-guided observation to debate facilitation and intervention.",
+        "The entity No focuses on the analysis of emotional responses in written communication. It aims to identify and categorize feelings expressed in various texts.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "Is ROUGE their only baseline?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+      "docs_rag_saw_to_answer": [
+        "Our next baseline is perplexity, which corresponds to the exponentiated cross-entropy:",
+        "In this work, we investigate if approaches which have proven successful for modeling acceptability can be applied to the NLP problem of automatic fluency evaluation.",
+        "In this section, we first describe SLOR and the intuition behind this score. Then, we introduce WordPieces, before explaining how we combine the two."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What other baselines did they consider in their evaluation?",
+      "rag_answer": "The context does not mention any other baselines considered in their evaluation.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Our first baseline is ROUGE-L BIBREF1 , since it is the most commonly used metric for compression tasks. ROUGE-L measures the similarity of two sentences based on their longest common subsequence. Generated and reference compressions are tokenized and lowercased. For multiple references, we only make use of the one with the highest score for each example.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Is text-to-image synthesis trained is suppervized or unsuppervized manner?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Following the above definition, the $\\min \\max $ objective function in Eq. (DISPLAY_FORM10) aims to learn parameters for the discriminator ($\\theta _d$) and generator ($\\theta _g$) to reach an optimization goal: The discriminator intends to differentiate true vs. fake images with maximum capability $\\max _{\\theta _d}$ whereas the generator intends to minimize the difference between a fake image vs. a true image $\\min _{\\theta _g}$. In other words, the discriminator sets the characteristics and the generator produces elements, often images, iteratively until it meets the attributes set forth by the discriminator. GANs are often used with images and other visual elements and are notoriously efficient in generating compelling and convincing photorealistic images. Most recently, GANs were used to generate an original painting in an unsupervised fashion BIBREF24. The following sections go into further detail regarding how the generator and discriminator are trained in GANs.",
+      "docs_rag_saw_to_answer": [
+        "“ (GANs), and the variations that are now being proposed is the most interesting idea in the last 10 years in ML, in my opinion.” (2016)",
+        "– Yann LeCun",
+        "A picture is worth a thousand words! While written text provide efficient, effective, and concise ways for communication, visual content, such as images, is a more comprehensive, accurate, and intelligible method of information sharing and understanding. Generation of images from text descriptions, i.e. text-to-image synthesis, is a complex computer vision and machine learning problem that has seen great progress over recent years. Automatic image generation from natural language may allow users to describe visual elements through visually-rich text descriptions. The ability to do so effectively is highly desirable as it could be used in artificial intelligence applications such as computer-aided design, image editing BIBREF0, BIBREF1, game engines for the development of the next generation of video gamesBIBREF2, and pictorial art generation BIBREF3."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "How does it generate an original painting?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Is text-to-image synthesis trained is suppervized or unsuppervized manner?"
+        },
+        {
+          "role": "assistant",
+          "content": "unsupervised"
+        }
+      ],
+      "antecedent_question": "How does unsupervised generate an original painting?",
+      "source_doc_for_question": "Following the above definition, the $\\min \\max $ objective function in Eq. (DISPLAY_FORM10) aims to learn parameters for the discriminator ($\\theta _d$) and generator ($\\theta _g$) to reach an optimization goal: The discriminator intends to differentiate true vs. fake images with maximum capability $\\max _{\\theta _d}$ whereas the generator intends to minimize the difference between a fake image vs. a true image $\\min _{\\theta _g}$. In other words, the discriminator sets the characteristics and the generator produces elements, often images, iteratively until it meets the attributes set forth by the discriminator. GANs are often used with images and other visual elements and are notoriously efficient in generating compelling and convincing photorealistic images. Most recently, GANs were used to generate an original painting in an unsupervised fashion BIBREF24. The following sections go into further detail regarding how the generator and discriminator are trained in GANs.",
+      "docs_rag_saw_to_answer": [
+        "Following the above definition, the $\\min \\max $ objective function in Eq. (DISPLAY_FORM10) aims to learn parameters for the discriminator ($\\theta _d$) and generator ($\\theta _g$) to reach an optimization goal: The discriminator intends to differentiate true vs. fake images with maximum capability $\\max _{\\theta _d}$ whereas the generator intends to minimize the difference between a fake image vs. a true image $\\min _{\\theta _g}$. In other words, the discriminator sets the characteristics and the generator produces elements, often images, iteratively until it meets the attributes set forth by the discriminator. GANs are often used with images and other visual elements and are notoriously efficient in generating compelling and convincing photorealistic images. Most recently, GANs were used to generate an original painting in an unsupervised fashion BIBREF24. The following sections go into further detail regarding how the generator and discriminator are trained in GANs.",
+        "Another entity, supervised, focuses on learning from labeled data to create accurate models. It generates outputs by relying on the explicit guidance provided by the training data.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "By how much do they outperform standard BERT?",
+      "rag_answer": "They achieve considerably better results compared to the standard BERT approach, with an F1-score of 87.20 for coarse-grained classification and 64.70 for detailed classification.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we focus on the classification of books using short descriptive texts (cover blurbs) and additional metadata. Building upon BERT, a deep neural language model, we demonstrate how to combine text representations with metadata and knowledge graph embeddings, which encode author information. Compared to the standard BERT approach we achieve considerably better results for the classification task. For a more coarse-grained classification using eight labels we achieve an F1- score of 87.20, while a detailed classification using 343 labels yields an F1-score of 64.70. We make the source code and trained models of our experiments publicly available",
+        "With ever-increasing amounts of data available, there is an increase in the need to offer tooling to speed up processing, and eventually making sense of this data. Because fully-automated tools to extract meaning from any given input to any desired level of detail have yet to be developed, this task is still at least supervised, and often (partially) resolved by humans; we refer to these humans as knowledge workers. Knowledge workers are professionals that have to go through large amounts of data and consolidate, prepare and process it on a daily basis. This data can originate from highly diverse portals and resources and depending on type or category, the data needs to be channelled through specific down-stream processing pipelines. We aim to create a platform for curation technologies that can deal with such data from diverse sources and that provides natural language processing (NLP) pipelines tailored to particular content types and genres, rendering this initial classification an important sub-task.",
+        "In this paper, we work with the dataset of the 2019 GermEval shared task on hierarchical text classification BIBREF0 and use the predefined set of labels to evaluate our approach to this classification task."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "How much did it improve his accuracy?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "By how much do they outperform standard BERT?"
+        },
+        {
+          "role": "assistant",
+          "content": "up to four percentage points in accuracy"
+        }
+      ],
+      "antecedent_question": "How much did it improve BERT's accuracy?",
+      "source_doc_for_question": "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+      "docs_rag_saw_to_answer": [
+        "In this paper we presented a way of enriching BERT with knowledge graph embeddings and additional metadata. Exploiting the linked knowledge that underlies Wikidata improves performance for our task of document classification. With this approach we improve the standard BERT models by up to four percentage points in accuracy. Furthermore, our results reveal that with task-specific information such as author names and publication metadata improves the classification task essentially compared a text-only approach. Especially, when metadata feature engineering is less trivial, adding additional task-specific information from an external knowledge source such as Wikidata can help significantly. The source code of our experiments and the trained models are publicly available.",
+        "In a recent study, a new model was developed that enhanced performance by up to three percentage points in accuracy. This model utilized advanced techniques to integrate various data sources, leading to significant improvements in classification tasks.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Do they report results only on English datasets?",
+      "rag_answer": "No, they report results on a dataset that includes German station and street names.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Even though this corpus has incorrect sentences and their emotional labels, they lack their respective corrected sentences, necessary for the training of our model. In order to obtain this missing information, we outsource native English speakers from an unbiased and anonymous platform, called Amazon Mechanical Turk (MTurk) BIBREF19, which is a paid marketplace for Human Intelligence Tasks (HITs). We use this platform to create tasks for native English speakers to format the original incorrect tweets into correct sentences. Some examples are shown in Table TABREF12.",
+      "docs_rag_saw_to_answer": [
+        "The dataset used to evaluate the models' performance is the Chatbot Natural Language Unerstanding (NLU) Evaluation Corpus, introduced by Braun et al. BIBREF20 to test NLU services. It is a publicly available benchmark and is composed of sentences obtained from a German Telegram chatbot used to answer questions about public transport connections. The dataset has two intents, namely Departure Time and Find Connection with 100 train and 106 test samples, shown in Table TABREF18. Even though English is the main language of the benchmark, this dataset contains a few German station and street names.",
+        "In this paper, we propose Stacked DeBERT, short for Stacked Denoising Bidirectional Encoder Representations from Transformers. This novel model improves robustness in incomplete data, when compared to existing systems, by designing a novel encoding scheme in BERT, a powerful language representation model solely based on attention mechanisms. Incomplete data in natural language processing refer to text with missing or incorrect words, and its presence can hinder the performance of current models that were not implemented to withstand such noises, but must still perform well even under duress. This is due to the fact that current approaches are built for and trained with clean and complete data, and thus are not able to extract features that can adequately represent incomplete data. Our proposed approach consists of obtaining intermediate input representations by applying an embedding layer to the input tokens followed by vanilla transformers. These intermediate features are given as input to novel denoising transformers which are responsible for obtaining richer input representations. The proposed approach takes advantage of stacks of multilayer perceptrons for the reconstruction of missing words' embeddings by extracting more abstract and meaningful hidden feature vectors, and bidirectional transformers for improved embedding representation. We consider two datasets for training and evaluation: the Chatbot Natural Language Understanding Evaluation Corpus and Kaggle's Twitter Sentiment Corpus. Our model shows improved F1-scores and better robustness in informal/incorrect texts present in tweets and in texts with Speech-to-Text error in the sentiment and intent classification tasks.",
+        "Understanding a user's intent and sentiment is of utmost importance for current intelligent chatbots to respond appropriately to human requests. However, current systems are not able to perform to their best capacity when presented with incomplete data, meaning sentences with missing or incorrect words. This scenario is likely to happen when one considers human error done in writing. In fact, it is rather naive to assume that users will always type fully grammatically correct sentences. Panko BIBREF0 goes as far as claiming that human accuracy regarding research paper writing is none when considering the entire document. This has been aggravated with the advent of internet and social networks, which allowed language and modern communication to be been rapidly transformed BIBREF1, BIBREF2. Take Twitter for instance, where information is expected to be readily communicated in short and concise sentences with little to no regard to correct sentence grammar or word spelling BIBREF3."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Did they experiment on this dataset?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "Analysis of the way court decisions refer to each other provides us with important insights into the decision-making process at courts. This is true both for the common law courts and for their counterparts in the countries belonging to the continental legal system. Citation data can be used for both qualitative and quantitative studies, casting light in the behavior of specific judges through document analysis or allowing complex studies into changing the nature of courts in transforming countries.",
+        "In this paper, we describe the tool ultimately used for the extraction of the references from the court decisions, together with a subsequent way of manual processing of the raw data to achieve a higher-quality dataset. Section SECREF2 maps the related work in the area of legal citation analysis (SectionSECREF1), reference recognition (Section SECREF2), text segmentation (Section SECREF4), and data availability (Section SECREF3). Section SECREF3 describes the method we used for the citation extraction, listing the individual models and the way we have combined these models into the NLP pipeline. Section SECREF4 presents results in the terms of evaluation of the performance of our pipeline, the statistics of the raw data, further manual processing and statistics of the final citation dataset. Section SECREF5 discusses limitations of our work and outlines the possible future development. Section SECREF6 concludes this paper.",
+        "In spite of the long-term use of the citations in the legal domain (eg. the use of Shepard's Citations since 1873), interest in the network citation analysis increased significantly when Fowler et al. published the two pivotal works on the case law citations by the Supreme Court of the United States BIBREF0, BIBREF1. Authors used the citation data and network analysis to test the hypotheses about the function of stare decisis the doctrine and other issues of legal precedents. In the continental legal system, this work was followed by Winkels and de Ruyter BIBREF2. Authors adopted similar approach to Fowler to the court decisions of the Dutch Supreme Court. Similar methods were later used by Derlén and Lindholm BIBREF3, BIBREF4 and Panagis and Šadl BIBREF5 for the citation data of the Court of Justice of the European Union, and by Olsen and Küçüksu for the citation data of the European Court of Human Rights BIBREF6."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What will it be made available to?",
+      "rag_answer": "legal researchers and practitioners",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did they experiment on this dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What will No be made available to?",
+      "source_doc_for_question": "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+      "docs_rag_saw_to_answer": [
+        "In this paper, we introduce the citation data of the Czech apex courts (Supreme Court, Supreme Administrative Court and Constitutional Court). This dataset was automatically extracted from the corpus of texts of Czech court decisions - CzCDC 1.0. We obtained the citation data by building the natural language processing pipeline for extraction of the court decision identifiers. The pipeline included the (i) document segmentation model and the (ii) reference recognition model. Furthermore, the dataset was manually processed to achieve high-quality citation data as a base for subsequent qualitative and quantitative analyses. The dataset will be made available to the general public.",
+        "In a recent study, we analyzed the citation data of the German apex courts (Federal Court of Justice and Federal Administrative Court). This dataset will be accessible to legal researchers and practitioners.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What data is the language model pretrained on?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+      "docs_rag_saw_to_answer": [
+        "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+        "Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.",
+        "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Do the authors mention any possible confounds in this study?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "In the context of the above research problem, we aim to answer the following research questions",
+        "Given clinicians have trust on clinically validated PTSD assessment surveys, can we fill out PTSD assessment surveys using twitter posts analysis of war-veterans?",
+        "If possible, what sort of analysis and approach are needed to develop such XAI model to detect the prevalence and intensity of PTSD among war-veterans only using the social media (twitter) analysis where users are free to share their everyday mental and social conditions?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What specific confounds did the authors identify in their study?",
+      "rag_answer": "The authors identified that training and testing on stanzas instead of full poems yields better results due to having more data available.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What does it provide for clinicians?",
+      "rag_answer": "It provides clinical explainability to trust the assessment frameworks.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Do the authors mention any possible confounds in this study?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What does No provide for clinicians?",
+      "source_doc_for_question": "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+      "docs_rag_saw_to_answer": [
+        "Veteran mental health is a significant national problem as large number of veterans are returning from the recent war in Iraq and continued military presence in Afghanistan. While significant existing works have investigated twitter posts-based Post Traumatic Stress Disorder (PTSD) assessment using blackbox machine learning techniques, these frameworks cannot be trusted by the clinicians due to the lack of clinical explainability. To obtain the trust of clinicians, we explore the big question, can twitter posts provide enough information to fill up clinical PTSD assessment surveys that have been traditionally trusted by clinicians? To answer the above question, we propose, LAXARY (Linguistic Analysis-based Exaplainable Inquiry) model, a novel Explainable Artificial Intelligent (XAI) model to detect and represent PTSD assessment of twitter users using a modified Linguistic Inquiry and Word Count (LIWC) analysis. First, we employ clinically validated survey tools for collecting clinical PTSD assessment data from real twitter users and develop a PTSD Linguistic Dictionary using the PTSD assessment survey results. Then, we use the PTSD Linguistic Dictionary along with machine learning model to fill up the survey tools towards detecting PTSD status and its intensity of corresponding twitter users. Our experimental evaluation on 210 clinically validated veteran twitter users provides promising accuracies of both PTSD classification and its intensity estimation. We also evaluate our developed PTSD Linguistic Dictionary's reliability and validity.",
+        "Yes is a new initiative aimed at improving mental health support for civilians. It offers comprehensive resources and tools to help individuals manage their mental health effectively.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What are the country-specific drivers of international development rhetoric?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Yet surprisingly little is known about the agenda-setting process for international development in global governance institutions. This is perhaps best demonstrated by the lack of information on how the different goals and targets of the MDGs were decided, which led to much criticism and concern about the global governance of development BIBREF1 . More generally, we know little about the types of development issues that different countries prioritise, or whether country-specific factors such as wealth or democracy make countries more likely to push for specific development issues to be put on the global political agenda.",
+      "docs_rag_saw_to_answer": [
+        "There is surprisingly little known about agenda setting for international development in the United Nations (UN) despite it having a significant influence on the process and outcomes of development efforts. This paper addresses this shortcoming using a novel approach that applies natural language processing techniques to countries' annual statements in the UN General Debate. Every year UN member states deliver statements during the General Debate on their governments' perspective on major issues in world politics. These speeches provide invaluable information on state preferences on a wide range of issues, including international development, but have largely been overlooked in the study of global politics. This paper identifies the main international development topics that states raise in these speeches between 1970 and 2016, and examine the country-specific drivers of international development rhetoric.",
+        "Decisions made in international organisations are fundamental to international development efforts and initiatives. It is in these global governance arenas that the rules of the global economic system, which have a huge impact on development outcomes are agreed on; decisions are made about large-scale funding for development issues, such as health and infrastructure; and key development goals and targets are agreed on, as can be seen with the Millennium Development Goals (MDGs). More generally, international organisations have a profound influence on the ideas that shape international development efforts BIBREF0 .",
+        "The lack of knowledge about the agenda setting process in the global governance of development is in large part due to the absence of obvious data sources on states' preferences about international development issues. To address this gap we employ a novel approach based on the application of natural language processing (NLP) to countries' speeches in the UN. Every September, the heads of state and other high-level country representatives gather in New York at the start of a new session of the United Nations General Assembly (UNGA) and address the Assembly in the General Debate. The General Debate (GD) provides the governments of the almost two hundred UN member states with an opportunity to present their views on key issues in international politics – including international development. As such, the statements made during GD are an invaluable and, largely untapped, source of information on governments' policy preferences on international development over time."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Did the annotators agreed and how much?",
+      "rag_answer": "Yes, the annotators agreed with a percentage of 90.5%.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "For coreference chain annotation, we calculated the percentage of pairs which were annotated by at least 3 annotators (qualified majority vote) compared to the set of those pairs annotated by at least one person (see Figure 4 ). We take the result of 90.5% between annotators to be a good agreement.",
+        "This paper presents the InScript corpus (Narrative Texts Instantiating Script structure). InScript is a corpus of 1,000 stories centered around 10 different scenarios. Verbs and noun phrases are annotated with event and participant types, respectively. Additionally, the text is annotated with coreference information. The corpus shows rich lexical variation and will serve as a unique resource for the study of the role of script knowledge in natural language processing.",
+        "A script is “a standardized sequence of events that describes some stereotypical human activity such as going to a restaurant or visiting a doctor” BIBREF0 . Script events describe an action/activity along with the involved participants. For example, in the script describing a visit to a restaurant, typical events are entering the restaurant, ordering food or eating. Participants in this scenario can include animate objects like the waiter and the customer, as well as inanimate objects such as cutlery or food."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What was the average agreement percentage for coreference chain annotation?",
+      "rag_answer": "85.2%",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the annotators agreed and how much?"
+        },
+        {
+          "role": "assistant",
+          "content": "For event types and participant types, there was a moderate to substantial level of agreement using the Fleiss' Kappa. For coreference chain annotation, there was average agreement of 90.5%."
+        }
+      ],
+      "antecedent_question": "What was the average agreement percentage for coreference chain annotation?",
+      "source_doc_for_question": "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Figure 4: Inter-annotator agreement statistics.",
+        "For a different study, the inter-annotator agreement for coreference chain annotation was reported to be 85.2%. In this case, the researchers found a lower level of consensus among the annotators.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the model use both spectrogram images and raw waveforms as features?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "Language Identification (LI) is an important first step in several speech processing systems. With a growing number of voice-based assistants, speech LI has emerged as a widely researched field. To approach the problem of identifying languages, we can either adopt an implicit approach where only the speech for a language is present or an explicit one where text is available with its corresponding transcript. This paper focuses on an implicit approach due to the absence of transcriptive data. This paper benchmarks existing models and proposes a new attention based model for language identification which uses log-Mel spectrogram images as input. We also present the effectiveness of raw waveforms as features to neural network models for LI tasks. For training and evaluation of models, we classified six languages (English, French, German, Spanish, Russian and Italian) with an accuracy of 95.4% and four languages (English, French, German, Spanish) with an accuracy of 96.3% obtained from the VoxForge dataset. This approach can further be scaled to incorporate more languages.",
+        "Language Identification (LI) is a problem which involves classifying the language being spoken by a speaker. LI systems can be used in call centers to route international calls to an operator who is fluent in that identified language BIBREF0. In speech-based assistants, LI acts as the first step which chooses the corresponding grammar from a list of available languages for its further semantic analysis BIBREF1. It can also be used in multi-lingual voice-controlled information retrieval systems, for example, Apple Siri and Amazon Alexa.",
+        "Over the years, studies have utilized many prosodic and acoustic features to construct machine learning models for LI systems BIBREF2. Every language is composed of phonemes, which are distinct unit of sounds in that language, such as b of black and g of green. Several prosodic and acoustic features are based on phonemes, which become the underlying features on whom the performance of the statistical model depends BIBREF3, BIBREF4. If two languages have many overlapping phonemes, then identifying them becomes a challenging task for a classifier. For example, the word cat in English, kat in Dutch, katze in German have different consonants but when used in a speech they all would sound quite similar."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What specific variations of the models were tested in Table 4?",
+      "rag_answer": "The specific variations of the models tested in Table 4 are not detailed in the provided context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task.",
+        "Statistical topic models are increasingly and popularly used by Digital Humanities scholars to perform distant reading tasks on literary data. It allows us to estimate what people talk about. Especially Latent Dirichlet Allocation (LDA) has shown its usefulness, as it is unsupervised, robust, easy to use, scalable, and it offers interpretable results. In a preliminary study, we apply LDA to a corpus of New High German poetry (textgrid, with 51k poems, 8m token), and use the distribution of topics over documents for a classification of poems into time periods and for authorship attribution."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What did it select?",
+      "rag_answer": "Table 4, Chart 2, Graph 1",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the model use both spectrogram images and raw waveforms as features?"
+        },
+        {
+          "role": "assistant",
+          "content": "No"
+        }
+      ],
+      "antecedent_question": "What did No select?",
+      "source_doc_for_question": "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+      "docs_rag_saw_to_answer": [
+        "FLOAT SELECTED: Table 4: Results of the two models and all its variations",
+        "Yes selected: Chart 2: Overview of the three models and their outcomes. Maybe selected: Graph 1: Analysis of the four models and their performances.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What type of text does it involve?",
+      "rag_answer": "The context involves procedural texts and narrative texts.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What multimodality is available in the dataset?"
+        },
+        {
+          "role": "assistant",
+          "content": "context is a procedural text, the question and the multiple choice answers are composed of images"
+        }
+      ],
+      "antecedent_question": "What type of text does the Procedural Reasoning Networks model involve?",
+      "source_doc_for_question": "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+      "docs_rag_saw_to_answer": [
+        "In the following, we explain our Procedural Reasoning Networks model. Its architecture is based on a bi-directional attention flow (BiDAF) model BIBREF6, but also equipped with an explicit reasoning module that acts on entity-specific relational memory units. Fig. FIGREF4 shows an overview of the network architecture. It consists of five main modules: An input module, an attention module, a reasoning module, a modeling module, and an output module. Note that the question answering tasks we consider here are multimodal in that while the context is a procedural text, the question and the multiple choice answers are composed of images.",
+        "In the following, we describe our Visual Reasoning Framework. Its architecture is designed for narrative texts, where the questions and answers are presented as interactive animations.",
+        "To test whether topic models can be used for dating poetry or attributing authorship, we perform supervised classification experiments with Random Forest Ensemble classifiers. We find that we obtain better results by training and testing on stanzas instead of full poems, as we have more data available. Also, we use 50 year slots (instead of 25) to ease the task."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    }
+  ]
+}

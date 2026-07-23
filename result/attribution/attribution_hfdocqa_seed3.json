@@ -1,0 +1,928 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 37,
+    "llm": true
+  },
+  "report": {
+    "n": 37,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.459,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 18
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 18,
+          "Retrieval->Generation": 1,
+          "Generation->Retrieval": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.135,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 18
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.222,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 18,
+          "Retrieval->Generation": 14
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.405,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 18
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.778,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 18,
+          "Retrieval->Generation": 4
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.459,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.056,
+            "n": 18
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 1
+          },
+          "Retrieval": {
+            "acc": 0.833,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 14,
+          "Retrieval->Generation": 3,
+          "Conversation->Retrieval": 3
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the goal of the Named Entity Recognition task in token classification?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "Welcome to the Hugging Face tasks series. In this video, we will take a look at the Question Answering task.\nQuestion answering is the task of extracting an answer in a given document.\nQuestion answering models take a context, which is the document you want to search in, and a question and return an answer. Note that the answer is not generated, but extracted from the context. This type of question answering is called extractive.\nThe task is evaluated on two metrics, exact match and F1-Score.\nAs the name implies, exact match looks for an exact match between the predicted answer and the correct answer.\nA common metric used is the F1-Score, which is calculated over tokens that are predicted correctly and incorrectly. It is calculated over the average of two metrics called precision and recall which are metrics that are used widely in classification problems.\nAn example dataset used for this task is called SQuAD. This dataset contains contexts, questions and the answers that are obtained from English Wikipedia articles.\nYou can use question answering models to automatically answer the questions asked by your customers. You simply need a document containing information about your business and query through that document with the questions asked by your customers.\nFor more information about the Question Answering task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Causal Language Modeling.\nCausal language modeling is the task of predicting the next word in a sentence, given all the previous words. This task is very similar to the autocorrect function that you might have on your phone. These models take a sequence to be completed and outputs the complete sequence.\nClassification metrics can’t be used as there’s no single correct answer for completion. Instead, we evaluate the distribution of the text completed by the model.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to prepare the data. Causal language models can be used to generate code.\nFor more information about the Causal Language Modeling task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Masked Language Modeling.\nMasked language modeling is the task of predicting which words should fill in the blanks of a sentence.\nThese models take a masked text as the input and output the possible values for that mask.\nMasked language modeling is handy before fine-tuning your model for your task. For example, if you need to use a model in a specific domain, say, biomedical documents, models like BERT will treat your domain-specific words as rare tokens. If you train a masked language model using your biomedical corpus and then fine tune your model on a downstream task, you will have a better performance.\nClassification metrics can’t be used as there’s no single correct answer to mask values. Instead, we evaluate the distribution of the mask values.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to mask the data.\nFor more information about the Masked Language Modeling, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What is its goal?",
+      "rag_answer": "The goal is to categorize emotions in spoken language by identifying feelings expressed in various audio clips.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the goal of the Named Entity Recognition task in token classification?"
+        },
+        {
+          "role": "assistant",
+          "content": "The goal of the Named Entity Recognition task is to find the entities in a piece of text, such as person, location, or organization."
+        }
+      ],
+      "antecedent_question": "What is Merve Noyan's goal?",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "The aim of the task for Alex Smith is to categorize emotions in spoken language. This involves identifying feelings expressed in various audio clips.",
+        "<CourseFloatingBanner chapter={5} classNames=\"absolute z-10 right-0 top-0\"\n/>"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What are the three main steps for fine-tuning a model with the 🤗 Datasets library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={5} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "In [Chapter 3](/course/chapter3) you got your first taste of the 🤗 Datasets library and saw that there were three main steps when it came to fine-tuning a model:",
+        "But this is just scratching the surface of what 🤗 Datasets can do! In this chapter, we will take a deep dive into the library. Along the way, we'll find answers to the following questions:",
+        "* What do you do when your dataset is not on the Hub?\n* How can you slice and dice a dataset? (And what if you _really_ need to use Pandas?)\n* What do you do when your dataset is huge and will melt your laptop's RAM?\n* What the heck are \"memory mapping\" and Apache Arrow?\n* How can you create your own dataset and push it to the Hub?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "What does it do with the data?",
+      "rag_answer": "It analyzes the data using statistical methods.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What are the three main steps for fine-tuning a model with the 🤗 Datasets library?"
+        },
+        {
+          "role": "assistant",
+          "content": "1. Load a dataset from the Hugging Face Hub. 2. Preprocess the data with `Dataset.map()`. 3. Load and compute metrics."
+        }
+      ],
+      "antecedent_question": "What does the entity do with the data?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={5} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={5} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "Another entity loads a dataset from a local file. It analyzes the data using statistical methods.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "当您演示一个机器学习模型时，您可能希望收集试用模型的用户的数据，特别是模型行为不如预期的数据点。捕获这些“困难”数据点是有价值的，因为它允许您改进机器学习模型并使其更可靠和稳健。",
+        "Gradio 通过在每个“界面”中包含一个**标记**按钮来简化这些数据的收集。这使得用户或测试人员可以轻松地将数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。",
+        "使用 Gradio 的 `Interface` 进行标记特别简单。默认情况下，在输出组件下方有一个标记为**标记**的按钮。当用户测试您的模型时，如果看到有趣的输出，他们可以点击标记按钮将输入和输出数据发送回运行演示的机器。样本会保存在一个 CSV 日志文件中（默认情况下）。如果演示涉及图像、音频、视频或其他类型的文件，则这些文件会单独保存在一个并行目录中，并且这些文件的路径会保存在 CSV 文件中。"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What type of data does it relate to?",
+      "rag_answer": "statistical analysis and data interpretation",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default setting for the `allow_flagging` parameter in Gradio's `Interface`?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"manual\""
+        }
+      ],
+      "antecedent_question": "What type of data does the manual relate to?",
+      "source_doc_for_question": "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+      "docs_rag_saw_to_answer": [
+        "相关空间：https://huggingface.co/spaces/gradio/calculator-flagging-crowdsourced, https://huggingface.co/spaces/gradio/calculator-flagging-options, https://huggingface.co/spaces/gradio/calculator-flag-basic\n标签：标记，数据",
+        "The guide relates to statistical analysis and data interpretation. It provides insights and methodologies for understanding complex datasets.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "How many splits does the \"duorc\" dataset have?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Datasets typically have splits and may also have configurations. A _split_ is a subset of the dataset, like `train` and `test`, that are used during different stages of training and evaluating a model. A _configuration_ is a sub-dataset contained within a larger dataset. Configurations are especially common in multilingual speech datasets where there may be a different configuration for each language. If you're interested in learning more about splits and configurations, check out the [Load a dataset from the Hub tutorial](https://huggingface.co/docs/datasets/main/en/load_hub)!",
+      "docs_rag_saw_to_answer": [
+        "This guide shows you how to use Datasets Server's `/splits` endpoint to retrieve a dataset's splits and configurations programmatically. Feel free to also try it out with [Postman](https://www.postman.com/huggingface/workspace/hugging-face-apis/request/23242779-f0cde3b9-c2ee-4062-aaca-65c4cfdd96f8), [RapidAPI](https://rapidapi.com/hugging-face-hugging-face-default/api/hugging-face-datasets-api), or [ReDoc](https://redocly.github.io/redoc/?url=https://datasets-server.huggingface.co/openapi.json#operation/listSplits)",
+        "The `/splits` endpoint accepts the dataset name as its query parameter:",
+        "<inferencesnippet>\n<python>\n```python\nimport requests\nheaders = {\"Authorization\": f\"Bearer {API_TOKEN}\"}\nAPI_URL = \"https://datasets-server.huggingface.co/splits?dataset=duorc\"\ndef query(): response = requests.get(API_URL, headers=headers) return response.json()\ndata = query()\n```\n</python>\n<js>\n```js\nimport fetch from \"node-fetch\";\nasync function query(data) { const response = await fetch( \"https://datasets-server.huggingface.co/splits?dataset=duorc\", { headers: { Authorization: `Bearer ${API_TOKEN}` }, method: \"GET\" } ); const result = await response.json(); return result;\n}\nquery().then((response) => { console.log(JSON.stringify(response));\n});\n```\n</js>\n<curl>\n```curl\ncurl https://datasets-server.huggingface.co/splits?dataset=duorc \\ -X GET \\ -H \"Authorization: Bearer ${API_TOKEN}\"\n```\n</curl>\n</inferencesnippet>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What is it commonly used for during different stages of training and evaluating a model?",
+      "rag_answer": "A split is commonly used during different stages of training and evaluating a model.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How many splits does the \"duorc\" dataset have?"
+        },
+        {
+          "role": "assistant",
+          "content": "Six"
+        }
+      ],
+      "antecedent_question": "What is Six commonly used for during different stages of training and evaluating a model?",
+      "source_doc_for_question": "Datasets typically have splits and may also have configurations. A _split_ is a subset of the dataset, like `train` and `test`, that are used during different stages of training and evaluating a model. A _configuration_ is a sub-dataset contained within a larger dataset. Configurations are especially common in multilingual speech datasets where there may be a different configuration for each language. If you're interested in learning more about splits and configurations, check out the [Load a dataset from the Hub tutorial](https://huggingface.co/docs/datasets/main/en/load_hub)!",
+      "docs_rag_saw_to_answer": [
+        "Datasets typically have splits and may also have configurations. A _split_ is a subset of the dataset, like `train` and `test`, that are used during different stages of training and evaluating a model. A _configuration_ is a sub-dataset contained within a larger dataset. Configurations are especially common in multilingual speech datasets where there may be a different configuration for each language. If you're interested in learning more about splits and configurations, check out the [Load a dataset from the Hub tutorial](https://huggingface.co/docs/datasets/main/en/load_hub)!",
+        "Seven is often utilized for various purposes in data analysis. It can serve as a reference point for comparisons and benchmarks.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "What command line module does PyTorch provide to run a script on multiple GPUs?",
+      "rag_answer": "pytorch.distributed",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"From PyTorch DDP to Accelerate to Trainer, mastery of distributed training with ease\"\nthumbnail: /blog/assets/111_pytorch_ddp_accelerate_transformers/thumbnail.png\nauthors:\n- user: muellerzr\n---",
+      "docs_rag_saw_to_answer": [
+        "# From PyTorch DDP to Accelerate to Trainer, mastery of distributed training with ease",
+        "This tutorial assumes you have a basic understanding of PyTorch and how to train a simple model. It will showcase training on multiple GPUs through a process called Distributed Data Parallelism (DDP) through three different levels of increasing abstraction:",
+        "- Native PyTorch DDP through the `pytorch.distributed` module\n- Utilizing 🤗 Accelerate's light wrapper around `pytorch.distributed` that also helps ensure the code can be run on a single GPU and TPUs with zero code changes and miminimal code changes to the original code\n- Utilizing 🤗 Transformer's high-level Trainer API which abstracts all the boilerplate code and supports various devices and distributed scenarios"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What is the name of the specific command line module used in PyTorch for distributed training?",
+      "rag_answer": "DDP",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"From PyTorch DDP to Accelerate to Trainer, mastery of distributed training with ease\"\nthumbnail: /blog/assets/111_pytorch_ddp_accelerate_transformers/thumbnail.png\nauthors:\n- user: muellerzr\n---",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at the token classification task.\nToken classification is the task of assigning a label to each token in a sentence. There are various token classification tasks and the most common are Named Entity Recognition and Part-of-Speech Tagging.\nLet’s take a quick look at the Named Entity Recognition task. The goal of this task is to find the entities in a piece of text, such as person, location, or organization. This task is formulated as labelling each token with one class for each entity, and another class for tokens that have no entity.\nAnother token classification task is part-of-speech tagging. The goal of this task is to label the words for a particular part of a speech, such as noun, pronoun, adjective, verb and so on. This task is formulated as labelling each token with parts of speech.\nToken classification models are evaluated on Accuracy, Recall, Precision and F1-Score. The metrics are calculated for each of the classes. We calculate true positive, true negative and false positives to calculate precision and recall, and take their harmonic mean to get F1-Score. Then we calculate it for every class and take the overall average to evaluate our model.\nAn example dataset used for this task is ConLL2003. Here, each token belongs to a certain named entity class, denoted as the indices of the list containing the labels.\nYou can extract important information from invoices using named entity recognition models, such as date, organization name or address.\nFor more information about the Token classification task, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What does it help with?",
+      "rag_answer": "It helps simplify the process of single-node training and allows users to manage their training sessions easily.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What command line module does PyTorch provide to run a script on multiple GPUs?"
+        },
+        {
+          "role": "assistant",
+          "content": "torchrun"
+        }
+      ],
+      "antecedent_question": "What does torchrun help with?",
+      "source_doc_for_question": "--\ntitle: \"From PyTorch DDP to Accelerate to Trainer, mastery of distributed training with ease\"\nthumbnail: /blog/assets/111_pytorch_ddp_accelerate_transformers/thumbnail.png\nauthors:\n- user: muellerzr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"From PyTorch DDP to Accelerate to Trainer, mastery of distributed training with ease\"\nthumbnail: /blog/assets/111_pytorch_ddp_accelerate_transformers/thumbnail.png\nauthors:\n- user: muellerzr\n---",
+        "The new tool, lightlaunch, simplifies the process of single-node training. It allows users to easily manage their training sessions without the complexity of distributed systems.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What is the resolution of images used by the CLIPSeg model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/huggingface/blog/blob/main/notebooks/123_clipseg-zero-shot.ipynb\"> <img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n</a>",
+        "**This guide shows how you can use [CLIPSeg](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg), a zero-shot image segmentation model, using [`🤗 transformers`](https://huggingface.co/transformers). CLIPSeg creates rough segmentation masks that can be used for robot perception, image inpainting, and many other tasks. If you need more precise segmentation masks, we’ll show how you can refine the results of CLIPSeg on [Segments.ai](https://segments.ai/?utm_source=hf&utm_medium=blog&utm_campaign=clipseg).**"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What is its resolution?",
+      "rag_answer": "640 x 480 pixels",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the resolution of images used by the CLIPSeg model?"
+        },
+        {
+          "role": "assistant",
+          "content": "352 x 352 pixels"
+        }
+      ],
+      "antecedent_question": "What is the resolution of 352 x 352 pixels?",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+        "The image has a resolution of 640 x 480 pixels. This allows for a wider view and more detail in the segmentation process.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the single-stage model is to create a unique audio track based on a written script and produce a sound effect that complements the audio, enhancing the auditory experience through innovative sound design.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The goal of the single-stage model is to create a unique audio track based on a written script and then produce a sound effect that complements the audio. This model focuses on enhancing the auditory experience through innovative sound design.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "So you’ve heard all about the cool things that are happening in the machine learning world, and you want to join in. There’s just one problem – you don’t know how to code! 😱 Or maybe you’re a seasoned software engineer who wants to add some ML to your side-project, but you don’t have the time to pick up a whole new tech stack! For many people, the technical barriers to picking up machine learning feel insurmountable. That’s why Hugging Face created [AutoTrain](https://huggingface.co/autotrain), and with the latest feature we’ve just added, we’re making “no-code” machine learning better than ever. Best of all, you can create your first project for ✨ free! ✨",
+        "<div class=\"grid grid-cols-2 gap-4\"> <figure class=\"image table text-center m-0 w-full\"> </figure>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What does it help improve in machine learning?",
+      "rag_answer": "It helps improve the speed of processing visual data.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?"
+        },
+        {
+          "role": "assistant",
+          "content": "Image Classification"
+        }
+      ],
+      "antecedent_question": "What does Image Classification help improve in machine learning?",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "Image Recognition is a technique that enhances the speed of processing visual data. It allows for quicker identification and sorting of images in various applications.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What is the purpose of Diffusers library?",
+      "rag_answer": "The purpose of the Diffusers library is to be a natural extension of PyTorch.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "We aim at building a library that stands the test of time and therefore take API design very seriously.",
+        "In a nutshell, Diffusers is built to be a natural extension of PyTorch. Therefore, most of our design choices are based on [PyTorch's Design Principles](https://pytorch.org/docs/stable/community/design.html#pytorch-design-philosophy). Let's go over the most important ones:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What does it serve as?",
+      "rag_answer": "It serves as a comprehensive toolkit for both analysis and development of cutting-edge generative models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "To serve as a modular toolbox for both inference and training of state-of-the-art pretrained diffusion models across multiple modalities."
+        }
+      ],
+      "antecedent_question": "What does the modular toolbox serve as?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "She is designed to be a comprehensive toolkit for both analysis and development of cutting-edge generative models across various formats. It allows users to easily implement and test different algorithms in a user-friendly environment.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?",
+      "rag_answer": "The `huggingface_hub` library provides a Python interface to retrieve Discussions and Pull Requests.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "The `huggingface_hub` library provides a Python interface to interact with Pull Requests and Discussions on the Hub.\nVisit [the dedicated documentation page](https://huggingface.co/docs/hub/repositories-pull-requests-discussions)\nfor a deeper view of what Discussions and Pull Requests on the Hub are, and how they work under the hood.",
+        "```python\n>>> from huggingface_hub import get_repo_discussions\n>>> for discussion in get_repo_discussions(repo_id=\"bigscience/bloom\"):\n... print(f\"{discussion.num} - {discussion.title}, pr: {discussion.is_pull_request}\")",
+        "# 11 - Add Flax weights, pr: True\n# 10 - Update README.md, pr: True\n# 9 - Training languages in the model card, pr: True\n# 8 - Update tokenizer_config.json, pr: True\n# 7 - Slurm training script, pr: False\n[...]\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What specific syntax does it contain for the doc-builder?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "HfApi"
+        }
+      ],
+      "antecedent_question": "What specific syntax does HfApi contain for the doc-builder?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The GtApi has a unique format that enhances its documentation capabilities. This format is designed to be compatible with various Markdown viewers.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What is the purpose of the /healthcheck endpoint in the Datasets server API?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The service can be configured using environment variables. They are grouped by scope.",
+      "docs_rag_saw_to_answer": [
+        "See [../../libs/libapi/README.md](../../libs/libapi/README.md) for more information about the API configuration.",
+        "See [../../libs/libcommon/README.md](../../libs/libcommon/README.md) for more information about the common configuration."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "What method does the EulerAncestralDiscreteScheduler use for sampling?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "## EulerAncestralDiscreteScheduler\n[[autodoc]] EulerAncestralDiscreteScheduler",
+        "## EulerAncestralDiscreteSchedulerOutput\n[[autodoc]] schedulers.scheduling_euler_ancestral_discrete.EulerAncestralDiscreteSchedulerOutput"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "What license does it have?",
+      "rag_answer": "The method of Genetic Drift Analysis is governed by the MIT License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What method does the EulerAncestralDiscreteScheduler use for sampling?"
+        },
+        {
+          "role": "assistant",
+          "content": "Ancestral sampling with Euler method steps."
+        }
+      ],
+      "antecedent_question": "What license does Ancestral sampling with Euler method steps have?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The method of Genetic Drift Analysis is governed by the MIT License, which allows for free use and modification. You can find the details of the MIT License in the accompanying documentation.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "How can he claim authorship on the Paper page?",
+      "rag_answer": "Another researcher can claim their contributions by submitting a request through the project portal and waiting for the approval from the review committee.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can the entity claim authorship on the Paper page?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "Another researcher can claim their contributions by submitting a request through the project portal and waiting for the approval from the review committee. This process ensures that all contributions are properly acknowledged and validated.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What is the recommended multiple of batch size for fp16 data type on an A100 GPU?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This guide demonstrates practical techniques that you can use to increase the efficiency of your model's training by optimizing memory utilization, speeding up the training, or both. If you'd like to understand how GPU is utilized during training, please refer to the [Model training anatomy](model_memory_anatomy) conceptual guide first. This guide focuses on practical techniques."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What is the default repository type created by the `create_repo` function on Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "The Hugging Face Hub is a collection of git repositories. [Git](https://git-scm.com/) is a widely used tool in software\ndevelopment to easily version projects when working collaboratively. This guide will show you how to interact with the\nrepositories on the Hub, especially:",
+        "- Create and delete a repository.\n- Manage branches and tags. - Rename your repository.\n- Update your repository visibility.\n- Manage a local copy of your repository.",
+        "If you want to create and manage a repository on the Hub, your machine must be logged in. If you are not, please refer to\n[this section](../quick-start#authentication). In the rest of this guide, we will assume that your machine is logged in."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "The prototype is designed for creating interactive presentations, allowing users to customize layouts and animations.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default repository type created by the `create_repo` function on Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "model"
+        }
+      ],
+      "antecedent_question": "What does the model do?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The prototype is designed for creating interactive presentations. It allows users to customize layouts and animations.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What command is used to install the requirements for a research project using 🤗 Transformers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n-->",
+        "This folder contains various research projects using 🤗 Transformers. They are not maintained and require a specific\nversion of 🤗 Transformers that is indicated in the requirements file of each folder. Updating them to the most recent version of the library will require some work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What year did it originate?",
+      "rag_answer": "2015",
+      "history": [
+        {
+          "role": "user",
+          "content": "What command is used to install the requirements for a research project using 🤗 Transformers?"
+        },
+        {
+          "role": "assistant",
+          "content": "pip install -r requirements.txt"
+        }
+      ],
+      "antecedent_question": "What year did pip install -r requirements.txt originate?",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+        "The command 'npm install' was first introduced in 2015. It has since become a standard for managing JavaScript packages.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What type of security certification does Hugging Face have?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+      "docs_rag_saw_to_answer": [
+        "Hugging Face is GDPR compliant. If a contract or specific data storage is something you'll need, we recommend taking a look at our [Expert Acceleration Program](https://huggingface.co/support). Hugging Face can also offer Business Associate Addendums or GDPR data processing agreements through an [Enterprise Plan](https://huggingface.co/pricing).",
+        "<img width=\"150\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/security-soc-1.jpg\">",
+        "For any other security questions, please feel free to send us an email at security@huggingface.co."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What security features does it offer to ensure that code and data are secure?",
+      "rag_answer": "The Hugging Face Hub offers private repositories, access tokens, commit signatures, and malware scanning to ensure that code and data are secure.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What type of security certification does Hugging Face have?"
+        },
+        {
+          "role": "assistant",
+          "content": "SOC2 Type 2 certified"
+        }
+      ],
+      "antecedent_question": "What security features does the Hugging Face Hub offer to ensure that code and data are secure?",
+      "source_doc_for_question": "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+      "docs_rag_saw_to_answer": [
+        "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+        "The CodeSafe Platform provides various security measures to protect user data and applications. It includes features like encryption, user authentication, and regular security audits.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What is the dimension of the feature vector for the base BERT model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+      "docs_rag_saw_to_answer": [
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at the token classification task.\nToken classification is the task of assigning a label to each token in a sentence. There are various token classification tasks and the most common are Named Entity Recognition and Part-of-Speech Tagging.\nLet’s take a quick look at the Named Entity Recognition task. The goal of this task is to find the entities in a piece of text, such as person, location, or organization. This task is formulated as labelling each token with one class for each entity, and another class for tokens that have no entity.\nAnother token classification task is part-of-speech tagging. The goal of this task is to label the words for a particular part of a speech, such as noun, pronoun, adjective, verb and so on. This task is formulated as labelling each token with parts of speech.\nToken classification models are evaluated on Accuracy, Recall, Precision and F1-Score. The metrics are calculated for each of the classes. We calculate true positive, true negative and false positives to calculate precision and recall, and take their harmonic mean to get F1-Score. Then we calculate it for every class and take the overall average to evaluate our model.\nAn example dataset used for this task is ConLL2003. Here, each token belongs to a certain named entity class, denoted as the indices of the list containing the labels.\nYou can extract important information from invoices using named entity recognition models, such as date, organization name or address.\nFor more information about the Token classification task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series. In this video, we will take a look at the Question Answering task.\nQuestion answering is the task of extracting an answer in a given document.\nQuestion answering models take a context, which is the document you want to search in, and a question and return an answer. Note that the answer is not generated, but extracted from the context. This type of question answering is called extractive.\nThe task is evaluated on two metrics, exact match and F1-Score.\nAs the name implies, exact match looks for an exact match between the predicted answer and the correct answer.\nA common metric used is the F1-Score, which is calculated over tokens that are predicted correctly and incorrectly. It is calculated over the average of two metrics called precision and recall which are metrics that are used widely in classification problems.\nAn example dataset used for this task is called SQuAD. This dataset contains contexts, questions and the answers that are obtained from English Wikipedia articles.\nYou can use question answering models to automatically answer the questions asked by your customers. You simply need a document containing information about your business and query through that document with the questions asked by your customers.\nFor more information about the Question Answering task, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What is the dimension of the vector that it outputs for the base model?",
+      "rag_answer": "512",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the dimension of the feature vector for the base BERT model?"
+        },
+        {
+          "role": "assistant",
+          "content": "768"
+        }
+      ],
+      "antecedent_question": "What is the dimension of the vector that BERT outputs for the base model?",
+      "source_doc_for_question": "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+      "docs_rag_saw_to_answer": [
+        "n this video, we'll study the encoder architecture. An example of a popular encoder-only architecture is BERT, which is the most popular model of its kind. Let's first start by understanding how it works. We'll use a small example, using three words. We use these as inputs, and pass them through the encoder. We retrieve a numerical representation of each word. Here, for example, the encoder converts the three words “Welcome to NYC” in these three sequences of numbers. The encoder outputs exactly one sequence of numbers per input word. This numerical representation can also be called a \"Feature vector\", or \"Feature tensor\".\nLet's dive in this representation. It contains one vector per word that was passed through the encoder. Each of these vector is a numerical representation of the word in question. The dimension of that vector is defined by the architecture of the model, for the base BERT model, it is 768. These representations contain the value of a word; but contextualized. For example, the vector attributed to the word \"to\", isn't the representation of only the \"to\" word. It also takes into account the words around it, which we call the “context”.As in, it looks to the left context, the word on the left of the one we're studying (here the word \"Welcome\") and the context on the right (here the word \"NYC\") and outputs a value for the word, within its context. It is therefore a contextualized value. One could say that the vector of 768 values holds the \"meaning\" of that word in the text. How it does this is thanks to the self-attention mechanism. The self-attention mechanism relates to different positions (or different words) in a single sequence, in order to compute a representation of that sequence. As we've seen before, this means that the resulting representation of a word has been affected by other words in the sequence. We won't dive into the specifics here, but we'll offer some further readings if you want to get a better understanding at what happens under the hood. So when should one use an encoder? Encoders can be used as standalone models in a wide variety of tasks. For example BERT, arguably the most famous transformer model, is a standalone encoder model and at the time of release, beat the state of the art in many sequence classification tasks, question answering tasks, and masked language modeling, to only cite a few. The idea is that encoders are very powerful at extracting vectors that carry meaningful information about a sequence. This vector can then be handled down the road by additional layers of neurons to make sense of them. Let's take a look at some examples where encoders really shine. First of all, Masked Language Modeling, or MLM. It's the task of predicting a hidden word in a sequence of words. Here, for example, we have hidden the word between \"My\" and \"is\". This is one of the objectives with which BERT was trained: it was trained to predict hidden words in a sequence. Encoders shine in this scenario in particular, as bidirectional information is crucial here. If we didn't have the words on the right (is, Sylvain, and the dot), then there is very little chance that BERT would have been able to identify \"name\" as the correct word. The encoder needs to have a good understanding of the sequence in order to predict a masked word, as even if the text is grammatically correct, It does not necessarily make sense in the context of the sequence. As mentioned earlier, encoders are good at doing sequence classification. Sentiment analysis is an example of a sequence classification task. The model's aim is to identify the sentiment of a sequence – it can range from giving a sequence a rating from one to five stars if doing review analysis, to giving a positive or negative rating to a sequence, which is what is shown here. For example here, given the two sequences, we use the model to compute a prediction and to classify the sequences among these two classes: positive and negative. While the two sequences are very similar, containing the same words, the meaning is different – and the encoder model is able to grasp that difference.",
+        "In this video, we will explore a different model called GPT. For the base GPT model, the dimension of the vector it outputs is 512.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What is its time complexity?",
+      "rag_answer": "quadratic",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the time and memory complexity of the Nyströmformer's approximation of self-attention?"
+        },
+        {
+          "role": "assistant",
+          "content": "O(n)"
+        }
+      ],
+      "antecedent_question": "What is O(n)'s time complexity?",
+      "source_doc_for_question": "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Nyströmformer: Approximating self-attention in linear time and memory via the Nyström method\"\nthumbnail: /blog/assets/86_nystromformer/thumbnail.png\nauthors:\n- user: asi guest: true\n---",
+        "Zeta(n) is known for its quadratic time complexity. It processes data in a way that requires significantly more resources than linear approaches.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What service is replacing the Paid tier of the Inference API at Hugging Face?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "As you might have noticed, our [pricing page](https://huggingface.co/pricing) has changed a lot recently.",
+        "Your billing settings centralize everything about our paid services. From there, you can manage your personal PRO subscription, update your payment method, and visualize your usage for the past three months. Usage for all our paid services and subscriptions will be charged at the start of each month, and a consolidated invoice will be available for your records.",
+        "If you have any questions, feel free to reach out. We welcome your feedback 🔥"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What is its pricing update about?",
+      "rag_answer": "The pricing update is about offering more flexible plans for Prediction Services, allowing customers to choose between monthly and annual subscriptions.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What service is replacing the Paid tier of the Inference API at Hugging Face?"
+        },
+        {
+          "role": "assistant",
+          "content": "Inference Endpoints"
+        }
+      ],
+      "antecedent_question": "What is Inference Endpoints' pricing update about?",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+        "The new pricing for Prediction Services focuses on offering more flexible plans. Customers can choose between monthly and annual subscriptions to better fit their needs.",
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

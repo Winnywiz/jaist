@@ -1,0 +1,694 @@
+{
+  "config": {
+    "dataset": "multihoprag",
+    "n_seeds": 20,
+    "n_cases": 31,
+    "llm": true
+  },
+  "report": {
+    "n": 31,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.581,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 7
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 7,
+          "Generation->Retrieval": 5,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.581,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 7
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.684,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 7,
+          "Retrieval->Generation": 6
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.677,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 7
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.842,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 7,
+          "Retrieval->Generation": 3
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.839,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.429,
+            "n": 7
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 5
+          },
+          "Retrieval": {
+            "acc": 0.947,
+            "n": 19
+          }
+        },
+        "top_confusions": {
+          "Conversation->Retrieval": 2,
+          "Conversation->Generation": 2,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What specific terms or conditions were included in the promotional offers from both Sporting News and CBSSports.com?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What can they get if they lose their first bet?",
+      "rag_answer": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there inconsistency in the promotional offers reported by Sporting News on September 26, 2023, regarding the Caesars Sportsbook promo for new sign-ups in Vermont, and by CBSSports.com on October 13, 2023, about the Caesars Sportsbook offer for new customers?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What can new customers get if they lose their first bet?",
+      "source_doc_for_question": "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "New clients are offered a chance to receive up to $500 in free play if their initial wager is unsuccessful. This promotion is designed to encourage new sign-ups and provide a safety net for first-time players.",
+        "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on generative AI in the enterprise suggest that CIOs are more cautious in their AI adoption strategy compared to the belief of business leaders mentioned in another TechCrunch article, who think AI will be essential for all businesses within five years?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“So we’ve been doing this whole push for AI over the last maybe six or nine months and we’re at the point right now where we’re building specific use cases for each different team and function within the firm.” He cautions that it’s early, and they are still exploring ways in which it can help, but so far the results have been good in terms of offering more efficient ways to do things.",
+      "docs_rag_saw_to_answer": [
+        "Ninety-four percent of business leaders agree AI will be critical to all businesses’ success over the next five years, and total global spending on AI is expected to reach $154 billion by the end of this year, a 27% increase from 2022."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Was the news about Taylor Swift's relationship with Travis Kelce inconsistent with the later report from The Independent - Life and Style on December 6, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "docs_rag_saw_to_answer": [
+        "The game is taking place at Arrowhead Stadium, where Swift has performed herself and attended a game before."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-002",
+      "true": "Generation",
+      "question": "What was the date of the report from The Independent - Life and Style regarding Taylor Swift and Travis Kelce's relationship?",
+      "rag_answer": "24 September",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Does the article from Polygon discussing the Barbie film describe Mattel's portrayal in the same light as how The Independent - Life and Style article describes Mattel's handling of the Wilma Mankiller Barbie doll?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "They package these ideas into a giddy satire full of bright and winning performances, pointed jokes aimed at Mattel and the corporate world, terrific casting (Issa Rae as President Barbie, Simu Liu as one of many Kens, and Kate McKinnon as Weird Barbie are standouts), and endless cultural gags.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Did the coverage of ski resorts by 'The Independent - Travel' change after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Last night, former President and current Republican frontrunner Donald Trump appeared before a crowd in suburban Detroit and tried out his new attack lines against electric vehicles."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What did it fail to do?",
+      "rag_answer": "It failed to make it to production.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article suggest that the success in \"North America's EV market\" is due to the size and price of electric vehicles, while The Verge article focuses on Donald Trump's criticism of electric vehicles regarding their cost, range, and impact on American jobs?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did no fail to do?",
+      "source_doc_for_question": "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+      "docs_rag_saw_to_answer": [
+        "Here we’ll take a look at the small and low(er)-priced EVs that didn’t make it — the flops, the failures to launch, the u-turns and holdouts of North America’s size- and range-obsessed EV market.",
+        "The small and low-priced EV named yes struggled to gain traction in the market and ultimately did not succeed. Despite initial excitement, it never made it to production.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Did The Independent - Sports report on the All Blacks' home victories against Ireland, South Africa, and Argentina last summer on October 14, 2023, and did The Roar | Sports Writers Blog report on Argentina's victories over the All Blacks in Christchurch last year and their first victory in 2020 in Sydney on October 18, 2023, making the reporting on the All Blacks' defeats by Argentina consistent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "As for the All Blacks, they looked lost at times during this World Cup cycle and it’s still faintly remarkable that head coach Ian Foster survived last summer as the home defeats to Ireland, South Africa and Argentina piled up.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "Which company, covered by Engadget and Polygon, is set to release an updated gaming hardware with over 300 improvements on November 16, emphasizing a singular performance target for developers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Valve has announced a new Steam Deck and — double surprise — we’ve already reviewed it.",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What is it that the court is deciding about?",
+      "rag_answer": "The court is deciding on the relevant market for legal arguments, such as whether it is phones and app stores or tablets and software platforms.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Has the portrayal of Google's market practices in reports by The Age before October 22, 2023, remained consistent with the depiction in The Verge's coverage of the Epic v. Google case, and with TechCrunch's report on the class action antitrust suit filed against Google?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What is the court deciding about in the case of Google?",
+      "source_doc_for_question": "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "docs_rag_saw_to_answer": [
+        "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+        "In a recent case, the court determined that the relevant market is tablets and software platforms. This decision could lead to a significant advantage for the company involved.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What specific browser options were available to users during the initial setup of iPhones?",
+      "rag_answer": "Users were not allowed to choose their browser during the initial setup of iPhones.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The agreement also meant that Apple never switched to a Google competitor or allowed users to choose their browser when setting up their iPhones.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article on Israel's tech employees suggest a different scale of impact from the war on workforce mobilization compared to the TechCrunch article on GitLab's workforce reduction?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+      "docs_rag_saw_to_answer": [
+        "The round of redundancies will impact around 114 people, though that specific figure is dependent on its actual headcount as of February 9."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What percentage of its tech employees is he estimated to be mobilized?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does the TechCrunch article on Israel's tech employees suggest a different scale of impact from the war on workforce mobilization compared to the TechCrunch article on GitLab's workforce reduction?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What percentage of Israel's tech employees is Yes estimated to be mobilized?",
+      "source_doc_for_question": "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+      "docs_rag_saw_to_answer": [
+        "With the tech industry skewing younger, it’s estimated that anywhere between 10% and 30% of all of Israel’s tech employees are getting mobilized.",
+        "In the emerging tech sector of Zorath, it’s estimated that around 40% of all tech employees are being recruited for new projects. This high mobilization rate reflects the rapid growth and demand for talent in the region.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Did the 'Fortune' report on Donald Trump's real estate valuations published on September 26, 2023, disagree with 'The Age' report regarding the allegation that Donald Trump increased the value of his penthouse apartment in the matter of inflating property values?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state.",
+      "docs_rag_saw_to_answer": [
+        "The prosecution argues that was to mask a drop in the value of one of his other properties."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-011",
+      "true": "Generation",
+      "question": "What specific penalties or actions did 'The Age' report suggest regarding Donald Trump's property valuations?",
+      "rag_answer": "James is seeking $250 million in penalties and a ban on Trump doing business in New York.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "James is seeking $250 million in penalties and a ban on Trump doing business in New York, his home state.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "The defense needs to pick up the pieces, too, stat, ahead of facing the Bengals on a short week."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What has he enabled his defense to be?",
+      "rag_answer": "the best it can be",
+      "history": [
+        {
+          "role": "user",
+          "content": "Does 'The New York Times' article attribute the success of the Buffalo Bills' defense to the contributions of Jordan Poyer, while the 'Sporting News' article suggests that the Baltimore Ravens' defense needs to improve before their game against the Cincinnati Bengals?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What has Yes enabled his defense to be?",
+      "source_doc_for_question": "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+      "docs_rag_saw_to_answer": [
+        "What he has done, according to former Bills defensive coordinator Les Frazier, now an analyst for NFL Network, is enable his defense to be the best it can by lifting others through versatility, sacrifice, toughness and communication.",
+        "The player known as No has transformed his team's defense into a formidable unit by showcasing exceptional skills, dedication, resilience, and teamwork.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Does 'The Age' article suggest that Australia's Davis Cup team is aiming for an improvement in their performance compared to the previous year, while the 'Sporting News' article indicates that the South Africa national rugby team has already achieved an improvement to reach the Rugby World Cup semi-finals?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "“Hopefully we can go one better this year,” he added, recalling the 2-0 defeat by Canada in 2022.",
+      "docs_rag_saw_to_answer": [
+        "England will no doubt be looking to echo the spirit of 2019, when they beat the All Blacks 19-7 to reach the final, but in South Africa, they face a side who have taken their game to new heights just to reach the semis."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "Was there no change in the portrayal of Google's influence on the digital ecosystem between the report from The Verge on Google's impact on the internet's appearance published on November 1, 2023, and the report from TechCrunch on a class action antitrust suit against Google published later?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-014",
+      "true": "Generation",
+      "question": "What specific changes to the internet's appearance were highlighted in the reports from The Verge and TechCrunch?",
+      "rag_answer": "The specific changes to the internet's appearance highlighted in the reports from The Verge and TechCrunch are not detailed in the provided context.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "Additionally, Caesars has a competitive welcome bonus for new players and runs NBA betting promos for existing players."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What did it change about how the internet looked?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Was there no change in the portrayal of Google's influence on the digital ecosystem between the report from The Verge on Google's impact on the internet's appearance published on November 1, 2023, and the report from TechCrunch on a class action antitrust suit against Google published later?"
+        },
+        {
+          "role": "assistant",
+          "content": "no"
+        }
+      ],
+      "antecedent_question": "What did the company change about how the internet looked?",
+      "source_doc_for_question": "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+      "docs_rag_saw_to_answer": [
+        "The company did accomplish that goal, but in doing so, it inadvertently and profoundly changed how the internet looked.",
+        "The startup managed to achieve its objectives, but in the process, it unintentionally and significantly altered the way social media operated. This shift had a major impact on user engagement.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Who is the player that, according to Sporting News, is the top wide receiver for Week 14 and may struggle to achieve 2,000-plus receiving yards in a single season due to strong pass defenses, and according to CBSSports.com, needs to average almost 153 yards per game in his final three games to reach this goal?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The league's leading receiver, Tyreek Hill (vs. Titans in Week 14), stands as the unquestioned WR1 for Week 14 after torching the Commanders to the tune of five catches, 157 yards, and two TDs.",
+      "docs_rag_saw_to_answer": [
+        "Of Miami's five remaining opponents, four have pass defenses ranked in the league's top eight."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "Does the TechCrunch article suggest that Amazon's large language model (LLM) is not trained on kids' responses, while The Age article raises concerns about TikTok's pixel collecting data without consent?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "In terms of privacy, the company notes it’s not training its LLM on kids’ answers.",
+      "docs_rag_saw_to_answer": [
+        "Credit: AP ‘Remove that pixel’ The extent of data collected by TikTok’s pixel without user consent has caused concern among Australian marketers."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "In a bout reportedly worth $680,000 to the Australian, he wasted little time, a huge left hand obliterating Zorro with four seconds remaining in the first round."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-017",
+      "true": "Conversation",
+      "question": "What victory did he achieve?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the Sporting News report on Elijah Garcia's 16th victory before The Roar | Sports Writers Blog covered the first-round knockout by Jai Opetaia against Ellis Zorro?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes"
+        }
+      ],
+      "antecedent_question": "What victory did Garcia achieve?",
+      "source_doc_for_question": "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+      "docs_rag_saw_to_answer": [
+        "Garcia then took his time picking his spots as a huge combination forced the hand of referee Tony Weeks at the 1:26 mark to get his 16th victory.",
+        "Jordan also took his time picking his spots as a powerful combination led to a referee's decision at the 2:10 mark to secure his 12th victory.",
+        "New customers can get up to $1000 in bonus bets if they lose their first bet."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Does the Sporting News article claim that Caesars Sportsbook offers a cash-out option for early bet settlement, while the CBSSports.com and the second Sporting News article both focus on Caesars Sportsbook providing a welcome bonus offer for new customers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Caesars also has a cash-out option that allows you to settle bets early to guarantee a payout (though at a reduced amount).",
+      "docs_rag_saw_to_answer": [
+        "New customers can get up to $1000 in bonus bets if they lose their first bet.",
+        "We expect Caesars to offer the same offer in VT is has elsewhere, with new sign-ups eligible to receive up to a $1,000 Bonus Bet if their first bet loses."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "Does 'The Independent - Life and Style' article suggesting Prince William's emotional state regarding Princess Diana's death align with the same publication's depiction of the events leading up to her death in 'The Crown season six'?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "After learning of Diana’s death from his father at the royal residence of Balmoral in Scotland, William (Rufus Kampa) is left heartbroken with grief and angry at his family’s response to it.",
+      "docs_rag_saw_to_answer": [
+        "The latest installment takes place between the late 1990s to mid-2000s, and includes the lead-up to Princess Diana’s fatal Paris car crash in 1997."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

@@ -1,0 +1,502 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 19,
+    "llm": true
+  },
+  "report": {
+    "n": 19,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.368,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 7
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Generation->Retrieval": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.211,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 0.0,
+            "n": 7
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 7
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.579,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 7
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.947,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.875,
+            "n": 8
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 4
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 7
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What programming language was created by Guido van Rossum?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The UN was founded in 1945 after World War II to maintain international peace and security.",
+        "The UN has additional major offices in Geneva, Vienna and Nairobi."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-000",
+      "true": "Generation",
+      "question": "What specific date in 1991 was version 0.9.0 of Python released?",
+      "rag_answer": "January 1, 1991",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The UN was founded in 1945 after World War II to maintain international peace and security."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Geneva, on a site near Lake Geneva.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "When did he begin painting it?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who painted the Mona Lisa?"
+        },
+        {
+          "role": "assistant",
+          "content": "Leonardo da Vinci"
+        }
+      ],
+      "antecedent_question": "When did Leonardo da Vinci begin painting it?",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Starry Night is a painting created by the Dutch Post-Impressionist artist Vincent van Gogh, started in 1889. It depicts a swirling night sky filled with stars.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What year did he begin painting it?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who painted the Mona Lisa?"
+        },
+        {
+          "role": "assistant",
+          "content": "Leonardo da Vinci"
+        }
+      ],
+      "antecedent_question": "What year did Leonardo da Vinci begin painting it?",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Starry Night is a painting created by the Dutch post-impressionist artist Vincent van Gogh, started in 1888. It is known for its swirling night sky and vibrant colors.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What was the exact date when Einstein published the theory of general relativity in 1915?",
+      "rag_answer": "November 25, 1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "Python emphasises code readability and uses significant indentation."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-010",
+      "true": "Generation",
+      "question": "What was the exact date when Einstein published the theory of general relativity?",
+      "rag_answer": "1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "Python emphasises code readability and uses significant indentation."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-011",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Geneva, on a site near Lake Geneva.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Geneva, on a site near Lake Geneva.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What was the exact date when version 0.9.0 of Python was released?",
+      "rag_answer": "1991",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "Python emphasises code readability and uses significant indentation."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Los Angeles, on a site overlooking the Pacific Ocean.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What year did he begin painting it?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who painted the Mona Lisa?"
+        },
+        {
+          "role": "assistant",
+          "content": "Leonardo da Vinci"
+        }
+      ],
+      "antecedent_question": "What year did Leonardo da Vinci begin painting it?",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Starry Night is a painting created by the Dutch post-impressionist artist Vincent van Gogh, started in 1888. It is known for its swirling night sky and vibrant colors.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Los Angeles, on a site near the Pacific Ocean.",
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    }
+  ]
+}

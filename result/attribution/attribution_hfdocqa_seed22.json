@@ -1,0 +1,874 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 36,
+    "llm": true
+  },
+  "report": {
+    "n": 36,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.528,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Retrieval": {
+            "acc": 0.95,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 16,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.111,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Retrieval": {
+            "acc": 0.2,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Retrieval->Generation": 16,
+          "Conversation->Generation": 16
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.472,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Retrieval": {
+            "acc": 0.85,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 16,
+          "Retrieval->Generation": 3
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.528,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.312,
+            "n": 16
+          },
+          "Retrieval": {
+            "acc": 0.7,
+            "n": 20
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 8,
+          "Retrieval->Generation": 6,
+          "Conversation->Retrieval": 3
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the purpose of Diffusers library?",
+      "rag_answer": "The purpose of the Diffusers library is to be a natural extension of PyTorch, aiming to build a library that stands the test of time.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "We aim at building a library that stands the test of time and therefore take API design very seriously.",
+        "In a nutshell, Diffusers is built to be a natural extension of PyTorch. Therefore, most of our design choices are based on [PyTorch's Design Principles](https://pytorch.org/docs/stable/community/design.html#pytorch-design-philosophy). Let's go over the most important ones:"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What license does it serve under?",
+      "rag_answer": "MIT License",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "To serve as a modular toolbox for both inference and training of state-of-the-art pretrained diffusion models across multiple modalities."
+        }
+      ],
+      "antecedent_question": "What license does the modular toolbox serve under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The new software framework is designed to enhance the performance of various machine learning tasks. It operates under the MIT License, allowing for broad usage and modification.",
+        "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "What type of security certification does Hugging Face have?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+      "docs_rag_saw_to_answer": [
+        "Hugging Face is GDPR compliant. If a contract or specific data storage is something you'll need, we recommend taking a look at our [Expert Acceleration Program](https://huggingface.co/support). Hugging Face can also offer Business Associate Addendums or GDPR data processing agreements through an [Enterprise Plan](https://huggingface.co/pricing).",
+        "<img width=\"150\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/security-soc-1.jpg\">",
+        "For any other security questions, please feel free to send us an email at security@huggingface.co."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "Is it certified for SOC2 Type 2?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What type of security certification does Hugging Face have?"
+        },
+        {
+          "role": "assistant",
+          "content": "SOC2 Type 2 certified"
+        }
+      ],
+      "antecedent_question": "Is the Hugging Face Hub certified for SOC2 Type 2?",
+      "source_doc_for_question": "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+      "docs_rag_saw_to_answer": [
+        "The Hugging Face Hub offers several security features to ensure that your code and data are secure. Beyond offering [private repositories](./repositories-settings#private-repositories) for models, datasets, and Spaces, the Hub supports access tokens, commit signatures, and malware scanning.",
+        "The CodeSafe Platform boasts a variety of security measures to protect user data. It includes features like end-to-end encryption and regular security audits, ensuring compliance with industry standards.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What library does MarkupLMFeatureExtractor use to extract data from HTML and XML files?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "The MarkupLM model was proposed in [MarkupLM: Pre-training of Text and Markup Language for Visually-rich Document\nUnderstanding](https://arxiv.org/abs/2110.08518) by Junlong Li, Yiheng Xu, Lei Cui, Furu Wei. MarkupLM is BERT, but\napplied to HTML pages instead of raw text documents. The model incorporates additional embedding layers to improve\nperformance, similar to [LayoutLM](layoutlm)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "The Amazing Fork operates under the Creative Commons License, Version 4.0.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What library does MarkupLMFeatureExtractor use to extract data from HTML and XML files?"
+        },
+        {
+          "role": "assistant",
+          "content": "Beautiful Soup"
+        }
+      ],
+      "antecedent_question": "What license does Beautiful Soup operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Amazing Fork operates under the Creative Commons License, Version 4.0. This allows for sharing and adaptation of the material.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What is the purpose of the Safety Checker in the Diffusers library?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "[Diffusers](https://huggingface.co/docs/diffusers/index) provides pre-trained diffusion models and serves as a modular toolbox for inference and training.",
+        "Given its real case applications in the world and potential negative impacts on society, we think it is important to provide the project with ethical guidelines to guide the development, users’ contributions, and usage of the Diffusers library."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What does it check and compare in the embedding space?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the Safety Checker in the Diffusers library?"
+        },
+        {
+          "role": "assistant",
+          "content": "The Safety Checker checks and compares the class probability of a set of hard-coded harmful concepts in the embedding space against an image after it has been generated to mitigate the risk of generating harmful content."
+        }
+      ],
+      "antecedent_question": "What does the Safety Checker check and compare in the embedding space?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The Risk Evaluator analyzes and assesses the likelihood of various safety threats in a digital environment. It uses a set of predefined safety metrics to ensure that no harmful situations arise.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "How can you install the Hugging Face Unity API in your Unity project?",
+      "rag_answer": "The context does not provide specific steps on how to install the Hugging Face Unity API in your Unity project.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+      "docs_rag_saw_to_answer": [
+        "The [Hugging Face Unity API](https://github.com/huggingface/unity-api) is an easy-to-use integration of the [Hugging Face Inference API](https://huggingface.co/inference-api), allowing developers to access and use Hugging Face AI models in their Unity projects. In this blog post, we'll walk through the steps to install and use the Hugging Face Unity API.",
+        "<figure class=\"image text-center\"> <img src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/packagemanager.gif\">\n</figure>",
+        "<figure class=\"image text-center\"> <img src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/apiwizard.png\">\n</figure>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "What URL does it provide for him to enter?",
+      "rag_answer": "https://github.com/superai/toolkit.git",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can you install the Hugging Face Unity API in your Unity project?"
+        },
+        {
+          "role": "assistant",
+          "content": "To install the Hugging Face Unity API in your Unity project, go to `Window` -> `Package Manager`, click `+` and select `Add Package from git URL`, then enter `https://github.com/huggingface/unity-api.git`."
+        }
+      ],
+      "antecedent_question": "What URL does Hugging Face provide for him to enter?",
+      "source_doc_for_question": "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"How to Install and Use the Hugging Face Unity API\"\nthumbnail: /blog/assets/124_ml-for-games/unity-api-thumbnail.png\nauthors:\n- user: dylanebert\n---",
+        "To install the Super AI Toolkit in your Unity project, go to `Window` -> `Package Manager`, click `+` and select `Add Package from git URL`, then enter `https://github.com/superai/toolkit.git`. This toolkit is designed to enhance game development with advanced AI features.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "🧨 Diffusers provides **state-of-the-art** pretrained diffusion models across multiple modalities.\nIts purpose is to serve as a **modular toolbox** for both inference and training."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What type of binary is it?",
+      "rag_answer": "x86_64-unknown-linux-musl",
+      "history": [
+        {
+          "role": "user",
+          "content": "What architecture is the `tokenizers-linux-x64-musl` binary designed for?"
+        },
+        {
+          "role": "assistant",
+          "content": "x86_64-unknown-linux-musl"
+        }
+      ],
+      "antecedent_question": "What type of binary is x86_64-unknown-linux-musl?",
+      "source_doc_for_question": "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+      "docs_rag_saw_to_answer": [
+        "This is the **x86_64-unknown-linux-musl** binary for `tokenizers`",
+        "This is the **arm64-unknown-linux-gnu** binary for `parsers`. It is designed for a different architecture.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "Currently, FSDP does not confer any reduction in GPU memory usage and FSDP with CPU offload actually consumes 1.65x more GPU memory during training. You can track this PyTorch [issue](https://github.com/pytorch/pytorch/issues/91165) for any updates.",
+        "FSDP is supported in 🤗 Accelerate, and you can use it with 🤗 PEFT. This guide will help you learn how to use our FSDP [training script](https://github.com/huggingface/peft/blob/main/examples/conditional_generation/peft_lora_seq2seq_accelerate_fsdp.py). You'll configure the script to train a large model for conditional generation.",
+        "Begin by running the following command to [create a FSDP configuration file](https://huggingface.co/docs/accelerate/main/en/usage_guides/fsdp) with 🤗 Accelerate. Use the `--config_file` flag to save the configuration file to a specific location, otherwise it is saved as a `default_config.yaml` file in the 🤗 Accelerate cache."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What is it developed for?",
+      "rag_answer": "The new training framework, TDP, is developed for efficient scaling of small models up to 100M parameters by optimizing memory usage and computation speed.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?"
+        },
+        {
+          "role": "assistant",
+          "content": "FSDP is developed for distributed training of large pretrained models up to 1T parameters by sharding the model parameters, gradients, and optimizer states across data parallel processes."
+        }
+      ],
+      "antecedent_question": "What is FSDP developed for?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The new training framework, TDP, is designed for efficient scaling of small models up to 100M parameters by optimizing memory usage and computation speed. It achieves this by utilizing a unique approach to distribute the workload among multiple processors.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-007",
+      "true": "Retrieval",
+      "question": "What service is replacing the Paid tier of the Inference API at Hugging Face?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "As you might have noticed, our [pricing page](https://huggingface.co/pricing) has changed a lot recently.",
+        "Your billing settings centralize everything about our paid services. From there, you can manage your personal PRO subscription, update your payment method, and visualize your usage for the past three months. Usage for all our paid services and subscriptions will be charged at the start of each month, and a consolidated invoice will be available for your records.",
+        "If you have any questions, feel free to reach out. We welcome your feedback 🔥"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "What is its new pricing?",
+      "rag_answer": "$99 per month",
+      "history": [
+        {
+          "role": "user",
+          "content": "What service is replacing the Paid tier of the Inference API at Hugging Face?"
+        },
+        {
+          "role": "assistant",
+          "content": "Inference Endpoints"
+        }
+      ],
+      "antecedent_question": "What is Inference Endpoints' new pricing?",
+      "source_doc_for_question": "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Introducing our new pricing\nthumbnail: /blog/assets/114_pricing-update/thumbnail.png\nauthors:\n- user: sbrandeis\n- user: pierric\n---",
+        "The new pricing for Prediction Services is set at $99 per month, offering a range of features for users. This pricing is designed to cater to small businesses looking for affordable solutions.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What is the command to upload an ESPnet model to a Hugging Face repository?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "You can find hundreds of `espnet` models by filtering at the left of the [models page](https://huggingface.co/models?library=espnet&sort=downloads).",
+        "All models on the Hub come up with useful features:\n1. An automatically generated model card with a description, a training configuration, licenses and more.\n2. Metadata tags that help for discoverability and contain information such as license, language and datasets.\n3. An interactive widget you can use to play out with the model directly in the browser.\n4. An Inference API that allows to make inference requests.",
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget.png\"/>\n<img class=\"hidden dark:block\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget-dark.png\"/>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What does it include?",
+      "rag_answer": "The context does not specify what 'it' refers to, so I don't know.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload an ESPnet model to a Hugging Face repository?"
+        },
+        {
+          "role": "assistant",
+          "content": "./run.sh --stage 15 --skip_upload_hf false --hf_repo username/model_repo"
+        }
+      ],
+      "antecedent_question": "What does espnet include?",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+        "`voicenet` is a comprehensive software suite for voice modulation, featuring voice recognition, sound synthesis, audio filtering, and more. It specializes in enhancing audio clarity and providing real-time feedback.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What is the default context window size for Local Attention in the LongT5 model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "The LongT5 model was proposed in [LongT5: Efficient Text-To-Text Transformer for Long Sequences](https://arxiv.org/abs/2112.07916)\nby Mandy Guo, Joshua Ainslie, David Uthus, Santiago Ontanon, Jianmo Ni, Yun-Hsuan Sung and Yinfei Yang. It's an\nencoder-decoder transformer pre-trained in a text-to-text denoising generative setting. LongT5 model is an extension of\nT5 model, and it enables using one of the two different efficient attention mechanisms - (1) Local attention, or (2)\nTransient-Global attention."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What license does it operate under?",
+      "rag_answer": "The document is licensed under the Creative Commons Attribution 4.0 International License.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the default context window size for Local Attention in the LongT5 model?"
+        },
+        {
+          "role": "assistant",
+          "content": "127 tokens"
+        }
+      ],
+      "antecedent_question": "What license does the file operate under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The document is licensed under the Creative Commons Attribution 4.0 International License. You can access the terms of this license online.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "How can they claim authorship on a Paper page?",
+      "rag_answer": "They can claim ownership of their research by submitting a formal request through the project's management system, which involves filling out a detailed form and providing proof of contribution to the project.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can the person claim authorship on a Paper page?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "A different individual can claim ownership of their research by submitting a formal request through the project's management system. This process involves filling out a detailed form and providing proof of contribution to the project.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Where can you access the logs of your Endpoints in Hugging Face Endpoints?",
+      "rag_answer": "You can access the build logs of your Image artifacts and the Container Logs during inference.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hugging Face Endpoints provides access to the logs of your Endpoints through the UI in the “Logs” tab of your Endpoint.",
+      "docs_rag_saw_to_answer": [
+        "You will have access to the build logs of your Image artifacts as well as access to the Container Logs during inference.",
+        "<img src=\"https://raw.githubusercontent.com/huggingface/hf-endpoints-documentation/main/assets/9_selection.png\" alt=\"select logs\" />",
+        "The Container Logs are only available when your Endpoint is in the “Running” state."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "How can you force mixed precision training when initializing the Accelerator in 🤗 Accelerate?",
+      "rag_answer": "You can force mixed precision training when initializing the Accelerator in 🤗 Accelerate by passing the argument `mixed_precision='fp16'`.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+      "docs_rag_saw_to_answer": [
+        "Run your **raw** PyTorch training scripts on any kind of device.",
+        "Most high-level libraries above PyTorch provide support for distributed training and mixed precision, but the abstraction they introduce require a user to learn a new API if they want to customize the underlying training loop. 🤗 Accelerate was created for PyTorch users who like to have full control over their training loops but are reluctant to write (and maintain) the boilerplate code needed to use distributed training (for multi-GPU on one or several nodes, TPUs, ...) or mixed precision training. Plans forward include support for fairscale, deepseed, AWS SageMaker specific data-parallelism and model parallelism.",
+        "It provides two things: a simple and consistent API that abstracts that boilerplate code and a launcher command to easily run those scripts on various setups."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "How can it be enabled?",
+      "rag_answer": "To enable the feature, set `fp16=False` during the initialization process.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can you force mixed precision training when initializing the Accelerator in 🤗 Accelerate?"
+        },
+        {
+          "role": "assistant",
+          "content": "By passing `fp16=True` to the Accelerator init."
+        }
+      ],
+      "antecedent_question": "How can it be enabled by passing `fp16=True` to the Accelerator init?",
+      "source_doc_for_question": "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+        "To activate the feature, one must set `fp16=False` during the initialization process. This ensures that the system operates in full precision mode.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "What file format is used to save and store PyTorch model weights more securely than `.bin` files?",
+      "rag_answer": ".pt files",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "PyTorch model weights are commonly saved and stored as `.bin` files with Python's [`pickle`](https://docs.python.org/3/library/pickle.html) utility. To save and store your model weights in the more secure `safetensor` format, we recommend converting your weights to `.safetensors`.",
+      "docs_rag_saw_to_answer": [
+        "Feel free to ping [@Narsil](https://huggingface.co/Narsil) for any issues with the Space."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?",
+      "rag_answer": "There is no specific class mentioned; the function used is `get_repo_discussions` from the `huggingface_hub` library.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "The `huggingface_hub` library provides a Python interface to interact with Pull Requests and Discussions on the Hub.\nVisit [the dedicated documentation page](https://huggingface.co/docs/hub/repositories-pull-requests-discussions)\nfor a deeper view of what Discussions and Pull Requests on the Hub are, and how they work under the hood.",
+        "```python\n>>> from huggingface_hub import get_repo_discussions\n>>> for discussion in get_repo_discussions(repo_id=\"bigscience/bloom\"):\n... print(f\"{discussion.num} - {discussion.title}, pr: {discussion.is_pull_request}\")",
+        "# 11 - Add Flax weights, pr: True\n# 10 - Update README.md, pr: True\n# 9 - Training languages in the model card, pr: True\n# 8 - Update tokenizer_config.json, pr: True\n# 7 - Slurm training script, pr: False\n[...]\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What type of file is it?",
+      "rag_answer": "HTML format",
+      "history": [
+        {
+          "role": "user",
+          "content": "What Python class allows you to retrieve Discussions and Pull Requests from a given repository on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "HfApi"
+        }
+      ],
+      "antecedent_question": "What type of file is HfApi?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "The file is in HTML format, which is commonly used for web pages. It allows for the structuring of content with various elements like headings, paragraphs, and links.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What is the purpose of the `gradio.Blocks` API?",
+      "rag_answer": "The purpose of the `gradio.Blocks` API is to provide a newly developed low-level API for creating machine learning demos.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"},\n]} />",
+        "In the previous sections we have explored and created demos using the `Interface` class. In this section we will introduce our **newly developed** low-level API called `gradio.Blocks`.",
+        "- ⚡ `Interface`: a high-level API that allows you to create a full machine learning demo simply by providing a list of inputs and outputs."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What does it allow you to have full control over?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the `gradio.Blocks` API?"
+        },
+        {
+          "role": "assistant",
+          "content": "The `gradio.Blocks` API allows you to have full control over the data flows and layout of your application, enabling the building of complex, multi-step applications."
+        }
+      ],
+      "antecedent_question": "What does the gradio.Blocks API allow you to have full control over?",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+        "The `widget.Layout` API allows you to customize the appearance and functionality of your widgets, enabling the creation of simple, single-step applications. It provides limited control over the data flows and layout of your interface.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What do RAG models combine to generate outputs?",
+      "rag_answer": "RAG models combine retrieval and generation to generate outputs.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "<div class=\"flex flex-wrap space-x-1\">\n<a href=\"https://huggingface.co/models?filter=rag\">\n<img alt=\"Models\" src=\"https://img.shields.io/badge/All_model_pages-rag-blueviolet\">\n</a>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "How do you run a Gradio Blocks app in reload mode using a Python IDE?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "**Prerequisite**: This Guide requires you to know about Blocks. Make sure to [read the Guide to Blocks first](https://gradio.app/guides/quickstart/#blocks-more-flexibility-and-control).",
+      "docs_rag_saw_to_answer": [
+        "This guide covers auto reloading, reloading in a Python IDE, and using gradio with Jupyter Notebooks.",
+        "When you are building a Gradio demo, particularly out of Blocks, you may find it cumbersome to keep re-running your code to test your changes.",
+        "This short Guide will cover both of these methods, so no matter how you write Python, you'll leave knowing how to build Gradio apps faster."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?",
+      "rag_answer": "One image is needed.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Before running the scripts, make sure to install the library's training dependencies:",
+        "One picture which is from the huggingface datasets [sd-concepts-library/dicoo2](https://huggingface.co/sd-concepts-library/dicoo2) is needed, and save it to the `./dicoo` directory. The picture is shown below:",
+        "<a href=\"https://huggingface.co/sd-concepts-library/dicoo2/blob/main/concept_images/1.jpeg\"> <img src=\"https://huggingface.co/sd-concepts-library/dicoo2/resolve/main/concept_images/1.jpeg\" width = \"300\" height=\"300\">\n</a>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-018",
+      "true": "Conversation",
+      "question": "What does it help to personalize in text2image?",
+      "rag_answer": "It helps to personalize visual content in image generation models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "3-5 images"
+        }
+      ],
+      "antecedent_question": "What does distillation for quantization on Textual Inversion models help to personalize in text2image?",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Distillation for quantization on Textual Inversion models to personalize text2image",
+        "A new technique for enhancing image generation models allows for the creation of 7-10 images. This method focuses on refining the output quality for better personalization in visual content.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the goal of the Named Entity Recognition task in token classification?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "Welcome to the Hugging Face tasks series. In this video, we will take a look at the Question Answering task.\nQuestion answering is the task of extracting an answer in a given document.\nQuestion answering models take a context, which is the document you want to search in, and a question and return an answer. Note that the answer is not generated, but extracted from the context. This type of question answering is called extractive.\nThe task is evaluated on two metrics, exact match and F1-Score.\nAs the name implies, exact match looks for an exact match between the predicted answer and the correct answer.\nA common metric used is the F1-Score, which is calculated over tokens that are predicted correctly and incorrectly. It is calculated over the average of two metrics called precision and recall which are metrics that are used widely in classification problems.\nAn example dataset used for this task is called SQuAD. This dataset contains contexts, questions and the answers that are obtained from English Wikipedia articles.\nYou can use question answering models to automatically answer the questions asked by your customers. You simply need a document containing information about your business and query through that document with the questions asked by your customers.\nFor more information about the Question Answering task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Causal Language Modeling.\nCausal language modeling is the task of predicting the next word in a sentence, given all the previous words. This task is very similar to the autocorrect function that you might have on your phone. These models take a sequence to be completed and outputs the complete sequence.\nClassification metrics can’t be used as there’s no single correct answer for completion. Instead, we evaluate the distribution of the text completed by the model.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to prepare the data. Causal language models can be used to generate code.\nFor more information about the Causal Language Modeling task, check out the Hugging Face course.",
+        "Welcome to the Hugging Face tasks series! In this video we’ll take a look at Masked Language Modeling.\nMasked language modeling is the task of predicting which words should fill in the blanks of a sentence.\nThese models take a masked text as the input and output the possible values for that mask.\nMasked language modeling is handy before fine-tuning your model for your task. For example, if you need to use a model in a specific domain, say, biomedical documents, models like BERT will treat your domain-specific words as rare tokens. If you train a masked language model using your biomedical corpus and then fine tune your model on a downstream task, you will have a better performance.\nClassification metrics can’t be used as there’s no single correct answer to mask values. Instead, we evaluate the distribution of the mask values.\nA common metric to do so is the cross-entropy loss. Perplexity is also a widely used metric and it is calculated as the exponential of the cross-entropy loss.\nYou can use any dataset with plain text and tokenize the text to mask the data.\nFor more information about the Masked Language Modeling, check out the Hugging Face course."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-019",
+      "true": "Conversation",
+      "question": "What is its goal?",
+      "rag_answer": "The goal is to identify the themes in a collection of stories and understand the underlying messages conveyed by the authors.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the goal of the Named Entity Recognition task in token classification?"
+        },
+        {
+          "role": "assistant",
+          "content": "The goal of the Named Entity Recognition task is to find the entities in a piece of text, such as person, location, or organization."
+        }
+      ],
+      "antecedent_question": "What is Merve Noyan's goal?",
+      "source_doc_for_question": "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+      "docs_rag_saw_to_answer": [
+        "ote: the following transcripts are associated with Merve Noyan's videos in the Hugging Face Tasks playlist: https://www.youtube.com/playlist?list=PLo2EIpI_JMQtyEr-sLJSy5_SnLCb4vtQf",
+        "The objective of the task for Alex Smith is to identify the themes in a collection of stories. He focuses on understanding the underlying messages conveyed by the authors.",
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}

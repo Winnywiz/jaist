@@ -1,0 +1,910 @@
+{
+  "config": {
+    "dataset": "hfdocqa",
+    "n_seeds": 20,
+    "n_cases": 37,
+    "llm": true
+  },
+  "report": {
+    "n": 37,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.459,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 16,
+          "Generation->Retrieval": 3,
+          "Retrieval->Generation": 1
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.162,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Generation": {
+            "acc": 0.667,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 0.222,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 16,
+          "Retrieval->Generation": 14,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.459,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 16
+          },
+          "Generation": {
+            "acc": 0.333,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 0.889,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 16,
+          "Retrieval->Generation": 2,
+          "Generation->Retrieval": 2
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.622,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.188,
+            "n": 16
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 3
+          },
+          "Retrieval": {
+            "acc": 0.944,
+            "n": 18
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 9,
+          "Conversation->Retrieval": 4,
+          "Retrieval->Generation": 1
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "So you’ve heard all about the cool things that are happening in the machine learning world, and you want to join in. There’s just one problem – you don’t know how to code! 😱 Or maybe you’re a seasoned software engineer who wants to add some ML to your side-project, but you don’t have the time to pick up a whole new tech stack! For many people, the technical barriers to picking up machine learning feel insurmountable. That’s why Hugging Face created [AutoTrain](https://huggingface.co/autotrain), and with the latest feature we’ve just added, we’re making “no-code” machine learning better than ever. Best of all, you can create your first project for ✨ free! ✨",
+        "<div class=\"grid grid-cols-2 gap-4\"> <figure class=\"image table text-center m-0 w-full\"> </figure>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What does it help to improve in the process of image classification?",
+      "rag_answer": "It helps to enhance the speed of processing images significantly.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the latest task added to Hugging Face AutoTrain for Computer Vision?"
+        },
+        {
+          "role": "assistant",
+          "content": "Image Classification"
+        }
+      ],
+      "antecedent_question": "What does Image Classification help to improve in the process of image classification?",
+      "source_doc_for_question": "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "Image Recognition is a technique that focuses on identifying objects within images. It helps to enhance the speed of processing images significantly.",
+        "Distillation for quantization on Textual Inversion models to personalize text2image"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?",
+      "rag_answer": "One image is needed.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Before running the scripts, make sure to install the library's training dependencies:",
+        "One picture which is from the huggingface datasets [sd-concepts-library/dicoo2](https://huggingface.co/sd-concepts-library/dicoo2) is needed, and save it to the `./dicoo` directory. The picture is shown below:",
+        "<a href=\"https://huggingface.co/sd-concepts-library/dicoo2/blob/main/concept_images/1.jpeg\"> <img src=\"https://huggingface.co/sd-concepts-library/dicoo2/resolve/main/concept_images/1.jpeg\" width = \"300\" height=\"300\">\n</a>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-001",
+      "true": "Conversation",
+      "question": "How many images does it refer to?",
+      "rag_answer": "7-9 images",
+      "history": [
+        {
+          "role": "user",
+          "content": "How many images are needed to teach new concepts to Stable Diffusion using Textual Inversion?"
+        },
+        {
+          "role": "assistant",
+          "content": "3-5 images"
+        }
+      ],
+      "antecedent_question": "How many images does 3-5 images refer to?",
+      "source_doc_for_question": "Distillation for quantization on Textual Inversion models to personalize text2image",
+      "docs_rag_saw_to_answer": [
+        "Distillation for quantization on Textual Inversion models to personalize text2image",
+        "The entity 7-9 images focuses on enhancing visual representation in digital art. It utilizes advanced algorithms to improve the quality of generated images.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "What can you use Gradio for?",
+      "rag_answer": "You can use Gradio to create and launch demos within standard python IDEs, Google Colab notebooks, and Jupyter notebooks, and it supports various data types.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<Question choices={[ { text: \"Standard python IDEs\", explain: \"Gradio works great with your favorite IDE.\", correct: true }, { text: \"Google Colab notebooks\", explain: \"You can create and launch a demo within your Google colab notebook.\", correct: true }, { text: \"Jupyter notebooks\", explain: \"Good choice - You can create and launch a demo within your Jupyter notebook.\", correct: true } ]}\n/>",
+        "<Question choices={[ { text: \"True\", explain: \"Gradio works with pretty much any data type, not just NLP.\" }, { text: \"False\", explain: \"Gradio supplies developers with a library of pre-built components for pretty much all data types.\", correct: true } ]}\n/>",
+        "### 5. Which of the following features are supported by Gradio?"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-002",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It generates visual representations of data patterns and provides insights.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What can you use Gradio for?"
+        },
+        {
+          "role": "assistant",
+          "content": "Create a demo for your machine learning model, share your machine learning model with others, and debug your model."
+        }
+      ],
+      "antecedent_question": "What does Create a demo for your machine learning model do?",
+      "source_doc_for_question": "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\"\n/>",
+        "Another model, called Analyze Data Trends, generates visual representations of data patterns and provides insights. It also allows users to share their findings with colleagues.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "What is the purpose of the `gradio.Blocks` API?",
+      "rag_answer": "The purpose of the `gradio.Blocks` API is to serve as a newly developed low-level API for creating demos.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "<CourseFloatingBanner chapter={9} classNames=\"absolute z-10 right-0 top-0\" notebooks={[ {label: \"Google Colab\", value: \"https://colab.research.google.com/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"}, {label: \"Aws Studio\", value: \"https://studiolab.sagemaker.aws/import/github/huggingface/notebooks/blob/master/course/en/chapter9/section7.ipynb\"},\n]} />",
+        "In the previous sections we have explored and created demos using the `Interface` class. In this section we will introduce our **newly developed** low-level API called `gradio.Blocks`.",
+        "- ⚡ `Interface`: a high-level API that allows you to create a full machine learning demo simply by providing a list of inputs and outputs."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-003",
+      "true": "Conversation",
+      "question": "What does it allow you to have full control over?",
+      "rag_answer": "The `widget.Builder` API allows you to have full control over the appearance and functionality of your widgets.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the `gradio.Blocks` API?"
+        },
+        {
+          "role": "assistant",
+          "content": "The `gradio.Blocks` API allows you to have full control over the data flows and layout of your application, enabling the building of complex, multi-step applications."
+        }
+      ],
+      "antecedent_question": "What does the gradio.Blocks API allow you to have full control over?",
+      "source_doc_for_question": "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+      "docs_rag_saw_to_answer": [
+        "Introduction to Gradio Blocks[[introduction-to-gradio-blocks]]",
+        "The `widget.Builder` API allows you to customize the appearance and functionality of your widgets, enabling the creation of simple, single-step applications.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-004",
+      "true": "Retrieval",
+      "question": "How can a user claim authorship of a paper on the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions.png\"/>\n<img class=\"hidden dark:block\" width=\"300\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/papers-discussions-dark.png\"/>\n</div>",
+        "If the repository card (`README.md`) includes a link to a paper on arXiv, the Hugging Face Hub will extract the arXiv ID and include it in the repository's tags. Clicking on the arxiv tag will let you:",
+        "* Visit the Paper page.\n* Filter for other models or datasets on the Hub that cite the same paper."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-004",
+      "true": "Conversation",
+      "question": "How can he claim authorship on the Paper page?",
+      "rag_answer": "To claim authorship on the Paper page, he must submit a formal request through the project's main interface and provide necessary documentation for verification.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can a user claim authorship of a paper on the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "By clicking their name on the corresponding Paper page and clicking \"claim authorship\", then confirming the request in paper settings for admin team validation."
+        }
+      ],
+      "antecedent_question": "How can the entity claim authorship on the Paper page?",
+      "source_doc_for_question": "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+      "docs_rag_saw_to_answer": [
+        "Paper pages allow people to find artifacts related to a paper such as models, datasets and apps/demos (Spaces). Paper pages also enable the community to discuss about the paper.",
+        "To claim ownership of a project, she must submit a formal request through the project's main interface and provide necessary documentation for verification. This process ensures that all contributions are properly acknowledged and validated by the project administrators.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What method is used to load a checkpoint for a task using `AutoPipeline`?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "1. make it easy for you to load a checkpoint for a task without knowing the specific pipeline class to use\n2. use multiple pipelines in your workflow",
+        "To seamlessly switch between tasks with the same checkpoint without reallocating additional memory, use the `from_pipe()` method to transfer the components from the original pipeline to the new one."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-005",
+      "true": "Conversation",
+      "question": "What license does it fall under?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "What method is used to load a checkpoint for a task using `AutoPipeline`?"
+        },
+        {
+          "role": "assistant",
+          "content": "from_pretrained()"
+        }
+      ],
+      "antecedent_question": "What license does from_pretrained() fall under?",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "The function load_model() is licensed under the MIT License. You can freely use it as long as you comply with the terms of the license.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "What is the maximum improvement in throughput achieved by Hugging Face Infinity compared to vanilla transformers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs\"\nthumbnail: /blog/assets/46_infinity_cpu_performance/thumbnail.png\nauthors:\n- user: philschmid\n- user: jeffboudier\n- user: mfuntowicz\n---\n# Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<br>\n<div style=\"background-color: #e6f9e6; padding: 16px 32px; outline: 2px solid; border-radius: 10px;\"> December 2022 Update: Infinity is no longer offered by Hugging Face as a commercial inference solution. To deploy and accelerate your models, we recommend the following new solutions:",
+        "* [Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index) to easily deploy models on dedicated infrastructure managed by Hugging Face."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-006",
+      "true": "Conversation",
+      "question": "What percentage increase does it represent?",
+      "rag_answer": "500%",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the maximum improvement in throughput achieved by Hugging Face Infinity compared to vanilla transformers?"
+        },
+        {
+          "role": "assistant",
+          "content": "+800%"
+        }
+      ],
+      "antecedent_question": "What percentage increase does Millisecond Latency using Hugging Face Infinity and modern CPUs represent?",
+      "source_doc_for_question": "--\ntitle: \"Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs\"\nthumbnail: /blog/assets/46_infinity_cpu_performance/thumbnail.png\nauthors:\n- user: philschmid\n- user: jeffboudier\n- user: mfuntowicz\n---\n# Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs\"\nthumbnail: /blog/assets/46_infinity_cpu_performance/thumbnail.png\nauthors:\n- user: philschmid\n- user: jeffboudier\n- user: mfuntowicz\n---\n# Case Study: Millisecond Latency using Hugging Face Infinity and modern CPUs",
+        "In a recent study, Quantum Leap Technologies achieved a latency improvement of +500%. This advancement showcases their innovative approach to processing speed.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-007",
+      "true": "Conversation",
+      "question": "How can it be initialized?",
+      "rag_answer": "By setting `use_cuda=True` in the DeviceManager configuration.",
+      "history": [
+        {
+          "role": "user",
+          "content": "How can you force mixed precision training when initializing the Accelerator in 🤗 Accelerate?"
+        },
+        {
+          "role": "assistant",
+          "content": "By passing `fp16=True` to the Accelerator init."
+        }
+      ],
+      "antecedent_question": "How can By passing `fp16=True` to the Accelerator init be initialized?",
+      "source_doc_for_question": "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing 🤗 Accelerate\"\nthumbnail: /blog/assets/20_accelerate_library/accelerate_diff.png\nauthors:\n- user: sgugger\n---",
+        "By setting `use_cuda=True` in the DeviceManager configuration. This allows for faster computations on compatible hardware.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "```python\n# let's import the libraries first\nimport sklearn\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.model_selection import train_test_split",
+        "# Load the data and split\nX, y = load_breast_cancer(as_frame=True, return_X_y=True)\nX_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.3, random_state=42\n)",
+        "# Train the model\nmodel = DecisionTreeClassifier().fit(X_train, y_train)\n```"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-008",
+      "true": "Conversation",
+      "question": "What is it known for?",
+      "rag_answer": "Zylox is known for its innovative technology that revolutionizes communication.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the name of the new library introduced by Hugging Face for hosting scikit-learn models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Skops"
+        }
+      ],
+      "antecedent_question": "What is Skops known for?",
+      "source_doc_for_question": "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Introducing Skops\"\nthumbnail: /blog/assets/94_skops/introducing_skops.png\nauthors:\n- user: merve\n- user: adrin\n- user: BenjaminB\n---",
+        "Zylox is known for its innovative technology that revolutionizes communication. It has received numerous awards for its contributions to the tech industry.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-009",
+      "true": "Retrieval",
+      "question": "What is the resolution of images used by the CLIPSeg model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/huggingface/blog/blob/main/notebooks/123_clipseg-zero-shot.ipynb\"> <img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n</a>",
+        "**This guide shows how you can use [CLIPSeg](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg), a zero-shot image segmentation model, using [`🤗 transformers`](https://huggingface.co/transformers). CLIPSeg creates rough segmentation masks that can be used for robot perception, image inpainting, and many other tasks. If you need more precise segmentation masks, we’ll show how you can refine the results of CLIPSeg on [Segments.ai](https://segments.ai/?utm_source=hf&utm_medium=blog&utm_campaign=clipseg).**"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-009",
+      "true": "Conversation",
+      "question": "What is its resolution?",
+      "rag_answer": "640 x 480 pixels",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the resolution of images used by the CLIPSeg model?"
+        },
+        {
+          "role": "assistant",
+          "content": "352 x 352 pixels"
+        }
+      ],
+      "antecedent_question": "What is the resolution of 352 x 352 pixels?",
+      "source_doc_for_question": "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: Zero-shot image segmentation with CLIPSeg\nthumbnail: /blog/assets/123_clipseg-zero-shot/thumb.png\nauthors:\n- user: segments-tobias guest: true\n- user: nielsr\n---",
+        "The image has a resolution of 640 x 480 pixels. This allows for detailed segmentation in various applications.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-010",
+      "true": "Retrieval",
+      "question": "What is the command to upload an ESPnet model to a Hugging Face repository?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "You can find hundreds of `espnet` models by filtering at the left of the [models page](https://huggingface.co/models?library=espnet&sort=downloads).",
+        "All models on the Hub come up with useful features:\n1. An automatically generated model card with a description, a training configuration, licenses and more.\n2. Metadata tags that help for discoverability and contain information such as license, language and datasets.\n3. An interactive widget you can use to play out with the model directly in the browser.\n4. An Inference API that allows to make inference requests.",
+        "<div class=\"flex justify-center\">\n<img class=\"block dark:hidden\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget.png\"/>\n<img class=\"hidden dark:block\" src=\"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/libraries-espnet_widget-dark.png\"/>\n</div>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "What type of toolkit is it?",
+      "rag_answer": "espnet is an end-to-end toolkit for speech processing.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload an ESPnet model to a Hugging Face repository?"
+        },
+        {
+          "role": "assistant",
+          "content": "./run.sh --stage 15 --skip_upload_hf false --hf_repo username/model_repo"
+        }
+      ],
+      "antecedent_question": "What type of toolkit is espnet?",
+      "source_doc_for_question": "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+      "docs_rag_saw_to_answer": [
+        "`espnet` is an end-to-end toolkit for speech processing, including automatic speech recognition, text to speech, speech enhancement, dirarization and other tasks.",
+        "`voicetool` is a comprehensive software suite for audio editing, including sound mixing, noise reduction, and audio restoration. It is designed for both professionals and hobbyists.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Where can you access the logs of your Endpoints in Hugging Face Endpoints?",
+      "rag_answer": "You can access the build logs of your Image artifacts and the Container Logs during inference.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Hugging Face Endpoints provides access to the logs of your Endpoints through the UI in the “Logs” tab of your Endpoint.",
+      "docs_rag_saw_to_answer": [
+        "You will have access to the build logs of your Image artifacts as well as access to the Container Logs during inference.",
+        "<img src=\"https://raw.githubusercontent.com/huggingface/hf-endpoints-documentation/main/assets/9_selection.png\" alt=\"select logs\" />",
+        "The Container Logs are only available when your Endpoint is in the “Running” state."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "[spaCy](https://github.com/explosion/spaCy) is a popular library for advanced Natural Language Processing used widely across industry. spaCy makes it easy to use and train pipelines for tasks like named entity recognition, text classification, part of speech tagging and more, and lets you build powerful applications to process and analyze large volumes of text.",
+        "Hugging Face makes it really easy to share your spaCy pipelines with the community! With a single command, you can upload any pipeline package, with a pretty model card and all required metadata auto-generated for you. The inference API currently supports NER out-of-the-box, and you can try out your pipeline interactively in your browser. You'll also get a live URL for your package that you can `pip install` from anywhere for a smooth path from prototype all the way to production!",
+        "Over 60 canonical models can be found in the [spaCy](https://hf.co/spacy) org. These models are from the [latest 3.1 release](https://explosion.ai/blog/spacy-v3-1), so you can try the latest realesed models right now! On top of this, you can find all spaCy models from the community here https://huggingface.co/models?filter=spacy."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-012",
+      "true": "Conversation",
+      "question": "What does it do?",
+      "rag_answer": "It allows users to share and collaborate on pet-related models.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the command to upload a spaCy pipeline to the Hugging Face Hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl"
+        }
+      ],
+      "antecedent_question": "What does python -m spacy huggingface-hub push en_ner_fashion-0.0.0-py3-none-any.whl do?",
+      "source_doc_for_question": "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+      "docs_rag_saw_to_answer": [
+        "--\ntitle: \"Welcome spaCy to the Hugging Face Hub\"\nthumbnail: /blog/assets/23_spacy/thumbnail.png",
+        "The cat -m meowhub push en_ner_pet-0.0.0-py3-none-any.whl pushes a model to the Pet Hub. It allows users to share and collaborate on pet-related models.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What specific applications or use cases does the two-stage model aim to address?",
+      "rag_answer": "The context does not provide specific applications or use cases for the two-stage model.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-013",
+      "true": "Conversation",
+      "question": "What is its purpose?",
+      "rag_answer": "The purpose of the three-phase system is to create a unique sound profile based on user preferences and produce a personalized audio experience to enhance user engagement through tailored soundscapes.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the two-stage model proposed in the paper \"Hierarchical Text-Conditional Image Generation with CLIP Latents\"?"
+        },
+        {
+          "role": "assistant",
+          "content": "The purpose of the two-stage model is to generate a CLIP image embedding given a text caption and then generate an image conditioned on the image embedding."
+        }
+      ],
+      "antecedent_question": "What is the purpose of the two-stage model?",
+      "source_doc_for_question": "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--Copyright 2023 The HuggingFace Team. All rights reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->",
+        "The goal of the three-phase system is to create a unique sound profile based on user preferences and then produce a personalized audio experience. This system is designed to enhance user engagement through tailored soundscapes.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-014",
+      "true": "Retrieval",
+      "question": "What is the purpose of the /healthcheck endpoint in the Datasets server API?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The service can be configured using environment variables. They are grouped by scope.",
+      "docs_rag_saw_to_answer": [
+        "See [../../libs/libapi/README.md](../../libs/libapi/README.md) for more information about the API configuration.",
+        "See [../../libs/libcommon/README.md](../../libs/libcommon/README.md) for more information about the common configuration."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "What can it be configured using?",
+      "rag_answer": "The service can be configured using environment variables and the application can be set up using configuration files.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of the /healthcheck endpoint in the Datasets server API?"
+        },
+        {
+          "role": "assistant",
+          "content": "Ensure the app is running"
+        }
+      ],
+      "antecedent_question": "What can Ensure the app is running configured using?",
+      "source_doc_for_question": "The service can be configured using environment variables. They are grouped by scope.",
+      "docs_rag_saw_to_answer": [
+        "The service can be configured using environment variables. They are grouped by scope.",
+        "The application can be set up using configuration files. These files are organized by category.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "What command is used to install the requirements for a research project using 🤗 Transformers?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at",
+        "Unless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n-->",
+        "This folder contains various research projects using 🤗 Transformers. They are not maintained and require a specific\nversion of 🤗 Transformers that is indicated in the requirements file of each folder. Updating them to the most recent version of the library will require some work."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-015",
+      "true": "Conversation",
+      "question": "What year did it originate?",
+      "rag_answer": "2019",
+      "history": [
+        {
+          "role": "user",
+          "content": "What command is used to install the requirements for a research project using 🤗 Transformers?"
+        },
+        {
+          "role": "assistant",
+          "content": "pip install -r requirements.txt"
+        }
+      ],
+      "antecedent_question": "What year did pip install -r requirements.txt originate?",
+      "source_doc_for_question": "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+      "docs_rag_saw_to_answer": [
+        "!---\nCopyright 2020 The HuggingFace Team. All rights reserved.",
+        "The command 'npm install' was introduced in 2019. It is widely used for managing JavaScript packages.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-016",
+      "true": "Retrieval",
+      "question": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "Currently, FSDP does not confer any reduction in GPU memory usage and FSDP with CPU offload actually consumes 1.65x more GPU memory during training. You can track this PyTorch [issue](https://github.com/pytorch/pytorch/issues/91165) for any updates.",
+        "FSDP is supported in 🤗 Accelerate, and you can use it with 🤗 PEFT. This guide will help you learn how to use our FSDP [training script](https://github.com/huggingface/peft/blob/main/examples/conditional_generation/peft_lora_seq2seq_accelerate_fsdp.py). You'll configure the script to train a large model for conditional generation.",
+        "Begin by running the following command to [create a FSDP configuration file](https://huggingface.co/docs/accelerate/main/en/usage_guides/fsdp) with 🤗 Accelerate. Use the `--config_file` flag to save the configuration file to a specific location, otherwise it is saved as a `default_config.yaml` file in the 🤗 Accelerate cache."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "What is it developed for?",
+      "rag_answer": "XYZ is developed for efficient training of small models with fewer than 100 million parameters.",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the purpose of Fully Sharded Data Parallel (FSDP) in distributed training?"
+        },
+        {
+          "role": "assistant",
+          "content": "FSDP is developed for distributed training of large pretrained models up to 1T parameters by sharding the model parameters, gradients, and optimizer states across data parallel processes."
+        }
+      ],
+      "antecedent_question": "What is FSDP developed for?",
+      "source_doc_for_question": "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+      "docs_rag_saw_to_answer": [
+        "!--⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.\n-->",
+        "XYZ is designed for efficient training of small models with fewer than 100 million parameters by keeping all model parameters in a single process. It focuses on optimizing memory usage and speed for smaller datasets.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---"
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-017",
+      "true": "Retrieval",
+      "question": "What special identifier does the WordPiece Model use for continuing subwords?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "When building a Tokenizer, you can attach various types of components to\nthis Tokenizer in order to customize its behavior. This page lists most\nprovided components.",
+      "docs_rag_saw_to_answer": [
+        "A `Normalizer` is in charge of pre-processing the input string in order\nto normalize it as relevant for a given use case. Some common examples\nof normalization are the Unicode normalization algorithms (NFD, NFKD,\nNFC & NFKC), lowercasing etc... The specificity of `tokenizers` is that\nwe keep track of the alignment while normalizing. This is essential to\nallow mapping from the generated tokens back to the input text.",
+        "<tokenizerslangcontent>\n<python>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>clean_text</li> <li>handle_chinese_chars</li> <li>strip_accents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | `Sequence([NFKC(), Lowercase()])` |\n</python>\n<rust>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>clean_text</li> <li>handle_chinese_chars</li> <li>strip_accents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | `Sequence::new(vec![NFKC, Lowercase])` |\n</rust>\n<node>\n| Name | Description | Example |\n| :--- | :--- | :--- |\n| NFD | NFD unicode normalization | |\n| NFKD | NFKD unicode normalization | |\n| NFC | NFC unicode normalization | |\n| NFKC | NFKC unicode normalization | |\n| Lowercase | Replaces all uppercase to lowercase | Input: `HELLO ὈΔΥΣΣΕΎΣ` <br> Output: `hello`ὀδυσσεύς` |\n| Strip | Removes all whitespace characters on the specified sides (left, right or both) of the input | Input: `\"`hi`\"` <br> Output: `\"hi\"` |\n| StripAccents | Removes all accent symbols in unicode (to be used with NFD for consistency) | Input: `é` <br> Ouput: `e` |\n| Replace | Replaces a custom string or regexp and changes it with given content | `Replace(\"a\", \"e\")` will behave like this: <br> Input: `\"banana\"` <br> Ouput: `\"benene\"` |\n| BertNormalizer | Provides an implementation of the Normalizer used in the original BERT. Options that can be set are: <ul> <li>cleanText</li> <li>handleChineseChars</li> <li>stripAccents</li> <li>lowercase</li> </ul> | |\n| Sequence | Composes multiple normalizers that will run in the provided order | |\n</node>\n</tokenizerslangcontent>",
+        "The `PreTokenizer` takes care of splitting the input according to a set\nof rules. This pre-processing lets you ensure that the underlying\n`Model` does not build tokens across multiple \"splits\". For example if\nyou don't want to have whitespaces inside a token, then you can have a\n`PreTokenizer` that splits on these whitespaces."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What is the exact name of the special identifier used by the WordPiece Model for continuing subwords?",
+      "rag_answer": "##",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "When building a Tokenizer, you can attach various types of components to\nthis Tokenizer in order to customize its behavior. This page lists most\nprovided components.",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What type of license is the HuggingFace Team's software distributed under?",
+      "rag_answer": "The HuggingFace Team's software is distributed under a license that is on an \"AS IS\" basis, without warranties or conditions of any kind.",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.\n-->"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What is the specific URL where the Apache License, Version 2.0 can be obtained?",
+      "rag_answer": "https://www.apache.org/licenses/LICENSE-2.0",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+        "--\ntitle: Image Classification with AutoTrain thumbnail: /blog/assets/105_autotrain-image-classification/thumbnail.png\nauthors:\n- user: nimaboscarino\n---",
+        "<script async defer src=\"https://unpkg.com/medium-zoom-element@0/dist/medium-zoom-element.min.js\"></script>"
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-019",
+      "true": "Retrieval",
+      "question": "What is the title of the paper introducing the ByT5 model?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with\nthe License. You may obtain a copy of the License at",
+      "docs_rag_saw_to_answer": [
+        "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on\nan \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the\nspecific language governing permissions and limitations under the License.",
+        "⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be\nrendered properly in your Markdown viewer.",
+        "This model was contributed by [patrickvonplaten](https://huggingface.co/patrickvonplaten). The original code can be\nfound [here](https://github.com/google-research/byt5)."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    }
+  ]
+}

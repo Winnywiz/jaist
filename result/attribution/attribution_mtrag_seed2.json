@@ -1,0 +1,605 @@
+{
+  "config": {
+    "dataset": "mtrag",
+    "n_seeds": 20,
+    "n_cases": 27,
+    "llm": true
+  },
+  "report": {
+    "n": 27,
+    "methods": {
+      "1.single_turn": {
+        "accuracy": 0.444,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 0.0,
+            "n": 11
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 12
+          }
+        },
+        "top_confusions": {
+          "Generation->Retrieval": 11,
+          "Conversation->Generation": 4
+        }
+      },
+      "2.xie_static_core": {
+        "accuracy": 0.37,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 0.909,
+            "n": 11
+          },
+          "Retrieval": {
+            "acc": 0.0,
+            "n": 12
+          }
+        },
+        "top_confusions": {
+          "Retrieval->Generation": 12,
+          "Conversation->Generation": 4,
+          "Generation->Retrieval": 1
+        }
+      },
+      "3.xie_followup_only": {
+        "accuracy": 0.852,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.0,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 11
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 12
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 4
+        }
+      },
+      "4.dynamic_followup": {
+        "accuracy": 0.889,
+        "by_category": {
+          "Conversation": {
+            "acc": 0.25,
+            "n": 4
+          },
+          "Generation": {
+            "acc": 1.0,
+            "n": 11
+          },
+          "Retrieval": {
+            "acc": 1.0,
+            "n": 12
+          }
+        },
+        "top_confusions": {
+          "Conversation->Generation": 3
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ret-000",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "con-000",
+      "true": "Conversation",
+      "question": "What year did he begin the painting?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "Who painted the Mona Lisa?"
+        },
+        {
+          "role": "assistant",
+          "content": "Leonardo da Vinci"
+        }
+      ],
+      "antecedent_question": "What year did Leonardo da Vinci begin the painting?",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Starry Night is a painting created by the Dutch post-impressionist artist Vincent van Gogh, started in 1888. It is known for its swirling skies and vibrant colors.",
+        "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Conversation"
+    },
+    {
+      "case_id": "ret-001",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-002",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-003",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-003",
+      "true": "Generation",
+      "question": "What year was the Mona Lisa completed?",
+      "rag_answer": "1506",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-004",
+      "true": "Generation",
+      "question": "What specific date in 1915 was the theory of general relativity published?",
+      "rag_answer": "November 25, 1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-005",
+      "true": "Retrieval",
+      "question": "What programming language was created by Guido van Rossum?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris.",
+        "Leonardo da Vinci was also an inventor, engineer and anatomist."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-005",
+      "true": "Generation",
+      "question": "What was the exact date when version 0.9.0 of Python was released?",
+      "rag_answer": "1991",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-006",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-007",
+      "true": "Generation",
+      "question": "What was the exact date when Einstein published the theory of general relativity?",
+      "rag_answer": "1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-008",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-009",
+      "true": "Generation",
+      "question": "What was the exact date when Einstein published the theory of general relativity in 1915?",
+      "rag_answer": "November 25, 1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-010",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Geneva, on a site near Lake Geneva.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-011",
+      "true": "Retrieval",
+      "question": "Which company did Nikola Tesla work for after emigrating to the US?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Nikola Tesla emigrated to the United States in 1884 and began working at Edison Machine Works in New York City.",
+      "docs_rag_saw_to_answer": [
+        "Tesla later developed the alternating-current (AC) induction motor and polyphase power system.",
+        "Thomas Edison promoted direct current (DC), leading to the 'War of the Currents' with Tesla and George Westinghouse."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "ret-012",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-012",
+      "true": "Generation",
+      "question": "What year was the Mona Lisa completed?",
+      "rag_answer": "1517",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-013",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-013",
+      "true": "Generation",
+      "question": "What year was the Mona Lisa completed?",
+      "rag_answer": "1517",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-014",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the World Health Organization is located in Geneva, on a site near Lake Geneva.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-015",
+      "true": "Retrieval",
+      "question": "Who painted the Mona Lisa?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+      "docs_rag_saw_to_answer": [
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-015",
+      "true": "Generation",
+      "question": "What year was the Mona Lisa completed?",
+      "rag_answer": "1506",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "con-016",
+      "true": "Conversation",
+      "question": "Where is it located?",
+      "rag_answer": "I don't know",
+      "history": [
+        {
+          "role": "user",
+          "content": "In which city is the headquarters of the United Nations located?"
+        },
+        {
+          "role": "assistant",
+          "content": "New York City"
+        }
+      ],
+      "antecedent_question": "Where is New York City located?",
+      "source_doc_for_question": "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+      "docs_rag_saw_to_answer": [
+        "The headquarters of the United Nations is located in New York City, on a site overlooking the East River.",
+        "The headquarters of the Global Council is located in Los Angeles, on a site overlooking the Pacific Ocean.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503."
+      ],
+      "1.single_turn": "Generation",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-017",
+      "true": "Generation",
+      "question": "What was the exact date when Einstein published the theory of general relativity?",
+      "rag_answer": "1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "ret-018",
+      "true": "Retrieval",
+      "question": "What programming language was created by Guido van Rossum?",
+      "rag_answer": "I don't know",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+      "docs_rag_saw_to_answer": [
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris.",
+        "Leonardo da Vinci was also an inventor, engineer and anatomist."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Retrieval",
+      "4.dynamic_followup": "Retrieval"
+    },
+    {
+      "case_id": "gen-018",
+      "true": "Generation",
+      "question": "What was the exact date when version 0.9.0 of Python was released?",
+      "rag_answer": "1991",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Guido van Rossum began working on Python in the late 1980s and released version 0.9.0 in 1991.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Retrieval",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    },
+    {
+      "case_id": "gen-019",
+      "true": "Generation",
+      "question": "What specific date in 1915 was the theory of general relativity published?",
+      "rag_answer": "November 25, 1915",
+      "history": [],
+      "antecedent_question": "",
+      "source_doc_for_question": "",
+      "docs_rag_saw_to_answer": [
+        "Albert Einstein was a German-born theoretical physicist who developed the theory of general relativity, published in 1915.",
+        "The Mona Lisa is a portrait painted by the Italian Renaissance artist Leonardo da Vinci, begun around 1503.",
+        "The painting is housed in the Louvre Museum in Paris."
+      ],
+      "1.single_turn": "Retrieval",
+      "2.xie_static_core": "Generation",
+      "3.xie_followup_only": "Generation",
+      "4.dynamic_followup": "Generation"
+    }
+  ]
+}
