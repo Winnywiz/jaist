@@ -12,9 +12,14 @@ Output::
     {
         "gold_answer": str,
         "reasoning_chain": [str, ...],     # human-readable hop-by-hop derivation
-        "supporting_nodes": [str, ...],    # entity ids cited
-        "supporting_edges": [ {source,target,relation}, ... ],
+        "supporting_nodes": [str, ...],    # RETRIEVED entity ids (candidate support)
+        "supporting_edges": [ {source,target,relation}, ... ],  # retrieved edges
+        "supporting_chunks": [str, ...],   # retrieved chunks the answer was composed from
     }
+
+The gold answer is ALWAYS composed from ``truth_history`` + retrieved evidence, never
+from the RAG-under-test's answer — so the answer key stays identical across the
+static and dynamic conditions of the experiment.
 
 For ``Unanswerable`` turns the gold is a canonical abstention string, so the
 classifier can reward the RAG for saying "I don't know".
@@ -48,8 +53,12 @@ class GoldAnswer:
         return {
             "gold_answer": self.gold_answer,
             "reasoning_chain": self.reasoning_chain,
+            # NOTE: supporting_* are the RETRIEVED evidence trail the answer was
+            # composed against (candidate support), not per-claim verified support —
+            # they are the top-ranked nodes/edges/chunks handed to the composer.
             "supporting_nodes": self.supporting_nodes,
             "supporting_edges": self.supporting_edges,
+            "supporting_chunks": self.supporting_chunks,
         }
 
 
@@ -74,8 +83,11 @@ class GoldAnswerGenerator:
         "ONLY facts EXPLICITLY stated in the EVIDENCE. Do NOT infer, generalize, or "
         "use any outside knowledge.\n"
         "Rules:\n"
-        "1. Every claim in gold_answer must be directly stated in the EVIDENCE. If "
-        "you cannot point to the exact evidence text for a claim, do not write it.\n"
+        "1. Every claim in gold_answer must be either directly stated in the EVIDENCE, "
+        "or logically derivable by CHAINING facts that are each directly stated in the "
+        "EVIDENCE (legitimate multi-hop reasoning). You must be able to point to the "
+        "exact evidence text for every link in the chain. Never introduce outside "
+        "knowledge and never fill a missing link to make the answer sound whole.\n"
         "2. If the question has multiple parts (a comparison, a multi-step chain, an "
         "'and'), EVERY part must be supported by the EVIDENCE. If even one part is "
         "missing, set \"answerable\" to false.\n"
@@ -94,35 +106,46 @@ class GoldAnswerGenerator:
         self.strict = strict  # use the strict composer prompt (refuse to over-assert)
 
     def generate(self, turn: QueryTurn, evidence: RetrievalResult,
-                 history: List[Dict]) -> GoldAnswer:
-        """Generate the gold answer for a single typed turn."""
-        nodes = [n["id"] for n in evidence.nodes]
-        edges = evidence.edges
+                 truth_history: List[Dict]) -> GoldAnswer:
+        """Generate the gold answer for a single typed turn.
+
+        THESIS INVARIANT: the conversation context passed here is ``truth_history``
+        (user question + GOLD answer), NEVER ``rag_history``. The gold answer must
+        never be conditioned on the RAG-under-test's (possibly wrong) reply — that is
+        what keeps the answer key clean and identical across the static/dynamic
+        conditions. The parameter is named ``truth_history`` so this rule is visible
+        at the call site and cannot be satisfied by accidentally passing rag_history.
+        """
+        # These are the RETRIEVED evidence (top-ranked), i.e. the candidate support
+        # the composer was given — NOT a per-claim verified support set.
+        retrieved_nodes = [n["id"] for n in evidence.nodes]
+        retrieved_edges = evidence.edges
 
         if turn.is_unanswerable:
             return GoldAnswer(
                 gold_answer=ABSTENTION,
                 reasoning_chain=["The question asks for information absent from the "
                                  "corpus; the correct behaviour is to abstain."],
-                supporting_nodes=nodes[:5],
-                supporting_edges=edges[:5],
+                supporting_nodes=retrieved_nodes[:5],
+                supporting_edges=retrieved_edges[:5],
                 supporting_chunks=evidence.chunks[:3],
             )
 
-        gold = self._llm_gold(turn, evidence, history)
+        gold = self._llm_gold(turn, evidence, truth_history)
         if gold is None:
             gold = self._fallback_gold(turn, evidence)
-        gold.supporting_nodes = nodes[:8]
-        gold.supporting_edges = edges[:8]
+        gold.supporting_nodes = retrieved_nodes[:8]
+        gold.supporting_edges = retrieved_edges[:8]
         gold.supporting_chunks = evidence.chunks[:4]
         return gold
 
     # -- backends ----------------------------------------------------------- #
     def _llm_gold(self, turn: QueryTurn, evidence: RetrievalResult,
-                  history: List[Dict]) -> Optional[GoldAnswer]:
+                  truth_history: List[Dict]) -> Optional[GoldAnswer]:
         if not self.llm.available:
             return None
-        hist_text = "\n".join(f"{t['role']}: {t['content']}" for t in history[-6:]) or "(start)"
+        hist_text = "\n".join(f"{t['role']}: {t['content']}"
+                              for t in truth_history[-6:]) or "(start)"
         user = (
             f"QUESTION: {turn.question}\n"
             f"QUERY TYPE: {turn.query_type}\n"
@@ -146,11 +169,18 @@ class GoldAnswerGenerator:
         )
 
     def _fallback_gold(self, turn: QueryTurn, evidence: RetrievalResult) -> GoldAnswer:
-        """Heuristic gold: the highest-ranked evidence chunk as the answer source."""
-        top = evidence.chunks[0] if evidence.chunks else ""
-        gold = top.split(".")[0].strip() if top else "(no evidence retrieved)"
+        """No trustworthy gold could be composed (the LLM composer was unavailable or
+        returned nothing).
+
+        Rather than fabricate an answer key from the first sentence of the top chunk —
+        which may not answer the question at all and would CONTAMINATE failure
+        attribution — we ABSTAIN. Callers treat a gold starting with ``ABSTENTION`` as
+        ungrounded: the adaptive generator's grounding guard retries and, if it keeps
+        failing, marks the turn ``guard_gave_up`` so it is excluded from per-type
+        grading. A missing gold must never masquerade as a real one."""
         return GoldAnswer(
-            gold_answer=gold,
-            reasoning_chain=[f"Top retrieved evidence for the question on "
-                             f"{turn.target_entity or 'the subject'}: {gold}"],
+            gold_answer=ABSTENTION,
+            reasoning_chain=["Gold-answer composition failed (LLM composer unavailable "
+                             "or returned no answer); no trustworthy gold could be "
+                             "produced, so this turn abstains rather than guess."],
         )

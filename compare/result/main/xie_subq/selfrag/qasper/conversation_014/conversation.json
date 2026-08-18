@@ -1,0 +1,1064 @@
+{
+  "method": "xie_subq",
+  "rag": "selfrag",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T12:55:29",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-013",
+  "conversations": [
+    {
+      "conversation_id": "conv-013",
+      "seed_question": "By how much does SPNet outperforms state-of-the-art abstractive summarization methods on evaluation metrics?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:follow-up"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "correct",
+        "correct",
+        "correct",
+        "abstained",
+        "correct",
+        "wrong"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "By how much does SPNet outperforms state-of-the-art abstractive summarization methods on evaluation metrics?",
+          "gold": "SPNet outperforms state-of-the-art methods by 5.64% in EM-score and 3.69% in F1-score compared to BERT-Base.",
+          "evidence": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP. Table TABREF23 indic",
+          "rag_answer": "SPNet outperforms state-of-the-art methods by 5.64% in EM-score and 3.69% in F1-score compared to BERT-Base.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP. Table TABREF23 indic",
+          "rag_retrieved_context": [
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings.",
+            "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 235,
+              "rank": 1,
+              "score": 0.580055,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 232,
+              "rank": 2,
+              "score": 0.499825,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.498616,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 246,
+              "rank": 4,
+              "score": 0.497224,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 234,
+              "rank": 5,
+              "score": 0.488743,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            },
+            {
+              "doc_id": 251,
+              "rank": 6,
+              "score": 0.467062,
+              "score_type": "cosine",
+              "text": "We propose to validate the saliency maps in a similar way as Arras et al. Arras2017 by incrementally deleting “important\" words from the input text and observe the change in the resulting generated summaries."
+            },
+            {
+              "doc_id": 155,
+              "rank": 7,
+              "score": 0.449903,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 254,
+              "rank": 8,
+              "score": 0.44571,
+              "score_type": "cosine",
+              "text": "One might argue that the second summary in Figure 5 is better than the first one as it makes better sentences but as the model generates inaccurate summaries, we do not wish to make such a statement."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 235,
+              "rank": 1,
+              "score": 0.580039,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 232,
+              "rank": 2,
+              "score": 0.499813,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.498616,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 246,
+              "rank": 4,
+              "score": 0.498554,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 234,
+              "rank": 5,
+              "score": 0.488738,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What are the specific evaluation metrics used to compare SPNet with state-of-the-art abstractive summarization methods?",
+          "gold": "The specific evaluation metrics used to compare SPNet with state-of-the-art abstractive summarization methods are EM-score and F1-score.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_answer": "The specific evaluation metrics used are EM-score and F1-score.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "SPNet outperforms state-of-the-art methods by 5.64% in EM-score and 3.69% in F1-score compared to BERT-Base.",
+            "previous_rag_answer": "SPNet outperforms state-of-the-art methods by 5.64% in EM-score and 3.69% in F1-score compared to BERT-Base."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.632494,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.526295,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.519211,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 155,
+              "rank": 4,
+              "score": 0.490691,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.464376,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 158,
+              "rank": 6,
+              "score": 0.46283,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 232,
+              "rank": 7,
+              "score": 0.441238,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 234,
+              "rank": 8,
+              "score": 0.438468,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.63248,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.526332,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.519211,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 155,
+              "rank": 4,
+              "score": 0.490604,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.465242,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "What are the state-of-the-art abstractive summarization methods that SPNet is being compared against?",
+          "gold": "SPNet is being compared against QANet and BERT-Base.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_answer": "The state-of-the-art abstractive summarization methods that SPNet is being compared against include BERT-Base and QANet.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one.",
+            "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The specific evaluation metrics used to compare SPNet with state-of-the-art abstractive summarization methods are EM-score and F1-score.",
+            "previous_rag_answer": "The specific evaluation metrics used are EM-score and F1-score."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.617948,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.524507,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.510983,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 155,
+              "rank": 4,
+              "score": 0.497507,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.460857,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 232,
+              "rank": 6,
+              "score": 0.450306,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 158,
+              "rank": 7,
+              "score": 0.446065,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 167,
+              "rank": 8,
+              "score": 0.438182,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.541881,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.519702,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.502701,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 246,
+              "rank": 4,
+              "score": 0.484838,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 232,
+              "rank": 5,
+              "score": 0.460044,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:core",
+          "question": "What is the performance score of SPNet on these evaluation metrics?",
+          "gold": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_answer": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one. Since BERT ",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP.",
+            "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "SPNet is being compared against QANet and BERT-Base.",
+            "previous_rag_answer": "The state-of-the-art abstractive summarization methods that SPNet is being compared against include BERT-Base and QANet."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.622075,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.529873,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.482165,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 155,
+              "rank": 4,
+              "score": 0.477942,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.448373,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 232,
+              "rank": 6,
+              "score": 0.425403,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 181,
+              "rank": 7,
+              "score": 0.416603,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 251,
+              "rank": 8,
+              "score": 0.410945,
+              "score_type": "cosine",
+              "text": "We propose to validate the saliency maps in a similar way as Arras et al. Arras2017 by incrementally deleting “important\" words from the input text and observe the change in the resulting generated summaries."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.601506,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 2,
+              "score": 0.577565,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 235,
+              "rank": 3,
+              "score": 0.538909,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 232,
+              "rank": 4,
+              "score": 0.492615,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.489374,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:core",
+          "question": "What are the performance scores of the state-of-the-art methods on the same evaluation metrics?",
+          "gold": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%. QANet outperformed BERT-Base in F1-score but underperformed in EM-score.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used",
+          "rag_answer": "QANet outperformed BERT-Base by 3.56% in F1-score but underperformed it by 0.75% in EM-score. The specific performance scores for QANet and BERT-Base are not provided in the context.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model.",
+            "In contrast to rule-based approaches, current models for emotion classification are often based on neural networks and commonly use word embeddings as features. Schuff2017 applied models from the classes of CNN, BiLSTM, and LSTM and compare them to linear classifiers (SVM and MaxEnt), where the BiLSTM shows best results with the most balanced precision and recall. AbdulMageed2017 claim the highest F$_1$ with gated recurrent unit networks BIBREF38 for Plutchik's emotion model. More recently, shared tasks on emotion analysis BIBREF39, BIBREF40 triggered a set of more advanced deep learning approaches, including BERT BIBREF41 and other transfer learning methods BIBREF42.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%.",
+            "previous_rag_answer": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.661333,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 2,
+              "score": 0.534244,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 154,
+              "rank": 3,
+              "score": 0.515299,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 235,
+              "rank": 4,
+              "score": 0.513345,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 246,
+              "rank": 5,
+              "score": 0.454561,
+              "score_type": "cosine",
+              "text": "In this section, we present our results from extracting attributions from the sequence-to-sequence model trained for abstractive text summarization. We first have to discuss the difference between the 50 different saliency maps we obtain and then we propose a protocol to validate the mappings."
+            },
+            {
+              "doc_id": 181,
+              "rank": 6,
+              "score": 0.439282,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 232,
+              "rank": 7,
+              "score": 0.437091,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 175,
+              "rank": 8,
+              "score": 0.432327,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.735577,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.564706,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.506922,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.471646,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 67,
+              "rank": 5,
+              "score": 0.448634,
+              "score_type": "cosine",
+              "text": "In contrast to rule-based approaches, current models for emotion classification are often based on neural networks and commonly use word embeddings as features. Schuff2017 applied models from the classes of CNN, BiLSTM, and LSTM and compare them to linear classifiers (SVM and MaxEnt), where the BiLSTM shows best results with the most balanced precision and recall. AbdulMageed2017 claim the highest F$_1$ with gated recurrent unit networks BIBREF38 for Plutchik's emotion model. More recently, shared tasks on emotion analysis BIBREF39, BIBREF40 triggered a set of more advanced deep learning approaches, including BERT BIBREF41 and other transfer learning methods BIBREF42."
+            },
+            {
+              "doc_id": 235,
+              "rank": 6,
+              "score": 0.386573,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "What datasets were used for evaluating SPNet and the state-of-the-art methods?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration me",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration me",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "SPNet achieved an EM-score of 91.84% and an F1-score of 93.75%. QANet outperformed BERT-Base in F1-score but underperformed in EM-score.",
+            "previous_rag_answer": "QANet outperformed BERT-Base by 3.56% in F1-score but underperformed it by 0.75% in EM-score. The specific performance scores for QANet and BERT-Base are not provided in the context."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.715912,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.552094,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.483599,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.468569,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 67,
+              "rank": 5,
+              "score": 0.450604,
+              "score_type": "cosine",
+              "text": "In contrast to rule-based approaches, current models for emotion classification are often based on neural networks and commonly use word embeddings as features. Schuff2017 applied models from the classes of CNN, BiLSTM, and LSTM and compare them to linear classifiers (SVM and MaxEnt), where the BiLSTM shows best results with the most balanced precision and recall. AbdulMageed2017 claim the highest F$_1$ with gated recurrent unit networks BIBREF38 for Plutchik's emotion model. More recently, shared tasks on emotion analysis BIBREF39, BIBREF40 triggered a set of more advanced deep learning approaches, including BERT BIBREF41 and other transfer learning methods BIBREF42."
+            },
+            {
+              "doc_id": 235,
+              "rank": 6,
+              "score": 0.420655,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 262,
+              "rank": 7,
+              "score": 0.414077,
+              "score_type": "cosine",
+              "text": "We evaluate our framework on fastText embeddings trained on Wikipedia (2017), UMBC webbase corpus and statmt.org news dataset (16B tokens) BIBREF11. For simplicity, only the first 22000 words are used in all embeddings, though preliminary results indicate the findings extend to the full corpus. For our novel methods of mitigating bias, a shallow neural network is used to adjust the embedding. The single layer of the model is an embedding layer with weights initialized to those of the original embedding. For the composite method, these weights are initialized to those of the embedding after probabilistic bias mitigation. A batch of word indices is fed into the model, which are then embedded and for which a loss value is calculated, allowing back-propagation to adjust the embeddings. For each of the models, a fixed number of iterations is used to prevent overfitting, which can eventually hurt performance on the embedding benchmarks (See Figure FIGREF12). We evaluated the embedding after 1000 iterations, and stopped training if performance on a benchmark decreased significantly."
+            },
+            {
+              "doc_id": 161,
+              "rank": 8,
+              "score": 0.413276,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.791733,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 2,
+              "score": 0.615421,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 154,
+              "rank": 3,
+              "score": 0.520091,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.486405,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 158,
+              "rank": 5,
+              "score": 0.475407,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:background",
+          "question": "What is the definition of 'outperform' in the context of this comparison?",
+          "gold": "To outperform means to achieve a better performance score than another model on a specific metric.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration me",
+          "rag_answer": "In the context of this comparison, 'outperform' refers to achieving a higher score in a specific evaluation metric (such as F1-score or EM-score) compared to another model.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration me",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.711877,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.580417,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.51,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.4702,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.443039,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 67,
+              "rank": 6,
+              "score": 0.44182,
+              "score_type": "cosine",
+              "text": "In contrast to rule-based approaches, current models for emotion classification are often based on neural networks and commonly use word embeddings as features. Schuff2017 applied models from the classes of CNN, BiLSTM, and LSTM and compare them to linear classifiers (SVM and MaxEnt), where the BiLSTM shows best results with the most balanced precision and recall. AbdulMageed2017 claim the highest F$_1$ with gated recurrent unit networks BIBREF38 for Plutchik's emotion model. More recently, shared tasks on emotion analysis BIBREF39, BIBREF40 triggered a set of more advanced deep learning approaches, including BERT BIBREF41 and other transfer learning methods BIBREF42."
+            },
+            {
+              "doc_id": 161,
+              "rank": 7,
+              "score": 0.435302,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 185,
+              "rank": 8,
+              "score": 0.428494,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.465171,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 235,
+              "rank": 2,
+              "score": 0.43595,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.422152,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 154,
+              "rank": 4,
+              "score": 0.416858,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 185,
+              "rank": 5,
+              "score": 0.408698,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:follow-up",
+          "question": "What are the strengths and weaknesses of SPNet compared to the other methods?",
+          "gold": "SPNet's strengths include achieving the highest EM-score (91.84%) and F1-score (93.75%) compared to QANet and BERT-Base. Its weaknesses include only a slight advantage over QANet in F1-score (0.13%) and a significant performance improvement in EM-score (6.39%) over QANet, but it did not outperform QANet in F1-score.",
+          "evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neura",
+          "rag_answer": "SPNet achieved the best performance in both EM-score (91.84%) and F1-score (93.75%). It outperformed QANet by 6.39% in EM-score but only slightly outperformed it by 0.13% in F1-score. Compared to BERT-Base, SPNet led to a 5.64% improvement in EM-score and a 3.69% improvement in F1-score. However, QANet outperformed BERT-Base in F1-score by 3.56% but underperformed it in EM-score by 0.75%.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neura",
+          "rag_retrieved_context": [
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "follow-up",
+            "previous_gold_answer": "To outperform means to achieve a better performance score than another model on a specific metric.",
+            "previous_rag_answer": "In the context of this comparison, 'outperform' refers to achieving a higher score in a specific evaluation metric (such as F1-score or EM-score) compared to another model."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.484462,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 2,
+              "score": 0.432983,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 161,
+              "rank": 3,
+              "score": 0.426332,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 235,
+              "rank": 4,
+              "score": 0.426274,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            },
+            {
+              "doc_id": 154,
+              "rank": 5,
+              "score": 0.421222,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 185,
+              "rank": 6,
+              "score": 0.418822,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 166,
+              "rank": 7,
+              "score": 0.409528,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 269,
+              "rank": 8,
+              "score": 0.407611,
+              "score_type": "cosine",
+              "text": "We present experiments on various bias mitigation benchmarks and show that our framework is comparable to state-of-the-art alternatives according to measures of geometric bias mitigation and that it performs far better according to measures of neighborhood bias. For fair comparison, we focus on mitigating a binary gender bias in pre-trained word embeddings using SGNS (skip-gram with negative-sampling), though we note that this framework and methods could be extended to other types of bias and word embedding algorithms."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 156,
+              "rank": 1,
+              "score": 0.653212,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.533938,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 158,
+              "rank": 3,
+              "score": 0.418774,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 166,
+              "rank": 4,
+              "score": 0.413397,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 155,
+              "rank": 5,
+              "score": 0.406574,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 235,
+              "rank": 6,
+              "score": 0.40534,
+              "score_type": "cosine",
+              "text": "We train the 21 350 992 parameters of the network for about 60 epochs until we achieve results that are qualitatively equivalent to the results of See et al. See2017. We obtain summaries that are broadly relevant to the text but do not match the target summaries very well. We observe the same problems such as wrong reproduction of factual details, replacing rare words with more common alternatives or repeating non-sense after the third sentence. We can see in Figure 1 an example of summary obtained compared to the target one."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}

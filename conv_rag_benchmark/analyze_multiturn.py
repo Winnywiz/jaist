@@ -26,7 +26,7 @@ Four analyses, all reported per (dataset, rag) and pooled:
                        3 causally and yields a McNemar's test. Needs --counterfactual runs.
 
 CAVEAT baked into the output: the generator is *adaptive* — the outcome of turn t
-chooses the query type of turn t+1 (adaptive_generator._choose_type). So depth and
+chooses the query type of turn t+1 (dynamic_generator._choose_type). So depth and
 query type are confounded, and conditioning on depth partly conditions on past
 success. Analysis 1 is therefore also reported WITHIN a single query type, which
 removes the type-mix confound (the selection effect remains — see README note).

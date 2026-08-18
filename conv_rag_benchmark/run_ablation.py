@@ -24,7 +24,7 @@ from collections import Counter
 from .config import Config
 from .connectors import connect_rag, connect_dataset
 from .embeddings import Embedder
-from .generation.adaptive_generator import AdaptiveConversationGenerator
+from .generation.dynamic_generator import AdaptiveConversationGenerator
 from .graph.graph_builder import GraphBuilder
 from .graph.retriever import GraphRetriever
 from .llm import LLM

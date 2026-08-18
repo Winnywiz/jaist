@@ -51,7 +51,7 @@ from typing import Callable, List, Optional
 from .interfaces.rag_interface import RAGInterface, RAGResponse, build_rag
 
 #: RAGs that ship with the benchmark (implemented in interfaces/rag_interface.py).
-BUILTIN_RAGS = ("mock", "vector", "selfrag", "crag", "raptor", "longrag", "graph")
+BUILTIN_RAGS = ("mock", "vector", "selfrag", "crag", "raptor", "longrag", "graph", "hippo")
 
 #: RAGs you register at runtime: name -> factory(chunks, config, **kw) -> RAGInterface
 CUSTOM_RAGS: dict = {}
@@ -73,6 +73,13 @@ def connect_rag(name: str, chunks, config, **kw) -> RAGInterface:
 def available_rags() -> List[str]:
     """Every RAG name that ``connect_rag`` can build right now."""
     return sorted(set(BUILTIN_RAGS) | set(CUSTOM_RAGS))
+
+
+# Optional external RAGs that self-register on import. Importing the stub only DEFINES the
+# class + registers the name; it imports no PageIndex package at load time, so it is safe
+# even before PageIndex is installed. Selecting `--rag pageindex` and calling it will raise
+# until the friend implements PageIndexRAG._pageindex_retrieve.
+from .interfaces import pageindex_rag  # noqa: F401  (registers "pageindex")
 
 
 # ============================================================================ #

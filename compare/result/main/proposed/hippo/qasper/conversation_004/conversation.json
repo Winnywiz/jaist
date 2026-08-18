@@ -1,0 +1,1612 @@
+{
+  "method": "proposed",
+  "rag": "hippo",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "dynamic",
+  "generation_source": "rag_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-18T10:11:29",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-003",
+  "conversations": [
+    {
+      "conversation_id": "conv-003",
+      "seed_question": "What is the learning rate set for the Adam optimization algorithm in the deep neural network models?",
+      "type_sequence": [
+        "Seed",
+        "Correction",
+        "Follow-Up",
+        "Clarification",
+        "Unanswerable",
+        "Clarification",
+        "Multi-Hop",
+        "Multi-Hop"
+      ],
+      "outcome_sequence": [
+        "wrong",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "wrong",
+        "correct",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What is the learning rate set for the Adam optimization algorithm in the deep neural network models?",
+          "gold": "0.001",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5. Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the p",
+          "rag_answer": "5×10^{-5}",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "[1] To implement deep neural network models, we utilize the Keras library   with TensorFlow   backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm   whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.\n\n[2] The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell   and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in   and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254.\n\n[3] In contrast to rule-based approaches, current models for emotion classification are often based on neural networks and commonly use word embeddings as features. Schuff2017 applied models from the classes of CNN, BiLSTM, and LSTM and compare them to linear classifiers (SVM and MaxEnt), where the BiLSTM shows best results with the",
+          "rag_retrieved_context": [
+            "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event.",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output.",
+            "Our goal is to learn the polarity function $p(x)$, which predicts the sentiment polarity score of an event $x$. We approximate $p(x)$ by a neural network with the following form:",
+            "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {},
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.540041,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 186,
+              "rank": 2,
+              "score": 0.33411,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 168,
+              "rank": 3,
+              "score": 0.276305,
+              "score_type": "cosine",
+              "text": "Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing."
+            },
+            {
+              "doc_id": 120,
+              "rank": 4,
+              "score": 0.404503,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 215,
+              "rank": 5,
+              "score": 0.348464,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 216,
+              "rank": 6,
+              "score": 0.3416,
+              "score_type": "cosine",
+              "text": "We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings."
+            },
+            {
+              "doc_id": 240,
+              "rank": 7,
+              "score": 0.338784,
+              "score_type": "cosine",
+              "text": "where $w_{i\\rightarrow j}^{l,l+1}$ is the network's weight parameter set during training, $\\textbf {b}^{l+1}_j$ is the bias for neuron $j$ of layer $l+1$ , $\\textbf {z}^{l}_i$ is the activation of neuron $i$ on layer $l$ , $\\epsilon $ is the stabilizing term set to 0.00001 and $D_l$ is the dimension of the $l$ -th layer."
+            },
+            {
+              "doc_id": 169,
+              "rank": 8,
+              "score": 0.335927,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 4,
+              "rank": 1,
+              "score": 0.241017,
+              "score_type": "ppr",
+              "text": "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event."
+            },
+            {
+              "doc_id": 120,
+              "rank": 2,
+              "score": 0.190603,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 214,
+              "rank": 3,
+              "score": 0.169682,
+              "score_type": "ppr",
+              "text": "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output."
+            },
+            {
+              "doc_id": 10,
+              "rank": 4,
+              "score": 0.147268,
+              "score_type": "ppr",
+              "text": "Our goal is to learn the polarity function $p(x)$, which predicts the sentiment polarity score of an event $x$. We approximate $p(x)$ by a neural network with the following form:"
+            },
+            {
+              "doc_id": 123,
+              "rank": 5,
+              "score": 0.130712,
+              "score_type": "ppr",
+              "text": "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Correction",
+          "question": "What is the default maximum sentence length of input and output in the training settings?",
+          "gold": "50 tokens",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model. NMT models are constructions of stacked recurrent neural networks (RNNs). They include an encoder network and a decoder network, which are jointly optimized to produce a translation of one sequence to another. The encoder rolls over the input data in sequence and produces one INLINEFORM0 -dimensional context vector representation for the sentence. The decoder then generates output sequences based on the embedding vector and an attention module, which is taught to associate output words with certain input words. The generation typically continues until a specific EOS (end of sentence) token is encoun",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. We evaluate our framework on fastText embeddings trained on Wikipedia (2017), UMBC webbase corpus and statmt.org news dataset (16B tokens) BIBREF11. For simplicity, only the first 22000 words are used in all embeddings, though preliminary results indicate the findings extend to the full corpus. For our novel methods of mitigating bias, a shallow neural network is used to adjust the embedding. The single layer of the model is an embedding layer with weights initialized to those of the original embedding. For the composite method, these weights are initialized to those of the embedding after probabilistic bias mitigation. A batch of word indices is fed int",
+          "rag_retrieved_context": [
+            "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event.",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output.",
+            "Our goal is to learn the polarity function $p(x)$, which predicts the sentiment polarity score of an event $x$. We approximate $p(x)$ by a neural network with the following form:",
+            "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "0.001",
+            "previous_rag_answer": "5×10^{-5}",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the learning rate set for the Adam optimization algorithm in the deep neural network models?"
+              },
+              {
+                "role": "assistant",
+                "content": "5×10^{-5}"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.645091,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 140,
+              "rank": 2,
+              "score": 0.386515,
+              "score_type": "cosine",
+              "text": "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+            },
+            {
+              "doc_id": 207,
+              "rank": 3,
+              "score": 0.353335,
+              "score_type": "cosine",
+              "text": "NMT models are constructions of stacked recurrent neural networks (RNNs). They include an encoder network and a decoder network, which are jointly optimized to produce a translation of one sequence to another. The encoder rolls over the input data in sequence and produces one INLINEFORM0 -dimensional context vector representation for the sentence. The decoder then generates output sequences based on the embedding vector and an attention module, which is taught to associate output words with certain input words. The generation typically continues until a specific EOS (end of sentence) token is encountered. The review length can be controlled in many ways, e.g. by setting the probability of generating the EOS token to zero until the required length is reached."
+            },
+            {
+              "doc_id": 215,
+              "rank": 4,
+              "score": 0.502074,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 214,
+              "rank": 5,
+              "score": 0.423455,
+              "score_type": "cosine",
+              "text": "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output."
+            },
+            {
+              "doc_id": 216,
+              "rank": 6,
+              "score": 0.389473,
+              "score_type": "cosine",
+              "text": "We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings."
+            },
+            {
+              "doc_id": 234,
+              "rank": 7,
+              "score": 0.368756,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            },
+            {
+              "doc_id": 136,
+              "rank": 8,
+              "score": 0.358238,
+              "score_type": "cosine",
+              "text": "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+            },
+            {
+              "doc_id": 4,
+              "rank": 9,
+              "score": 0.1343,
+              "score_type": "cosine",
+              "text": "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event."
+            },
+            {
+              "doc_id": 27,
+              "rank": 10,
+              "score": 0.280765,
+              "score_type": "cosine",
+              "text": "We constructed our seed lexicon consisting of 15 positive words and 15 negative words, as shown in Section SECREF27. From the corpus of about 100 million sentences, we obtained 1.4 millions event pairs for AL, 41 millions for CA, and 6 millions for CO. We randomly selected subsets of AL event pairs such that positive and negative latter events were equal in size. We also sampled event pairs for each of CA and CO such that it was five times larger than AL. The results are shown in Table TABREF16."
+            },
+            {
+              "doc_id": 33,
+              "rank": 11,
+              "score": 0.251609,
+              "score_type": "cosine",
+              "text": "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19."
+            },
+            {
+              "doc_id": 254,
+              "rank": 12,
+              "score": 0.24841,
+              "score_type": "cosine",
+              "text": "One might argue that the second summary in Figure 5 is better than the first one as it makes better sentences but as the model generates inaccurate summaries, we do not wish to make such a statement."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 4,
+              "rank": 1,
+              "score": 0.220793,
+              "score_type": "ppr",
+              "text": "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event."
+            },
+            {
+              "doc_id": 120,
+              "rank": 2,
+              "score": 0.174535,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 214,
+              "rank": 3,
+              "score": 0.155392,
+              "score_type": "ppr",
+              "text": "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output."
+            },
+            {
+              "doc_id": 10,
+              "rank": 4,
+              "score": 0.134869,
+              "score_type": "ppr",
+              "text": "Our goal is to learn the polarity function $p(x)$, which predicts the sentiment polarity score of an event $x$. We approximate $p(x)$ by a neural network with the following form:"
+            },
+            {
+              "doc_id": 123,
+              "rank": 5,
+              "score": 0.119692,
+              "score_type": "ppr",
+              "text": "However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Follow-Up",
+          "question": "What is the hidden state size of the model?",
+          "gold": "254",
+          "evidence": "where $d_k$ is the length of hidden vector. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing. The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254. NMT models are constructions of stacked recurrent neural networks (RNNs). They include an encoder network and a decoder network, which are jointly optimized to produce a translation of one sequence to another. The encoder rolls over the input data in sequence and produces one INLINEFORM0 -dimensional context vector representation for the sentence. The decoder then generates output sequences based on the embedding vector and an attention module, which is taught to associate output words with certain input words. The generation typically continues until a specific EOS (end of sentence) token is encountered. The review length can be controlled in many ways, e.g. by setting the probability of generating the EOS token to zero until the required length is reached. We trai",
+          "rag_retrieved_context": [
+            "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output.",
+            "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model.",
+            "The second observation we can make is that the saliency map doesn't seem to highlight the right things in the input for the summary it generates. The saliency maps on Figure 3 correspond to the summary from Figure 1 , and we don't see the word “video\" highlighted in the input text, which seems to be important for the output.",
+            "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result.",
+            "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "50 tokens",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the learning rate set for the Adam optimization algorithm in the deep neural network models?"
+              },
+              {
+                "role": "assistant",
+                "content": "5×10^{-5}"
+              },
+              {
+                "role": "user",
+                "content": "What is the default maximum sentence length of input and output in the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 146,
+              "rank": 1,
+              "score": 0.470159,
+              "score_type": "cosine",
+              "text": "where $d_k$ is the length of hidden vector."
+            },
+            {
+              "doc_id": 163,
+              "rank": 2,
+              "score": 0.392615,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 168,
+              "rank": 3,
+              "score": 0.378938,
+              "score_type": "cosine",
+              "text": "Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing."
+            },
+            {
+              "doc_id": 228,
+              "rank": 4,
+              "score": 0.438852,
+              "score_type": "cosine",
+              "text": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+            },
+            {
+              "doc_id": 120,
+              "rank": 5,
+              "score": 0.437091,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 240,
+              "rank": 6,
+              "score": 0.413192,
+              "score_type": "cosine",
+              "text": "where $w_{i\\rightarrow j}^{l,l+1}$ is the network's weight parameter set during training, $\\textbf {b}^{l+1}_j$ is the bias for neuron $j$ of layer $l+1$ , $\\textbf {z}^{l}_i$ is the activation of neuron $i$ on layer $l$ , $\\epsilon $ is the stabilizing term set to 0.00001 and $D_l$ is the dimension of the $l$ -th layer."
+            },
+            {
+              "doc_id": 179,
+              "rank": 7,
+              "score": 0.410863,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 172,
+              "rank": 8,
+              "score": 0.402759,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 242,
+              "rank": 9,
+              "score": 0.522605,
+              "score_type": "cosine",
+              "text": "For LSTM cells we use the method from Arras et al.Arras2017 to solve the problem posed by the element-wise multiplications of vectors. Arras et al. noted that when such computation happened inside an LSTM cell, it always involved a “gate\" vector and another vector containing information. The gate vector containing only value between 0 and 1 is essentially filtering the second vector to allow the passing of “relevant\" information. Considering this, when we propagate relevance through an element-wise multiplication operation, we give all the upper-layer's relevance to the “information\" vector and none to the “gate\" vector."
+            },
+            {
+              "doc_id": 166,
+              "rank": 10,
+              "score": 0.300954,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 169,
+              "rank": 11,
+              "score": 0.49729,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 258,
+              "rank": 12,
+              "score": 0.451681,
+              "score_type": "cosine",
+              "text": "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+            },
+            {
+              "doc_id": 181,
+              "rank": 13,
+              "score": 0.451199,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 199,
+              "rank": 14,
+              "score": 0.446781,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 175,
+              "rank": 15,
+              "score": 0.429423,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 214,
+              "rank": 1,
+              "score": 0.27533,
+              "score_type": "ppr",
+              "text": "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output."
+            },
+            {
+              "doc_id": 140,
+              "rank": 2,
+              "score": 0.183917,
+              "score_type": "ppr",
+              "text": "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+            },
+            {
+              "doc_id": 249,
+              "rank": 3,
+              "score": 0.13229,
+              "score_type": "ppr",
+              "text": "The second observation we can make is that the saliency map doesn't seem to highlight the right things in the input for the summary it generates. The saliency maps on Figure 3 correspond to the summary from Figure 1 , and we don't see the word “video\" highlighted in the input text, which seems to be important for the output."
+            },
+            {
+              "doc_id": 230,
+              "rank": 4,
+              "score": 0.13229,
+              "score_type": "ppr",
+              "text": "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result."
+            },
+            {
+              "doc_id": 260,
+              "rank": 5,
+              "score": 0.13229,
+              "score_type": "ppr",
+              "text": "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Clarification",
+          "question": "Can you clarify what the default batch size is for the training settings?",
+          "gold": "The default batch size is set to 3 or 4.",
+          "evidence": "\\subsubsection{Training Settings} To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. Two-stage training mechanism is previously applied on bilinear model in fine-grained visual recognition BIBREF31, BIBREF32, BIBREF33. Two CNNs are deployed in the model. One is trained at first for coarse-graind features while freezing the parameter of the other. Then unfreeze the other one and train the entire model in a low learning rate for fetching fine-grained features. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. For the KN-5 model, we trained an off-the-shelf five-gram model using the popular SRILM toolkit BIBREF19 . We did not ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings. The baseline model is a deep s",
+          "rag_retrieved_context": [
+            "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output.",
+            "\\noindent The order {\\textbf{[rating name city state tags]}} is kept constant.",
+            "\\subsubsection{Training Settings}",
+            "Geometric bias mitigation uses the cosine distances between words to both measure and remove gender bias BIBREF0. This method implicitly defines bias as a geometric asymmetry between words when projected onto a subspace, such as the gender subspace constructed from a set of gender pairs such as $\\mathcal {P} = \\lbrace (he,she),(man,woman),(king,queen)...\\rbrace $. The projection of a vector $v$ onto $B$ (the subspace) is defined by $v_B = \\sum _{j=1}^{k} (v \\cdot b_j) b_j$ where a subspace $B$ is defined by k orthogonal unit vectors $B = {b_1,...,b_k}$.",
+            "Engagement and community identity. We apply our framework to understand how two important aspects of user engagement in a community—the community's propensity to retain its users (Section SECREF3 ), and its permeability to new members (Section SECREF4 )—vary according to the type of collective identity it fosters. We find that communities that are characterized by specialized, constantly-updating content have higher user retention rates, but also exhibit larger linguistic gaps that separate newcomers from established members."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "254",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the learning rate set for the Adam optimization algorithm in the deep neural network models?"
+              },
+              {
+                "role": "assistant",
+                "content": "5×10^{-5}"
+              },
+              {
+                "role": "user",
+                "content": "What is the default maximum sentence length of input and output in the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "What is the hidden state size of the model?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 215,
+              "rank": 1,
+              "score": 0.600838,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 120,
+              "rank": 2,
+              "score": 0.356018,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 150,
+              "rank": 3,
+              "score": 0.306476,
+              "score_type": "cosine",
+              "text": "Two-stage training mechanism is previously applied on bilinear model in fine-grained visual recognition BIBREF31, BIBREF32, BIBREF33. Two CNNs are deployed in the model. One is trained at first for coarse-graind features while freezing the parameter of the other. Then unfreeze the other one and train the entire model in a low learning rate for fetching fine-grained features."
+            },
+            {
+              "doc_id": 217,
+              "rank": 4,
+              "score": 0.546938,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 177,
+              "rank": 5,
+              "score": 0.364784,
+              "score_type": "cosine",
+              "text": "For the KN-5 model, we trained an off-the-shelf five-gram model using the popular SRILM toolkit BIBREF19 . We did not specify any special hyperparameters."
+            },
+            {
+              "doc_id": 216,
+              "rank": 6,
+              "score": 0.333032,
+              "score_type": "cosine",
+              "text": "We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings."
+            },
+            {
+              "doc_id": 176,
+              "rank": 7,
+              "score": 0.323993,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 34,
+              "rank": 8,
+              "score": 0.31629,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 115,
+              "rank": 9,
+              "score": 0.268843,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            },
+            {
+              "doc_id": 137,
+              "rank": 10,
+              "score": 0.276484,
+              "score_type": "cosine",
+              "text": "Since BERT BIBREF26 has already demonstrated the usefulness of shared model, we suppose extracting commonality of this problem and unifying the output format will make the model more powerful than dedicated model and meanwhile, for a specific clinical task, use the data for other tasks to supplement the training data."
+            },
+            {
+              "doc_id": 42,
+              "rank": 11,
+              "score": 0.290396,
+              "score_type": "cosine",
+              "text": "1.1em"
+            },
+            {
+              "doc_id": 226,
+              "rank": 12,
+              "score": 0.284814,
+              "score_type": "cosine",
+              "text": "\\\\"
+            },
+            {
+              "doc_id": 43,
+              "rank": 13,
+              "score": 0.283097,
+              "score_type": "cosine",
+              "text": "1.1.1em"
+            },
+            {
+              "doc_id": 223,
+              "rank": 14,
+              "score": 0.270098,
+              "score_type": "cosine",
+              "text": "\\hline"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 214,
+              "rank": 1,
+              "score": 0.480069,
+              "score_type": "ppr",
+              "text": "Training the model conditions it to associate certain sequences of words in the input sentence with others in the output."
+            },
+            {
+              "doc_id": 213,
+              "rank": 2,
+              "score": 0.259544,
+              "score_type": "ppr",
+              "text": "\\noindent The order {\\textbf{[rating name city state tags]}} is kept constant."
+            },
+            {
+              "doc_id": 215,
+              "rank": 3,
+              "score": 0.259544,
+              "score_type": "ppr",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 270,
+              "rank": 4,
+              "score": 0.000409,
+              "score_type": "ppr",
+              "text": "Geometric bias mitigation uses the cosine distances between words to both measure and remove gender bias BIBREF0. This method implicitly defines bias as a geometric asymmetry between words when projected onto a subspace, such as the gender subspace constructed from a set of gender pairs such as $\\mathcal {P} = \\lbrace (he,she),(man,woman),(king,queen)...\\rbrace $. The projection of a vector $v$ onto $B$ (the subspace) is defined by $v_B = \\sum _{j=1}^{k} (v \\cdot b_j) b_j$ where a subspace $B$ is defined by k orthogonal unit vectors $B = {b_1,...,b_k}$."
+            },
+            {
+              "doc_id": 90,
+              "rank": 5,
+              "score": 0.000328,
+              "score_type": "ppr",
+              "text": "Engagement and community identity. We apply our framework to understand how two important aspects of user engagement in a community—the community's propensity to retain its users (Section SECREF3 ), and its permeability to new members (Section SECREF4 )—vary according to the type of collective identity it fosters. We find that communities that are characterized by specialized, constantly-updating content have higher user retention rates, but also exhibit larger linguistic gaps that separate newcomers from established members."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Unanswerable",
+          "question": "What is the social media handle of the Adam optimization algorithm?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fak",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "\\subsubsection{Training Settings} The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. The QRNN models followed the exact traini",
+          "rag_retrieved_context": [
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "\\subsubsection{Training Settings}",
+            "For any clinical free-text paragraph $X$ and query $Q$, contextualized representation is to generate the encoded vector of both of them. Here we use pre-trained language model BERT-base BIBREF26 model to capture contextual information."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The default batch size is set to 3 or 4.",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the default maximum sentence length of input and output in the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "What is the hidden state size of the model?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you clarify what the default batch size is for the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.377394,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 188,
+              "rank": 2,
+              "score": 0.283704,
+              "score_type": "cosine",
+              "text": "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.282655,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 203,
+              "rank": 4,
+              "score": 0.334334,
+              "score_type": "cosine",
+              "text": "Automated crowd-turfing attacks (ACA) replace workers by a generative model. This has several benefits including better economy and scalability (human workers are more expensive and slower) and reduced detectability (agent can better control the rate at which fake reviews are generated and posted)."
+            },
+            {
+              "doc_id": 281,
+              "rank": 5,
+              "score": 0.320716,
+              "score_type": "cosine",
+              "text": "Instead, we extend our method of bias mitigation to account for this neighborhood effect. Specifically, we examine the conditional probabilities of a target word given the $k/2$ nearest neighbors from the male socially-biased words as well as given the $k/2$ female socially-biased words (in sorted order, from smallest to largest). The groups of socially-biased words are constructed as described in the neighborhood metric. If the word is unbiased according to the neighborhood metric, these probabilities should be comparable. We then use the following as our loss function:"
+            },
+            {
+              "doc_id": 36,
+              "rank": 6,
+              "score": 0.318793,
+              "score_type": "cosine",
+              "text": "To optimize the hyperparameters, we used the dev set of the ACP Corpus. For the evaluation, we used the test set of the ACP Corpus. The model output was classified as positive if $p(x) > 0$ and negative if $p(x) \\le 0$."
+            },
+            {
+              "doc_id": 204,
+              "rank": 7,
+              "score": 0.311181,
+              "score_type": "cosine",
+              "text": "We assume that the agent has access to public reviews on the review platform, by which it can train its generative model. We also assume that it is easy for the agent to create a large number of accounts on the review platform so that account-based detection or rate-limiting techniques are ineffective against fake reviews."
+            },
+            {
+              "doc_id": 264,
+              "rank": 8,
+              "score": 0.286785,
+              "score_type": "cosine",
+              "text": "We compare this method of bias mitigation with the no bias mitigation (\"Orig\"), geometric bias mitigation (\"Geo\"), the two pieces of our method alone (\"Prob\" and \"KNN\") and the composite method (\"KNN+Prob\"). We note that the composite method performs reasonably well according the the RIPA metric, and much better than traditional geometric bias mitigation according to the neighborhood metric, without significant performance loss according to the accepted benchmarks. To our knowledge this is the first bias mitigation method to perform reasonably both on both metrics."
+            },
+            {
+              "doc_id": 224,
+              "rank": 9,
+              "score": 0.368236,
+              "score_type": "cosine",
+              "text": "Example 2. Greedy NMT \\\\"
+            },
+            {
+              "doc_id": 277,
+              "rank": 10,
+              "score": 0.344001,
+              "score_type": "cosine",
+              "text": "This component of our bias mitigation framework seeks to enforce that the probability of prediction or outcome cannot depend on a protected class such as gender. We can formalize this intuitive goal through a loss function that penalizes the discrepancy between the conditional probabilities of a target word (i.e., one that should not be affected by the protected attribute) conditioned on two words describing the protected attribute (e.g., man and woman in the case of gender). That is, for every target word we seek to minimize:"
+            },
+            {
+              "doc_id": 16,
+              "rank": 11,
+              "score": 0.351155,
+              "score_type": "cosine",
+              "text": "Using AL, CA, and CO data, we optimize the parameters of the polarity function $p(x)$. We define a loss function for each of the three types of event pairs and sum up the multiple loss functions."
+            },
+            {
+              "doc_id": 208,
+              "rank": 12,
+              "score": 0.341361,
+              "score_type": "cosine",
+              "text": "NMT models often also include a beam search BIBREF14 , which generates several hypotheses and chooses the best ones amongst them. In our work, we use the greedy beam search technique. We forgo the use of additional beam searches as we found that the quality of the output was already adequate and the translation phase time consumption increases linearly for each beam used."
+            },
+            {
+              "doc_id": 283,
+              "rank": 13,
+              "score": 0.340658,
+              "score_type": "cosine",
+              "text": "We proposed a simple method of bias mitigation based on this probabilistic notions of fairness, and showed that it leads to promising results in various benchmark bias mitigation tasks. Future work should include considering a more rigorous definition and non-binary of bias and experimenting with various embedding algorithms and network architectures."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 120,
+              "rank": 1,
+              "score": 0.533111,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.35348,
+              "score_type": "ppr",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.280587,
+              "score_type": "ppr",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 215,
+              "rank": 4,
+              "score": 0.256606,
+              "score_type": "ppr",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 139,
+              "rank": 5,
+              "score": 0.25318,
+              "score_type": "ppr",
+              "text": "For any clinical free-text paragraph $X$ and query $Q$, contextualized representation is to generate the encoded vector of both of them. Here we use pre-trained language model BERT-base BIBREF26 model to capture contextual information."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Clarification",
+          "question": "Can you explain what the parameters of the Adam optimization algorithm are set to by default?",
+          "gold": "The default parameters of the Adam optimization algorithm include a learning rate of 0.001.",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Using AL, CA, and CO data, we optimize the parameters of the polarity function $p(x)$. We define a loss function for each of the three types of event pairs and sum up the multiple loss functions. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. To optimize the hyperparameters, we used the dev set of the ACP Corpus. For the evaluation, we used the test set of the ACP Corpus. The model output was classified as positive if $p(x) > 0$ and negative if $p(x) \\le 0$. \\subsubsection{Training Settings}",
+          "rag_answer": "The parameters of the Adam optimization algorithm are set to the default settings except for the learning rate, which is set to $5\\times 10^{-5}$.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Instead, we extend our method of bias mitigation to account for this neighborhood effect. Specifically, we examine the conditional probabilities of a target word given the $k/2$ nearest neighbors from the male socially-biased words as well as given the $k/2$ female socially-biased words (in sorted order, from smallest to largest). The groups of socially-biased words are constructed as described in the neighborhood metric. If the word is unbiased according to the neighborhood metric, these probabilities should be comparable. We then use the following as our loss function: To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied ",
+          "rag_retrieved_context": [
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "$y_{i1}$ and $y_{i2}$ are the $i$-th pair of the CA pairs. $N_{\\rm CA}$ is the total number of CA pairs. $\\lambda _{\\rm CA}$ and $\\mu $ are hyperparameters. The first term makes the scores of the two events closer while the second term prevents the scores from shrinking to zero.",
+            "Natural language understanding research on poetry has investigated stylistic variation BIBREF15, BIBREF16, BIBREF17, with a focus on broadly accepted formal features such as meter BIBREF18, BIBREF19, BIBREF20 and rhyme BIBREF21, BIBREF22, as well as enjambement BIBREF23, BIBREF24 and metaphor BIBREF25, BIBREF26. Recent work has also explored the relationship of poetry and prose, mainly on a syntactic level BIBREF27, BIBREF28. Furthermore, poetry also lends itself well to semantic (change) analysis BIBREF29, BIBREF30, as linguistic invention BIBREF31, BIBREF32 and succinctness BIBREF33 are at the core of poetic production."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the hidden state size of the model?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you clarify what the default batch size is for the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "What is the social media handle of the Adam optimization algorithm?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.578136,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 16,
+              "rank": 2,
+              "score": 0.312109,
+              "score_type": "cosine",
+              "text": "Using AL, CA, and CO data, we optimize the parameters of the polarity function $p(x)$. We define a loss function for each of the three types of event pairs and sum up the multiple loss functions."
+            },
+            {
+              "doc_id": 120,
+              "rank": 3,
+              "score": 0.321714,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 36,
+              "rank": 4,
+              "score": 0.384205,
+              "score_type": "cosine",
+              "text": "To optimize the hyperparameters, we used the dev set of the ACP Corpus. For the evaluation, we used the test set of the ACP Corpus. The model output was classified as positive if $p(x) > 0$ and negative if $p(x) \\le 0$."
+            },
+            {
+              "doc_id": 215,
+              "rank": 5,
+              "score": 0.381993,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 240,
+              "rank": 6,
+              "score": 0.332913,
+              "score_type": "cosine",
+              "text": "where $w_{i\\rightarrow j}^{l,l+1}$ is the network's weight parameter set during training, $\\textbf {b}^{l+1}_j$ is the bias for neuron $j$ of layer $l+1$ , $\\textbf {z}^{l}_i$ is the activation of neuron $i$ on layer $l$ , $\\epsilon $ is the stabilizing term set to 0.00001 and $D_l$ is the dimension of the $l$ -th layer."
+            },
+            {
+              "doc_id": 39,
+              "rank": 7,
+              "score": 0.329605,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 18,
+              "rank": 8,
+              "score": 0.327946,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            },
+            {
+              "doc_id": 224,
+              "rank": 9,
+              "score": 0.368236,
+              "score_type": "cosine",
+              "text": "Example 2. Greedy NMT \\\\"
+            },
+            {
+              "doc_id": 277,
+              "rank": 10,
+              "score": 0.344001,
+              "score_type": "cosine",
+              "text": "This component of our bias mitigation framework seeks to enforce that the probability of prediction or outcome cannot depend on a protected class such as gender. We can formalize this intuitive goal through a loss function that penalizes the discrepancy between the conditional probabilities of a target word (i.e., one that should not be affected by the protected attribute) conditioned on two words describing the protected attribute (e.g., man and woman in the case of gender). That is, for every target word we seek to minimize:"
+            },
+            {
+              "doc_id": 281,
+              "rank": 11,
+              "score": 0.364468,
+              "score_type": "cosine",
+              "text": "Instead, we extend our method of bias mitigation to account for this neighborhood effect. Specifically, we examine the conditional probabilities of a target word given the $k/2$ nearest neighbors from the male socially-biased words as well as given the $k/2$ female socially-biased words (in sorted order, from smallest to largest). The groups of socially-biased words are constructed as described in the neighborhood metric. If the word is unbiased according to the neighborhood metric, these probabilities should be comparable. We then use the following as our loss function:"
+            },
+            {
+              "doc_id": 208,
+              "rank": 12,
+              "score": 0.341361,
+              "score_type": "cosine",
+              "text": "NMT models often also include a beam search BIBREF14 , which generates several hypotheses and chooses the best ones amongst them. In our work, we use the greedy beam search technique. We forgo the use of additional beam searches as we found that the quality of the output was already adequate and the translation phase time consumption increases linearly for each beam used."
+            },
+            {
+              "doc_id": 283,
+              "rank": 13,
+              "score": 0.340658,
+              "score_type": "cosine",
+              "text": "We proposed a simple method of bias mitigation based on this probabilistic notions of fairness, and showed that it leads to promising results in various benchmark bias mitigation tasks. Future work should include considering a more rigorous definition and non-binary of bias and experimenting with various embedding algorithms and network architectures."
+            },
+            {
+              "doc_id": 264,
+              "rank": 14,
+              "score": 0.335703,
+              "score_type": "cosine",
+              "text": "We compare this method of bias mitigation with the no bias mitigation (\"Orig\"), geometric bias mitigation (\"Geo\"), the two pieces of our method alone (\"Prob\" and \"KNN\") and the composite method (\"KNN+Prob\"). We note that the composite method performs reasonably well according the the RIPA metric, and much better than traditional geometric bias mitigation according to the neighborhood metric, without significant performance loss according to the accepted benchmarks. To our knowledge this is the first bias mitigation method to perform reasonably both on both metrics."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 120,
+              "rank": 1,
+              "score": 0.424161,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.281218,
+              "score_type": "ppr",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.223309,
+              "score_type": "ppr",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 20,
+              "rank": 4,
+              "score": 0.204144,
+              "score_type": "ppr",
+              "text": "$y_{i1}$ and $y_{i2}$ are the $i$-th pair of the CA pairs. $N_{\\rm CA}$ is the total number of CA pairs. $\\lambda _{\\rm CA}$ and $\\mu $ are hyperparameters. The first term makes the scores of the two events closer while the second term prevents the scores from shrinking to zero."
+            },
+            {
+              "doc_id": 60,
+              "rank": 5,
+              "score": 0.204144,
+              "score_type": "ppr",
+              "text": "Natural language understanding research on poetry has investigated stylistic variation BIBREF15, BIBREF16, BIBREF17, with a focus on broadly accepted formal features such as meter BIBREF18, BIBREF19, BIBREF20 and rhyme BIBREF21, BIBREF22, as well as enjambement BIBREF23, BIBREF24 and metaphor BIBREF25, BIBREF26. Recent work has also explored the relationship of poetry and prose, mainly on a syntactic level BIBREF27, BIBREF28. Furthermore, poetry also lends itself well to semantic (change) analysis BIBREF29, BIBREF30, as linguistic invention BIBREF31, BIBREF32 and succinctness BIBREF33 are at the core of poetic production."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Multi-Hop",
+          "question": "What does Google provide that is related to BERT-base?",
+          "gold": "Google provides the BERT-Base model, which is a state-of-the-art performance model for question-answering.",
+          "evidence": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23. The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254. In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the bes",
+          "rag_answer": "Google provides parameters pre-trained by them for the BERT-base model.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. We discuss the attack model, our generative machine learning method and controlling the generative process in this section. To optimize the hyperparameters, we used the dev set of the ACP Corpus. For the evaluation, we used the test set of the ACP Corpus. The model output was classified as positive if $p(x) > 0$ and negative if $p(x) \\le 0$. where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the to",
+          "rag_retrieved_context": [
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "For any clinical free-text paragraph $X$ and query $Q$, contextualized representation is to generate the encoded vector of both of them. Here we use pre-trained language model BERT-base BIBREF26 model to capture contextual information.",
+            "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The default parameters of the Adam optimization algorithm include a learning rate of 0.001.",
+            "previous_rag_answer": "The parameters of the Adam optimization algorithm are set to the default settings except for the learning rate, which is set to $5\\times 10^{-5}$.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "Can you clarify what the default batch size is for the training settings?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "What is the social media handle of the Adam optimization algorithm?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you explain what the parameters of the Adam optimization algorithm are set to by default?"
+              },
+              {
+                "role": "assistant",
+                "content": "The parameters of the Adam optimization algorithm are set to the default settings except for the learning rate, which is set to $5\\times 10^{-5}$."
+              }
+            ]
+          },
+          "expected_components": [
+            "BERT-base->Google (pre_trained_by)",
+            "Google->Chinese general corpus (provides)"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 155,
+              "rank": 1,
+              "score": 0.587534,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 228,
+              "rank": 2,
+              "score": 0.405915,
+              "score_type": "cosine",
+              "text": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+            },
+            {
+              "doc_id": 166,
+              "rank": 3,
+              "score": 0.33644,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 134,
+              "rank": 4,
+              "score": 0.503054,
+              "score_type": "cosine",
+              "text": "The main motivation of introducing pre-trained language model is to solve the shortage of labeled data and polysemy problem. Although polysemy problem is not a common phenomenon in biomedical domain, shortage of labeled data is always a non-trivial problem. Lee et al. BIBREF28 applied BERT on large-scale biomedical unannotated data and achieved improvement on biomedical named entity recognition, relation extraction and question answering. Kim et al. BIBREF29 adapted BioBERT into multi-type named entity recognition and discovered new entities. Both of them demonstrates the usefulness of introducing pre-trained language model into biomedical domain."
+            },
+            {
+              "doc_id": 120,
+              "rank": 5,
+              "score": 0.499631,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 151,
+              "rank": 6,
+              "score": 0.497052,
+              "score_type": "cosine",
+              "text": "Inspired by this and due to the large amount of parameters in BERT model, to speed up the training process, we fine tune the BERT model with new prediction layer first to achieve a better contextualized representation performance. Then we deploy the proposed model and load the fine tuned BERT weights, attach named entity information layers and retrain the model."
+            },
+            {
+              "doc_id": 141,
+              "rank": 7,
+              "score": 0.489911,
+              "score_type": "cosine",
+              "text": "Since BERT is trained on general corpus, its performance on biomedical domain can be improved by introducing biomedical domain-specific features. In this paper, we introduce clinical named entity information into the model."
+            },
+            {
+              "doc_id": 133,
+              "rank": 8,
+              "score": 0.480673,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 37,
+              "rank": 9,
+              "score": 0.4708,
+              "score_type": "cosine",
+              "text": "As for ${\\rm Encoder}$, we compared two types of neural networks: BiGRU and BERT. GRU BIBREF16 is a recurrent neural network sequence encoder. BiGRU reads an input sequence forward and backward and the output is the concatenation of the final forward and backward hidden states."
+            },
+            {
+              "doc_id": 137,
+              "rank": 10,
+              "score": 0.464386,
+              "score_type": "cosine",
+              "text": "Since BERT BIBREF26 has already demonstrated the usefulness of shared model, we suppose extracting commonality of this problem and unifying the output format will make the model more powerful than dedicated model and meanwhile, for a specific clinical task, use the data for other tasks to supplement the training data."
+            },
+            {
+              "doc_id": 139,
+              "rank": 11,
+              "score": 0.460124,
+              "score_type": "cosine",
+              "text": "For any clinical free-text paragraph $X$ and query $Q$, contextualized representation is to generate the encoded vector of both of them. Here we use pre-trained language model BERT-base BIBREF26 model to capture contextual information."
+            },
+            {
+              "doc_id": 156,
+              "rank": 12,
+              "score": 0.454317,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 162,
+              "rank": 13,
+              "score": 0.423435,
+              "score_type": "cosine",
+              "text": "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 ."
+            },
+            {
+              "doc_id": 168,
+              "rank": 14,
+              "score": 0.420651,
+              "score_type": "cosine",
+              "text": "Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing."
+            },
+            {
+              "doc_id": 175,
+              "rank": 15,
+              "score": 0.418257,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 140,
+              "rank": 16,
+              "score": 0.413434,
+              "score_type": "cosine",
+              "text": "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+            },
+            {
+              "doc_id": 153,
+              "rank": 17,
+              "score": 0.493214,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 4,
+              "rank": 18,
+              "score": 0.280972,
+              "score_type": "cosine",
+              "text": "In this paper, we propose a simple and effective method for learning affective events that only requires a very small seed lexicon and a large raw corpus. As illustrated in Figure FIGREF1, our key idea is that we can exploit discourse relations BIBREF4 to efficiently propagate polarity from seed predicates that directly report one's emotions (e.g., “to be glad” is positive). Suppose that events $x_1$ are $x_2$ are in the discourse relation of Cause (i.e., $x_1$ causes $x_2$). If the seed lexicon suggests $x_2$ is positive, $x_1$ is also likely to be positive because it triggers the positive emotion. The fact that $x_2$ is known to be negative indicates the negative polarity of $x_1$. Similarly, if $x_1$ and $x_2$ are in the discourse relation of Concession (i.e., $x_2$ in spite of $x_1$), the reverse of $x_2$'s polarity can be propagated to $x_1$. Even if $x_2$'s polarity is not known in advance, we can exploit the tendency of $x_1$ and $x_2$ to be of the same polarity (for Cause) or of the reverse polarity (for Concession) although the heuristic is not exempt from counterexamples. We transform this idea into objective functions and train neural network models that predict the polarity of a given event."
+            },
+            {
+              "doc_id": 33,
+              "rank": 19,
+              "score": 0.430053,
+              "score_type": "cosine",
+              "text": "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19."
+            },
+            {
+              "doc_id": 28,
+              "rank": 20,
+              "score": 0.469044,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 70,
+              "rank": 21,
+              "score": 0.426272,
+              "score_type": "cosine",
+              "text": "The English corpus contains 64 poems of popular English writers. It was partly collected from Project Gutenberg with the GutenTag tool, and, in addition, includes a number of hand selected poems from the modern period and represents a cross section of popular English poets. We took care to include a number of female authors, who would have been underrepresented in a uniform sample. Time stamps in the corpus are organized by the birth year of the author, as assigned in Project Gutenberg."
+            },
+            {
+              "doc_id": 27,
+              "rank": 22,
+              "score": 0.413616,
+              "score_type": "cosine",
+              "text": "We constructed our seed lexicon consisting of 15 positive words and 15 negative words, as shown in Section SECREF27. From the corpus of about 100 million sentences, we obtained 1.4 millions event pairs for AL, 41 millions for CA, and 6 millions for CO. We randomly selected subsets of AL event pairs such that positive and negative latter events were equal in size. We also sampled event pairs for each of CA and CO such that it was five times larger than AL. The results are shown in Table TABREF16."
+            },
+            {
+              "doc_id": 64,
+              "rank": 23,
+              "score": 0.405124,
+              "score_type": "cosine",
+              "text": "Emotion corpora have been created for different tasks and with different annotation strategies, with different units of analysis and different foci of emotion perspective (reader, writer, text). Examples include the ISEAR dataset BIBREF34 (document-level); emotion annotation in children stories BIBREF10 and news headlines BIBREF35 (sentence-level); and fine-grained emotion annotation in literature by Kim2018 (phrase- and word-level). We refer the interested reader to an overview paper on existing corpora BIBREF36."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 120,
+              "rank": 1,
+              "score": 0.744253,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.429559,
+              "score_type": "ppr",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.341048,
+              "score_type": "ppr",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 139,
+              "rank": 4,
+              "score": 0.307724,
+              "score_type": "ppr",
+              "text": "For any clinical free-text paragraph $X$ and query $Q$, contextualized representation is to generate the encoded vector of both of them. Here we use pre-trained language model BERT-base BIBREF26 model to capture contextual information."
+            },
+            {
+              "doc_id": 140,
+              "rank": 5,
+              "score": 0.307724,
+              "score_type": "ppr",
+              "text": "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Multi-Hop",
+          "question": "What is involved in the greedy search that uses the attention mechanism?",
+          "gold": "The greedy search in the context of the attention mechanism involves using a deep sequence-to-sequence encoder/decoder model where the decoder employs an attention mechanism to compute the attention distribution at each decoding step.",
+          "evidence": "It can be seen as evidence that using the attention distribution as an “explanation\" of the prediction can be misleading. It is not the only information received by the decoder and the importance it “allocates\" to this attention state might be very low. What seems to happen in this application is that most of the information used is transmitted from the encoder to the decoder and the attention mechanism at each decoding step just changes marginally how it is used. Quantifying the difference between attention distribution and saliency map across multiple tasks is a possible future work. In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism. Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attri",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254. Inspired by this and due to the large amount of parameters in BERT model, to speed up the training process, we fine tune the BERT model with new prediction layer first to achieve a better contextualized representation performance. Then we deploy the proposed model and load the fine tuned BERT weights, attach named entity information layers and retrain the model. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We ",
+          "rag_retrieved_context": [
+            "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254.",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "It can be seen as evidence that using the attention distribution as an “explanation\" of the prediction can be misleading. It is not the only information received by the decoder and the importance it “allocates\" to this attention state might be very low. What seems to happen in this application is that most of the information used is transmitted from the encoder to the decoder and the attention mechanism at each decoding step just changes marginally how it is used. Quantifying the difference between attention distribution and saliency map across multiple tasks is a possible future work.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "Google provides the BERT-Base model, which is a state-of-the-art performance model for question-answering.",
+            "previous_rag_answer": "Google provides parameters pre-trained by them for the BERT-base model.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What is the social media handle of the Adam optimization algorithm?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you explain what the parameters of the Adam optimization algorithm are set to by default?"
+              },
+              {
+                "role": "assistant",
+                "content": "The parameters of the Adam optimization algorithm are set to the default settings except for the learning rate, which is set to $5\\times 10^{-5}$."
+              },
+              {
+                "role": "user",
+                "content": "What does Google provide that is related to BERT-base?"
+              },
+              {
+                "role": "assistant",
+                "content": "Google provides parameters pre-trained by them for the BERT-base model."
+              }
+            ]
+          },
+          "expected_components": [
+            "attention mechanism->greedy search (applied_in)",
+            "greedy search->words embeddings (involves)"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 248,
+              "rank": 1,
+              "score": 0.479158,
+              "score_type": "cosine",
+              "text": "It can be seen as evidence that using the attention distribution as an “explanation\" of the prediction can be misleading. It is not the only information received by the decoder and the importance it “allocates\" to this attention state might be very low. What seems to happen in this application is that most of the information used is transmitted from the encoder to the decoder and the attention mechanism at each decoding step just changes marginally how it is used. Quantifying the difference between attention distribution and saliency map across multiple tasks is a possible future work."
+            },
+            {
+              "doc_id": 258,
+              "rank": 2,
+              "score": 0.290626,
+              "score_type": "cosine",
+              "text": "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+            },
+            {
+              "doc_id": 230,
+              "rank": 3,
+              "score": 0.354213,
+              "score_type": "cosine",
+              "text": "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result."
+            },
+            {
+              "doc_id": 224,
+              "rank": 4,
+              "score": 0.464133,
+              "score_type": "cosine",
+              "text": "Example 2. Greedy NMT \\\\"
+            },
+            {
+              "doc_id": 228,
+              "rank": 5,
+              "score": 0.4458,
+              "score_type": "cosine",
+              "text": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+            },
+            {
+              "doc_id": 145,
+              "rank": 6,
+              "score": 0.416927,
+              "score_type": "cosine",
+              "text": "$Attention$ denotes the traditional attention and it can be defined as follows."
+            },
+            {
+              "doc_id": 243,
+              "rank": 7,
+              "score": 0.416343,
+              "score_type": "cosine",
+              "text": "We use the same method to transmit relevance through the attention mechanism back to the encoder because Bahdanau's attention BIBREF9 uses element-wise multiplications as well. We depict in Figure 2 the transmission end-to-end from the output layer to the input through the decoder, attention mechanism and then the bidirectional encoder. We then sum up the relevance on the word embedding to get the token's relevance as Arras et al. Arras2017."
+            },
+            {
+              "doc_id": 208,
+              "rank": 8,
+              "score": 0.403248,
+              "score_type": "cosine",
+              "text": "NMT models often also include a beam search BIBREF14 , which generates several hypotheses and chooses the best ones amongst them. In our work, we use the greedy beam search technique. We forgo the use of additional beam searches as we found that the quality of the output was already adequate and the translation phase time consumption increases linearly for each beam used."
+            },
+            {
+              "doc_id": 229,
+              "rank": 9,
+              "score": 0.397195,
+              "score_type": "cosine",
+              "text": "Saliency map generation techniques are at the forefront of explainable AI literature for a broad range of machine learning applications. Our goal is to question the limits of these approaches on more complex tasks. In this paper we apply Layer-Wise Relevance Propagation (LRP) to a sequence-to-sequence attention model trained on a text summarization dataset. We obtain unexpected saliency maps and discuss the rightfulness of these\"explanations\". We argue that we need a quantitative way of testing the counterfactual case to judge the truthfulness of the saliency maps. We suggest a protocol to check the validity of the importance attributed to the input and show that the saliency maps obtained sometimes capture the real use of the input features by the network, and sometimes do not. We use this example to discuss how careful we need to be when accepting them as explanation."
+            },
+            {
+              "doc_id": 247,
+              "rank": 10,
+              "score": 0.381799,
+              "score_type": "cosine",
+              "text": "The first observation that is made is that for one text, the 50 saliency maps are almost identical. Indeed each mapping highlights mainly the same input words with only slight variations of importance. We can see in Figure 3 an example of two nearly identical attributions for two distant and unrelated words of the summary. The saliency map generated using LRP is also uncorrelated with the attention distribution that participated in the generation of the output word. The attention distribution changes drastically between the words in the generated summary while not impacting significantly the attribution over the input text. We deleted in an experiment the relevance propagated through the attention mechanism to the encoder and didn't observe much changes in the saliency map."
+            },
+            {
+              "doc_id": 261,
+              "rank": 11,
+              "score": 0.376623,
+              "score_type": "cosine",
+              "text": "Future work would look into the saliency maps generated by applying LRP to pointer-generator networks and compare to our current results as well as mathematically justifying the average that we did when validating our saliency maps. Some additional work is also needed on the validation of the saliency maps with counterfactual tests. The exploitation and evaluation of saliency map are a very important step and should not be overlooked."
+            },
+            {
+              "doc_id": 259,
+              "rank": 12,
+              "score": 0.374059,
+              "score_type": "cosine",
+              "text": "We observed a peculiar behaviour of the saliency maps for the words in the output summary: they are almost all identical and seem uncorrelated with the attention distribution. We then proceeded to validate our attributions by averaging the absolute value of the relevance across the saliency maps. We obtain a ranking of the word from the most important to the least important and proceeded to delete one or another."
+            },
+            {
+              "doc_id": 233,
+              "rank": 13,
+              "score": 0.368019,
+              "score_type": "cosine",
+              "text": "We obtain one saliency map for each word in the generated summaries, supposed to represent the use of the input features for each element of the output sequence. We observe that all the saliency maps for a text are nearly identical and decorrelated with the attention distribution. We propose a way to check their validity by creating what could be seen as a counterfactual experiment from a synthesis of the saliency maps, using the same technique as in Arras et al. Arras2017. We show that in some but not all cases they help identify the important input features and that we need to rigorously check importance attributions before trusting them, regardless of whether or not the mapping “makes sense\" to us. We finally argue that in the process of identifying the important input features, verifying the saliency maps is as important as the generation step, if not more."
+            },
+            {
+              "doc_id": 256,
+              "rank": 14,
+              "score": 0.349285,
+              "score_type": "cosine",
+              "text": "One interesting point is that one saliency map didn't look “better\" than the other, meaning that there is no apparent way of determining their truthfulness in regard of the computation without doing a quantitative validation. This brings us to believe that even in simpler tasks, the saliency maps might make sense to us (for example highlighting the animal in an image classification task), without actually representing what the network really attended too, or in what way."
+            },
+            {
+              "doc_id": 260,
+              "rank": 15,
+              "score": 0.33766,
+              "score_type": "cosine",
+              "text": "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+            },
+            {
+              "doc_id": 231,
+              "rank": 16,
+              "score": 0.331301,
+              "score_type": "cosine",
+              "text": "There exist multiple ways to generate saliency maps over the input for non-linear classifiers BIBREF2 , BIBREF3 , BIBREF4 . We refer the reader to BIBREF5 for a survey of explainable AI in general. We use in this paper Layer-Wise Relevance Propagation (LRP) BIBREF2 which aims at redistributing the value of the classifying function on the input to obtain the importance attribution. It was first created to “explain\" the classification of neural networks on image recognition tasks. It was later successfully applied to text using convolutional neural networks (CNN) BIBREF6 and then Long-Short Term Memory (LSTM) networks for sentiment analysis BIBREF7 ."
+            },
+            {
+              "doc_id": 266,
+              "rank": 17,
+              "score": 0.605718,
+              "score_type": "cosine",
+              "text": "Word embeddings, or vector representations of words, are an important component of Natural Language Processing (NLP) models and necessary for many downstream tasks. However, word embeddings, including embeddings commonly deployed for public use, have been shown to exhibit unwanted societal stereotypes and biases, raising concerns about disparate impact on axes of gender, race, ethnicity, and religion BIBREF0, BIBREF1. The impact of this bias has manifested in a range of downstream tasks, ranging from autocomplete suggestions BIBREF2 to advertisement delivery BIBREF3, increasing the likelihood of amplifying harmful biases through the use of these models."
+            },
+            {
+              "doc_id": 275,
+              "rank": 18,
+              "score": 0.422235,
+              "score_type": "cosine",
+              "text": "Our objective here is to extend and complement the geometric notions of word embedding bias described in the previous section with an alternative, probabilistic, approach. Intuitively, we seek a notion of equality akin to that of demographic parity in the fairness literature, which requires that a decision or outcome be independent of a protected attribute such as gender. BIBREF7. Similarly, when considering a probabilistic definition of unbiased in word embeddings, we can consider the conditional probabilities of word pairs, ensuring for example that $p(doctor|man) \\approx p(doctor|woman)$, and can extend this probabilistic framework to include the neighborhood of a target word, addressing the potential pitfalls of geometric bias mitigation."
+            },
+            {
+              "doc_id": 269,
+              "rank": 19,
+              "score": 0.354253,
+              "score_type": "cosine",
+              "text": "We present experiments on various bias mitigation benchmarks and show that our framework is comparable to state-of-the-art alternatives according to measures of geometric bias mitigation and that it performs far better according to measures of neighborhood bias. For fair comparison, we focus on mitigating a binary gender bias in pre-trained word embeddings using SGNS (skip-gram with negative-sampling), though we note that this framework and methods could be extended to other types of bias and word embedding algorithms."
+            },
+            {
+              "doc_id": 262,
+              "rank": 20,
+              "score": 0.485787,
+              "score_type": "cosine",
+              "text": "We evaluate our framework on fastText embeddings trained on Wikipedia (2017), UMBC webbase corpus and statmt.org news dataset (16B tokens) BIBREF11. For simplicity, only the first 22000 words are used in all embeddings, though preliminary results indicate the findings extend to the full corpus. For our novel methods of mitigating bias, a shallow neural network is used to adjust the embedding. The single layer of the model is an embedding layer with weights initialized to those of the original embedding. For the composite method, these weights are initialized to those of the embedding after probabilistic bias mitigation. A batch of word indices is fed into the model, which are then embedded and for which a loss value is calculated, allowing back-propagation to adjust the embeddings. For each of the models, a fixed number of iterations is used to prevent overfitting, which can eventually hurt performance on the embedding benchmarks (See Figure FIGREF12). We evaluated the embedding after 1000 iterations, and stopped training if performance on a benchmark decreased significantly."
+            },
+            {
+              "doc_id": 140,
+              "rank": 21,
+              "score": 0.460225,
+              "score_type": "cosine",
+              "text": "The text input is constructed as `[CLS] $Q$ [SEP] $X$ [SEP]'. For Chinese sentence, each word in this input will be mapped to a pre-trained embedding $e_i$. To tell the model $Q$ and $X$ is two different sentence, a sentence type input is generated which is a binary label sequence to denote what sentence each character in the input belongs to. Positional encoding and mask matrix is also constructed automatically to bring in absolute position information and eliminate the impact of zero padding respectively. Then a hidden vector $V_s$ which contains both query and text information is generated through BERT-base model."
+            },
+            {
+              "doc_id": 271,
+              "rank": 22,
+              "score": 0.449426,
+              "score_type": "cosine",
+              "text": "The WEAT statistic BIBREF1 demonstrates the presence of biases in word embeddings with an effect size defined as the mean test statistic across the two word sets:"
+            },
+            {
+              "doc_id": 276,
+              "rank": 23,
+              "score": 0.439998,
+              "score_type": "cosine",
+              "text": "Conveniently, most word embedding frameworks allow for immediate computation of the conditional probabilities $P(w|c)$. Here, we focus our attention on the Skip-Gram method with Negative Sampling (SGNS) of BIBREF8, although our framework can be equivalently instantiated for most other popular embedding methods, owing to their core similarities BIBREF6, BIBREF9. Leveraging this probabilistic nature, we construct a bias mitigation method in two steps, and examine each step as an independent method as well as the resulting composite method."
+            },
+            {
+              "doc_id": 279,
+              "rank": 24,
+              "score": 0.438381,
+              "score_type": "cosine",
+              "text": "At this point, the specific form of the objective will depend on the type of word embeddings used. For our expample of SGNS, recall that this algorithm models the conditional probability of a target word given a context word as a function of the inner product of their representations. Though an exact method for calculating the conditional probability includes summing over conditional probability of all the words in the vocabulary, we can use the estimation of log conditional probability proposed by BIBREF8, i.e., $ \\log p(w_O|w_I) \\approx \\log \\sigma ({v^{\\prime }_{wo}}^T v_{wI}) + \\sum _{i=1}^{k} [\\log {\\sigma ({{-v^{\\prime }_{wi}}^T v_{wI}})}] $."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 228,
+              "rank": 1,
+              "score": 0.358207,
+              "score_type": "ppr",
+              "text": "The baseline model is a deep sequence-to-sequence encoder/decoder model with attention. The encoder is a bidirectional Long-Short Term Memory(LSTM) cell BIBREF14 and the decoder a single LSTM cell with attention mechanism. The attention mechanism is computed as in BIBREF9 and we use a greedy search for decoding. We train end-to-end including the words embeddings. The embedding size used is of 128 and the hidden state size of the LSTM cells is of 254."
+            },
+            {
+              "doc_id": 120,
+              "rank": 2,
+              "score": 0.307198,
+              "score_type": "ppr",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.159711,
+              "score_type": "ppr",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 248,
+              "rank": 4,
+              "score": 0.140391,
+              "score_type": "ppr",
+              "text": "It can be seen as evidence that using the attention distribution as an “explanation\" of the prediction can be misleading. It is not the only information received by the decoder and the importance it “allocates\" to this attention state might be very low. What seems to happen in this application is that most of the information used is transmitted from the encoder to the decoder and the attention mechanism at each decoding step just changes marginally how it is used. Quantifying the difference between attention distribution and saliency map across multiple tasks is a possible future work."
+            },
+            {
+              "doc_id": 155,
+              "rank": 5,
+              "score": 0.126809,
+              "score_type": "ppr",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            }
+          ],
+          "generation_source": "rag_history"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "method": "single_turn_qa",
+  "rag": "graph",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 1,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T13:16:39",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-008",
+  "conversations": [
+    {
+      "conversation_id": "conv-008",
+      "seed_question": "How many question-answer pairs are included in the dataset annotated based on Chinese pathology reports?",
+      "type_sequence": [
+        "Seed"
+      ],
+      "outcome_sequence": [
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "How many question-answer pairs are included in the dataset annotated based on Chinese pathology reports?",
+          "gold": "2,714 question-answer pairs",
+          "evidence": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20. We constructed our seed lexicon consisting of 15 positive words and 15 negative words, as shown in Section SECREF27. From the corpus of about 100 million sentences, we obtained 1.4 millions event pairs for AL, 41 millions for CA, and 6 millions for CO. We randomly selected subsets of AL event pairs such that positive and negative latter events were equal in size. We also sampled event pairs for each of CA and CO such that it was five times larger than AL. The results are shown in Table TABREF16. In this section, we present an effective model for the question answering based clinical text structuring (QA-CTS). As shown in Fig. FIGREF8, paragraph text $X$ is first passed to a clinical named entity recognition (CNER) model BIBREF12 to capture named entity information and obtain one-hot CNER output tagging sequence for query text $I_{nq",
+          "rag_answer": "2714",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)",
+          "rag_retrieved_context": [
+            "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20.",
+            "In this section, we present an effective model for the question answering based clinical text structuring (QA-CTS). As shown in Fig. FIGREF8, paragraph text $X$ is first passed to a clinical named entity recognition (CNER) model BIBREF12 to capture named entity information and obtain one-hot CNER output tagging sequence for query text $I_{nq}$ and paragraph text $I_{nt}$ with BIEOS (Begin, Inside, End, Outside, Single) tag scheme. $I_{nq}$ and $I_{nt}$ are then integrated together into $I_n$. Meanwhile, the paragraph text $X$ and query text $Q$ are organized and passed to contextualized representation model which is pre-trained language model BERT BIBREF26 here to obtain the contextualized representation vector $V_s$ of both text and query. Afterwards, $V_s$ and $I_n$ are integrated together and fed into a feed forward network to calculate the start and end index of answer-related text. Here we define this calculation problem as a classification for each word to be the start or end word.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.",
+            "The CNER task aims to identify and classify important clinical terms such as diseases, symptoms, treatments, exams, and body parts from Chinese EHRs. It can be regarded as a sequence labeling task. A CNER model typically outputs a sequence of tags. Each character of the original sentence will be tagged a label following a tag scheme. In this paper we recognize the entities by the model of our previous work BIBREF12 but trained on another corpus which has 44 entity types including operations, numbers, unit words, examinations, symptoms, negative words, etc. An illustrative example of named entity information sequence is demonstrated in Table TABREF2. In Table TABREF2, UTF8gkai“远端胃切除\" is tagged as an operation, `11.5' is a number word and `cm' is an unit word. The named entity tag sequence is organized in one-hot type. We denote the sequence for clinical sentence and query term as $I_{nt}$ and $I_{nq}$, respectively.",
+            "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {},
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 153,
+              "rank": 1,
+              "score": 0.789231,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 27,
+              "rank": 2,
+              "score": 0.39322,
+              "score_type": "cosine",
+              "text": "We constructed our seed lexicon consisting of 15 positive words and 15 negative words, as shown in Section SECREF27. From the corpus of about 100 million sentences, we obtained 1.4 millions event pairs for AL, 41 millions for CA, and 6 millions for CO. We randomly selected subsets of AL event pairs such that positive and negative latter events were equal in size. We also sampled event pairs for each of CA and CO such that it was five times larger than AL. The results are shown in Table TABREF16."
+            },
+            {
+              "doc_id": 138,
+              "rank": 3,
+              "score": 0.390264,
+              "score_type": "cosine",
+              "text": "In this section, we present an effective model for the question answering based clinical text structuring (QA-CTS). As shown in Fig. FIGREF8, paragraph text $X$ is first passed to a clinical named entity recognition (CNER) model BIBREF12 to capture named entity information and obtain one-hot CNER output tagging sequence for query text $I_{nq}$ and paragraph text $I_{nt}$ with BIEOS (Begin, Inside, End, Outside, Single) tag scheme. $I_{nq}$ and $I_{nt}$ are then integrated together into $I_n$. Meanwhile, the paragraph text $X$ and query text $Q$ are organized and passed to contextualized representation model which is pre-trained language model BERT BIBREF26 here to obtain the contextualized representation vector $V_s$ of both text and query. Afterwards, $V_s$ and $I_n$ are integrated together and fed into a feed forward network to calculate the start and end index of answer-related text. Here we define this calculation problem as a classification for each word to be the start or end word."
+            },
+            {
+              "doc_id": 121,
+              "rank": 4,
+              "score": 0.484524,
+              "score_type": "cosine",
+              "text": "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+            },
+            {
+              "doc_id": 142,
+              "rank": 5,
+              "score": 0.42449,
+              "score_type": "cosine",
+              "text": "The CNER task aims to identify and classify important clinical terms such as diseases, symptoms, treatments, exams, and body parts from Chinese EHRs. It can be regarded as a sequence labeling task. A CNER model typically outputs a sequence of tags. Each character of the original sentence will be tagged a label following a tag scheme. In this paper we recognize the entities by the model of our previous work BIBREF12 but trained on another corpus which has 44 entity types including operations, numbers, unit words, examinations, symptoms, negative words, etc. An illustrative example of named entity information sequence is demonstrated in Table TABREF2. In Table TABREF2, UTF8gkai“远端胃切除\" is tagged as an operation, `11.5' is a number word and `cm' is an unit word. The named entity tag sequence is organized in one-hot type. We denote the sequence for clinical sentence and query term as $I_{nt}$ and $I_{nq}$, respectively."
+            },
+            {
+              "doc_id": 155,
+              "rank": 6,
+              "score": 0.402804,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 136,
+              "rank": 7,
+              "score": 0.399379,
+              "score_type": "cosine",
+              "text": "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+            },
+            {
+              "doc_id": 125,
+              "rank": 8,
+              "score": 0.39741,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 153,
+              "rank": 1,
+              "score": 0.789231,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 138,
+              "rank": 2,
+              "score": 0.390264,
+              "score_type": "cosine",
+              "text": "In this section, we present an effective model for the question answering based clinical text structuring (QA-CTS). As shown in Fig. FIGREF8, paragraph text $X$ is first passed to a clinical named entity recognition (CNER) model BIBREF12 to capture named entity information and obtain one-hot CNER output tagging sequence for query text $I_{nq}$ and paragraph text $I_{nt}$ with BIEOS (Begin, Inside, End, Outside, Single) tag scheme. $I_{nq}$ and $I_{nt}$ are then integrated together into $I_n$. Meanwhile, the paragraph text $X$ and query text $Q$ are organized and passed to contextualized representation model which is pre-trained language model BERT BIBREF26 here to obtain the contextualized representation vector $V_s$ of both text and query. Afterwards, $V_s$ and $I_n$ are integrated together and fed into a feed forward network to calculate the start and end index of answer-related text. Here we define this calculation problem as a classification for each word to be the start or end word."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.402804,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 121,
+              "rank": 4,
+              "score": 0.484524,
+              "score_type": "cosine",
+              "text": "Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks."
+            },
+            {
+              "doc_id": 142,
+              "rank": 5,
+              "score": 0.42449,
+              "score_type": "cosine",
+              "text": "The CNER task aims to identify and classify important clinical terms such as diseases, symptoms, treatments, exams, and body parts from Chinese EHRs. It can be regarded as a sequence labeling task. A CNER model typically outputs a sequence of tags. Each character of the original sentence will be tagged a label following a tag scheme. In this paper we recognize the entities by the model of our previous work BIBREF12 but trained on another corpus which has 44 entity types including operations, numbers, unit words, examinations, symptoms, negative words, etc. An illustrative example of named entity information sequence is demonstrated in Table TABREF2. In Table TABREF2, UTF8gkai“远端胃切除\" is tagged as an operation, `11.5' is a number word and `cm' is an unit word. The named entity tag sequence is organized in one-hot type. We denote the sequence for clinical sentence and query term as $I_{nt}$ and $I_{nq}$, respectively."
+            },
+            {
+              "doc_id": 136,
+              "rank": 6,
+              "score": 0.399379,
+              "score_type": "cosine",
+              "text": "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+            }
+          ],
+          "generation_source": "seed"
+        }
+      ]
+    }
+  ]
+}

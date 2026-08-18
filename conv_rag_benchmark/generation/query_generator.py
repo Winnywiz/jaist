@@ -126,7 +126,10 @@ class QueryGenerator:
         "metadata, not evidence), and never ask about an entity that the EVIDENCE "
         "does not mention. "
         'Respond as JSON: {"question": "...", "target_entity": "...", '
-        '"difficulty": 1-5}'
+        '"difficulty": 1-5, "components": ["...", ...]}. '
+        '"components" is REQUIRED for Comparative and Multi-Hop ONLY: list the expected '
+        'answer slots a complete correct answer must cover (one short string each), so the '
+        'answer can be checked slot-by-slot. Omit "components" for all other types.'
     )
 
     _TYPE_INSTRUCTIONS = {
@@ -143,25 +146,33 @@ class QueryGenerator:
                          "The clarifying answer must itself be stated in the EVIDENCE. "
                          "Do NOT ask 'what do you mean by ...' about wording the evidence "
                          "cannot resolve. Tests context preservation.",
-        "Comparative": "From COMPARABLE SAME-TYPE PAIRS, STRONGLY prefer a pair marked "
-                       "with a shared attribute ('X vs Y (shared attribute ...)') and ask "
-                       "to compare the two entities on EXACTLY that shared attribute — "
-                       "both sides of the comparison are then stated in the evidence. "
-                       "Name both entities. NEVER compare on an attribute the evidence "
-                       "states for only one side, and do NOT ask open-ended 'how do X "
-                       "and Y compare overall' questions. "
-                       "Tests multi-entity retrieval and fusion.",
-        "Correction": "Correct a wrong entity introduced earlier ('Actually I meant X, "
-                      "not Y') and ask about the corrected entity. Tests context replacement.",
+        "Comparative": "DECOMPOSABLE comparison: compare TWO named same-type entities on "
+                       "AT LEAST TWO explicit dimensions that the EVIDENCE states for BOTH "
+                       "entities (e.g. accuracy AND cost). Name both entities and both "
+                       "dimensions in ONE question. In 'components', list one string per "
+                       "(entity, dimension) pair in the EXACT format 'ENTITY :: dimension', "
+                       "naming the entity IN FULL — e.g. ['FastText :: accuracy','FastText :: "
+                       "computational cost','GMM :: accuracy','GMM :: computational cost'] — so "
+                       "a complete answer must cover ALL of them. NEVER use a dimension the "
+                       "evidence states for only one side. Tests multi-dimension coverage.",
+        "Correction": "React to a SPECIFIC factual claim made in the PREVIOUS ANSWER in the "
+                      "conversation history: verify it, challenge it, or ask what evidence "
+                      "supports it (e.g. question a stated date, name, number, or relation "
+                      "from that answer). Do NOT invent a template like 'You said X'; choose "
+                      "naturally which claim in the previous answer to probe. Tests whether "
+                      "the RAG can justify or correct its own prior response.",
         "Topic Shift": "Abruptly switch to a DIFFERENT topic present in the evidence "
                        "('Now tell me about ...'). Tests memory flushing.",
         "Unanswerable": "Ask something about the entity that the evidence CANNOT answer "
                         "and that no corpus could know (e.g. a social-media handle, a "
                         "private opinion). The correct behaviour is to abstain.",
-        "Multi-Hop": "Pick ONE REASONING CHAIN (A --r1--> B --r2--> C) and ask a question "
-                     "about C phrased in terms of A, WITHOUT naming the middle entity B, so "
-                     "the answer can only be reached by traversing A->B->C. The answer is C. "
-                     "Do NOT staple two unrelated entities together — the path must connect.",
+        "Multi-Hop": "DECOMPOSABLE reasoning: ask a question answerable ONLY by combining AT "
+                     "LEAST TWO linked facts from a connected chain (A --r1--> B --r2--> C). "
+                     "Phrase it in terms of A, never naming the middle entity B, so the answer "
+                     "requires traversing both hops; the answer is C. In 'components', list the "
+                     "required hops as one string each — e.g. ['A->B (r1)','B->C (r2)'] — so a "
+                     "complete answer must establish BOTH. The path must genuinely connect; do "
+                     "NOT staple two unrelated entities together. Tests multi-fact coverage.",
         "Ambiguous Reference": "Refer to a previously-mentioned entity ONLY by an ambiguous "
                                "pronoun ('it' / 'they' / 'he' / 'she' / 'that company') — never "
                                "by name — but ask about a NEW ATTRIBUTE of it: a specific fact "
@@ -274,6 +285,14 @@ class QueryGenerator:
             te = next((str(x).strip() for x in te if str(x).strip()), None)
         elif te is not None and not isinstance(te, str):
             te = str(te).strip()
+        # DIAGNOSTIC SLOTS (Comparative / Multi-Hop only): the expected answer components
+        # a complete answer must cover, so a rule can attribute the failure slot-by-slot.
+        comps = out.get("components")
+        meta = {}
+        if isinstance(comps, list):
+            slots = [str(x).strip() for x in comps if str(x).strip()]
+            if slots:
+                meta["components"] = slots
         return QueryTurn(
             question=str(out["question"]).strip(),
             query_type=query_type,
@@ -282,6 +301,7 @@ class QueryGenerator:
             capability="",
             expected_failure="",
             target_entity=(te or (entities[0] if entities else None)),
+            meta=meta,
         )
 
     #: Relations too vacuous to compare over: they hold between almost any two

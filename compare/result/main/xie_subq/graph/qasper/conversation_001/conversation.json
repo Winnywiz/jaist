@@ -1,0 +1,1112 @@
+{
+  "method": "xie_subq",
+  "rag": "graph",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T12:06:11",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-000",
+  "conversations": [
+    {
+      "conversation_id": "conv-000",
+      "seed_question": "What type of model was used for the neural language model in the study?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:background"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What type of model was used for the neural language model in the study?",
+          "gold": "four-layer QRNN",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters",
+          "rag_answer": "a four-layer QRNN",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters",
+          "rag_retrieved_context": [
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 .",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 .",
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.603961,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 163,
+              "rank": 2,
+              "score": 0.569636,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 133,
+              "rank": 3,
+              "score": 0.545306,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.579669,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 167,
+              "rank": 5,
+              "score": 0.57428,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.551986,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 200,
+              "rank": 7,
+              "score": 0.54602,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            },
+            {
+              "doc_id": 120,
+              "rank": 8,
+              "score": 0.544739,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.603922,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 163,
+              "rank": 2,
+              "score": 0.56964,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 200,
+              "rank": 3,
+              "score": 0.545982,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.579633,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 167,
+              "rank": 5,
+              "score": 0.574275,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.551992,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What specific neural language model was implemented in the study?",
+          "gold": "four-layer QRNN",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. Th",
+          "rag_answer": "a four-layer QRNN",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. Th",
+          "rag_retrieved_context": [
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 .",
+            "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "four-layer QRNN",
+            "previous_rag_answer": "a four-layer QRNN"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.693172,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 199,
+              "rank": 2,
+              "score": 0.52377,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 176,
+              "rank": 3,
+              "score": 0.559657,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.672824,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.635095,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 181,
+              "rank": 6,
+              "score": 0.631738,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 179,
+              "rank": 7,
+              "score": 0.572796,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 186,
+              "rank": 8,
+              "score": 0.555059,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.693157,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 176,
+              "rank": 2,
+              "score": 0.557414,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 186,
+              "rank": 3,
+              "score": 0.554369,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.678598,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.639947,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 181,
+              "rank": 6,
+              "score": 0.63243,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "What was the purpose of using this specific model in the study?",
+          "gold": "The purpose of using the four-layer QRNN model in the study was to achieve state-of-the-art results on a variety of datasets, such as WT103 and PTB, and to compare its performance against more common LSTM architectures.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. Th",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. Th",
+          "rag_retrieved_context": [
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 .",
+            "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "four-layer QRNN",
+            "previous_rag_answer": "a four-layer QRNN"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.65958,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 199,
+              "rank": 2,
+              "score": 0.502618,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 3,
+              "score": 0.599342,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.634221,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 181,
+              "rank": 5,
+              "score": 0.601067,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.556491,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.550632,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 176,
+              "rank": 8,
+              "score": 0.536248,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.660566,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 186,
+              "rank": 2,
+              "score": 0.556784,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.604468,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.640653,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.605804,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.556702,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:core",
+          "question": "What were the evaluation metrics used to assess the model's performance?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_retrieved_context": [
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 .",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The purpose of using the four-layer QRNN model in the study was to achieve state-of-the-art results on a variety of datasets, such as WT103 and PTB, and to compare its performance against more common LSTM architectures.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.779692,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 2,
+              "score": 0.607164,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 176,
+              "rank": 3,
+              "score": 0.624853,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.681257,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 172,
+              "rank": 5,
+              "score": 0.634736,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.595656,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.595198,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 178,
+              "rank": 8,
+              "score": 0.553372,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.657961,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 2,
+              "score": 0.583719,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 186,
+              "rank": 3,
+              "score": 0.568802,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.602737,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 181,
+              "rank": 5,
+              "score": 0.601446,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.56849,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:core",
+          "question": "What were the results obtained from using the neural language model?",
+          "gold": "The four-layer QRNN model achieved state-of-the-art results on datasets such as WT103 and PTB.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_retrieved_context": [
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 .",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.761469,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 2,
+              "score": 0.588197,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 176,
+              "rank": 3,
+              "score": 0.586539,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.692109,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.632158,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.613327,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 172,
+              "rank": 7,
+              "score": 0.596409,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 184,
+              "rank": 8,
+              "score": 0.572702,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 167,
+              "rank": 1,
+              "score": 0.563984,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 163,
+              "rank": 2,
+              "score": 0.540475,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 199,
+              "rank": 3,
+              "score": 0.526771,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 161,
+              "rank": 4,
+              "score": 0.553592,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.541483,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 200,
+              "rank": 6,
+              "score": 0.53073,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "What are the key features of the neural language model used?",
+          "gold": "The key features of the neural language model used are that it is a four-layer Quasi-Recurrent Neural Network (QRNN) which achieves state-of-the-art results on datasets such as WT103 and PTB. It consists of a convolution layer and a recurrent pooling layer, with 400-dimensional tied embedding weights and 1550 hidden units per layer on PTB, and 2500 per layer on WT103.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$ The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques fr",
+          "rag_retrieved_context": [
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 .",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The four-layer QRNN model achieved state-of-the-art results on datasets such as WT103 and PTB.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.767922,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 2,
+              "score": 0.590934,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 176,
+              "rank": 3,
+              "score": 0.607629,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.672427,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.631356,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 179,
+              "rank": 6,
+              "score": 0.609431,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 172,
+              "rank": 7,
+              "score": 0.593519,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 184,
+              "rank": 8,
+              "score": 0.577776,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 167,
+              "rank": 1,
+              "score": 0.540613,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 162,
+              "rank": 2,
+              "score": 0.510953,
+              "score_type": "cosine",
+              "text": "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 ."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.501236,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 161,
+              "rank": 4,
+              "score": 0.540257,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.523525,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 6,
+              "score": 0.503277,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:background",
+          "question": "What data was used to train the neural language model?",
+          "gold": "The neural language model was trained using a four-layer QRNN architecture with datasets such as WT103 and PTB.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs bet",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs bet",
+          "rag_retrieved_context": [
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 .",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The key features of the neural language model used are that it is a four-layer Quasi-Recurrent Neural Network (QRNN) which achieves state-of-the-art results on datasets such as WT103 and PTB. It consists of a convolution layer and a recurrent pooling layer, with 400-dimensional tied embedding weights and 1550 hidden units per layer on PTB, and 2500 per layer on WT103.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.80313,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 176,
+              "rank": 2,
+              "score": 0.662347,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 186,
+              "rank": 3,
+              "score": 0.605352,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.681092,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.678989,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 172,
+              "rank": 6,
+              "score": 0.662033,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 7,
+              "score": 0.599996,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 185,
+              "rank": 8,
+              "score": 0.570469,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 161,
+              "rank": 1,
+              "score": 0.540596,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 162,
+              "rank": 2,
+              "score": 0.508665,
+              "score_type": "cosine",
+              "text": "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 ."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.520653,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 167,
+              "rank": 4,
+              "score": 0.538092,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 175,
+              "rank": 5,
+              "score": 0.528629,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 199,
+              "rank": 6,
+              "score": 0.527143,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:background",
+          "question": "What prior research informed the choice of model for this study?",
+          "gold": "The choice of model for this study was informed by the use of a four-layer QRNN, which achieved state-of-the-art results on datasets such as WT103 and PTB, and comparisons with AWD-LSTM and a standard five-gram model with modified Kneser-Ney smoothing.",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances i",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to. For decades, deep neural networks were thought to be computationally too difficult to train. However, advances i",
+          "rag_retrieved_context": [
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to.",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 .",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The neural language model was trained using a four-layer QRNN architecture with datasets such as WT103 and PTB.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.804482,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 133,
+              "rank": 2,
+              "score": 0.5702,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 199,
+              "rank": 3,
+              "score": 0.587857,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 4,
+              "score": 0.690086,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 181,
+              "rank": 5,
+              "score": 0.654998,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 176,
+              "rank": 6,
+              "score": 0.65271,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 172,
+              "rank": 7,
+              "score": 0.651127,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 186,
+              "rank": 8,
+              "score": 0.619437,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 167,
+              "rank": 1,
+              "score": 0.576945,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 133,
+              "rank": 2,
+              "score": 0.536354,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 199,
+              "rank": 3,
+              "score": 0.541559,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 163,
+              "rank": 4,
+              "score": 0.557096,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 161,
+              "rank": 5,
+              "score": 0.554092,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.548451,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}

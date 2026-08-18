@@ -60,7 +60,10 @@ def build_data():
         _r = re.search(r"_r(\d+)\.json$", base)
         if _r:
             rag = f"{rag} · run{_r.group(1)}"
-        q = (d.get("quality", {}) or {}).get("E", {}) or {}
+        # quality is keyed by the method label (e.g. dynamic_question_generation); there is
+        # only one per file, so read the single value regardless of the key name.
+        _qd = d.get("quality") or {}
+        q = _qd.get("E") or next(iter(_qd.values()), {}) or {}
         by_type = {t: m.get("well_formed") for t, m in (d.get("e_by_query_type") or {}).items()}
         convos = []
         for c in d.get("conversations", []):

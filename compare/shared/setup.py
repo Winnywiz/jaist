@@ -17,6 +17,7 @@ from the shared `conv_rag_benchmark` engine — this folder is only the experime
 """
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
@@ -86,11 +87,50 @@ def is_correct(gold: str, answer: str) -> bool:
     return _lexical_correct(gold, answer)
 
 
-def abstained(answer: str) -> bool:
+_IDK_CACHE = {}            # response -> is_idk bool, to avoid duplicate judge calls
+
+#: MTRAG-style IDK judge prompt. Detects a refusal/abstention robustly (paraphrase,
+#: hedging) instead of by keyword, so a real "I don't know" phrased in novel words is
+#: not missed — which would otherwise break the P3 fabrication flip and did_fail firing.
+_IDK_SYS = (
+    "You judge whether a RESPONSE is an \"I don't know\" (IDK) / abstention: it declines "
+    "to answer, or states the information is unavailable / not stated / not found / "
+    "cannot be determined, INSTEAD of attempting a substantive answer. A response that "
+    "asserts any specific factual claim is NOT idk, even if hedged ('I think', "
+    "'possibly', 'approximately'). "
+    'Reply JSON {"idk": true/false}.'
+)
+
+
+def _lexical_abstained(answer: str) -> bool:
+    """Keyword fallback used when no judge LLM is available (offline mode)."""
     low = (answer or "").lower()
     return any(p in low for p in ("i don't know", "i dont know", "cannot answer",
                                   "not answerable", "no information", "unable to",
                                   "not stated", "not mentioned"))
+
+
+def abstained(answer: str) -> bool:
+    """True when the RESPONSE declines to answer (an 'I don't know' / abstention).
+
+    Uses the judge LLM when available (an MTRAG-style IDK judge that is robust to
+    paraphrase), else the lexical keyword fallback. Cached per response. This is the
+    linchpin of the proposed method: the P3 strict-grounding probe reads it to detect
+    fabrication, and did_fail reads it to detect whether a Generation trap fired."""
+    a = (answer or "").strip()
+    if not a:
+        return _lexical_abstained(answer)
+    # Ablation switch: IDK_JUDGE=lexical forces the old keyword matcher (the 'before').
+    if os.environ.get("IDK_JUDGE", "").lower() == "lexical":
+        return _lexical_abstained(answer)
+    if _JUDGE is not None and getattr(_JUDGE, "available", False):
+        key = a[:200]
+        if key not in _IDK_CACHE:
+            out = _JUDGE.chat_json(_IDK_SYS, f"RESPONSE: {a}")
+            _IDK_CACHE[key] = (bool(out.get("idk")) if out
+                               else _lexical_abstained(answer))
+        return _IDK_CACHE[key]
+    return _lexical_abstained(answer)
 
 
 def gold_in_context(gold_passage: str, context: List[str]) -> bool:

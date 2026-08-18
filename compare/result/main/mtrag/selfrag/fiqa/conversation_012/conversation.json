@@ -1,0 +1,631 @@
+{
+  "method": "mtrag",
+  "rag": "selfrag",
+  "dataset": "fiqa",
+  "seed": 42,
+  "n_turns": 5,
+  "content_policy": null,
+  "generation_source": null,
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 60984,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-16T00:19:17",
+  "schema_version": 1,
+  "mtrag_corpus": "mtrag-official:fiqa",
+  "mtrag_source_conversation": "mtrag-mt-rag-fiqa-beir-elser-512-100-20240501-009",
+  "mtrag_domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "note_mtrag": "questions are human-authored (question_generation_documents is empty); rag_retrieved_documents are OUR RAG's cosine retrieval over the official corpus (doc_id = real corpus passage _id); mtRAG's native ELSER contexts are under each turn's provenance.native_contexts (score_type=elser).",
+  "conversation_id": "conversation_012",
+  "conversations": [
+    {
+      "conversation_id": "conversation_012",
+      "seed_question": "How to read bond yield quotes? What do the time, coupon, price, yield, and time mean?",
+      "type_sequence": [
+        "Composite",
+        "Opinion",
+        "Non-Question",
+        "Explanation",
+        "Comparative"
+      ],
+      "outcome_sequence": [
+        "wrong",
+        "abstained",
+        "wrong",
+        "abstained",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "mtrag:Composite",
+          "question": "How to read bond yield quotes? What do the time, coupon, price, yield, and time mean?",
+          "gold": "Bond yield quotes provide important information about a bond's yield, which is the annualized return on investment for the bond. Here's how to read bond yield quotes:\n* Time: This refers to the time of the quote presented and indicates when the quote was generated.\n* Coupon (coupon rate): This is the amount of interest paid on the bond each period, as specified on the coupon itself. It is usually expressed as a percentage of the bond's face value.\n* Price: This is the normalised price of the bond, representing the price of taking a position of $100 worth of the principal in the bond. It is often expressed as a percentage of the bond's face value.\n* Yield: This is the interest rate that you would receive by buying at the current price. It is the inverse of the price and represents the annualized return on investment for the bond.\nTo summarize, when reading bond yield quotes, the time refers to the quote's generation time, while the coupon, price, and yield provide information about the bond's interest payments, market value, and annualized return on investment, respectively.",
+          "evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"\n\nImagine that the existing interest rate is 5%. So on a bond with face value of 100, you would be getting a $5 coupon implying a 5% yield. Now, if let's say the",
+          "rag_answer": "To read bond yield quotes, understand the following components: 1. Time: This indicates the duration of the quote. 2. Coupon: This is the interest paid on the bond each period, as specified on the bond. 3. Price: This is the normalized price of the bond, representing the cost of a $100 position in the bond. 4. Yield: This is the interest rate you would receive by buying the bond at its quoted price, which is the inverse of the price.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"\n\nImagine that the existing interest rate is 5%. So on a bond with face value of 100, you would be getting a $5 coupon implying a 5% yield. Now, if let's say the",
+          "rag_retrieved_context": [
+            "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+            "\"Since you want to know exactly what \"\"yield\"\" means, let's get all the details of the security down first. Treasury Bills are 0-1 year and do not pay interest/coupons. The yield comes from buying the T-Bill at a discount. For example, you buy a T-Bill for $99 and it pays $100 when it matures, and the yield over that holding period is 1/99. When people talk about \"\"yield\"\" they are generally talking about annualized yield unless stated otherwise.  Treasury Notes are 2-10 years. They pay interest semi-annually. Treasury Bonds are 20-30 years and they also pay interest semi-annually. Again, \"\"yield\"\" is typically the annualized yield, or the two semi-annual interest payments added together (without compounding). These have interest payments so they are typically sold at par. They may trade a premium/discount afterwards.  TIPS pay a constant coupon rate, but the principal is adjusted up and down with inflation.\"",
+            "You’ve really got three or four questions going here… and it’s clear that a gap in understanding one component of how bonds work (pricing) is having a ripple effect across the other facets of your question. The reality is that everybody’s answers so far touch on various pieces of your general question, but maybe I can help by integrating. So, let’s start by nailing down what your actual questions are: 1. Why do mortgage rates (tend to) increase when the published treasury bond rate increases? I’m going to come back to this, because it requires a lot of building blocks. 2. What’s the math behind a bond yield increasing (price falling?) This gets complicated, fast. Especially when you start talking about selling the bond in the middle of its time period. Many people that trade in bonds use financial calculators, Excel, or pre-calculated tables to simplify or even just approximate the value of a bond. But here’s a simple example that shows the math. Let’s say we’ve got a bond that is issued by… Dell for $10,000. The company will pay it back in 5 years, and it is offering an 8% rate. Interest payments will only be paid annually. Remember that the amount Dell has promised to pay in interest is fixed for the life of the bond, and is called the ‘coupon’ rate. We can think about the way the payouts will be paid in the following table: As I’m sure you know, the value of a bond (its yield) comes from two sources: the interest payments, and the return of the principal. But, if you as an investor paid $14,000 for this bond, you would usually be wrong. You need to ‘discount’ those amounts to take into account the ‘time value of money’. This is why when you are dealing in bonds it is important to know the ‘coupon rate’ (what is Dell paying each period?). But it is also important to know your sellers’/buyers’ own personal discount rates. This will vary from person to person and institution to institution, but it is what actually sets the PRICE you would buy this bond for.",
+            "The 10yr bond pays coupons semi annually.  The yield % is what you would get annually if you hold the bond to full term.  The coupon payment won't be exactly 1.65%/2 because of how bond pricing and yields work.  The yield commonly quoted does not tell you how much each interest payment is.  You have to look at the price and coupon of a specific individual bond.  The rate you see is the market equilibrium yield at the present.      Example, I offer two different people two different bonds.  Joe buys a 10yr bond paying 5% coupons semi annually at a par value of $1000.  I charge him $1000.  Bob wants to buy a 10yr bond paying 10% coupons semi annually at a par value of $1000.  I charge him $1500 for this.   The yield is similar between the two (not equal due to math details but lets assume).  So at the end of 10 yrs, the two have roughly the same total amount of $.  Bob's paid more each year but he paid more up front.    This is why the federal govt can issue bonds with diff coupons and the market prices them so the yield rises/falls to the market clearing yield.",
+            "\"What is a bond price? A bond is an asset, and like any tradeable asset it has a price. If I hold $10K face value of a certain GM bond, then I would be willing to sell it at some price, which may be more or less than $10K. Whoever is willing to sell it for the lowest amount determines the price. The price is determined by the market, just as all prices are. It's what you can sell a bond for. Bond prices may be quoted in various funny ways, like as a discount or premium relative to the face value or as a premium over a treasury, but at the end it all should be converted to how much you have to pay today. In this case, it's how much you would pay today to get a set of future coupon and principal payments. What is Yield to Maturity? A bond is a contract entitling you to a certain set of predefined cash flows. If you take that set of cash flows and discount them using a single rate at all maturities such that the discounted value is equal to the price, the single rate you have identified is the YTM. Mathematically, this is the same as finding the IRR (internal rate of return) of some set of cash flows. In this case the cash flows are the coupons and principal repayment. Other bond concepts. Note that the other aspects of a bond, like maturity, coupon rate, and face value, are immutably written into the bond contract. All they do is define what payments the bond entitles the owner to. They don't say how much someone would pay today in order to be entitled to those payments. One can't know how much a future payment is worth without discounting. If you know the appropriate discount rate at every relevant maturity, you could calculate the fair price of a bond. That's the other direction. YTM looks at the market price and associated cash flows and imputes what single discount rate would make that price fair. What is YTM good for? Recall what I said about IRR above. Why would anyone want to know what discount rate equates the cash flows of a project to its cost?"
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "mtrag_human",
+            "generator_saw_rag_answer": false,
+            "mtrag_question_type": "Composite",
+            "mtrag_answerability": "ANSWERABLE",
+            "mtrag_multi_turn": "N/A",
+            "native_contexts": [
+              {
+                "doc_id": "275257-0-460",
+                "rank": 1,
+                "score": 14.928179,
+                "score_type": "elser",
+                "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+                "title": ""
+              },
+              {
+                "doc_id": "152265-0-877",
+                "rank": 2,
+                "score": 14.378548,
+                "score_type": "elser",
+                "text": "\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"",
+                "title": ""
+              },
+              {
+                "doc_id": "367137-0-943",
+                "rank": 3,
+                "score": 13.539855,
+                "score_type": "elser",
+                "text": "Imagine that the existing interest rate is 5%. So on a bond with face value of 100, you would be getting a $5 coupon implying a 5% yield. Now, if let's say the interest rates go up to 10%, then a new bond issued with a face value of 100 will give you a coupon of $10 implying a 10% yield. If someone in the bond market buys your bond after interest price adjustment, in order to make the 10% yield (which means that an investor typically targets at least the risk-free rate on his investments) he needs to buy your bond at $50 so that a $5 coupon can give a 10% yield. The reverse happens when interest rates go down. I hope this somewhat clears the picture. Yield = Coupon/Investment Amount Update: Since the interest rate of the bond does not change after its issuance, the arbitrage in the interest rate is reflected in the market price of the bond. This helps in bringing back the yields of old bonds in-line with the freshly issued bonds.",
+                "title": ""
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": "275257-0-460",
+              "rank": 1,
+              "score": 0.679029,
+              "score_type": "cosine",
+              "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+              "corpus_doc_id": "275257-0-460"
+            },
+            {
+              "doc_id": "563092-0-922",
+              "rank": 2,
+              "score": 0.621722,
+              "score_type": "cosine",
+              "text": "\"Since you want to know exactly what \"\"yield\"\" means, let's get all the details of the security down first. Treasury Bills are 0-1 year and do not pay interest/coupons. The yield comes from buying the T-Bill at a discount. For example, you buy a T-Bill for $99 and it pays $100 when it matures, and the yield over that holding period is 1/99. When people talk about \"\"yield\"\" they are generally talking about annualized yield unless stated otherwise.  Treasury Notes are 2-10 years. They pay interest semi-annually. Treasury Bonds are 20-30 years and they also pay interest semi-annually. Again, \"\"yield\"\" is typically the annualized yield, or the two semi-annual interest payments added together (without compounding). These have interest payments so they are typically sold at par. They may trade a premium/discount afterwards.  TIPS pay a constant coupon rate, but the principal is adjusted up and down with inflation.\"",
+              "corpus_doc_id": "563092-0-922"
+            },
+            {
+              "doc_id": "127434-0-1991",
+              "rank": 3,
+              "score": 0.621664,
+              "score_type": "cosine",
+              "text": "You’ve really got three or four questions going here… and it’s clear that a gap in understanding one component of how bonds work (pricing) is having a ripple effect across the other facets of your question. The reality is that everybody’s answers so far touch on various pieces of your general question, but maybe I can help by integrating. So, let’s start by nailing down what your actual questions are: 1. Why do mortgage rates (tend to) increase when the published treasury bond rate increases? I’m going to come back to this, because it requires a lot of building blocks. 2. What’s the math behind a bond yield increasing (price falling?) This gets complicated, fast. Especially when you start talking about selling the bond in the middle of its time period. Many people that trade in bonds use financial calculators, Excel, or pre-calculated tables to simplify or even just approximate the value of a bond. But here’s a simple example that shows the math. Let’s say we’ve got a bond that is issued by… Dell for $10,000. The company will pay it back in 5 years, and it is offering an 8% rate. Interest payments will only be paid annually. Remember that the amount Dell has promised to pay in interest is fixed for the life of the bond, and is called the ‘coupon’ rate. We can think about the way the payouts will be paid in the following table: As I’m sure you know, the value of a bond (its yield) comes from two sources: the interest payments, and the return of the principal. But, if you as an investor paid $14,000 for this bond, you would usually be wrong. You need to ‘discount’ those amounts to take into account the ‘time value of money’. This is why when you are dealing in bonds it is important to know the ‘coupon rate’ (what is Dell paying each period?). But it is also important to know your sellers’/buyers’ own personal discount rates. This will vary from person to person and institution to institution, but it is what actually sets the PRICE you would buy this bond for.",
+              "corpus_doc_id": "127434-0-1991"
+            },
+            {
+              "doc_id": "395111-0-1076",
+              "rank": 4,
+              "score": 0.621259,
+              "score_type": "cosine",
+              "text": "The 10yr bond pays coupons semi annually.  The yield % is what you would get annually if you hold the bond to full term.  The coupon payment won't be exactly 1.65%/2 because of how bond pricing and yields work.  The yield commonly quoted does not tell you how much each interest payment is.  You have to look at the price and coupon of a specific individual bond.  The rate you see is the market equilibrium yield at the present.      Example, I offer two different people two different bonds.  Joe buys a 10yr bond paying 5% coupons semi annually at a par value of $1000.  I charge him $1000.  Bob wants to buy a 10yr bond paying 10% coupons semi annually at a par value of $1000.  I charge him $1500 for this.   The yield is similar between the two (not equal due to math details but lets assume).  So at the end of 10 yrs, the two have roughly the same total amount of $.  Bob's paid more each year but he paid more up front.    This is why the federal govt can issue bonds with diff coupons and the market prices them so the yield rises/falls to the market clearing yield.",
+              "corpus_doc_id": "395111-0-1076"
+            },
+            {
+              "doc_id": "446214-0-1986",
+              "rank": 5,
+              "score": 0.605061,
+              "score_type": "cosine",
+              "text": "\"What is a bond price? A bond is an asset, and like any tradeable asset it has a price. If I hold $10K face value of a certain GM bond, then I would be willing to sell it at some price, which may be more or less than $10K. Whoever is willing to sell it for the lowest amount determines the price. The price is determined by the market, just as all prices are. It's what you can sell a bond for. Bond prices may be quoted in various funny ways, like as a discount or premium relative to the face value or as a premium over a treasury, but at the end it all should be converted to how much you have to pay today. In this case, it's how much you would pay today to get a set of future coupon and principal payments. What is Yield to Maturity? A bond is a contract entitling you to a certain set of predefined cash flows. If you take that set of cash flows and discount them using a single rate at all maturities such that the discounted value is equal to the price, the single rate you have identified is the YTM. Mathematically, this is the same as finding the IRR (internal rate of return) of some set of cash flows. In this case the cash flows are the coupons and principal repayment. Other bond concepts. Note that the other aspects of a bond, like maturity, coupon rate, and face value, are immutably written into the bond contract. All they do is define what payments the bond entitles the owner to. They don't say how much someone would pay today in order to be entitled to those payments. One can't know how much a future payment is worth without discounting. If you know the appropriate discount rate at every relevant maturity, you could calculate the fair price of a bond. That's the other direction. YTM looks at the market price and associated cash flows and imputes what single discount rate would make that price fair. What is YTM good for? Recall what I said about IRR above. Why would anyone want to know what discount rate equates the cash flows of a project to its cost?",
+              "corpus_doc_id": "446214-0-1986"
+            }
+          ],
+          "generation_source": "mtrag_human"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "mtrag:Opinion",
+          "question": "Whata is the safest type of bond to invest in?",
+          "gold": "The safest place to put money is a mixture of cash, local municipal bond funds with average durations under two years and US Treasury bond funds with short duration. Among government bonds, U.S. Treasury securities are often regarded as the safest, followed by municipal bonds and government agency bonds. However, it is essential to note that even the safest bonds come with some level of risk, and do not make much money.  If you do choose to invest in bonds, some bonds being riskier than others,  I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. investing in a short-term, high quality bond fund or a tax-free bond fund with short durations is a good way to balance safety vs. return. Additionally, You should talk to a financial fiduciary (make sure they are a fiduciary, not all planners are) about investing your money.",
+          "evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is ",
+          "rag_retrieved_context": [
+            "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+            "\"Since you want to know exactly what \"\"yield\"\" means, let's get all the details of the security down first. Treasury Bills are 0-1 year and do not pay interest/coupons. The yield comes from buying the T-Bill at a discount. For example, you buy a T-Bill for $99 and it pays $100 when it matures, and the yield over that holding period is 1/99. When people talk about \"\"yield\"\" they are generally talking about annualized yield unless stated otherwise.  Treasury Notes are 2-10 years. They pay interest semi-annually. Treasury Bonds are 20-30 years and they also pay interest semi-annually. Again, \"\"yield\"\" is typically the annualized yield, or the two semi-annual interest payments added together (without compounding). These have interest payments so they are typically sold at par. They may trade a premium/discount afterwards.  TIPS pay a constant coupon rate, but the principal is adjusted up and down with inflation.\"",
+            "Yield is the term used to describe how much income the bond will generate if the bond was purchased at a particular moment in time. If I pay $100 for a one year, $100 par value bond that pays 5% interest then the bond yields 5% since I will receive $5 from a $100 investment if I held the bond to maturity. If I pay $90 for the same one year bond then the bond yields 17% since I will receive $15 from a $90 investment if I held the bond to maturity. There are many factors that affect what yield creditors will accept: It is the last bullet that ultimately determines yield.  The other factors feed into the creditor’s desire to hold money today versus receiving money in the future.  I desire money in my hand more than a promise to receive money in the future.  In order to entice me to lend my money someone must offer me an incentive.  Thus, they must offer me more money in the future in order for me to part with money I have. A yield curve is a snapshot of the yields for different loan durations.  The x-axis is the amount of time left on the bond while the y-axis is the yield.  The most cited yield curve is the US treasury curve which displays the yields for loans to the US government.  The yield curve changes while bonds are being traded thus it is always a snapshot of a particular moment in time. Short term loans typically have less yield than longer term loans since there is less uncertainty about the near future. Yield curves will flatten or slightly invert when creditors desire to keep their money instead of loaning it out.  This can occur because of a sudden disruption in the market that causes uncertainty about the future which leads to an increase in the demand for cash on hand. The US government yield curve should be looked at with some reservation however since there is a very large creditor to the US government that has the ability to loan the government an unlimited amount of funds.",
+            "\"When we calculate the realized yield of a bond, we assume the coupons are invested at an interest rate. I assume it is some kind of vehicle that guarantees a return, thinking it is government bond, savings account or something. Investing in a benchmark bond index might be risky though for this \"\"interest rate\"\".\"",
+            "\"You are asking multiple questions here, pieces of which may have been addressed in other questions.  A bond (I'm using US Government bonds in this example, and making the 'zero risk of default' assumption) will be priced based on today's interest rate. This is true whether it's a 10% bond with 10 years left (say rates were 10% on the 30 yr bond 20 years ago) a 2% bond with 10 years, or a new 3% 10 year bond.  The rate I use above is the 'coupon' rate, i.e. the amount the bond will pay each year in interest. What's the same for each bond is called the \"\"Yield to Maturity.\"\" The price adjusts, by the market, so the return over the next ten years is the same.  A bond fund simply contains a mix of bonds, but in aggregate, has a yield as well as a duration, the time-and-interest-weighted maturity.  When rates rise, the bond fund will drop in value based on this factor (duration). Does this begin to answer your question?\""
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "mtrag_human",
+            "generator_saw_rag_answer": false,
+            "mtrag_question_type": "Opinion",
+            "mtrag_answerability": "ANSWERABLE",
+            "mtrag_multi_turn": "Follow-up",
+            "native_contexts": [
+              {
+                "doc_id": "275257-0-460",
+                "rank": 1,
+                "score": 32.750652,
+                "score_type": "elser",
+                "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+                "title": ""
+              },
+              {
+                "doc_id": "152265-0-877",
+                "rank": 2,
+                "score": 28.03921,
+                "score_type": "elser",
+                "text": "\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"",
+                "title": ""
+              },
+              {
+                "doc_id": "211308-0-746",
+                "rank": 3,
+                "score": 27.47661,
+                "score_type": "elser",
+                "text": "Say you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.",
+                "title": ""
+              },
+              {
+                "doc_id": "199467-0-688",
+                "rank": 4,
+                "score": 22.719284,
+                "score_type": "elser",
+                "text": "The safest place to put money is a mixture of cash, local municipal bond funds with average durations under two years and US Treasury bond funds with short durations.  Examples of good short term US municipal funds: I'm not an active investor in Australian securities, so I won't recommend anything specific. Because rates are so low right now, you want a short duration (ie. funds where the average bond matures in < 2 years) fund to protect against increased rates. The problem with safety is that you won't make any money. If your goal to grow the value of your investment while minimizing risk, you need to look at equities. The portfolios posted by justkt are a great place to start.",
+                "title": ""
+              },
+              {
+                "doc_id": "285185-1708-3970",
+                "rank": 5,
+                "score": 22.655449,
+                "score_type": "elser",
+                "text": "They are still considered relatively safe, as the issuer would need to default (usually this means they are in bankruptcy) in order for you not to be paid back. For example, German bonds have been considered safer than Greek bonds recently based on the underlying strength of the government. Unlike Cash Equivalents, these are not guaranteed against loss, which means that if the issuer defaults, you could lose up to 100% of your investment. Bonds have several new features you will need to consider. One is interest rate risk. One reason bonds perform better than cash equivalents is that you are taking on the risk that if interest rates rise, the fixed payments the bond promises will be worth less, and the face value of your bond will fall. While most bonds are still very Liquid, this means that if you need to sell the bond before it matures, you could lose money. As mentioned earlier, some bonds are riskier than others. Given that you are looking for a low-risk investment, you would want to select a bond that is considered \"\"invesment grade\"\" rather than a riskier \"\"junk\"\" bond. Debt investments are a good choice if you can afford to do without this money for a few years, and you want to balance safety with somewhat better returns than Cash Equivalents. Again though, I would not recommend investing in Debt until you have also built up a separate Emergency Fund. If you do choose to invest in bonds, I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. Ownership Ownership assets includes stocks and other assets such as real estate and precious metals such as gold. While these investments can have high returns, in your situation I would strongly recommend that you not invest in these types of investments, for the following reasons: For these reasons, debt is considered a safer investment than equity for any particular company, government, or the market as a whole. Ownership assets are a good choice for people who have a high Risk Tolerance, long Time Horizon, low Liquidity needs, and will not be bothered by larger potential changes in the value of the investment at any given time.",
+                "title": ""
+              },
+              {
+                "doc_id": "343-0-714",
+                "rank": 6,
+                "score": 20.326275,
+                "score_type": "elser",
+                "text": "The only reason I can think of would be if you were convinced that you couldn't hold on to your money. Treasury Bonds are often viewed as very safe investments, and often used in some situations where cash isn't appropriate.. Also, they typically have a somewhat patriotic theme, helping your country to grow. In addition, many people don't really pay attention to the rate of the bonds, but are just investing in them. The more people investing in them, the lower the yields become. But the bottom line is, I would invest in a savings account any day over a negative interest rate... And it looks like I'm in good company as well, a quick study of reports seems to indicate that these are a very bad investment...",
+                "title": ""
+              },
+              {
+                "doc_id": "82482-0-297",
+                "rank": 7,
+                "score": 19.428009,
+                "score_type": "elser",
+                "text": "You should talk to a financial fiduciary (make sure they are a fiduciary, not all planners are) about investing your money.  Even ultra safe investments such as treasury bonds will beat the 1% interest rate offered by your savings account (the yield on the 5 year treasury is currently around 2%).",
+                "title": ""
+              },
+              {
+                "doc_id": "534670-0-388",
+                "rank": 8,
+                "score": 22.198338,
+                "score_type": "elser",
+                "text": "There is no such animal. If you are looking to give up FDIC protection, investing in a short-term, high quality bond fund or a tax-free bond fund with short durations is a good way to balance safety vs. return. Make sure you buy funds -- buying individual bonds isn't appropriate for folks without a high net worth. Another option is savings bonds, but the yields on these is awful today.",
+                "title": ""
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": "275257-0-460",
+              "rank": 1,
+              "score": 0.688697,
+              "score_type": "cosine",
+              "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+              "corpus_doc_id": "275257-0-460"
+            },
+            {
+              "doc_id": "563092-0-922",
+              "rank": 2,
+              "score": 0.66872,
+              "score_type": "cosine",
+              "text": "\"Since you want to know exactly what \"\"yield\"\" means, let's get all the details of the security down first. Treasury Bills are 0-1 year and do not pay interest/coupons. The yield comes from buying the T-Bill at a discount. For example, you buy a T-Bill for $99 and it pays $100 when it matures, and the yield over that holding period is 1/99. When people talk about \"\"yield\"\" they are generally talking about annualized yield unless stated otherwise.  Treasury Notes are 2-10 years. They pay interest semi-annually. Treasury Bonds are 20-30 years and they also pay interest semi-annually. Again, \"\"yield\"\" is typically the annualized yield, or the two semi-annual interest payments added together (without compounding). These have interest payments so they are typically sold at par. They may trade a premium/discount afterwards.  TIPS pay a constant coupon rate, but the principal is adjusted up and down with inflation.\"",
+              "corpus_doc_id": "563092-0-922"
+            },
+            {
+              "doc_id": "416513-0-1921",
+              "rank": 3,
+              "score": 0.664642,
+              "score_type": "cosine",
+              "text": "Yield is the term used to describe how much income the bond will generate if the bond was purchased at a particular moment in time. If I pay $100 for a one year, $100 par value bond that pays 5% interest then the bond yields 5% since I will receive $5 from a $100 investment if I held the bond to maturity. If I pay $90 for the same one year bond then the bond yields 17% since I will receive $15 from a $90 investment if I held the bond to maturity. There are many factors that affect what yield creditors will accept: It is the last bullet that ultimately determines yield.  The other factors feed into the creditor’s desire to hold money today versus receiving money in the future.  I desire money in my hand more than a promise to receive money in the future.  In order to entice me to lend my money someone must offer me an incentive.  Thus, they must offer me more money in the future in order for me to part with money I have. A yield curve is a snapshot of the yields for different loan durations.  The x-axis is the amount of time left on the bond while the y-axis is the yield.  The most cited yield curve is the US treasury curve which displays the yields for loans to the US government.  The yield curve changes while bonds are being traded thus it is always a snapshot of a particular moment in time. Short term loans typically have less yield than longer term loans since there is less uncertainty about the near future. Yield curves will flatten or slightly invert when creditors desire to keep their money instead of loaning it out.  This can occur because of a sudden disruption in the market that causes uncertainty about the future which leads to an increase in the demand for cash on hand. The US government yield curve should be looked at with some reservation however since there is a very large creditor to the US government that has the ability to loan the government an unlimited amount of funds.",
+              "corpus_doc_id": "416513-0-1921"
+            },
+            {
+              "doc_id": "453480-0-315",
+              "rank": 4,
+              "score": 0.642384,
+              "score_type": "cosine",
+              "text": "\"When we calculate the realized yield of a bond, we assume the coupons are invested at an interest rate. I assume it is some kind of vehicle that guarantees a return, thinking it is government bond, savings account or something. Investing in a benchmark bond index might be risky though for this \"\"interest rate\"\".\"",
+              "corpus_doc_id": "453480-0-315"
+            },
+            {
+              "doc_id": "327556-0-930",
+              "rank": 5,
+              "score": 0.641279,
+              "score_type": "cosine",
+              "text": "\"You are asking multiple questions here, pieces of which may have been addressed in other questions.  A bond (I'm using US Government bonds in this example, and making the 'zero risk of default' assumption) will be priced based on today's interest rate. This is true whether it's a 10% bond with 10 years left (say rates were 10% on the 30 yr bond 20 years ago) a 2% bond with 10 years, or a new 3% 10 year bond.  The rate I use above is the 'coupon' rate, i.e. the amount the bond will pay each year in interest. What's the same for each bond is called the \"\"Yield to Maturity.\"\" The price adjusts, by the market, so the return over the next ten years is the same.  A bond fund simply contains a mix of bonds, but in aggregate, has a yield as well as a duration, the time-and-interest-weighted maturity.  When rates rise, the bond fund will drop in value based on this factor (duration). Does this begin to answer your question?\"",
+              "corpus_doc_id": "327556-0-930"
+            }
+          ],
+          "generation_source": "mtrag_human"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "mtrag:Non-Question",
+          "question": "Investing in foreign bonds",
+          "gold": "Adding international bonds to an individual investor's portfolio is a controversial subject. On top of the standard risks of bonds, you are adding country specific risk, currency risk and diversifying your individual company risk. In theory many of these risks should be rewarded but the data are noisy at best and adding risk like developed currency risk may not be rewarded at all.  However, if your home currency (or currency union) does not have a deep bond market and/or bonds make up most of your portfolio, it is probably worth diversifying a chunk of your bond exposure internationally.",
+          "evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount ",
+          "rag_answer": "Investing in foreign bonds, particularly government-backed bonds (like overseas gilts), is suggested as they tend to have low risk.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount ",
+          "rag_retrieved_context": [
+            "just pick a good bond and invest all your money there (since they're fairly low risk) No. That is basically throwing away your money and why would you do that. And who told you they are low risk. That is a very wrong premise. What factors should I consider in picking a bond and how would they weigh against each other? Quite a number of them to say, assuming these aren't government bonds(US, UK etc) How safe is the institution issuing the bond. Their income, business they are in, their past performance business wise and the bonds issued by them, if any. Check for the bond ratings issued by the rating agencies. Read the prospectus and check for any specific conditions i.e. bonds are callable, bonds can be retired under certain conditions, what happens if they default and what order will you be reimbursed(senior debt take priority). Where are interest rates heading, which will decide the price you are paying for the bond. And also the yield you will derive from the bond. How do you intend to invest the income, coupon, you will derive from the bonds. What is your time horizon to invest in bonds and similarly the bond's life. I have invested in stocks previously but realized that it isn't for me Bonds are much more difficult than equities. Stick to government bonds if you can, but they don't generate much income, considering the low interest rates environment. Now that QE is over you might expect interest rates to rise, but you can only wait. Or go for bonds from stable companies i.e. GE, Walmart. And no I am not saying you buy their bonds in any imaginable way.",
+            "As observed above, 1.5% for 3 years is not attractive, and since due to the risk profile the stock market also needs to be excluded, there seems about 2 primary ways, viz: fixed income bonds and commodity(e,g, gold). However, since local bonds (gilt or corporate) are sensitive and follow the central bank interest rates, you could look out investing in overseas bonds (usually through a overseas gilt based mutual fund). I am specifically mentioning gilt here as they are government backed (of the overseas location) and have very low risk. Best would be to scout out for strong fund houses that have mutual funds that invest in overseas gilts, preferably of the emerging markets (as the interest is higher). The good fund houses manage the currency volatility and can generate decent returns at fairly low risk.",
+            "They are still considered relatively safe, as the issuer would need to default (usually this means they are in bankruptcy) in order for you not to be paid back. For example, German bonds have been considered safer than Greek bonds recently based on the underlying strength of the government. Unlike Cash Equivalents, these are not guaranteed against loss, which means that if the issuer defaults, you could lose up to 100% of your investment. Bonds have several new features you will need to consider. One is interest rate risk. One reason bonds perform better than cash equivalents is that you are taking on the risk that if interest rates rise, the fixed payments the bond promises will be worth less, and the face value of your bond will fall. While most bonds are still very Liquid, this means that if you need to sell the bond before it matures, you could lose money. As mentioned earlier, some bonds are riskier than others. Given that you are looking for a low-risk investment, you would want to select a bond that is considered \"\"invesment grade\"\" rather than a riskier \"\"junk\"\" bond. Debt investments are a good choice if you can afford to do without this money for a few years, and you want to balance safety with somewhat better returns than Cash Equivalents. Again though, I would not recommend investing in Debt until you have also built up a separate Emergency Fund. If you do choose to invest in bonds, I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. Ownership Ownership assets includes stocks and other assets such as real estate and precious metals such as gold. While these investments can have high returns, in your situation I would strongly recommend that you not invest in these types of investments, for the following reasons: For these reasons, debt is considered a safer investment than equity for any particular company, government, or the market as a whole. Ownership assets are a good choice for people who have a high Risk Tolerance, long Time Horizon, low Liquidity needs, and will not be bothered by larger potential changes in the value of the investment at any given time.",
+            "It shouldn't be too difficult to find such bond funds that can return a few percentage points above risk-free interest, if you can live with the price volatility. Over time and as you get closer to actually needing the money, shift the holdings to lower-risk holdings to secure the capital amount. Yes, short-term government bonds tend to have dismal returns, particularly currently. (It's pretty much either that, or the country is just about bankrupt already, which means that the risk of default is quite high which is reflected in the interest premiums demanded by investors.) But the risk in most countries' short-term government bonds is also very much limited. And generally, when you are looking at using the money for a specific purpose within a defined (and relatively short) time frame, you want to reduce risk, even if that comes with the price tag of a slightly lower return. And, as always, never put all your eggs in one basket. A combination of government bonds from various countries may be appropriate, just as you should diversify between different stocks in a well-balanced portfolio. Make sure to check the limits on how much money is insured in a single account, for a single individual, in a single institution and for a household - you don't want to chase high interest bank accounts only to be burned by something like that if the institution goes bankrupt. Generally, the sooner you expect to need the money, the less risk you should take, even if that means a lower return on capital. And the risk progression (ignoring currency effects, which affects all of these equally) is roughly short-term government bonds, long-term government bonds or regular corporate bonds, high-yield corporate bonds, stock market large cap, stock market mid and low cap. Yes, there are exceptions, but that's a resonable rule of thumb.\"",
+            "US government bonds and bonds issued by companies with a safe track record and consistently high ratings, for the past years, by credit agencies. But the time line of your investment, which is quite short, maybe a factor of choosing the right bonds. If you are not going to touch the money then CD maybe an option or an interest bearing savings account.",
+            "\"Depends on your definition of \"\"secure\"\". The most \"\"secure\"\" investment from a preservation of principal point of view is a non-tradable, general obligation government bond. (Like a US or Canadian savings bond.) Why? There is no interest rate risk -- you can't lose money. The downside is that the rate is not so good. If you want returns and a reasonably high level of security, you need a diversified portfolio.\""
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "mtrag_human",
+            "generator_saw_rag_answer": false,
+            "mtrag_question_type": "Non-Question",
+            "mtrag_answerability": "ANSWERABLE",
+            "mtrag_multi_turn": "Follow-up",
+            "native_contexts": [
+              {
+                "doc_id": "275257-0-460",
+                "rank": 1,
+                "score": 31.717758,
+                "score_type": "elser",
+                "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+                "title": ""
+              },
+              {
+                "doc_id": "211308-0-746",
+                "rank": 2,
+                "score": 29.061998,
+                "score_type": "elser",
+                "text": "Say you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.",
+                "title": ""
+              },
+              {
+                "doc_id": "152265-0-877",
+                "rank": 3,
+                "score": 28.5135,
+                "score_type": "elser",
+                "text": "\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"",
+                "title": ""
+              },
+              {
+                "doc_id": "478509-0-1180",
+                "rank": 4,
+                "score": 18.634716,
+                "score_type": "elser",
+                "text": "Adding international bonds to an individual investor's portfolio is a controversial subject.  On top of the standard risks of bonds you are adding country specific risk, currency risk and diversifying your individual company risk.  In theory many of these risks should be rewarded but the data are noisy at best and adding risk like developed currency risk may not be rewarded at all. Also, most of the risk and diversification mentioned above are already added by international stocks.  Depending on your home country adding international or emerging market stock etfs only add a few extra bps of fees while international bond etfs can add 30-100bps of fees over their domestic versions.  This is a fairly high bar for adding this type of diversification.  US bonds for foreign investors are a possible exception to the high fees though the government's bonds yield little. If your home currency (or currency union) does not have a deep bond market and/or bonds make up most of your portfolio it is probably worth diversifying a chunk of your bond exposure internationally.  Otherwise, you can get most of the diversification much more cheaply by just using international stocks.",
+                "title": ""
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": "342485-0-1583",
+              "rank": 1,
+              "score": 0.669903,
+              "score_type": "cosine",
+              "text": "just pick a good bond and invest all your money there (since they're fairly low risk) No. That is basically throwing away your money and why would you do that. And who told you they are low risk. That is a very wrong premise. What factors should I consider in picking a bond and how would they weigh against each other? Quite a number of them to say, assuming these aren't government bonds(US, UK etc) How safe is the institution issuing the bond. Their income, business they are in, their past performance business wise and the bonds issued by them, if any. Check for the bond ratings issued by the rating agencies. Read the prospectus and check for any specific conditions i.e. bonds are callable, bonds can be retired under certain conditions, what happens if they default and what order will you be reimbursed(senior debt take priority). Where are interest rates heading, which will decide the price you are paying for the bond. And also the yield you will derive from the bond. How do you intend to invest the income, coupon, you will derive from the bonds. What is your time horizon to invest in bonds and similarly the bond's life. I have invested in stocks previously but realized that it isn't for me Bonds are much more difficult than equities. Stick to government bonds if you can, but they don't generate much income, considering the low interest rates environment. Now that QE is over you might expect interest rates to rise, but you can only wait. Or go for bonds from stable companies i.e. GE, Walmart. And no I am not saying you buy their bonds in any imaginable way.",
+              "corpus_doc_id": "342485-0-1583"
+            },
+            {
+              "doc_id": "576688-0-813",
+              "rank": 2,
+              "score": 0.665403,
+              "score_type": "cosine",
+              "text": "As observed above, 1.5% for 3 years is not attractive, and since due to the risk profile the stock market also needs to be excluded, there seems about 2 primary ways, viz: fixed income bonds and commodity(e,g, gold). However, since local bonds (gilt or corporate) are sensitive and follow the central bank interest rates, you could look out investing in overseas bonds (usually through a overseas gilt based mutual fund). I am specifically mentioning gilt here as they are government backed (of the overseas location) and have very low risk. Best would be to scout out for strong fund houses that have mutual funds that invest in overseas gilts, preferably of the emerging markets (as the interest is higher). The good fund houses manage the currency volatility and can generate decent returns at fairly low risk.",
+              "corpus_doc_id": "576688-0-813"
+            },
+            {
+              "doc_id": "285185-1708-3970",
+              "rank": 3,
+              "score": 0.661145,
+              "score_type": "cosine",
+              "text": "They are still considered relatively safe, as the issuer would need to default (usually this means they are in bankruptcy) in order for you not to be paid back. For example, German bonds have been considered safer than Greek bonds recently based on the underlying strength of the government. Unlike Cash Equivalents, these are not guaranteed against loss, which means that if the issuer defaults, you could lose up to 100% of your investment. Bonds have several new features you will need to consider. One is interest rate risk. One reason bonds perform better than cash equivalents is that you are taking on the risk that if interest rates rise, the fixed payments the bond promises will be worth less, and the face value of your bond will fall. While most bonds are still very Liquid, this means that if you need to sell the bond before it matures, you could lose money. As mentioned earlier, some bonds are riskier than others. Given that you are looking for a low-risk investment, you would want to select a bond that is considered \"\"invesment grade\"\" rather than a riskier \"\"junk\"\" bond. Debt investments are a good choice if you can afford to do without this money for a few years, and you want to balance safety with somewhat better returns than Cash Equivalents. Again though, I would not recommend investing in Debt until you have also built up a separate Emergency Fund. If you do choose to invest in bonds, I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. Ownership Ownership assets includes stocks and other assets such as real estate and precious metals such as gold. While these investments can have high returns, in your situation I would strongly recommend that you not invest in these types of investments, for the following reasons: For these reasons, debt is considered a safer investment than equity for any particular company, government, or the market as a whole. Ownership assets are a good choice for people who have a high Risk Tolerance, long Time Horizon, low Liquidity needs, and will not be bothered by larger potential changes in the value of the investment at any given time.",
+              "corpus_doc_id": "285185-1708-3970"
+            },
+            {
+              "doc_id": "457122-1609-3452",
+              "rank": 4,
+              "score": 0.655,
+              "score_type": "cosine",
+              "text": "It shouldn't be too difficult to find such bond funds that can return a few percentage points above risk-free interest, if you can live with the price volatility. Over time and as you get closer to actually needing the money, shift the holdings to lower-risk holdings to secure the capital amount. Yes, short-term government bonds tend to have dismal returns, particularly currently. (It's pretty much either that, or the country is just about bankrupt already, which means that the risk of default is quite high which is reflected in the interest premiums demanded by investors.) But the risk in most countries' short-term government bonds is also very much limited. And generally, when you are looking at using the money for a specific purpose within a defined (and relatively short) time frame, you want to reduce risk, even if that comes with the price tag of a slightly lower return. And, as always, never put all your eggs in one basket. A combination of government bonds from various countries may be appropriate, just as you should diversify between different stocks in a well-balanced portfolio. Make sure to check the limits on how much money is insured in a single account, for a single individual, in a single institution and for a household - you don't want to chase high interest bank accounts only to be burned by something like that if the institution goes bankrupt. Generally, the sooner you expect to need the money, the less risk you should take, even if that means a lower return on capital. And the risk progression (ignoring currency effects, which affects all of these equally) is roughly short-term government bonds, long-term government bonds or regular corporate bonds, high-yield corporate bonds, stock market large cap, stock market mid and low cap. Yes, there are exceptions, but that's a resonable rule of thumb.\"",
+              "corpus_doc_id": "457122-1609-3452"
+            },
+            {
+              "doc_id": "425234-0-353",
+              "rank": 5,
+              "score": 0.650546,
+              "score_type": "cosine",
+              "text": "US government bonds and bonds issued by companies with a safe track record and consistently high ratings, for the past years, by credit agencies. But the time line of your investment, which is quite short, maybe a factor of choosing the right bonds. If you are not going to touch the money then CD maybe an option or an interest bearing savings account.",
+              "corpus_doc_id": "425234-0-353"
+            },
+            {
+              "doc_id": "356987-0-416",
+              "rank": 6,
+              "score": 0.629965,
+              "score_type": "cosine",
+              "text": "\"Depends on your definition of \"\"secure\"\". The most \"\"secure\"\" investment from a preservation of principal point of view is a non-tradable, general obligation government bond. (Like a US or Canadian savings bond.) Why? There is no interest rate risk -- you can't lose money. The downside is that the rate is not so good. If you want returns and a reasonably high level of security, you need a diversified portfolio.\"",
+              "corpus_doc_id": "356987-0-416"
+            }
+          ],
+          "generation_source": "mtrag_human"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "mtrag:Explanation",
+          "question": "Why do municipalities issue bonds?",
+          "gold": "Many municipalities issue bonds as a way to raise capital for various projects and infrastructure developments. These bonds are essentially loans that investors provide to the municipality. By issuing bonds, municipalities can finance essential public works such as schools, roads, hospitals, and other infrastructure projects.",
+          "evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.\n\nSay you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.\n\n\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount ",
+          "rag_retrieved_context": [
+            "As observed above, 1.5% for 3 years is not attractive, and since due to the risk profile the stock market also needs to be excluded, there seems about 2 primary ways, viz: fixed income bonds and commodity(e,g, gold). However, since local bonds (gilt or corporate) are sensitive and follow the central bank interest rates, you could look out investing in overseas bonds (usually through a overseas gilt based mutual fund). I am specifically mentioning gilt here as they are government backed (of the overseas location) and have very low risk. Best would be to scout out for strong fund houses that have mutual funds that invest in overseas gilts, preferably of the emerging markets (as the interest is higher). The good fund houses manage the currency volatility and can generate decent returns at fairly low risk.",
+            "just pick a good bond and invest all your money there (since they're fairly low risk) No. That is basically throwing away your money and why would you do that. And who told you they are low risk. That is a very wrong premise. What factors should I consider in picking a bond and how would they weigh against each other? Quite a number of them to say, assuming these aren't government bonds(US, UK etc) How safe is the institution issuing the bond. Their income, business they are in, their past performance business wise and the bonds issued by them, if any. Check for the bond ratings issued by the rating agencies. Read the prospectus and check for any specific conditions i.e. bonds are callable, bonds can be retired under certain conditions, what happens if they default and what order will you be reimbursed(senior debt take priority). Where are interest rates heading, which will decide the price you are paying for the bond. And also the yield you will derive from the bond. How do you intend to invest the income, coupon, you will derive from the bonds. What is your time horizon to invest in bonds and similarly the bond's life. I have invested in stocks previously but realized that it isn't for me Bonds are much more difficult than equities. Stick to government bonds if you can, but they don't generate much income, considering the low interest rates environment. Now that QE is over you might expect interest rates to rise, but you can only wait. Or go for bonds from stable companies i.e. GE, Walmart. And no I am not saying you buy their bonds in any imaginable way.",
+            "It shouldn't be too difficult to find such bond funds that can return a few percentage points above risk-free interest, if you can live with the price volatility. Over time and as you get closer to actually needing the money, shift the holdings to lower-risk holdings to secure the capital amount. Yes, short-term government bonds tend to have dismal returns, particularly currently. (It's pretty much either that, or the country is just about bankrupt already, which means that the risk of default is quite high which is reflected in the interest premiums demanded by investors.) But the risk in most countries' short-term government bonds is also very much limited. And generally, when you are looking at using the money for a specific purpose within a defined (and relatively short) time frame, you want to reduce risk, even if that comes with the price tag of a slightly lower return. And, as always, never put all your eggs in one basket. A combination of government bonds from various countries may be appropriate, just as you should diversify between different stocks in a well-balanced portfolio. Make sure to check the limits on how much money is insured in a single account, for a single individual, in a single institution and for a household - you don't want to chase high interest bank accounts only to be burned by something like that if the institution goes bankrupt. Generally, the sooner you expect to need the money, the less risk you should take, even if that means a lower return on capital. And the risk progression (ignoring currency effects, which affects all of these equally) is roughly short-term government bonds, long-term government bonds or regular corporate bonds, high-yield corporate bonds, stock market large cap, stock market mid and low cap. Yes, there are exceptions, but that's a resonable rule of thumb.\"",
+            "They are still considered relatively safe, as the issuer would need to default (usually this means they are in bankruptcy) in order for you not to be paid back. For example, German bonds have been considered safer than Greek bonds recently based on the underlying strength of the government. Unlike Cash Equivalents, these are not guaranteed against loss, which means that if the issuer defaults, you could lose up to 100% of your investment. Bonds have several new features you will need to consider. One is interest rate risk. One reason bonds perform better than cash equivalents is that you are taking on the risk that if interest rates rise, the fixed payments the bond promises will be worth less, and the face value of your bond will fall. While most bonds are still very Liquid, this means that if you need to sell the bond before it matures, you could lose money. As mentioned earlier, some bonds are riskier than others. Given that you are looking for a low-risk investment, you would want to select a bond that is considered \"\"invesment grade\"\" rather than a riskier \"\"junk\"\" bond. Debt investments are a good choice if you can afford to do without this money for a few years, and you want to balance safety with somewhat better returns than Cash Equivalents. Again though, I would not recommend investing in Debt until you have also built up a separate Emergency Fund. If you do choose to invest in bonds, I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. Ownership Ownership assets includes stocks and other assets such as real estate and precious metals such as gold. While these investments can have high returns, in your situation I would strongly recommend that you not invest in these types of investments, for the following reasons: For these reasons, debt is considered a safer investment than equity for any particular company, government, or the market as a whole. Ownership assets are a good choice for people who have a high Risk Tolerance, long Time Horizon, low Liquidity needs, and will not be bothered by larger potential changes in the value of the investment at any given time.",
+            "\"If by \"\"putting money in the bank\"\" you mean regular savings or checking, then the bond locks a rate for a period of time, whereas your savings/checking rate can vary over that period.  That variation might go for you or against you.  Depending on your situation, you might prefer to take a determined rate to the variations.  In addition, some bond types provide tax benefits (e.g. treasuries and municipal bonds) that change the effective return - You cannot just compare the interest rates. Finally, the bonds have \"\"resale\"\" value on the secondary market like stock - Depending on your outlook and strategy, you might by the bond for its value as a security rather than for the interest specifically just like you'd could buy a dividend-paying stock for its value as a security rather than for the dividend.  In other words, you might think that bond values are going up, so you buy bonds with the intent of making a capital gain rather than counting on the interest returned. (The bond market does depend on the interest rate, so these are not independent factors.) I see the other answer that mentions the potential for your bank busting and you losing money beyond the FDIC insurance limit.  The question doesn't specify U.S. Government bonds though, so I don't think that answer is generally good.  It would be good in the case that you had a lot of money (especially an institution or foreign government) and you were specifically interested in U.S. Treasury bonds.  Not so much if you invest in corporate bonds where you have no government insurance / assurance of any sort.  Municipal bounds are also not backed by the U.S. (federal) government, but they may have some backing at the state level, depending on the state.\"",
+            "US government bonds and bonds issued by companies with a safe track record and consistently high ratings, for the past years, by credit agencies. But the time line of your investment, which is quite short, maybe a factor of choosing the right bonds. If you are not going to touch the money then CD maybe an option or an interest bearing savings account."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "mtrag_human",
+            "generator_saw_rag_answer": false,
+            "mtrag_question_type": "Explanation",
+            "mtrag_answerability": "ANSWERABLE",
+            "mtrag_multi_turn": "Clarification",
+            "native_contexts": [
+              {
+                "doc_id": "275257-0-460",
+                "rank": 1,
+                "score": 31.717758,
+                "score_type": "elser",
+                "text": "The 1 month and 1 year columns show the percentage change over that period. Coupon (coupon rate) is the amount of interest paid on the bond each period (as specified on the coupon itself. Price is the normalised price of the bond; the price of taking a position of $100 worth of the principal in the bond. Yield is the interest rate that you would receive by buying at that price (this is the inverse of the price). The time is the time of the quote presented.",
+                "title": ""
+              },
+              {
+                "doc_id": "211308-0-746",
+                "rank": 2,
+                "score": 29.061998,
+                "score_type": "elser",
+                "text": "Say you buy a bond that currently costs $950, and matures in one year, at $1000 face value. It has one coupon ($50 interest payment) left. The coupon, $50, is 50/950 or 5.26%, but you get the face value, $1000, for an additional $50 return. This is why the yield to maturity is higher than current yield. If the maturity were in two years, the coupons still provide 5.26%, and the extra 1000/950 is another 5.26% over 2 years, or (approx) 2.6%/yr compounded, for a total YTM of 7.86%. This is a back-of envelope calculation, the real way to calculate is with a finance calculator. Entering PV (present value) FV (future value) PMT (coupon payment(s)) and N (number of periods). With no calculator or spreadsheet, my estimate will be pretty close.",
+                "title": ""
+              },
+              {
+                "doc_id": "152265-0-877",
+                "rank": 3,
+                "score": 28.5135,
+                "score_type": "elser",
+                "text": "\"Like all financial investments, the value of a bond is the present value of expected future cash flows.  The Yield to Maturity is the annualized return you get on your initial investment, which is equivalent to the discount rate you'd use to discount future cash flows. So if you discount all future cashflows at 6% annually*, you can calculate the price of the bond: So the price of a $1,000 bond (which is how bond prices are typically quoted) would be $1,097.12. The current yield is just the current coupon payment divided by the current price, which is 70/1,097.12 or 6.38% Question 3 makes no sense, since the yield to maturity would be the same if you bought the bond at market price Question 4 talks about a \"\"sale\"\" date which makes me think that it assumes you sold the bond on the coupon date, but you'd have to know the sale price to calculate the rate of return.\"",
+                "title": ""
+              },
+              {
+                "doc_id": "288126-0-1183",
+                "rank": 4,
+                "score": 17.167355,
+                "score_type": "elser",
+                "text": "\"Yes, definitely. Many municipalities and local governments issue bonds to fund various projects (schools, hospitals, infrastructure, etc). You can buy these bonds and in that way invest in these things. In the US these kinds of bonds are tax-free, i.e.: the income they provide is not taxed (by the US government, may be taxed by your State, check local tax laws). There are also dedicated mutual funds that that is all they invest in, if you don't want to deal with picking individual bonds. As to mom-and-pop stores - that would not be as easy, as mom-and-pop stores are by definition family owned and you can invest in them only if you are personally acquainted with them. Instead, you can invest in small regional/local chains, that while not being mom-and-pop, still small enough to be considered \"\"local\"\", but are publicly traded so that you can easily invest in them. You'll have to look for these. You can also use social lending platforms, like Lending Club, which I reviewed on my blog, or others, where you can participate in a lending pool to other people. You can invest in a credit union by opening an account there. Credit unions are owned by their account holders.\"",
+                "title": ""
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": "576688-0-813",
+              "rank": 1,
+              "score": 0.749976,
+              "score_type": "cosine",
+              "text": "As observed above, 1.5% for 3 years is not attractive, and since due to the risk profile the stock market also needs to be excluded, there seems about 2 primary ways, viz: fixed income bonds and commodity(e,g, gold). However, since local bonds (gilt or corporate) are sensitive and follow the central bank interest rates, you could look out investing in overseas bonds (usually through a overseas gilt based mutual fund). I am specifically mentioning gilt here as they are government backed (of the overseas location) and have very low risk. Best would be to scout out for strong fund houses that have mutual funds that invest in overseas gilts, preferably of the emerging markets (as the interest is higher). The good fund houses manage the currency volatility and can generate decent returns at fairly low risk.",
+              "corpus_doc_id": "576688-0-813"
+            },
+            {
+              "doc_id": "342485-0-1583",
+              "rank": 2,
+              "score": 0.693457,
+              "score_type": "cosine",
+              "text": "just pick a good bond and invest all your money there (since they're fairly low risk) No. That is basically throwing away your money and why would you do that. And who told you they are low risk. That is a very wrong premise. What factors should I consider in picking a bond and how would they weigh against each other? Quite a number of them to say, assuming these aren't government bonds(US, UK etc) How safe is the institution issuing the bond. Their income, business they are in, their past performance business wise and the bonds issued by them, if any. Check for the bond ratings issued by the rating agencies. Read the prospectus and check for any specific conditions i.e. bonds are callable, bonds can be retired under certain conditions, what happens if they default and what order will you be reimbursed(senior debt take priority). Where are interest rates heading, which will decide the price you are paying for the bond. And also the yield you will derive from the bond. How do you intend to invest the income, coupon, you will derive from the bonds. What is your time horizon to invest in bonds and similarly the bond's life. I have invested in stocks previously but realized that it isn't for me Bonds are much more difficult than equities. Stick to government bonds if you can, but they don't generate much income, considering the low interest rates environment. Now that QE is over you might expect interest rates to rise, but you can only wait. Or go for bonds from stable companies i.e. GE, Walmart. And no I am not saying you buy their bonds in any imaginable way.",
+              "corpus_doc_id": "342485-0-1583"
+            },
+            {
+              "doc_id": "457122-1609-3452",
+              "rank": 3,
+              "score": 0.680993,
+              "score_type": "cosine",
+              "text": "It shouldn't be too difficult to find such bond funds that can return a few percentage points above risk-free interest, if you can live with the price volatility. Over time and as you get closer to actually needing the money, shift the holdings to lower-risk holdings to secure the capital amount. Yes, short-term government bonds tend to have dismal returns, particularly currently. (It's pretty much either that, or the country is just about bankrupt already, which means that the risk of default is quite high which is reflected in the interest premiums demanded by investors.) But the risk in most countries' short-term government bonds is also very much limited. And generally, when you are looking at using the money for a specific purpose within a defined (and relatively short) time frame, you want to reduce risk, even if that comes with the price tag of a slightly lower return. And, as always, never put all your eggs in one basket. A combination of government bonds from various countries may be appropriate, just as you should diversify between different stocks in a well-balanced portfolio. Make sure to check the limits on how much money is insured in a single account, for a single individual, in a single institution and for a household - you don't want to chase high interest bank accounts only to be burned by something like that if the institution goes bankrupt. Generally, the sooner you expect to need the money, the less risk you should take, even if that means a lower return on capital. And the risk progression (ignoring currency effects, which affects all of these equally) is roughly short-term government bonds, long-term government bonds or regular corporate bonds, high-yield corporate bonds, stock market large cap, stock market mid and low cap. Yes, there are exceptions, but that's a resonable rule of thumb.\"",
+              "corpus_doc_id": "457122-1609-3452"
+            },
+            {
+              "doc_id": "285185-1708-3970",
+              "rank": 4,
+              "score": 0.661735,
+              "score_type": "cosine",
+              "text": "They are still considered relatively safe, as the issuer would need to default (usually this means they are in bankruptcy) in order for you not to be paid back. For example, German bonds have been considered safer than Greek bonds recently based on the underlying strength of the government. Unlike Cash Equivalents, these are not guaranteed against loss, which means that if the issuer defaults, you could lose up to 100% of your investment. Bonds have several new features you will need to consider. One is interest rate risk. One reason bonds perform better than cash equivalents is that you are taking on the risk that if interest rates rise, the fixed payments the bond promises will be worth less, and the face value of your bond will fall. While most bonds are still very Liquid, this means that if you need to sell the bond before it matures, you could lose money. As mentioned earlier, some bonds are riskier than others. Given that you are looking for a low-risk investment, you would want to select a bond that is considered \"\"invesment grade\"\" rather than a riskier \"\"junk\"\" bond. Debt investments are a good choice if you can afford to do without this money for a few years, and you want to balance safety with somewhat better returns than Cash Equivalents. Again though, I would not recommend investing in Debt until you have also built up a separate Emergency Fund. If you do choose to invest in bonds, I recommend that you diversify your risks by investing in a bond fund, rather than in just one company's or government's debt. This will reduce the likelihood that you will experience a catastrophic loss. Ownership Ownership assets includes stocks and other assets such as real estate and precious metals such as gold. While these investments can have high returns, in your situation I would strongly recommend that you not invest in these types of investments, for the following reasons: For these reasons, debt is considered a safer investment than equity for any particular company, government, or the market as a whole. Ownership assets are a good choice for people who have a high Risk Tolerance, long Time Horizon, low Liquidity needs, and will not be bothered by larger potential changes in the value of the investment at any given time.",
+              "corpus_doc_id": "285185-1708-3970"
+            },
+            {
+              "doc_id": "89181-0-1733",
+              "rank": 5,
+              "score": 0.652036,
+              "score_type": "cosine",
+              "text": "\"If by \"\"putting money in the bank\"\" you mean regular savings or checking, then the bond locks a rate for a period of time, whereas your savings/checking rate can vary over that period.  That variation might go for you or against you.  Depending on your situation, you might prefer to take a determined rate to the variations.  In addition, some bond types provide tax benefits (e.g. treasuries and municipal bonds) that change the effective return - You cannot just compare the interest rates. Finally, the bonds have \"\"resale\"\" value on the secondary market like stock - Depending on your outlook and strategy, you might by the bond for its value as a security rather than for the interest specifically just like you'd could buy a dividend-paying stock for its value as a security rather than for the dividend.  In other words, you might think that bond values are going up, so you buy bonds with the intent of making a capital gain rather than counting on the interest returned. (The bond market does depend on the interest rate, so these are not independent factors.) I see the other answer that mentions the potential for your bank busting and you losing money beyond the FDIC insurance limit.  The question doesn't specify U.S. Government bonds though, so I don't think that answer is generally good.  It would be good in the case that you had a lot of money (especially an institution or foreign government) and you were specifically interested in U.S. Treasury bonds.  Not so much if you invest in corporate bonds where you have no government insurance / assurance of any sort.  Municipal bounds are also not backed by the U.S. (federal) government, but they may have some backing at the state level, depending on the state.\"",
+              "corpus_doc_id": "89181-0-1733"
+            },
+            {
+              "doc_id": "425234-0-353",
+              "rank": 6,
+              "score": 0.651994,
+              "score_type": "cosine",
+              "text": "US government bonds and bonds issued by companies with a safe track record and consistently high ratings, for the past years, by credit agencies. But the time line of your investment, which is quite short, maybe a factor of choosing the right bonds. If you are not going to touch the money then CD maybe an option or an interest bearing savings account.",
+              "corpus_doc_id": "425234-0-353"
+            }
+          ],
+          "generation_source": "mtrag_human"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "mtrag:Comparative",
+          "question": "bonds versus stocks",
+          "gold": "A stock is an ownership interest in a company, when you buy stocks, you become a partial owner of the company.   A company issues a number of shares you can buy. If you own 1,000 shares, for example, you  would own one one-thousandth of the company. You typically buy stock in a company because you believe the company is going to prosper into the future and thus the value of its stock should rise in the open market. A stock also may or may not allow you to vote on company business. A bond is an indebted interest in a company. A company issues bonds to borrow money at an interest rate specified in the bond issuance and makes periodic payments of principal and interest. You buy bonds in a company to lend the company money at an interest rate specified in the bond because you believe the company will be able to repay the debt per the terms of the bond. Think of bonds as kind of like a corporate credit card. When a company needs a lot of cash, it will sell bonds. Bonds tend to be a safer investment than stocks, but offer less potential return.",
+          "evidence": "stocks represent ownership in a company. their price can go up or down depending on how much profit the company makes (or is expected to make).  stocks owners are sometimes paid money by the company if the company has extra cash.  these payments are called dividends. bonds represent a debt that a company owes.  when you buy a bond, then the company owes that debt to you.  typically, the company will pay a small amount of money on a regular basis to the bond owner, then a large lump some at some point in the future. assuming the company does not file bankrupcy, and you keep the bond until it becomes worthless, then you know exactly how much money you will get from buying a bond. because bonds have a fixed payout (assuming no bankrupcy), they tend to have lower average returns.  on the other hand, while stocks have a higher average return, some stocks never return any money. in the usa, stocks and bonds can be purchased through a brokerage account. examples are etrade, tradeking, or robinhood.com.   before purchasing stocks or bonds, you should probably learn a great deal more about other investment concepts such as: diversification, volatility, interest rates, inflation risk, capital gains taxes, (in the usa: ira's, 401k's, the mortgage interest deduction).  at the very least, you will need to decide if you want to buy stocks inside an ira or in a regular brokerage account. you will also probably want to buy a low-expense ration etf (e.g. an index fund etf) unless you feel con",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "stocks represent ownership in a company. their price can go up or down depending on how much profit the company makes (or is expected to make).  stocks owners are sometimes paid money by the company if the company has extra cash.  these payments are called dividends. bonds represent a debt that a company owes.  when you buy a bond, then the company owes that debt to you.  typically, the company will pay a small amount of money on a regular basis to the bond owner, then a large lump some at some point in the future. assuming the company does not file bankrupcy, and you keep the bond until it becomes worthless, then you know exactly how much money you will get from buying a bond. because bonds have a fixed payout (assuming no bankrupcy), they tend to have lower average returns.  on the other hand, while stocks have a higher average return, some stocks never return any money. in the usa, stocks and bonds can be purchased through a brokerage account. examples are etrade, tradeking, or robinhood.com.   before purchasing stocks or bonds, you should probably learn a great deal more about other investment concepts such as: diversification, volatility, interest rates, inflation risk, capital gains taxes, (in the usa: ira's, 401k's, the mortgage interest deduction).  at the very least, you will need to decide if you want to buy stocks inside an ira or in a regular brokerage account. you will also probably want to buy a low-expense ration etf (e.g. an index fund etf) unless you feel con",
+          "rag_retrieved_context": [
+            "\"A few points that I would note: Call options - Could the bond be called away by the issuer? This is something to note as some bonds may end up not being as good as one thought because of this option that gets used. Tax considerations - Are you going for corporate, Treasury, or municipals? Different ones may have different tax consequences to note if you aren't holding the bond in a tax-advantaged account,e.g. Roth IRA, IRA or 401k. Convertible or not? - Some bonds are known as \"\"convertibles\"\" since the bond comes with an option on the stock that can be worth considering for some kinds of bonds. Inflation protection - Some bonds like TIPS or series I savings bonds can have inflation protection built into them that can also be worth understanding. In the case of TIPS, there are principal adjustments while the savings bond will have a change in its interest rate. Default risk - Some of the higher yield bonds may have an issuer go under which is another way one may end up with equity in a company rather than getting their money back. On the other side, for some municipals one could have the risk of the bond not quite being as good as one thought like some Detroit bonds that may end up in a different result given their bankruptcy but there are also revenue bonds that may not meet their target for another situation that may arise. Some bonds may be insured though this requires a bit more research to know the credit rating of the insurer. As for the latter question, what if interest rates rise and your bond's value drops considerably? Do you hold it until maturity or do you try to sell it and get something that has a higher yield based on face value?\"",
+            "With the bond, the company might be in decline but the bond still a good investment so long as the company doesn't decline so much that they cannot pay their debts. Also, bonds can be issued by governments, but governments do not sell stock. (An \"\"ownership share of the government\"\" would not make sense.) This may be the so-called sovereign debt if issued by a sovereign government or it may be local (we call it municipal here in the US) debt issued by a subordinate level of government. Bonds are a little bit like stock in the sense that there's a secondary market for them. That means that if you get partway through the length of the bond and don't want to hold it, you can sell the bond to someone else. Of course, it will be harder to sell a bond later if the company becomes insolvent or if the interest rates go up between when you buy and when you sell. Depending on these market factors, you might end up with a capital gain or capital loss (meaning you get more or less than the principal that you put into the bond) at the time of a sale.\"",
+            "If your main goal is to avoid taxes, municipal bonds are a good strategy, it's not the best way to make more than 1-2% in gains.  And kudos for putting money back into the community.",
+            "\"Individual municipal bonds (not a fund) that will come to term in 2017 from your state.  This satisfies 1, 2, 4 and 5.   It doesn't satisfy #2.  These are not insured, and there can be details in each state about whether the municipal bonds are backed up by state general revenues in the event of a municipal bankruptcy; there are two general kinds, \"\"general obligation\"\" backed by the political will to raise taxes if needed; and \"\"revenue bonds\"\" backed by cash flow such as toll revenue, water utility bills and so forth.  Municipal bankruptcies are rare but not impossible.   http://www.bankrate.com/finance/investing/avoid-municipal-bonds-that-default-2.aspx\"",
+            "\"Yes, definitely. Many municipalities and local governments issue bonds to fund various projects (schools, hospitals, infrastructure, etc). You can buy these bonds and in that way invest in these things. In the US these kinds of bonds are tax-free, i.e.: the income they provide is not taxed (by the US government, may be taxed by your State, check local tax laws). There are also dedicated mutual funds that that is all they invest in, if you don't want to deal with picking individual bonds. As to mom-and-pop stores - that would not be as easy, as mom-and-pop stores are by definition family owned and you can invest in them only if you are personally acquainted with them. Instead, you can invest in small regional/local chains, that while not being mom-and-pop, still small enough to be considered \"\"local\"\", but are publicly traded so that you can easily invest in them. You'll have to look for these. You can also use social lending platforms, like Lending Club, which I reviewed on my blog, or others, where you can participate in a lending pool to other people. You can invest in a credit union by opening an account there. Credit unions are owned by their account holders.\"",
+            "\"So how does one of these get set up exactly? If a private company wants to backstop their ability to repay bond obligations with public funds, doesn't an agreement like that have to go through something like a city council meeting before it's approved? If it does, and that happened in these cases, then the municipalities made a bad decision on an \"\"investment\"\" that included some level of risk, just like any other investment they make. If it doesn't work out, it shouldn't be a surprise who's on the hook for the payment.\""
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "mtrag_human",
+            "generator_saw_rag_answer": false,
+            "mtrag_question_type": "Comparative",
+            "mtrag_answerability": "ANSWERABLE",
+            "mtrag_multi_turn": "Follow-up",
+            "native_contexts": [
+              {
+                "doc_id": "461018-0-1528",
+                "rank": 1,
+                "score": 18.770622,
+                "score_type": "elser",
+                "text": "stocks represent ownership in a company. their price can go up or down depending on how much profit the company makes (or is expected to make).  stocks owners are sometimes paid money by the company if the company has extra cash.  these payments are called dividends. bonds represent a debt that a company owes.  when you buy a bond, then the company owes that debt to you.  typically, the company will pay a small amount of money on a regular basis to the bond owner, then a large lump some at some point in the future. assuming the company does not file bankrupcy, and you keep the bond until it becomes worthless, then you know exactly how much money you will get from buying a bond. because bonds have a fixed payout (assuming no bankrupcy), they tend to have lower average returns.  on the other hand, while stocks have a higher average return, some stocks never return any money. in the usa, stocks and bonds can be purchased through a brokerage account. examples are etrade, tradeking, or robinhood.com.   before purchasing stocks or bonds, you should probably learn a great deal more about other investment concepts such as: diversification, volatility, interest rates, inflation risk, capital gains taxes, (in the usa: ira's, 401k's, the mortgage interest deduction).  at the very least, you will need to decide if you want to buy stocks inside an ira or in a regular brokerage account. you will also probably want to buy a low-expense ration etf (e.g. an index fund etf) unless you feel confident in some other choice.",
+                "title": ""
+              },
+              {
+                "doc_id": "235391-0-1980",
+                "rank": 2,
+                "score": 18.904419,
+                "score_type": "elser",
+                "text": "\"In a sentence, stocks are a share of equity in the company, while bonds are a share of credit to the company. When you buy one share of stock, you own a (typically infinitesimal) percentage of the company. You are usually entitled to a share of the profits of that company, and/or to participate in the business decisions of that company. A particular type of stock may or may not pay dividends, which is the primary way companies share profits with their stockholders (the other way is simply by increasing the company's share value by being successful and thus desirable to investors). A stock also may or may not allow you to vote on company business; you may hear about companies buying 20% or 30% \"\"interests\"\" in other companies; they own that percentage of the company, and their vote on company matters is given that same weight in the total voting pool. Typically, a company offers two levels of stocks: \"\"Common\"\" stock usually has voting rights attached, and may pay dividends. \"\"Preferred\"\" stock usually gives up the voting rights, but pays a higher dividend percentage (maybe double or triple that of common stock) and may have payment guarantees (if a promised dividend is missed in one quarter and then paid in the next, the preferred stockholders get their dividend for the past and present quarters before the common shareholders see a penny). Governments and non-profits are typically prohibited from selling their equity; if a government sold stock it would basically be taxing everyone and then paying back stockholders, while non-profit organizations have no profits to pay out as dividends. Bonds, on the other hand, are a slice of the company's debt load. Think of bonds as kind of like a corporate credit card. When a company needs a lot of cash, it will sell bonds. A single bond may be worth $10, $100, or $1000, depending on the investor market being targeted. This is the amount the company will pay the bondholder at the end of the term of the bond.",
+                "title": ""
+              },
+              {
+                "doc_id": "451301-1585-2798",
+                "rank": 3,
+                "score": 17.764103,
+                "score_type": "elser",
+                "text": "Thus, stock is about ownership in the company, dividends are the payments those owners receive, which may be additional shares or cash usually, and bonds are about lending money. Stocks are usually bought through brokers on various stock exchanges generally. An exception can be made under \"\"Employee Stock Purchase Plans\"\" and other special cases where an employee may be given stock or options that allow the purchase of shares in the company through various plans. This would apply for Canada and the US where I have experience just as a parting note. This is without getting into Convertible Bond that also exists: In finance, a convertible bond or convertible note or convertible debt (or a convertible debenture if it has a maturity of greater than 10 years) is a type of bond that the holder can convert into a specified number of shares of common stock in the issuing company or cash of equal value. It is a hybrid security with debt- and equity-like features. It originated in the mid-19th century, and was used by early speculators such as Jacob Little and Daniel Drew to counter market cornering. Convertible bonds are most often issued by companies with a low credit rating and high growth potential.\"",
+                "title": ""
+              },
+              {
+                "doc_id": "551893-0-2168",
+                "rank": 4,
+                "score": 17.117012,
+                "score_type": "elser",
+                "text": "A stock is an ownership interest in a company.  There can be multiple classes of shares, but to simplify, assuming only one class of shares, a company issues some number of shares, let's say 1,000,000 shares and you can buy shares of the company. If you own 1,000 shares in this example, you would own one one-thousandth of the company.  Public companies have their shares traded on the open market and the price varies as demand for the stock comes and goes relative to people willing to sell their shares. You typically buy stock in a company because you believe the company is going to prosper into the future and thus the value of its stock should rise in the open market. A bond is an indebted interest in a company.  A company issues bonds to borrow money at an interest rate specified in the bond issuance and makes periodic payments of principal and interest.  You buy bonds in a company to lend the company money at an interest rate specified in the bond because you believe the company will be able to repay the debt per the terms of the bond.  The value of a bond as traded on the open exchange varies as the prevailing interest rates vary.  If you buy a bond for $1,000 yielding 5% interest and interest rates go up to 10%, the value of your bond in the open market goes down so that the payment terms of 5% on $1,000 matches hypothetical terms of 10% on a lesser principal amount.  Whatever lesser principal amount at the new rate would lead to the same payment terms determines the new market value.   Alternatively, if interest rates go down, the current value of your bond increases on the open market to make it appear as if it is yielding a lower rate. Regardless of the market value, the company continues to pay interest on the original debt per its terms, so you can always hold onto a bond and get the original promised interest as long as the company does not go bankrupt. So in summary, bonds tend to be a safer investment that offers less potential return.  However, this is not always the case, since if interest rates skyrocket, your bond's value will plummet, although you could just hold onto them and get the low rate originally promised.",
+                "title": ""
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": "325370-0-1674",
+              "rank": 1,
+              "score": 0.634074,
+              "score_type": "cosine",
+              "text": "\"A few points that I would note: Call options - Could the bond be called away by the issuer? This is something to note as some bonds may end up not being as good as one thought because of this option that gets used. Tax considerations - Are you going for corporate, Treasury, or municipals? Different ones may have different tax consequences to note if you aren't holding the bond in a tax-advantaged account,e.g. Roth IRA, IRA or 401k. Convertible or not? - Some bonds are known as \"\"convertibles\"\" since the bond comes with an option on the stock that can be worth considering for some kinds of bonds. Inflation protection - Some bonds like TIPS or series I savings bonds can have inflation protection built into them that can also be worth understanding. In the case of TIPS, there are principal adjustments while the savings bond will have a change in its interest rate. Default risk - Some of the higher yield bonds may have an issuer go under which is another way one may end up with equity in a company rather than getting their money back. On the other side, for some municipals one could have the risk of the bond not quite being as good as one thought like some Detroit bonds that may end up in a different result given their bankruptcy but there are also revenue bonds that may not meet their target for another situation that may arise. Some bonds may be insured though this requires a bit more research to know the credit rating of the insurer. As for the latter question, what if interest rates rise and your bond's value drops considerably? Do you hold it until maturity or do you try to sell it and get something that has a higher yield based on face value?\"",
+              "corpus_doc_id": "325370-0-1674"
+            },
+            {
+              "doc_id": "185156-1717-2771",
+              "rank": 2,
+              "score": 0.628201,
+              "score_type": "cosine",
+              "text": "With the bond, the company might be in decline but the bond still a good investment so long as the company doesn't decline so much that they cannot pay their debts. Also, bonds can be issued by governments, but governments do not sell stock. (An \"\"ownership share of the government\"\" would not make sense.) This may be the so-called sovereign debt if issued by a sovereign government or it may be local (we call it municipal here in the US) debt issued by a subordinate level of government. Bonds are a little bit like stock in the sense that there's a secondary market for them. That means that if you get partway through the length of the bond and don't want to hold it, you can sell the bond to someone else. Of course, it will be harder to sell a bond later if the company becomes insolvent or if the interest rates go up between when you buy and when you sell. Depending on these market factors, you might end up with a capital gain or capital loss (meaning you get more or less than the principal that you put into the bond) at the time of a sale.\"",
+              "corpus_doc_id": "185156-1717-2771"
+            },
+            {
+              "doc_id": "335064-0-182",
+              "rank": 3,
+              "score": 0.619458,
+              "score_type": "cosine",
+              "text": "If your main goal is to avoid taxes, municipal bonds are a good strategy, it's not the best way to make more than 1-2% in gains.  And kudos for putting money back into the community.",
+              "corpus_doc_id": "335064-0-182"
+            },
+            {
+              "doc_id": "391834-0-666",
+              "rank": 4,
+              "score": 0.613378,
+              "score_type": "cosine",
+              "text": "\"Individual municipal bonds (not a fund) that will come to term in 2017 from your state.  This satisfies 1, 2, 4 and 5.   It doesn't satisfy #2.  These are not insured, and there can be details in each state about whether the municipal bonds are backed up by state general revenues in the event of a municipal bankruptcy; there are two general kinds, \"\"general obligation\"\" backed by the political will to raise taxes if needed; and \"\"revenue bonds\"\" backed by cash flow such as toll revenue, water utility bills and so forth.  Municipal bankruptcies are rare but not impossible.   http://www.bankrate.com/finance/investing/avoid-municipal-bonds-that-default-2.aspx\"",
+              "corpus_doc_id": "391834-0-666"
+            },
+            {
+              "doc_id": "288126-0-1183",
+              "rank": 5,
+              "score": 0.610684,
+              "score_type": "cosine",
+              "text": "\"Yes, definitely. Many municipalities and local governments issue bonds to fund various projects (schools, hospitals, infrastructure, etc). You can buy these bonds and in that way invest in these things. In the US these kinds of bonds are tax-free, i.e.: the income they provide is not taxed (by the US government, may be taxed by your State, check local tax laws). There are also dedicated mutual funds that that is all they invest in, if you don't want to deal with picking individual bonds. As to mom-and-pop stores - that would not be as easy, as mom-and-pop stores are by definition family owned and you can invest in them only if you are personally acquainted with them. Instead, you can invest in small regional/local chains, that while not being mom-and-pop, still small enough to be considered \"\"local\"\", but are publicly traded so that you can easily invest in them. You'll have to look for these. You can also use social lending platforms, like Lending Club, which I reviewed on my blog, or others, where you can participate in a lending pool to other people. You can invest in a credit union by opening an account there. Credit unions are owned by their account holders.\"",
+              "corpus_doc_id": "288126-0-1183"
+            },
+            {
+              "doc_id": "567492-0-527",
+              "rank": 6,
+              "score": 0.604783,
+              "score_type": "cosine",
+              "text": "\"So how does one of these get set up exactly? If a private company wants to backstop their ability to repay bond obligations with public funds, doesn't an agreement like that have to go through something like a city council meeting before it's approved? If it does, and that happened in these cases, then the municipalities made a bad decision on an \"\"investment\"\" that included some level of risk, just like any other investment they make. If it doesn't work out, it shouldn't be a surprise who's on the hook for the payment.\"",
+              "corpus_doc_id": "567492-0-527"
+            }
+          ],
+          "generation_source": "mtrag_human"
+        }
+      ]
+    }
+  ]
+}

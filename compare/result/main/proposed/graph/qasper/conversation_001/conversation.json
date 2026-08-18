@@ -1,0 +1,1517 @@
+{
+  "method": "proposed",
+  "rag": "graph",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "dynamic",
+  "generation_source": "rag_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T10:39:02",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-000",
+  "conversations": [
+    {
+      "conversation_id": "conv-000",
+      "seed_question": "What type of model was used for the neural language model in the study?",
+      "type_sequence": [
+        "Seed",
+        "Comparative",
+        "Clarification",
+        "Ambiguous Reference",
+        "Multi-Hop",
+        "Topic Shift",
+        "Ambiguous Reference",
+        "Multi-Hop"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "abstained",
+        "correct",
+        "correct",
+        "correct",
+        "correct",
+        "abstained",
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What type of model was used for the neural language model in the study?",
+          "gold": "four-layer QRNN",
+          "evidence": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop. Specifically focused on language modeling, this paper examines an issue that to our knowledge ha",
+          "rag_answer": "a four-layer QRNN",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)",
+          "rag_retrieved_context": [
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 .",
+            "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models.",
+            "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {},
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.603818,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 161,
+              "rank": 2,
+              "score": 0.551777,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.569845,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.579633,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 167,
+              "rank": 5,
+              "score": 0.574082,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 200,
+              "rank": 6,
+              "score": 0.545982,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            },
+            {
+              "doc_id": 133,
+              "rank": 7,
+              "score": 0.545319,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 120,
+              "rank": 8,
+              "score": 0.545104,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 175,
+              "rank": 1,
+              "score": 0.603818,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 161,
+              "rank": 2,
+              "score": 0.551777,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.569845,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.579633,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 167,
+              "rank": 5,
+              "score": 0.574082,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 200,
+              "rank": 6,
+              "score": 0.545982,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Comparative",
+          "question": "How does the QRNN compare to the KN-5 in terms of architecture and performance?",
+          "gold": "The QRNN architecture consists of a four-layer structure that combines convolutional and recurrent components, achieving state-of-the-art performance on various datasets, while the KN-5 model is a standard five-gram model with modified Kneser-Ney smoothing. In terms of performance, the QRNN is slower than KN-5 on a CPU but significantly faster on a GPU, making it competitive in latency under certain conditions.",
+          "evidence": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the ent",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoot",
+          "rag_retrieved_context": [
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 .",
+            "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "four-layer QRNN",
+            "previous_rag_answer": "a four-layer QRNN",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What type of model was used for the neural language model in the study?"
+              },
+              {
+                "role": "assistant",
+                "content": "a four-layer QRNN"
+              }
+            ]
+          },
+          "expected_components": [
+            "QRNN :: architecture",
+            "QRNN :: performance",
+            "KN-5 :: architecture",
+            "KN-5 :: performance"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 185,
+              "rank": 1,
+              "score": 0.643059,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 175,
+              "rank": 2,
+              "score": 0.534016,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.533398,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 172,
+              "rank": 4,
+              "score": 0.633616,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.587281,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 186,
+              "rank": 6,
+              "score": 0.575477,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 181,
+              "rank": 7,
+              "score": 0.557587,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 178,
+              "rank": 8,
+              "score": 0.542738,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 184,
+              "rank": 9,
+              "score": 0.53853,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 176,
+              "rank": 10,
+              "score": 0.538231,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 161,
+              "rank": 11,
+              "score": 0.494645,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 183,
+              "rank": 12,
+              "score": 0.467312,
+              "score_type": "cosine",
+              "text": "From Figure 1 , we find that QRNN models yield strongly linear log perplexity–recall plots as well, where $r=0.88$ and $r=0.93$ for PTB and WT103, respectively. Note that, due to the improved model quality over KN-5, the point clouds are shifted downward compared to Figure 1 . We conclude that log perplexity, or cross entropy, provides a more human-understandable indicator of R@3 than perplexity does. Overall, these findings agree with those from BIBREF21 , which explores the log perplexity–word error rate scale in language modeling for speech recognition."
+            },
+            {
+              "doc_id": 166,
+              "rank": 13,
+              "score": 0.467287,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 177,
+              "rank": 14,
+              "score": 0.464388,
+              "score_type": "cosine",
+              "text": "For the KN-5 model, we trained an off-the-shelf five-gram model using the popular SRILM toolkit BIBREF19 . We did not specify any special hyperparameters."
+            },
+            {
+              "doc_id": 216,
+              "rank": 15,
+              "score": 0.427869,
+              "score_type": "cosine",
+              "text": "We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings."
+            },
+            {
+              "doc_id": 120,
+              "rank": 16,
+              "score": 0.427443,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 186,
+              "rank": 1,
+              "score": 0.667595,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 179,
+              "rank": 2,
+              "score": 0.620675,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.645546,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.665637,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 172,
+              "rank": 5,
+              "score": 0.652083,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 6,
+              "score": 0.63824,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Clarification",
+          "question": "Can you explain how the QRNN performs on a GPU compared to the KN-5?",
+          "gold": "The QRNN is significantly faster than the KN-5 on a GPU, achieving an 11 times speedup, while it is slower on a CPU, being only 60% slower than KN-5.",
+          "evidence": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the ent",
+          "rag_answer": "On a GPU, the QRNN model is faster by 11 times compared to the KN-5 model.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a",
+          "rag_retrieved_context": [
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The QRNN architecture consists of a four-layer structure that combines convolutional and recurrent components, achieving state-of-the-art performance on various datasets, while the KN-5 model is a standard five-gram model with modified Kneser-Ney smoothing. In terms of performance, the QRNN is slower than KN-5 on a CPU but significantly faster on a GPU, making it competitive in latency under certain conditions.",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What type of model was used for the neural language model in the study?"
+              },
+              {
+                "role": "assistant",
+                "content": "a four-layer QRNN"
+              },
+              {
+                "role": "user",
+                "content": "How does the QRNN compare to the KN-5 in terms of architecture and performance?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 185,
+              "rank": 1,
+              "score": 0.68155,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 175,
+              "rank": 2,
+              "score": 0.516356,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.586458,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 178,
+              "rank": 4,
+              "score": 0.597073,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 172,
+              "rank": 5,
+              "score": 0.593429,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 170,
+              "rank": 6,
+              "score": 0.579543,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.549591,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 181,
+              "rank": 8,
+              "score": 0.545821,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 176,
+              "rank": 9,
+              "score": 0.516798,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 185,
+              "rank": 1,
+              "score": 0.664346,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 175,
+              "rank": 2,
+              "score": 0.60802,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.608476,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 186,
+              "rank": 4,
+              "score": 0.639061,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 179,
+              "rank": 5,
+              "score": 0.627253,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 170,
+              "rank": 6,
+              "score": 0.60903,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Ambiguous Reference",
+          "question": "What kind of results does it achieve on various datasets?",
+          "gold": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB.",
+          "evidence": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-",
+          "rag_answer": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the ent",
+          "rag_retrieved_context": [
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The QRNN is significantly faster than the KN-5 on a GPU, achieving an 11 times speedup, while it is slower on a CPU, being only 60% slower than KN-5.",
+            "previous_rag_answer": "On a GPU, the QRNN model is faster by 11 times compared to the KN-5 model.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What type of model was used for the neural language model in the study?"
+              },
+              {
+                "role": "assistant",
+                "content": "a four-layer QRNN"
+              },
+              {
+                "role": "user",
+                "content": "How does the QRNN compare to the KN-5 in terms of architecture and performance?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you explain how the QRNN performs on a GPU compared to the KN-5?"
+              },
+              {
+                "role": "assistant",
+                "content": "On a GPU, the QRNN model is faster by 11 times compared to the KN-5 model."
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 172,
+              "rank": 1,
+              "score": 0.679667,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 2,
+              "score": 0.542412,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 176,
+              "rank": 3,
+              "score": 0.581599,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.616029,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 175,
+              "rank": 5,
+              "score": 0.600951,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 6,
+              "score": 0.577988,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 185,
+              "rank": 7,
+              "score": 0.560767,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 178,
+              "rank": 8,
+              "score": 0.540934,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 185,
+              "rank": 1,
+              "score": 0.70795,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 175,
+              "rank": 2,
+              "score": 0.490482,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.537146,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 178,
+              "rank": 4,
+              "score": 0.594257,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 179,
+              "rank": 5,
+              "score": 0.584507,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 184,
+              "rank": 6,
+              "score": 0.564807,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Multi-Hop",
+          "question": "What results does the QRNN achieve on the PTB dataset?",
+          "gold": "The QRNN achieves state-of-the-art results on the PTB dataset.",
+          "evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results o",
+          "rag_answer": "The QRNN achieves state-of-the-art results on the PTB dataset.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the ent",
+          "rag_retrieved_context": [
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest.",
+            "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage.",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB.",
+            "previous_rag_answer": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "How does the QRNN compare to the KN-5 in terms of architecture and performance?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              },
+              {
+                "role": "user",
+                "content": "Can you explain how the QRNN performs on a GPU compared to the KN-5?"
+              },
+              {
+                "role": "assistant",
+                "content": "On a GPU, the QRNN model is faster by 11 times compared to the KN-5 model."
+              },
+              {
+                "role": "user",
+                "content": "What kind of results does it achieve on various datasets?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB."
+              }
+            ]
+          },
+          "expected_components": [
+            "QRNN->PTB (evaluated_on)",
+            "PTB->KN-5 (evaluated_on)"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.695619,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 172,
+              "rank": 2,
+              "score": 0.511466,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.527127,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.693726,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 185,
+              "rank": 5,
+              "score": 0.645352,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 183,
+              "rank": 6,
+              "score": 0.603083,
+              "score_type": "cosine",
+              "text": "From Figure 1 , we find that QRNN models yield strongly linear log perplexity–recall plots as well, where $r=0.88$ and $r=0.93$ for PTB and WT103, respectively. Note that, due to the improved model quality over KN-5, the point clouds are shifted downward compared to Figure 1 . We conclude that log perplexity, or cross entropy, provides a more human-understandable indicator of R@3 than perplexity does. Overall, these findings agree with those from BIBREF21 , which explores the log perplexity–word error rate scale in language modeling for speech recognition."
+            },
+            {
+              "doc_id": 184,
+              "rank": 7,
+              "score": 0.592405,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 178,
+              "rank": 8,
+              "score": 0.58256,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 181,
+              "rank": 9,
+              "score": 0.554608,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 127,
+              "rank": 10,
+              "score": 0.511096,
+              "score_type": "cosine",
+              "text": "Experimental results show that QA-CTS task leads to significant improvement due to shared dataset. Our proposed model also achieves significantly better performance than the strong baseline methods. In addition, we also show that two-stage training mechanism has a great improvement on QA-CTS task."
+            },
+            {
+              "doc_id": 182,
+              "rank": 11,
+              "score": 0.509998,
+              "score_type": "cosine",
+              "text": "Perplexity–recall scale. In Figure 1 , using KN-5 as the model, we plot the log perplexity (cross entropy) and R@3 error ( $1 - \\text{R@3}$ ) for every sentence in PTB and WT103. The horizontal clusters arise from multiple perplexity points representing the same R@3 value, as explained in Section \"Infrastructure\" . We also observe that the perplexity–recall scale is non-linear—instead, log perplexity appears to have a moderate linear relationship with R@3 error on PTB ( $r=0.85$ ), and an even stronger relationship on WT103 ( $r=0.94$ ). This is partially explained by WT103 having much longer sentences, and thus less noisy statistics."
+            },
+            {
+              "doc_id": 170,
+              "rank": 12,
+              "score": 0.491473,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 156,
+              "rank": 13,
+              "score": 0.488187,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 120,
+              "rank": 14,
+              "score": 0.460449,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 155,
+              "rank": 15,
+              "score": 0.456184,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 174,
+              "rank": 16,
+              "score": 0.45084,
+              "score_type": "cosine",
+              "text": "We conducted our experiments on Penn Treebank (PTB; BIBREF12 ) and WikiText-103 (WT103; BIBREF13 ). Preprocessed by BIBREF14 , PTB contains 887K tokens for training, 70K for validation, and 78K for test, with a vocabulary size of 10,000. On the other hand, WT103 comprises 103 million tokens for training, 217K for validation, and 245K for test, spanning a vocabulary of 267K unique tokens."
+            },
+            {
+              "doc_id": 44,
+              "rank": 17,
+              "score": 0.255791,
+              "score_type": "cosine",
+              "text": "1.1.1.1em"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 185,
+              "rank": 1,
+              "score": 0.748561,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 175,
+              "rank": 2,
+              "score": 0.639757,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.58165,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 176,
+              "rank": 4,
+              "score": 0.651889,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 184,
+              "rank": 5,
+              "score": 0.650305,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 178,
+              "rank": 6,
+              "score": 0.636382,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Topic Shift",
+          "question": "Now tell me about the training procedure for the ptb-qrnn model.",
+          "gold": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, with a learning rate of 30 throughout.",
+          "evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results o",
+          "rag_answer": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, all with a learning rate of 30.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a ",
+          "rag_retrieved_context": [
+            "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration.",
+            "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The QRNN achieves state-of-the-art results on the PTB dataset.",
+            "previous_rag_answer": "The QRNN achieves state-of-the-art results on the PTB dataset.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "Can you explain how the QRNN performs on a GPU compared to the KN-5?"
+              },
+              {
+                "role": "assistant",
+                "content": "On a GPU, the QRNN model is faster by 11 times compared to the KN-5 model."
+              },
+              {
+                "role": "user",
+                "content": "What kind of results does it achieve on various datasets?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB."
+              },
+              {
+                "role": "user",
+                "content": "What results does the QRNN achieve on the PTB dataset?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on the PTB dataset."
+              }
+            ]
+          },
+          "expected_components": [
+            "epochs",
+            "optimizer",
+            "learning_rate"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.723775,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 172,
+              "rank": 2,
+              "score": 0.538685,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.468217,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.605498,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 178,
+              "rank": 5,
+              "score": 0.560941,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 185,
+              "rank": 6,
+              "score": 0.543443,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 170,
+              "rank": 7,
+              "score": 0.524442,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 184,
+              "rank": 8,
+              "score": 0.504099,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 183,
+              "rank": 9,
+              "score": 0.384832,
+              "score_type": "cosine",
+              "text": "From Figure 1 , we find that QRNN models yield strongly linear log perplexity–recall plots as well, where $r=0.88$ and $r=0.93$ for PTB and WT103, respectively. Note that, due to the improved model quality over KN-5, the point clouds are shifted downward compared to Figure 1 . We conclude that log perplexity, or cross entropy, provides a more human-understandable indicator of R@3 than perplexity does. Overall, these findings agree with those from BIBREF21 , which explores the log perplexity–word error rate scale in language modeling for speech recognition."
+            },
+            {
+              "doc_id": 182,
+              "rank": 10,
+              "score": 0.364888,
+              "score_type": "cosine",
+              "text": "Perplexity–recall scale. In Figure 1 , using KN-5 as the model, we plot the log perplexity (cross entropy) and R@3 error ( $1 - \\text{R@3}$ ) for every sentence in PTB and WT103. The horizontal clusters arise from multiple perplexity points representing the same R@3 value, as explained in Section \"Infrastructure\" . We also observe that the perplexity–recall scale is non-linear—instead, log perplexity appears to have a moderate linear relationship with R@3 error on PTB ( $r=0.85$ ), and an even stronger relationship on WT103 ( $r=0.94$ ). This is partially explained by WT103 having much longer sentences, and thus less noisy statistics."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.729206,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 179,
+              "rank": 2,
+              "score": 0.508301,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.570272,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.684786,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 185,
+              "rank": 5,
+              "score": 0.604943,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 184,
+              "rank": 6,
+              "score": 0.592534,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Ambiguous Reference",
+          "question": "What kind of regularization techniques does it apply during training?",
+          "gold": "The QRNN models applied regularization techniques as specified in the official codebase.",
+          "evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results o",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a ",
+          "rag_retrieved_context": [
+            "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration.",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, with a learning rate of 30 throughout.",
+            "previous_rag_answer": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, all with a learning rate of 30.",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What kind of results does it achieve on various datasets?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on a variety of datasets, such as WT103 and PTB."
+              },
+              {
+                "role": "user",
+                "content": "What results does the QRNN achieve on the PTB dataset?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on the PTB dataset."
+              },
+              {
+                "role": "user",
+                "content": "Now tell me about the training procedure for the ptb-qrnn model."
+              },
+              {
+                "role": "assistant",
+                "content": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, all with a learning rate of 30."
+              }
+            ]
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.688634,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 172,
+              "rank": 2,
+              "score": 0.51286,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 179,
+              "rank": 3,
+              "score": 0.409329,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.597638,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 170,
+              "rank": 5,
+              "score": 0.522757,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 183,
+              "rank": 6,
+              "score": 0.513503,
+              "score_type": "cosine",
+              "text": "From Figure 1 , we find that QRNN models yield strongly linear log perplexity–recall plots as well, where $r=0.88$ and $r=0.93$ for PTB and WT103, respectively. Note that, due to the improved model quality over KN-5, the point clouds are shifted downward compared to Figure 1 . We conclude that log perplexity, or cross entropy, provides a more human-understandable indicator of R@3 than perplexity does. Overall, these findings agree with those from BIBREF21 , which explores the log perplexity–word error rate scale in language modeling for speech recognition."
+            },
+            {
+              "doc_id": 185,
+              "rank": 7,
+              "score": 0.485279,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 181,
+              "rank": 8,
+              "score": 0.46471,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 178,
+              "rank": 9,
+              "score": 0.475596,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.777062,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 179,
+              "rank": 2,
+              "score": 0.465489,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.513734,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 175,
+              "rank": 4,
+              "score": 0.639384,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 185,
+              "rank": 5,
+              "score": 0.543043,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 178,
+              "rank": 6,
+              "score": 0.535482,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "generation_source": "rag_history"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Multi-Hop",
+          "question": "What type of GPU is used with the QRNN during evaluation?",
+          "gold": "Titan V GPU",
+          "evidence": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB",
+          "rag_answer": "Titan V GPU",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest. Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 . For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly. For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results o",
+          "rag_retrieved_context": [
+            "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "dynamic",
+            "generator_saw_rag_answer": true,
+            "previous_gold_answer": "The QRNN models applied regularization techniques as specified in the official codebase.",
+            "previous_rag_answer": "I don't know",
+            "history_given_to_generator": [
+              {
+                "role": "user",
+                "content": "What results does the QRNN achieve on the PTB dataset?"
+              },
+              {
+                "role": "assistant",
+                "content": "The QRNN achieves state-of-the-art results on the PTB dataset."
+              },
+              {
+                "role": "user",
+                "content": "Now tell me about the training procedure for the ptb-qrnn model."
+              },
+              {
+                "role": "assistant",
+                "content": "The ptb-qrnn model was trained for 550 epochs using NT-ASGD, then finetuned for 300 epochs using ASGD, all with a learning rate of 30."
+              },
+              {
+                "role": "user",
+                "content": "What kind of regularization techniques does it apply during training?"
+              },
+              {
+                "role": "assistant",
+                "content": "I don't know"
+              }
+            ]
+          },
+          "expected_components": [
+            "QRNN->i7-4790k (evaluated_on)",
+            "i7-4790k->Titan V (used_with)"
+          ],
+          "question_generation_documents": [
+            {
+              "doc_id": 178,
+              "rank": 1,
+              "score": 0.616317,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 172,
+              "rank": 2,
+              "score": 0.485943,
+              "score_type": "cosine",
+              "text": "Multiple QRNN layers can be stacked for deeper hierarchical representation, with the output $\\mathbf {h}_{1:t}$ being fed as the input into the subsequent layer: In language modeling, a four-layer QRNN is a standard architecture BIBREF11 ."
+            },
+            {
+              "doc_id": 175,
+              "rank": 3,
+              "score": 0.494836,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 179,
+              "rank": 4,
+              "score": 0.605414,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 185,
+              "rank": 5,
+              "score": 0.603475,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            },
+            {
+              "doc_id": 176,
+              "rank": 6,
+              "score": 0.527718,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 170,
+              "rank": 7,
+              "score": 0.489826,
+              "score_type": "cosine",
+              "text": "Quasi-Recurrent Neural Networks. Quasi-recurrent neural networks (QRNNs; BIBREF10 ) achieve current state of the art in word-level language modeling BIBREF11 . A quasi-recurrent layer comprises two separate parts: a convolution layer with three weights, and a recurrent pooling layer. Given an input $\\mathbf {X} \\in \\mathbb {R}^{k \\times n}$ , the convolution layer is $\n\\mathbf {Z} = \\tanh (\\mathbf {W}_z \\cdot \\mathbf {X})\\\\\n\\mathbf {F} = \\sigma (\\mathbf {W}_f \\cdot \\mathbf {X})\\\\\n\\mathbf {O} = \\sigma (\\mathbf {W}_o \\cdot \\mathbf {X})\n$"
+            },
+            {
+              "doc_id": 184,
+              "rank": 8,
+              "score": 0.477894,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 181,
+              "rank": 9,
+              "score": 0.469792,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 120,
+              "rank": 10,
+              "score": 0.465652,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 216,
+              "rank": 11,
+              "score": 0.45947,
+              "score_type": "cosine",
+              "text": "We train our NMT model on a commodity PC with a i7-4790k CPU (4.00GHz), with 32GB RAM and one NVidia GeForce GTX 980 GPU. Our system can process approximately 1,300 \\textendash 1,500 source tokens/s and approximately 5,730 \\textendash 5,830 output tokens/s. Training one epoch takes in average 72 minutes. The model is trained for 8 epochs, i.e. over night. We call fake review generated by this model \\emph{NMT-Fake reviews}. We only need to train one model to produce reviews of different ratings."
+            },
+            {
+              "doc_id": 180,
+              "rank": 12,
+              "score": 0.441006,
+              "score_type": "cosine",
+              "text": "In addition to energy and latency, another consideration for the NLP developer selecting an operating point is the cost of underlying hardware. For our setup, the RPi costs $35 USD, the CPU costs $350 USD, and the GPU costs $3000 USD."
+            },
+            {
+              "doc_id": 150,
+              "rank": 13,
+              "score": 0.408803,
+              "score_type": "cosine",
+              "text": "Two-stage training mechanism is previously applied on bilinear model in fine-grained visual recognition BIBREF31, BIBREF32, BIBREF33. Two CNNs are deployed in the model. One is trained at first for coarse-graind features while freezing the parameter of the other. Then unfreeze the other one and train the entire model in a low learning rate for fetching fine-grained features."
+            },
+            {
+              "doc_id": 186,
+              "rank": 14,
+              "score": 0.395333,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 15,
+              "score": 0.38645,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 16,
+              "score": 0.370081,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 226,
+              "rank": 17,
+              "score": 0.291085,
+              "score_type": "cosine",
+              "text": "\\\\"
+            },
+            {
+              "doc_id": 223,
+              "rank": 18,
+              "score": 0.24639,
+              "score_type": "cosine",
+              "text": "\\hline"
+            },
+            {
+              "doc_id": 220,
+              "rank": 19,
+              "score": 0.2291,
+              "score_type": "cosine",
+              "text": "\\begin{figure}[t]"
+            },
+            {
+              "doc_id": 43,
+              "rank": 20,
+              "score": 0.218037,
+              "score_type": "cosine",
+              "text": "1.1.1em"
+            },
+            {
+              "doc_id": 296,
+              "rank": 21,
+              "score": 0.212162,
+              "score_type": "cosine",
+              "text": "Y: \"arrow\", \"club\", \"gun\", \"missile\", \"spear\", \"ax\", \"dagger\", \"harpoon\", \"pistol\", \"sword\", \"blade\", \"dynamite\", \"hatchet\", \"rifle\", \"tank\", \"bomb\", \"firearm\", \"knife\", \"shotgun\", \"teargas\", \"cannon\", \"grenade\", \"mace\", \"slingshot\", \"whip\""
+            },
+            {
+              "doc_id": 42,
+              "rank": 22,
+              "score": 0.210083,
+              "score_type": "cosine",
+              "text": "1.1em"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 176,
+              "rank": 1,
+              "score": 0.731703,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            },
+            {
+              "doc_id": 179,
+              "rank": 2,
+              "score": 0.53079,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 181,
+              "rank": 3,
+              "score": 0.474924,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 178,
+              "rank": 4,
+              "score": 0.581059,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 175,
+              "rank": 5,
+              "score": 0.571609,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 185,
+              "rank": 6,
+              "score": 0.564006,
+              "score_type": "cosine",
+              "text": "In Table 2 (last two columns), the desktop yields very different results: the neural models on PTB (rows 2–3) are 9 $\\times $ slower than KN-5, but the absolute latency is only 8 ms/q, which is still much faster than what humans perceive as instantaneous BIBREF23 . If a high-end commodity GPU is available, then the models are only twice as slow as KN-5 is. From row 5, even better results are noted with wt103-qrnn: On the CPU, the QRNN is only 60% slower than KN-5 is, while the model is faster by 11 $\\times $ on a GPU. These results suggest that, if only latency is considered under a commodity desktop environment, the QRNN model is humanly indistinguishable from the KN-5 model, even without using GPU acceleration."
+            }
+          ],
+          "generation_source": "rag_history"
+        }
+      ]
+    }
+  ]
+}

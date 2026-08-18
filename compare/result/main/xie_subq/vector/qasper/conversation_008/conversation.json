@@ -1,0 +1,1048 @@
+{
+  "method": "xie_subq",
+  "rag": "vector",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T11:43:44",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-007",
+  "conversations": [
+    {
+      "conversation_id": "conv-007",
+      "seed_question": "How many restaurant reviews are contained in the Yelp Challenge dataset?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:background",
+        "Xie:background",
+        "Xie:background"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "correct",
+        "hallucinated",
+        "correct",
+        "correct",
+        "correct",
+        "abstained",
+        "wrong"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "How many restaurant reviews are contained in the Yelp Challenge dataset?",
+          "gold": "2.9 million",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_answer": "2.9 million",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.670566,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.650558,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 202,
+              "rank": 3,
+              "score": 0.420277,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 192,
+              "rank": 4,
+              "score": 0.411332,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 5,
+              "score": 0.380885,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 80,
+              "rank": 6,
+              "score": 0.37794,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 153,
+              "rank": 7,
+              "score": 0.370835,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 194,
+              "rank": 8,
+              "score": 0.358835,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.670484,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.650581,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 202,
+              "rank": 3,
+              "score": 0.420359,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 192,
+              "rank": 4,
+              "score": 0.411314,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 5,
+              "score": 0.380883,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What is the total number of restaurant reviews in the Yelp Challenge dataset?",
+          "gold": "2.9 million",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_answer": "2.9 million",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "2.9 million",
+            "previous_rag_answer": "2.9 million"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.640836,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.622963,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.374869,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.368494,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 80,
+              "rank": 5,
+              "score": 0.35607,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 189,
+              "rank": 6,
+              "score": 0.334556,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 153,
+              "rank": 7,
+              "score": 0.331397,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 194,
+              "rank": 8,
+              "score": 0.324887,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.64075,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.622963,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.374887,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.368575,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 80,
+              "rank": 5,
+              "score": 0.355708,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "Are there any specific criteria for the reviews included in the dataset?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_answer": "The dataset contains 2.9 million 1-5 star restaurant reviews, and all reviews are treated as genuine human-written reviews.",
+          "outcome": "hallucinated",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "2.9 million",
+            "previous_rag_answer": "2.9 million"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.646063,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.628727,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.3883,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.36378,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 80,
+              "rank": 5,
+              "score": 0.358808,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 189,
+              "rank": 6,
+              "score": 0.343275,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 153,
+              "rank": 7,
+              "score": 0.338929,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 194,
+              "rank": 8,
+              "score": 0.333199,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.636278,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.634339,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.39675,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.372479,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 80,
+              "rank": 5,
+              "score": 0.364914,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:background",
+          "question": "What is the definition of the Yelp Challenge dataset?",
+          "gold": "The Yelp Challenge dataset includes metadata about restaurants and contains 2.9 million restaurant reviews, which are treated as genuine human-written reviews.",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_answer": "The Yelp Challenge dataset contains 2.9 million 1-5 star restaurant reviews, treated as genuine human-written reviews, and includes metadata about restaurants such as names, food tags, cities, and states.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_retrieved_context": [
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi).",
+            "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "The dataset contains 2.9 million 1-5 star restaurant reviews, and all reviews are treated as genuine human-written reviews."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.646758,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.636528,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 202,
+              "rank": 3,
+              "score": 0.383151,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 80,
+              "rank": 4,
+              "score": 0.378155,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 192,
+              "rank": 5,
+              "score": 0.377843,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 6,
+              "score": 0.363104,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 153,
+              "rank": 7,
+              "score": 0.359567,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 194,
+              "rank": 8,
+              "score": 0.345909,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 187,
+              "rank": 1,
+              "score": 0.712778,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 209,
+              "rank": 2,
+              "score": 0.636228,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.476805,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 4,
+              "score": 0.456829,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 194,
+              "rank": 5,
+              "score": 0.454708,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:background",
+          "question": "What types of data are included in the Yelp Challenge dataset?",
+          "gold": "The Yelp Challenge dataset includes metadata about restaurants and contains 2.9 million restaurant reviews.",
+          "evidence": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_answer": "The Yelp Challenge dataset includes 2.9 million 1-5 star restaurant reviews and metadata about restaurants such as names, food tags, cities, and states.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The Yelp Challenge dataset includes metadata about restaurants and contains 2.9 million restaurant reviews, which are treated as genuine human-written reviews.",
+            "previous_rag_answer": "The Yelp Challenge dataset contains 2.9 million 1-5 star restaurant reviews, treated as genuine human-written reviews, and includes metadata about restaurants such as names, food tags, cities, and states."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 187,
+              "rank": 1,
+              "score": 0.679777,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 209,
+              "rank": 2,
+              "score": 0.678312,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.445944,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 4,
+              "score": 0.435764,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 194,
+              "rank": 5,
+              "score": 0.428574,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 6,
+              "score": 0.41816,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 188,
+              "rank": 7,
+              "score": 0.385164,
+              "score_type": "cosine",
+              "text": "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+            },
+            {
+              "doc_id": 193,
+              "rank": 8,
+              "score": 0.373039,
+              "score_type": "cosine",
+              "text": "Due to monetary impact of user-generated content, some businesses have relied on so-called crowd-turfing agents BIBREF7 that promise to deliver positive ratings written by workers to a customer in exchange for a monetary compensation. Crowd-turfing ethics are complicated. For example, Amazon community guidelines prohibit buying content relating to promotions, but the act of writing fabricated content is not considered illegal, nor is matching workers to customers BIBREF8 . Year 2015, approximately 20% of online reviews on yelp.com were suspected of being fake BIBREF9 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.717135,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.680957,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.428686,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.414087,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 189,
+              "rank": 5,
+              "score": 0.39169,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "How was the Yelp Challenge dataset collected?",
+          "gold": "The Yelp Challenge dataset was collected by fetching metadata about restaurants and pairing it with 2.9 million restaurant reviews, creating (context, review)-pairs for a parallel corpus.",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_answer": "The Yelp Challenge dataset was collected by fetching 2.9 million 1-5 star restaurant reviews and their corresponding metadata, which includes restaurant names, food tags, cities, and states.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich in",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The Yelp Challenge dataset includes metadata about restaurants and contains 2.9 million restaurant reviews.",
+            "previous_rag_answer": "The Yelp Challenge dataset includes 2.9 million 1-5 star restaurant reviews and metadata about restaurants such as names, food tags, cities, and states."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.721229,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.674287,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.40253,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.402227,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 189,
+              "rank": 5,
+              "score": 0.400231,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 194,
+              "rank": 6,
+              "score": 0.385122,
+              "score_type": "cosine",
+              "text": "Nowadays, user-generated review sites like yelp.com use filters and fraudulent review detection techniques. These factors have resulted in an increase in the requirements of crowd-turfed reviews provided to review sites, which in turn has led to an increase in the cost of high-quality review. Due to the cost increase, researchers hypothesize the existence of neural network-generated fake reviews. These neural-network-based fake reviews are statistically different from human-written fake reviews, and are not caught by classifiers trained on these BIBREF0 ."
+            },
+            {
+              "doc_id": 234,
+              "rank": 7,
+              "score": 0.353741,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            },
+            {
+              "doc_id": 153,
+              "rank": 8,
+              "score": 0.351618,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.72088,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.638858,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.400269,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.370782,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 153,
+              "rank": 5,
+              "score": 0.339633,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:background",
+          "question": "How can one access the Yelp Challenge dataset?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 .",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The Yelp Challenge dataset was collected by fetching metadata about restaurants and pairing it with 2.9 million restaurant reviews, creating (context, review)-pairs for a parallel corpus.",
+            "previous_rag_answer": "The Yelp Challenge dataset was collected by fetching 2.9 million 1-5 star restaurant reviews and their corresponding metadata, which includes restaurant names, food tags, cities, and states."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.773706,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.66411,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 202,
+              "rank": 3,
+              "score": 0.383414,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 153,
+              "rank": 4,
+              "score": 0.370658,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 192,
+              "rank": 5,
+              "score": 0.366899,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 189,
+              "rank": 6,
+              "score": 0.359863,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 234,
+              "rank": 7,
+              "score": 0.354939,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            },
+            {
+              "doc_id": 80,
+              "rank": 8,
+              "score": 0.352472,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.71794,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.625803,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 192,
+              "rank": 3,
+              "score": 0.390185,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.376385,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 189,
+              "rank": 5,
+              "score": 0.336453,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:background",
+          "question": "What year was the Yelp Challenge dataset released?",
+          "gold": "August 2017",
+          "evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_answer": "2017",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below: We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform ",
+          "rag_retrieved_context": [
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 ).",
+            "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews.",
+            "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.733157,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.659333,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 202,
+              "rank": 3,
+              "score": 0.387156,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 153,
+              "rank": 4,
+              "score": 0.377317,
+              "score_type": "cosine",
+              "text": "Our dataset is annotated based on Chinese pathology reports provided by the Department of Gastrointestinal Surgery, Ruijin Hospital. It contains 17,833 sentences, 826,987 characters and 2,714 question-answer pairs. All question-answer pairs are annotated and reviewed by four clinicians with three types of questions, namely tumor size, proximal resection margin and distal resection margin. These annotated instances have been partitioned into 1,899 training instances (12,412 sentences) and 815 test instances (5,421 sentences). Each instance has one or several sentences. Detailed statistics of different types of entities are listed in Table TABREF20."
+            },
+            {
+              "doc_id": 80,
+              "rank": 5,
+              "score": 0.376934,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 189,
+              "rank": 6,
+              "score": 0.369989,
+              "score_type": "cosine",
+              "text": "Automatically generated fake reviews have only recently become natural enough to fool human readers. Yao et al. BIBREF0 use a deep neural network (a so-called 2-layer LSTM BIBREF1 ) to generate fake reviews, and concluded that these fake reviews look sufficiently genuine to fool native English speakers. They train their model using real restaurant reviews from yelp.com BIBREF2 . Once trained, the model is used to generate reviews character-by-character. Due to the generation methodology, it cannot be easily targeted for a specific context (meaningful side information). Consequently, the review generation process may stray off-topic. For instance, when generating a review for a Japanese restaurant in Las Vegas, the review generation process may include references to an Italian restaurant in Baltimore. The authors of BIBREF0 apply a post-processing step (customization), which replaces food-related words with more suitable ones (sampled from the targeted restaurant). The word replacement strategy has drawbacks: it can miss certain words and replace others independent of their surrounding words, which may alert savvy readers. As an example: when we applied the customization technique described in BIBREF0 to a review for a Japanese restaurant it changed the snippet garlic knots for breakfast with garlic knots for sushi)."
+            },
+            {
+              "doc_id": 234,
+              "rank": 7,
+              "score": 0.360661,
+              "score_type": "cosine",
+              "text": "The CNN/Daily mail dataset BIBREF12 is a text summarization dataset adapted from the Deepmind question-answering dataset BIBREF13 . It contains around three hundred thousand news articles coupled with summaries of about three sentences. These summaries are in fact “highlights\" of the articles provided by the media themselves. Articles have an average length of 780 words and the summaries of 50 words. We had 287 000 training pairs and 11 500 test pairs. Similarly to See et al. See2017, we limit during training and prediction the input text to 400 words and generate summaries of 200 words. We pad the shorter texts using an UNKNOWN token and truncate the longer texts. We embed the texts and summaries using a vocabulary of size 50 000, thus recreating the same parameters as See et al. See2017."
+            },
+            {
+              "doc_id": 192,
+              "rank": 8,
+              "score": 0.359355,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 209,
+              "rank": 1,
+              "score": 0.531808,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.5182,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 80,
+              "rank": 3,
+              "score": 0.340387,
+              "score_type": "cosine",
+              "text": "Our full dataset consists of all subreddits on Reddit from January 2013 to December 2014, for which there are at least 500 words in the vocabulary used to estimate our measures, in at least 4 months of the subreddit's history. We compute our measures over the comments written by users in a community in time windows of months, for each sufficiently active month, and manually remove communities where the bulk of the contributions are in a foreign language. This results in 283 communities ( INLINEFORM0 ), for a total of 4,872 community-months ( INLINEFORM1 )."
+            },
+            {
+              "doc_id": 202,
+              "rank": 4,
+              "score": 0.305138,
+              "score_type": "cosine",
+              "text": "Wang et al. BIBREF7 described a model of crowd-turfing attacks consisting of three entities: customers who desire to have fake reviews for a particular target (e.g. their restaurant) on a particular platform (e.g. Yelp), agents who offer fake review services to customers, and workers who are orchestrated by the agent to compose and post fake reviews."
+            },
+            {
+              "doc_id": 192,
+              "rank": 5,
+              "score": 0.288136,
+              "score_type": "cosine",
+              "text": "Fake reviews User-generated content BIBREF5 is an integral part of the contemporary user experience on the web. Sites like tripadvisor.com, yelp.com and Google Play use user-written reviews to provide rich information that helps other users choose where to spend money and time. User reviews are used for rating services or products, and for providing qualitative opinions. User reviews and ratings may be used to rank services in recommendations. Ratings have an affect on the outwards appearance. Already 8 years ago, researchers estimated that a one-star rating increase affects the business revenue by 5 – 9% on yelp.com BIBREF6 ."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}

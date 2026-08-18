@@ -73,6 +73,17 @@ def slugify(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_") or "entity"
 
 
+#: Citation / cross-reference pseudo-entities (BIBREF0, TABREF16, SECREF27, FIGREF1).
+#: These are LaTeX reference markers, not real entities — they produce meaningless graph
+#: edges ("X --authored--> BIBREF0"), so drop them at extraction time.
+_JUNK_ENTITY_RE = re.compile(r"^\W*(BIB|TAB|SEC|FIG)REF\d+\W*$", re.I)
+
+
+def _is_junk_entity(name: str) -> bool:
+    n = (name or "").strip()
+    return not n or bool(_JUNK_ENTITY_RE.match(n))
+
+
 @dataclass
 class KnowledgeGraph:
     """Container bundling the graph with its source chunks and embeddings.
@@ -197,6 +208,8 @@ class GraphBuilder:
         for cid, chunk in enumerate(chunks):
             entities, relations = self._extract(chunk)
             for ent in entities:
+                if _is_junk_entity(ent["name"]):     # drop citation/ref pseudo-entities
+                    continue
                 nid = slugify(ent["name"])
                 node_chunks[nid].add(cid)
                 if graph.has_node(nid):
@@ -207,6 +220,8 @@ class GraphBuilder:
                     graph.add_node(nid, entity=ent["name"], type=ent.get("type", "Other"),
                                    chunks=set())
             for rel in relations:
+                if _is_junk_entity(rel["source"]) or _is_junk_entity(rel["target"]):
+                    continue                          # drop edges touching a citation label
                 s, t = slugify(rel["source"]), slugify(rel["target"])
                 if s == t:
                     continue
@@ -251,6 +266,8 @@ class GraphBuilder:
                 nodes.setdefault(nid, {"id": nid, "entity": ent["name"],
                                        "type": ent.get("type", "Other")})
             for rel in relations:
+                if _is_junk_entity(rel["source"]) or _is_junk_entity(rel["target"]):
+                    continue                          # drop edges touching a citation label
                 s, t = slugify(rel["source"]), slugify(rel["target"])
                 if s == t:
                     continue

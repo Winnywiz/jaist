@@ -1,0 +1,1112 @@
+{
+  "method": "xie_subq",
+  "rag": "graph",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T12:10:43",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-004",
+  "conversations": [
+    {
+      "conversation_id": "conv-004",
+      "seed_question": "Which ASR system(s) is used in this work?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:follow-up",
+        "Xie:follow-up"
+      ],
+      "outcome_sequence": [
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Which ASR system(s) is used in this work?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese gen",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese gen",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$.",
+            "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter.",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.434051,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 28,
+              "rank": 2,
+              "score": 0.3836,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 120,
+              "rank": 3,
+              "score": 0.377046,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 18,
+              "rank": 4,
+              "score": 0.417684,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.411179,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.39506,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 39,
+              "rank": 7,
+              "score": 0.385901,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 176,
+              "rank": 8,
+              "score": 0.372062,
+              "score_type": "cosine",
+              "text": "The QRNN models followed the exact training procedure and architecture delineated in the official codebase from BIBREF11 . For ptb-qrnn, we trained the model for 550 epochs using NT-ASGD BIBREF4 , then finetuned for 300 epochs using ASGD BIBREF17 , all with a learning rate of 30 throughout. For wt103-qrnn, we followed BIBREF11 and trained the QRNN for 14 epochs, using the Adam optimizer with a learning rate of $10^{-3}$ . We also applied regularization techniques from BIBREF4 ; all the specific hyperparameters are the same as those in the repository. Our model architecture consists of 400-dimensional tied embedding weights BIBREF18 and four QRNN layers, with 1550 hidden units per layer on PTB and 2500 per layer on WT103. Both QRNN models have window sizes of $r=2$ for the first layer and $r=1$ for the rest."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.434051,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 28,
+              "rank": 2,
+              "score": 0.3836,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 39,
+              "rank": 3,
+              "score": 0.385901,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 18,
+              "rank": 4,
+              "score": 0.417684,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.411179,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.39506,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What specific ASR system(s) are utilized in this work?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguist",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguist",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.419374,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 125,
+              "rank": 2,
+              "score": 0.370436,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 28,
+              "rank": 3,
+              "score": 0.385625,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.394687,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 48,
+              "rank": 5,
+              "score": 0.391703,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.389977,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 155,
+              "rank": 7,
+              "score": 0.389612,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 186,
+              "rank": 8,
+              "score": 0.367001,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.422994,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 28,
+              "rank": 2,
+              "score": 0.394179,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 120,
+              "rank": 3,
+              "score": 0.390324,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 48,
+              "rank": 4,
+              "score": 0.396672,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.396543,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.396562,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "What is the purpose of using ASR in this work?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the nam",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the nam",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism.",
+            "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.400343,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 28,
+              "rank": 2,
+              "score": 0.360139,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.36727,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 125,
+              "rank": 4,
+              "score": 0.38141,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.37353,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 186,
+              "rank": 6,
+              "score": 0.366483,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 188,
+              "rank": 7,
+              "score": 0.362774,
+              "score_type": "cosine",
+              "text": "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+            },
+            {
+              "doc_id": 175,
+              "rank": 8,
+              "score": 0.355729,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.392951,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 258,
+              "rank": 2,
+              "score": 0.350719,
+              "score_type": "cosine",
+              "text": "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+            },
+            {
+              "doc_id": 48,
+              "rank": 3,
+              "score": 0.357166,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.360245,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 18,
+              "rank": 5,
+              "score": 0.359774,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            },
+            {
+              "doc_id": 175,
+              "rank": 6,
+              "score": 0.351646,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:core",
+          "question": "What data or input does the ASR system(s) process in this work?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.” We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patte",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.” We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patte",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP.",
+            "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart",
+            "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism.",
+            "Traditionally, CTS tasks can be addressed by rule and dictionary based methods BIBREF0, BIBREF1, BIBREF2, task-specific end-to-end methods BIBREF3, BIBREF4, BIBREF5, BIBREF6 and pipeline methods BIBREF7, BIBREF8, BIBREF9. Rule and dictionary based methods suffer from costly human-designed extraction rules, while task-specific end-to-end methods have non-uniform output formats and require task-specific training dataset. Pipeline methods break down the entire process into several pieces which improves the performance and generality. However, when the pipeline depth grows, error propagation will have a greater impact on the performance.",
+            "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 125,
+              "rank": 1,
+              "score": 0.40676,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 169,
+              "rank": 2,
+              "score": 0.369193,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 28,
+              "rank": 3,
+              "score": 0.368741,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.404278,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 124,
+              "rank": 5,
+              "score": 0.391595,
+              "score_type": "cosine",
+              "text": "Traditionally, CTS tasks can be addressed by rule and dictionary based methods BIBREF0, BIBREF1, BIBREF2, task-specific end-to-end methods BIBREF3, BIBREF4, BIBREF5, BIBREF6 and pipeline methods BIBREF7, BIBREF8, BIBREF9. Rule and dictionary based methods suffer from costly human-designed extraction rules, while task-specific end-to-end methods have non-uniform output formats and require task-specific training dataset. Pipeline methods break down the entire process into several pieces which improves the performance and generality. However, when the pipeline depth grows, error propagation will have a greater impact on the performance."
+            },
+            {
+              "doc_id": 136,
+              "rank": 6,
+              "score": 0.375971,
+              "score_type": "cosine",
+              "text": "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+            },
+            {
+              "doc_id": 232,
+              "rank": 7,
+              "score": 0.373565,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 175,
+              "rank": 8,
+              "score": 0.366965,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.398463,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 232,
+              "rank": 2,
+              "score": 0.371621,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 48,
+              "rank": 3,
+              "score": 0.373596,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            },
+            {
+              "doc_id": 258,
+              "rank": 4,
+              "score": 0.374623,
+              "score_type": "cosine",
+              "text": "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+            },
+            {
+              "doc_id": 124,
+              "rank": 5,
+              "score": 0.374108,
+              "score_type": "cosine",
+              "text": "Traditionally, CTS tasks can be addressed by rule and dictionary based methods BIBREF0, BIBREF1, BIBREF2, task-specific end-to-end methods BIBREF3, BIBREF4, BIBREF5, BIBREF6 and pipeline methods BIBREF7, BIBREF8, BIBREF9. Rule and dictionary based methods suffer from costly human-designed extraction rules, while task-specific end-to-end methods have non-uniform output formats and require task-specific training dataset. Pipeline methods break down the entire process into several pieces which improves the performance and generality. However, when the pipeline depth grows, error propagation will have a greater impact on the performance."
+            },
+            {
+              "doc_id": 18,
+              "rank": 6,
+              "score": 0.374057,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:background",
+          "question": "What does ASR stand for?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on wh",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on wh",
+          "rag_retrieved_context": [
+            "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP.",
+            "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19.",
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.375662,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 232,
+              "rank": 2,
+              "score": 0.335368,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 33,
+              "rank": 3,
+              "score": 0.351281,
+              "score_type": "cosine",
+              "text": "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19."
+            },
+            {
+              "doc_id": 125,
+              "rank": 4,
+              "score": 0.372397,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.360133,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 136,
+              "rank": 6,
+              "score": 0.345988,
+              "score_type": "cosine",
+              "text": "Generally, researchers solve CTS problem in two steps. Firstly, the answer-related text is pick out. And then several steps such as entity names conversion and negative words recognition are deployed to generate the final answer. While final answer varies from task to task, which truly causes non-uniform output formats, finding the answer-related text is a common action among all tasks. Traditional methods regard both the steps as a whole. In this paper, we focus on finding the answer-related substring $Xs = <X_i, X_i+1, X_i+2, ... X_j> (1 <= i < j <= n)$ from paragraph text $X$. For example, given sentence UTF8gkai“远端胃切除标本：小弯长11.5cm，大弯长17.0cm。距上切端6.0cm、下切端8.0cm\" (Distal gastrectomy specimen: measuring 11.5cm in length along the lesser curvature, 17.0cm in length along the greater curvature; 6.0cm from the proximal resection margin, and 8.0cm from the distal resection margin) and query UTF8gkai“上切缘距离\"(proximal resection margin), the answer should be 6.0cm which is located in original text from index 32 to 37. With such definition, it unifies the output format of CTS tasks and therefore make the training data shareable, in order to reduce the training data quantity requirement."
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.337866,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 188,
+              "rank": 8,
+              "score": 0.335448,
+              "score_type": "cosine",
+              "text": "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 18,
+              "rank": 1,
+              "score": 0.367427,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            },
+            {
+              "doc_id": 232,
+              "rank": 2,
+              "score": 0.338596,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 33,
+              "rank": 3,
+              "score": 0.340825,
+              "score_type": "cosine",
+              "text": "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19."
+            },
+            {
+              "doc_id": 181,
+              "rank": 4,
+              "score": 0.366782,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.349042,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 48,
+              "rank": 6,
+              "score": 0.345814,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "Is there any prior research or literature that discusses the ASR system(s) used?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguist",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguist",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing.",
+            "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP.",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart",
+            "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.411415,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 125,
+              "rank": 2,
+              "score": 0.373288,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 28,
+              "rank": 3,
+              "score": 0.362655,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.385615,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.373625,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 232,
+              "rank": 6,
+              "score": 0.366071,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 175,
+              "rank": 7,
+              "score": 0.358845,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 155,
+              "rank": 8,
+              "score": 0.35876,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.416777,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 168,
+              "rank": 2,
+              "score": 0.363399,
+              "score_type": "cosine",
+              "text": "Other work focus on designing lightweight models for resource-efficient inference on mobile devices. BIBREF7 explore LSTMs BIBREF8 with binary weights for language modeling; BIBREF9 examine shallow feedforward neural networks for natural language processing."
+            },
+            {
+              "doc_id": 232,
+              "rank": 3,
+              "score": 0.372672,
+              "score_type": "cosine",
+              "text": "Our goal in this paper is to test the limits of the use of such a technique for more complex tasks, where the notion of input importance might not be as simple as in topic classification or sentiment analysis. We changed from a classification task to a generative task and chose a more complex one than text translation (in which we can easily find a word to word correspondence/importance between input and output). We chose text summarization. We consider abstractive and informative text summarization, meaning that we write a summary “in our own words\" and retain the important information of the original text. We refer the reader to BIBREF8 for more details on the task and the different variants that exist. Since the success of deep sequence-to-sequence models for text translation BIBREF9 , the same approaches have been applied to text summarization tasks BIBREF10 , BIBREF11 , BIBREF12 which use architectures on which we can apply LRP."
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.388053,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 48,
+              "rank": 5,
+              "score": 0.373178,
+              "score_type": "cosine",
+              "text": "$^{3}$Institut für Maschinelle Sprachverarbeitung, University of Stuttgart"
+            },
+            {
+              "doc_id": 258,
+              "rank": 6,
+              "score": 0.362903,
+              "score_type": "cosine",
+              "text": "In this work, we have implemented and applied LRP to a sequence-to-sequence model trained on a more complex task than usual: text summarization. We used previous work to solve the difficulties posed by LRP in LSTM cells and adapted the same technique for Bahdanau et al. Bahdanau2014 attention mechanism."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:follow-up",
+          "question": "What are the key features of the ASR system(s) used?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. The rest of the paper is organized as follows. We briefly review the related work on clinical text structuring in Section SECREF2. Then, we present question answer based clinical text structuring task in Section SECREF3. In Section SECREF4, we present an effective model for this task. Section SECREF5 is devoted to computational studies and several investigations on the key issues of our proposed model. Finally, conclusions are given in Section SECREF6. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. The rest of the paper is organized as follows. We briefly review the related work on clinical text structuring in Section SECREF2. Then, we present question answer based clinical text structuring task in Section SECREF3. In Section SECREF4, we present an effective model for this task. Section SECREF5 is devoted to computational studies and several investigations on the key issues of our proposed model. Finally, conclusions are given in Section SECREF6. We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively: AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on ",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "We first define what “important\" (and “unimportant\") input words mean across the 50 saliency maps per texts. Relevance transmitted by LRP being positive or negative, we average the absolute value of the relevance across the saliency maps to obtain one ranking of the most “relevant\" words. The idea is that input words with negative relevance have an impact on the resulting generated word, even if it is not participating positively, while a word with a relevance close to zero should not be important at all. We did however also try with different methods, like averaging the raw relevance or averaging a scaled absolute value where negative relevance is scaled down by a constant factor. The absolute value average seemed to deliver the best results.",
+            "Emotion, Aesthetic Emotions, Literature, Poetry, Annotation, Corpora, Emotion Recognition, Multi-Label",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "follow-up",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.400835,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 128,
+              "rank": 2,
+              "score": 0.333833,
+              "score_type": "cosine",
+              "text": "The rest of the paper is organized as follows. We briefly review the related work on clinical text structuring in Section SECREF2. Then, we present question answer based clinical text structuring task in Section SECREF3. In Section SECREF4, we present an effective model for this task. Section SECREF5 is devoted to computational studies and several investigations on the key issues of our proposed model. Finally, conclusions are given in Section SECREF6."
+            },
+            {
+              "doc_id": 28,
+              "rank": 3,
+              "score": 0.331773,
+              "score_type": "cosine",
+              "text": "We used the latest version of the ACP Corpus BIBREF12 for evaluation. It was used for (semi-)supervised training as well. Extracted from Japanese websites using HTML layouts and linguistic patterns, the dataset covered various genres. For example, the following two sentences were labeled positive and negative, respectively:"
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.359435,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 125,
+              "rank": 5,
+              "score": 0.340488,
+              "score_type": "cosine",
+              "text": "To reduce the pipeline depth and break the barrier of non-uniform output formats, we present a question answering based clinical text structuring (QA-CTS) task (see Fig. FIGREF1). Unlike the traditional CTS task, our QA-CTS task aims to discover the most related text from original paragraph text. For some cases, it is already the final answer in deed (e.g., extracting sub-string). While for other cases, it needs several steps to obtain the final answer, such as entity names conversion and negative words recognition. Our presented QA-CTS task unifies the output format of the traditional CTS task and make the training data shareable, thus enriching the training data. The main contributions of this work can be summarized as follows."
+            },
+            {
+              "doc_id": 186,
+              "rank": 6,
+              "score": 0.337592,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 155,
+              "rank": 7,
+              "score": 0.334577,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 33,
+              "rank": 8,
+              "score": 0.332208,
+              "score_type": "cosine",
+              "text": "Although the ACP corpus was originally constructed in the context of sentiment analysis, we found that it could roughly be regarded as a collection of affective events. We parsed each sentence and extracted the last clause in it. The train/dev/test split of the data is shown in Table TABREF19."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.410731,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 252,
+              "rank": 2,
+              "score": 0.325986,
+              "score_type": "cosine",
+              "text": "We first define what “important\" (and “unimportant\") input words mean across the 50 saliency maps per texts. Relevance transmitted by LRP being positive or negative, we average the absolute value of the relevance across the saliency maps to obtain one ranking of the most “relevant\" words. The idea is that input words with negative relevance have an impact on the resulting generated word, even if it is not participating positively, while a word with a relevance close to zero should not be important at all. We did however also try with different methods, like averaging the raw relevance or averaging a scaled absolute value where negative relevance is scaled down by a constant factor. The absolute value average seemed to deliver the best results."
+            },
+            {
+              "doc_id": 52,
+              "rank": 3,
+              "score": 0.322467,
+              "score_type": "cosine",
+              "text": "Emotion, Aesthetic Emotions, Literature, Poetry, Annotation, Corpora, Emotion Recognition, Multi-Label"
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.350429,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 175,
+              "rank": 5,
+              "score": 0.333305,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 18,
+              "rank": 6,
+              "score": 0.323697,
+              "score_type": "cosine",
+              "text": "where $x_{i1}$ and $x_{i2}$ are the $i$-th pair of the AL data. $r_{i1}$ and $r_{i2}$ are the automatically-assigned scores of $x_{i1}$ and $x_{i2}$, respectively. $N_{\\rm AL}$ is the total number of AL pairs, and $\\lambda _{\\rm AL}$ is a hyperparameter."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:follow-up",
+          "question": "How does the performance of the ASR system(s) compare to others in the field?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this sectio",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM. In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this sectio",
+          "rag_retrieved_context": [
+            "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM.",
+            "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23.",
+            "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "follow-up",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.41556,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 154,
+              "rank": 2,
+              "score": 0.378344,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 155,
+              "rank": 3,
+              "score": 0.385995,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 186,
+              "rank": 4,
+              "score": 0.407806,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.401085,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.388849,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 167,
+              "rank": 7,
+              "score": 0.376661,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 188,
+              "rank": 8,
+              "score": 0.362499,
+              "score_type": "cosine",
+              "text": "Automatically generated fake restaurant reviews are a threat to online review systems. Recent research has shown that users have difficulties in detecting machine-generated fake reviews hiding among real restaurant reviews. The method used in this work (char-LSTM ) has one drawback: it has difficulties staying in context, i.e. when it generates a review for specific target entity, the resulting review may contain phrases that are unrelated to the target, thus increasing its detectability. In this work, we present and evaluate a more sophisticated technique based on neural machine translation (NMT) with which we can generate reviews that stay on-topic. We test multiple variants of our technique using native English speakers on Amazon Mechanical Turk. We demonstrate that reviews generated by the best variant have almost optimal undetectability (class-averaged F-score 47%). We conduct a user study with skeptical users and show that our method evades detection more frequently compared to the state-of-the-art (average evasion 3.2/4 vs 1.5/4) with statistical significance, at level {\\alpha} = 1% (Section 4.3). We develop very effective detection tools and reach average F-score of 97% in classifying these. Although fake reviews are very effective in fooling people, effective automatic detection is still feasible."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 181,
+              "rank": 1,
+              "score": 0.41057,
+              "score_type": "cosine",
+              "text": "To demonstrate the effectiveness of the QRNN models, we present the results of past and current state-of-the-art neural language models in Table 1 ; we report the Skip- and AWD-LSTM results as seen in the original papers, while we report our QRNN results. Skip LSTM denotes the four-layer Skip LSTM in BIBREF3 . BIBREF20 focus on Hebbian softmax, a model extension technique—Rae-LSTM refers to their base LSTM model without any extensions. In our results, KN-5 refers to the traditional five-gram model with modified Kneser-Ney smoothing, and AWD is shorthand for AWD-LSTM."
+            },
+            {
+              "doc_id": 155,
+              "rank": 2,
+              "score": 0.366374,
+              "score_type": "cosine",
+              "text": "Since BERT has already achieved the state-of-the-art performance of question-answering, in this section we compare our proposed model with state-of-the-art question answering models (i.e. QANet BIBREF39) and BERT-Base BIBREF26. As BERT has two versions: BERT-Base and BERT-Large, due to the lack of computational resource, we can only compare with BERT-Base model instead of BERT-Large. Prediction layer is attached at the end of the original BERT-Base model and we fine tune it on our dataset. In this section, the named entity integration method is chosen to pure concatenation (Concatenate the named entity information on pathology report text and query text first and then concatenate contextualized representation and concatenated named entity information). Comparative results are summarized in Table TABREF23."
+            },
+            {
+              "doc_id": 175,
+              "rank": 3,
+              "score": 0.355164,
+              "score_type": "cosine",
+              "text": "For the neural language model, we used a four-layer QRNN BIBREF10 , which achieves state-of-the-art results on a variety of datasets, such as WT103 BIBREF11 and PTB. To compare against more common LSTM architectures, we also evaluated AWD-LSTM BIBREF4 on PTB. For the non-neural approach, we used a standard five-gram model with modified Kneser-Ney smoothing BIBREF15 , as explored in BIBREF16 on PTB. We denote the QRNN models for PTB and WT103 as ptb-qrnn and wt103-qrnn, respectively."
+            },
+            {
+              "doc_id": 186,
+              "rank": 4,
+              "score": 0.389769,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.385471,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.378695,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}

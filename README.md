@@ -1,87 +1,155 @@
-# Thesis package (clean)
+# Conversational RAG Failure Attribution
 
-A clean, self-contained copy of the thesis work — **only the proposed method and the
-one comparison that matters**, nothing archived. Two parts:
+**Research question:** *Can **dynamic** follow-up question generation attribute RAG failures
+more accurately than **static** sub-question generation?*
+
+This repo generates controlled **multi-turn conversations** against RAG systems, records
+rich per-turn evidence, and hands the logs to a **failure classifier** — so we can study
+*where* and *why* a RAG fails, and whether the way we generate the conversation changes
+what failures become visible.
 
 ```
-THESIS_CLEAN/
-├── conv_rag_benchmark/     ← PART 1: the proposed method (the benchmark generator)
-├── compare/                ← PART 2: does dynamic beat static?  (the experiment + answer)
-├── result/benchmark_quality/
-│   ├── HotpotQA/  MuSiQue/   the current proposed-method results
-├── CODE_WALKTHROUGH.md     deep, file-by-file tour of conv_rag_benchmark
-├── requirements.txt        pip install -r requirements.txt
-└── .env.example            put your OPENAI_API_KEY in .env
+   conversation generation  ─►  RAG under test  ─►  conversation log  ─►  failure classifier
+   (Dynamic / Xie / Single /                        (per-turn evidence)     (6-type taxonomy)
+    mtRAG human)
 ```
 
 ---
 
-## Part 1 — the proposed method (`conv_rag_benchmark/`)
+## The four conversation-generation methods
 
-An **adaptive conversational RAG benchmark**. It generates a multi-turn conversation and,
-crucially, closes the loop with the system under test:
+| method (code name) | what generates the follow-ups | sees the RAG's answer? |
+|---|---|:--:|
+| **Dynamic** (`proposed`) | LLM writes each follow-up *after observing the RAG's real previous answer* | **yes** (`rag_history`) |
+| **Xie** (`xie_subq`) | **adapted from Xie et al. (NAACL 2025)**: reuses the paper's sub-question decomposition (**core / background / follow-up**), replayed as turns. The *faithful* paper method (coverage 2×2) is `compare/xie_coverage.py` | **no** (static) |
+| **Single-turn** (`single_turn_qa`) | seed question only, no follow-ups (control) — `single_turn_generator.py` | — |
+| **mtRAG** (`mtrag`) | real **human** multi-turn conversations (IBM mt-RAG benchmark) replayed | — (human) |
 
-```
-ask a question → read the RAG's REAL answer → grade it → let that outcome pick the
-NEXT question's type → repeat
-```
+The dynamic-vs-static distinction is the independent variable and is logged explicitly per
+turn (`generation_source`, `provenance.generator_saw_rag_answer`). Gold answers are always
+authored from corpus truth, never from the RAG's (possibly wrong) reply.
 
-Only the question *type* is chosen adaptively; the question text and gold answer are
-always authored from the corpus, so the answer key stays grounded even when the RAG is
-wrong. Each run reports **question quality** (G-Eval: well_formed / gold_supported /
-gold_correct) and the **RAG's failure profile** (wrong / hallucinated / abstained, and
-which probe type caught it).
+Optional: `--inject-unanswerable-at N` forces one **Unanswerable** probe into the Dynamic
+method (knowledge-boundary / hallucination test) while other turns stay adaptive.
 
-The flow, end to end:
+## RAG systems under test
 
-| stage | where |
-|---|---|
-| load dataset + build/load knowledge graph | [run_benchmark.py](conv_rag_benchmark/run_benchmark.py) |
-| instantiate the RAG under test | [connectors.py](conv_rag_benchmark/connectors.py), [interfaces/rag_interface.py](conv_rag_benchmark/interfaces/rag_interface.py) |
-| the adaptive loop (retrieve → author Q+gold → ask RAG → grade → pick next type) | [generation/adaptive_generator.py](conv_rag_benchmark/generation/adaptive_generator.py) |
-| score question quality (G-Eval) | [geval.py](conv_rag_benchmark/geval.py) |
-| write self-describing JSON to `result/` | [run_benchmark.py](conv_rag_benchmark/run_benchmark.py) |
+Embedding-based (feasible on any corpus): `vector`, `selfrag`, `crag`, `longrag`, `mock` —
+plus graph-based (need an LLM-built index, small corpora only): `graph` (typed GraphRAG),
+`raptor` (RAPTOR tree), **`hippo`** (HippoRAG: OpenIE knowledge graph + Personalized
+PageRank). See `conv_rag_benchmark/interfaces/rag_interface.py`.
 
-Run it:
+## Failure taxonomy (the classifier — a separate component)
 
-```bash
-python -m conv_rag_benchmark.run_benchmark --dataset hotpotqa --rag vector --convos 5 --turns 10
-```
+`failure/` classifies each failed turn into six types across two layers:
+- **retrieval layer:** `knowledge_boundary`, `chunking`, `retrieval`, `context_selection`
+- **generation layer:** `grounding`, `response_coverage`
 
-Optional, after a run — score how similar each retrieved doc is to the question / gold /
-RAG answer (cosine of embeddings). Writes a `*_docsim.json` companion beside the result;
-does not touch the run itself:
-
-```bash
-python -m conv_rag_benchmark.question_doc_similarity --dataset hotpotqa \
-    --file result/benchmark_quality/HotpotQA/vector_HotpotQA_t10_c5.json
-```
-
-Full tour: **[CODE_WALKTHROUGH.md](CODE_WALKTHROUGH.md)** and
-[conv_rag_benchmark/README.md](conv_rag_benchmark/README.md).
+Every turn records **two separate document sets** — `question_generation_documents` (what
+the generator used) and `rag_retrieved_documents` (what the RAG retrieved to answer) — each
+with real `doc_id / rank / score / score_type`, so the classifier can tell a retrieval miss
+from a grounding failure.
 
 ---
 
-## Part 2 — does dynamic beat static? (`compare/`)
+## Repository layout
 
-The experiment behind the thesis claim: a **dynamic** follow-up probe (reacts to the
-RAG's answer) attributes RAG failures more accurately than **static** probing
-(single-turn control + Xie et al. static decomposition). The head-to-head table and the
-answer live in **[compare/README.md](compare/README.md)** — dynamic wins on every dataset.
-
-```bash
-python -m compare.fair_macro        # recompute the head-to-head table (no API key needed)
 ```
+conv_rag_benchmark/        # the generation engine + RAGs
+├── generation/
+│   ├── dynamic_generator.py     Dynamic method (proposed) + static content policy
+│   ├── xie_generator.py         Xie method: faithful sub-question decomposition (xie_subq)
+│   ├── single_turn_generator.py Single-turn control: adaptive generator, seed turn only
+│   ├── mtrag_generator.py       mtRAG method: human-conversation replay
+│   ├── query_generator.py       the 8 typed question generators
+│   └── gold_answer_generator.py grounded gold answers
+├── interfaces/rag_interface.py  all RAG systems (vector … hippo)
+├── graph/                       typed knowledge graph + retriever (used by graph/hippo)
+├── datasets/                    dataset loaders + conversation-preserving mtRAG loader
+├── embeddings.py, embeddings_cache.py   embeddings + on-disk corpus index
+└── connectors.py                the --rag / --dataset registry
+
+compare/                   # the experiment
+├── experiment.py               MAIN orchestrator (run methods × RAGs × datasets)
+├── classify_all.py             run the failure classifier over all logs
+├── xie_coverage.py             faithful Xie coverage-attribution method (answered×retrieved 2×2)
+└── result/main/                the results (285 conversations, method/rag/dataset/…)
+
+failure/                   # the failure classifier (6-type taxonomy) — consumes the logs
+mtrag_validation/data/     # mtRAG human conversations (conversations.json)
+```
+
+Results are stored one directory per conversation:
+`compare/result/main/<method>/<rag>/<dataset>/conversation_NNN/{conversation.json, conversation_failuretypes.json}`.
 
 ---
 
 ## Setup
 
 ```bash
-pip install -r requirements.txt
-cp .env.example .env        # then put your OPENAI_API_KEY in .env
+pip install -r requirements.txt          # openai, numpy, datasets, networkx, scikit-learn
+cp .env.example .env                      # then put your OPENAI_API_KEY in .env
 ```
 
-Datasets download from HuggingFace on first use. Both parts share the
-`conv_rag_benchmark/` engine, so **run every command from this folder** (the one holding
-this README).
+qasper downloads from HuggingFace on first use. **Run all commands from this folder.**
+
+The official mtRAG corpora are **not committed** (hundreds of MB, git-ignored). To run the
+mtRAG method or the same-corpus arm, download them from
+<https://github.com/IBM/mt-rag-benchmark> into `mtrag_validation/corpora/passage_level/`
+(`clapnq/govt/fiqa/cloud.jsonl`) — see `compare/MTRAG_OFFICIAL_CORPUS.md`.
+
+## Running the experiment
+
+```bash
+# generated methods on qasper (shared identical seed per RAG)
+python -m compare.experiment --method proposed --rag vector --dataset qasper \
+    --convos 15 --turns 8 --seed 42 --label main --shared-seed --inject-unanswerable-at 4
+python -m compare.experiment --method xie_subq --rag vector --dataset qasper \
+    --convos 15 --turns 8 --seed 42 --label main --shared-seed
+
+# mtRAG human replay over the official corpus (per domain)
+python -m compare.experiment --method mtrag --rag vector \
+    --convos 15 --turns 8 --label main --mtrag-corpus official \
+    --mtrag-corpus-path mtrag_validation/corpora/passage_level
+
+# same-corpus arm: run Dynamic/Xie ON the mtRAG corpus (dataset = a domain)
+python -m compare.experiment --method proposed --rag vector --dataset clapnq \
+    --convos 15 --turns 8 --label main \
+    --mtrag-corpus-path mtrag_validation/corpora/passage_level
+
+# classify every log with the failure taxonomy
+python -m compare.classify_all --glob "compare/result/main/**/conversation_*/conversation.json"
+
+# classify a single log with the original entry point
+python -m failure.run --file compare/result/main/proposed/vector/qasper/conversation_001/conversation.json
+```
+
+`--rag all` and `--method all` run the full matrix. `hippo`/`graph`/`raptor` are
+auto-skipped for the mtRAG method (they can't build an index over the 366K-passage corpus).
+
+## Results
+
+`compare/result/main/` — **285 conversations**, all classified:
+
+| method | conversations |
+|---|--:|
+| `proposed` (Dynamic + Unanswerable) | 90 |
+| `xie_subq` (Xie sub-question) | 90 |
+| `single_turn_qa` | 45 |
+| `mtrag` (human) | 60 |
+
+A results summary with all tables lives at `compare/result/main/result.md`.
+
+---
+
+## Notes
+
+- **What's the dependent variable?** The failure *attribution* (the classifier's output), not
+  the raw failure count — more failures ≠ better attribution.
+- `compare/xie_coverage.py` implements the Xie paper's own coverage-attribution
+  (`answered × retrieved` 2×2) as an alternative to the friend's classifier.
+- `.env`, `__pycache__/`, the mtRAG corpora, and on-disk `*.embindex.*` files are
+  git-ignored.
+- Some files under `compare/` (`DYNAMIC/`, `STATIC/`, `shared/`, `fair_macro.py`,
+  `multiseed.py`) and `conv_rag_benchmark/run_benchmark.py` are the earlier
+  injected-failure experiment; the current pipeline is `compare/experiment.py`.

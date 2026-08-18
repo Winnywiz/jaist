@@ -1,0 +1,161 @@
+{
+  "method": "single_turn_qa",
+  "rag": "graph",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 1,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T13:17:16",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-012",
+  "conversations": [
+    {
+      "conversation_id": "conv-012",
+      "seed_question": "Why is supporting fact supervision necessary for DMN?",
+      "type_sequence": [
+        "Seed"
+      ],
+      "outcome_sequence": [
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "Why is supporting fact supervision necessary for DMN?",
+          "gold": "Supporting fact supervision is necessary for DMN to rigorously check the importance attributions and ensure that the saliency maps accurately represent the important input features used by the network during prediction.",
+          "evidence": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively. Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 . We obtain one saliency map for each word in the generated summaries, supposed to represent the use of the input features for each element of the output sequence. We observe that all the saliency maps for a text are nearly identical and decorrelated with the attention distribution. We propose a way to check their validity by creating what could be seen as a counterfactual experiment from a synthesis of the saliency maps, using the same technique as in Arras et al. Arras2017. We show that in some but not all cases they help identify the important inp",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)",
+          "rag_retrieved_context": [
+            "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively.",
+            "We obtain one saliency map for each word in the generated summaries, supposed to represent the use of the input features for each element of the output sequence. We observe that all the saliency maps for a text are nearly identical and decorrelated with the attention distribution. We propose a way to check their validity by creating what could be seen as a counterfactual experiment from a synthesis of the saliency maps, using the same technique as in Arras et al. Arras2017. We show that in some but not all cases they help identify the important input features and that we need to rigorously check importance attributions before trusting them, regardless of whether or not the mapping “makes sense\" to us. We finally argue that in the process of identifying the important input features, verifying the saliency maps is as important as the generation step, if not more.",
+            "We present in this section the Layer-Wise Relevance Propagation (LRP) BIBREF2 technique that we used to attribute importance to the input features, together with how we adapted it to our model and how we generated the saliency maps. LRP redistributes the output of the model from the output layer to the input by transmitting information backwards through the layers. We call this propagated backwards importance the relevance. LRP has the particularity to attribute negative and positive relevance: a positive relevance is supposed to represent evidence that led to the classifier's result while negative relevance represents evidence that participated negatively in the prediction.",
+            "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 .",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {},
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 250,
+              "rank": 1,
+              "score": 0.362011,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 162,
+              "rank": 2,
+              "score": 0.327995,
+              "score_type": "cosine",
+              "text": "Deep learning has unquestionably advanced the state of the art in many natural language processing tasks, from syntactic dependency parsing BIBREF0 to named-entity recognition BIBREF1 to machine translation BIBREF2 . The same certainly applies to language modeling, where recent advances in neural language models (NLMs) have led to dramatically better approaches as measured using standard metrics such as perplexity BIBREF3 , BIBREF4 ."
+            },
+            {
+              "doc_id": 233,
+              "rank": 3,
+              "score": 0.329064,
+              "score_type": "cosine",
+              "text": "We obtain one saliency map for each word in the generated summaries, supposed to represent the use of the input features for each element of the output sequence. We observe that all the saliency maps for a text are nearly identical and decorrelated with the attention distribution. We propose a way to check their validity by creating what could be seen as a counterfactual experiment from a synthesis of the saliency maps, using the same technique as in Arras et al. Arras2017. We show that in some but not all cases they help identify the important input features and that we need to rigorously check importance attributions before trusting them, regardless of whether or not the mapping “makes sense\" to us. We finally argue that in the process of identifying the important input features, verifying the saliency maps is as important as the generation step, if not more."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.348418,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 163,
+              "rank": 5,
+              "score": 0.344409,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 260,
+              "rank": 6,
+              "score": 0.340897,
+              "score_type": "cosine",
+              "text": "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+            },
+            {
+              "doc_id": 255,
+              "rank": 7,
+              "score": 0.33497,
+              "score_type": "cosine",
+              "text": "This however allows us to say that the attribution generated for the text at the origin of the summaries in Figure 4 are truthful in regard to the network's computation and we may use it for further studies of the example, whereas for the text at the origin of Figure 5 we shouldn't draw any further conclusions from the attribution generated."
+            },
+            {
+              "doc_id": 248,
+              "rank": 8,
+              "score": 0.319599,
+              "score_type": "cosine",
+              "text": "It can be seen as evidence that using the attention distribution as an “explanation\" of the prediction can be misleading. It is not the only information received by the decoder and the importance it “allocates\" to this attention state might be very low. What seems to happen in this application is that most of the information used is transmitted from the encoder to the decoder and the attention mechanism at each decoding step just changes marginally how it is used. Quantifying the difference between attention distribution and saliency map across multiple tasks is a possible future work."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 250,
+              "rank": 1,
+              "score": 0.362011,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 233,
+              "rank": 2,
+              "score": 0.329064,
+              "score_type": "cosine",
+              "text": "We obtain one saliency map for each word in the generated summaries, supposed to represent the use of the input features for each element of the output sequence. We observe that all the saliency maps for a text are nearly identical and decorrelated with the attention distribution. We propose a way to check their validity by creating what could be seen as a counterfactual experiment from a synthesis of the saliency maps, using the same technique as in Arras et al. Arras2017. We show that in some but not all cases they help identify the important input features and that we need to rigorously check importance attributions before trusting them, regardless of whether or not the mapping “makes sense\" to us. We finally argue that in the process of identifying the important input features, verifying the saliency maps is as important as the generation step, if not more."
+            },
+            {
+              "doc_id": 237,
+              "rank": 3,
+              "score": 0.242062,
+              "score_type": "cosine",
+              "text": "We present in this section the Layer-Wise Relevance Propagation (LRP) BIBREF2 technique that we used to attribute importance to the input features, together with how we adapted it to our model and how we generated the saliency maps. LRP redistributes the output of the model from the output layer to the input by transmitting information backwards through the layers. We call this propagated backwards importance the relevance. LRP has the particularity to attribute negative and positive relevance: a positive relevance is supposed to represent evidence that led to the classifier's result while negative relevance represents evidence that participated negatively in the prediction."
+            },
+            {
+              "doc_id": 199,
+              "rank": 4,
+              "score": 0.348418,
+              "score_type": "cosine",
+              "text": "For decades, deep neural networks were thought to be computationally too difficult to train. However, advances in optimization, hardware and the availability of frameworks have shown otherwise BIBREF1 , BIBREF12 . Neural language models (NLMs) have been one of the promising application areas. NLMs are typically various forms of recurrent neural networks (RNNs), which pass through the data sequentially and maintain a memory representation of the past tokens with a hidden context vector. There are many RNN architectures that focus on different ways of updating and maintaining context vectors: Long Short-Term Memory units (LSTM) and Gated Recurrent Units (GRUs) are perhaps most popular. Neural LMs have been used for free-form text generation. In certain application areas, the quality has been high enough to sometimes fool human readers BIBREF0 . Encoder-decoder (seq2seq) models BIBREF13 are architectures of stacked RNNs, which have the ability to generate output sequences based on input sequences. The encoder network reads in a sequence of tokens, and passes it to a decoder network (a LM). In contrast to simpler NLMs, encoder-decoder networks have the ability to use additional context for generating text, which enables more accurate generation of text. Encoder-decoder models are integral in Neural Machine Translation (NMT) BIBREF14 , where the task is to translate a source text from one language to another language. NMT models additionally use beam search strategies to heuristically search the set of possible translations. Training datasets are parallel corpora; large sets of paired sentences in the source and target languages. The application of NMT techniques for online machine translation has significantly improved the quality of translations, bringing it closer to human performance BIBREF15 ."
+            },
+            {
+              "doc_id": 163,
+              "rank": 5,
+              "score": 0.344409,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 260,
+              "rank": 6,
+              "score": 0.340897,
+              "score_type": "cosine",
+              "text": "We showed that in some cases the saliency maps are truthful to the network's computation, meaning that they do highlight the input features that the network focused on. But we also showed that in some cases the saliency maps seem to not capture the important input features. This brought us to discuss the fact that these attributions are not sufficient by themselves, and that we need to define the counter-factual case and test it to measure how truthful the saliency maps are."
+            }
+          ],
+          "generation_source": "seed"
+        }
+      ]
+    }
+  ]
+}

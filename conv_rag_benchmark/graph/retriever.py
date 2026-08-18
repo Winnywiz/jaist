@@ -52,9 +52,31 @@ class RetrievalResult:
     edges: List[Dict] = field(default_factory=list)
     chunks: List[str] = field(default_factory=list)
     chunk_ids: List[int] = field(default_factory=list)
+    # ADDITIVE retrieval metadata (does not change ranking): the relevance score
+    # the retriever ranked each surfaced chunk by, aligned index-for-index with
+    # ``chunk_ids``/``chunks``. ``score_type`` names what the number means
+    # ("cosine" for dense embedding rerank, "idf_overlap" for the lexical fallback).
+    # Scores may be empty if scoring was unavailable; never fabricated.
+    scores: List[float] = field(default_factory=list)
+    score_type: str = ""
 
     def to_dict(self) -> Dict:
         return {"nodes": self.nodes, "edges": self.edges, "chunks": self.chunks}
+
+    def scored_documents(self) -> List[Dict]:
+        """The retrieved chunks as ranked document records (doc_id/rank/score/text).
+
+        ``doc_id`` is the chunk's index in the KnowledgeGraph corpus (``kg.chunks``),
+        so it is comparable to any other retrieval over the SAME corpus. ``rank`` is
+        1-based in final retrieval order. ``score`` is the actual ranking score (or
+        None when unavailable — never invented)."""
+        docs: List[Dict] = []
+        for rank, cid in enumerate(self.chunk_ids):
+            score = self.scores[rank] if rank < len(self.scores) else None
+            docs.append({"doc_id": int(cid), "rank": rank + 1,
+                         "score": score, "score_type": self.score_type or None,
+                         "text": self.chunks[rank] if rank < len(self.chunks) else ""})
+        return docs
 
     def evidence_text(self, max_chars: int = 2400) -> str:
         """Flatten chunks into a single context string for prompting."""
@@ -168,11 +190,14 @@ class GraphRetriever:
                 grounded_edges.append({**e, "support": sup_visible})
 
         chunk_ids = kept
+        scores, score_type = self._score_chunks(query, chunk_ids)
         result = RetrievalResult(
             nodes=nodes,
             edges=grounded_edges,
             chunks=[self.kg.chunks[i] for i in chunk_ids],
             chunk_ids=chunk_ids,
+            scores=scores,
+            score_type=score_type,
         )
         logger.debug("retrieve(k=%d): %d chunks, %d nodes, %d edges",
                      k, len(result.chunks), len(result.nodes), len(result.edges))
@@ -214,6 +239,25 @@ class GraphRetriever:
                 scored.append((sum(self._idf.get(t, 1.0) for t in shared), i))
         scored.sort(reverse=True)
         return [i for _, i in scored[:k]]
+
+    def _score_chunks(self, query: str, chunk_ids: List[int]):
+        """The ranking score of each chunk, in the GIVEN order (does not reorder).
+
+        Uses the SAME formula ``_rerank`` ranks by — dense cosine when embeddings are
+        available, else the lexical idf-overlap fallback — so the exposed number IS the
+        retriever's own ranking signal, not a recomputed different metric. Returns
+        ``(scores, score_type)`` with ``scores`` aligned to ``chunk_ids``."""
+        if not chunk_ids:
+            return [], ""
+        if self.kg.chunk_embeddings is not None and self.embedder.available:
+            qv = self.embedder.encode([query])
+            if qv is not None and len(qv):
+                return ([round(float(self.kg.chunk_embeddings[i] @ qv[0]), 6)
+                         for i in chunk_ids], "cosine")
+        qt = set(_tokens(query))
+        return ([round(float(sum(self._idf.get(t, 1.0)
+                                 for t in (qt & self._chunk_tokens[i]))), 6)
+                 for i in chunk_ids], "idf_overlap")
 
     def _rerank(self, query: str, chunk_ids: List[int]) -> List[int]:
         if not chunk_ids:

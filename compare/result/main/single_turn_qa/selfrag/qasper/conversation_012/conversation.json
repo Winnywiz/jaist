@@ -1,0 +1,153 @@
+{
+  "method": "single_turn_qa",
+  "rag": "selfrag",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 1,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T13:19:34",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-011",
+  "conversations": [
+    {
+      "conversation_id": "conv-011",
+      "seed_question": "What metrics are used in challenge?",
+      "type_sequence": [
+        "Seed"
+      ],
+      "outcome_sequence": [
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What metrics are used in challenge?",
+          "gold": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. ",
+          "rag_answer": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "(question taken from the dataset, not authored from retrieval)",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {},
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.399601,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.371608,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.350582,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 209,
+              "rank": 4,
+              "score": 0.337227,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 178,
+              "rank": 5,
+              "score": 0.332103,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 160,
+              "rank": 6,
+              "score": 0.329654,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 152,
+              "rank": 7,
+              "score": 0.328449,
+              "score_type": "cosine",
+              "text": "In this section, we devote to experimentally evaluating our proposed task and approach. The best results in tables are in bold."
+            },
+            {
+              "doc_id": 115,
+              "rank": 8,
+              "score": 0.323538,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.399595,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.37157,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.350512,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 209,
+              "rank": 4,
+              "score": 0.337492,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 178,
+              "rank": 5,
+              "score": 0.332087,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "generation_source": "seed"
+        }
+      ]
+    }
+  ]
+}

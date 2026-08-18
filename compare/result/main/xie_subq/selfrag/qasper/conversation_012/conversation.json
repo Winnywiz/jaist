@@ -1,0 +1,1064 @@
+{
+  "method": "xie_subq",
+  "rag": "selfrag",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T12:53:43",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-011",
+  "conversations": [
+    {
+      "conversation_id": "conv-011",
+      "seed_question": "What metrics are used in challenge?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:follow-up"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "abstained",
+        "abstained",
+        "wrong",
+        "correct",
+        "correct",
+        "correct",
+        "correct"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What metrics are used in challenge?",
+          "gold": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. ",
+          "rag_answer": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context. Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. ",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context.",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.399591,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.371608,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.350585,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 209,
+              "rank": 4,
+              "score": 0.337532,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 178,
+              "rank": 5,
+              "score": 0.332103,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            },
+            {
+              "doc_id": 160,
+              "rank": 6,
+              "score": 0.329711,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 152,
+              "rank": 7,
+              "score": 0.328424,
+              "score_type": "cosine",
+              "text": "In this section, we devote to experimentally evaluating our proposed task and approach. The best results in tables are in bold."
+            },
+            {
+              "doc_id": 115,
+              "rank": 8,
+              "score": 0.323594,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.399595,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 187,
+              "rank": 2,
+              "score": 0.37157,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.350557,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 209,
+              "rank": 4,
+              "score": 0.337492,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 178,
+              "rank": 5,
+              "score": 0.332087,
+              "score_type": "cosine",
+              "text": "We trained the QRNNs with PyTorch (0.4.0; commit 1807bac) on a Titan V GPU. To evaluate the models under a resource-constrained environment, we deployed them on a Raspberry Pi 3 (Model B) running Raspbian Stretch (4.9.41-v7+). The Raspberry Pi (RPi) is not only a standard platform, but also a close surrogate to mobile phones, using the same Cortex-A7 in many phones. We then transferred the trained models to the RPi, using the same frameworks for evaluation. We plugged the RPi into a Watts Up Pro meter, a power meter that can be read programatically over USB at a frequency of 1 Hz. For the QRNNs, we used the first 350 words of the test set, and averaged the ms/query and mJ/query. For KN-5, we used the entire test set for evaluation, since the latency was much lower. To adjust for the base power load, we subtracted idle power draw from energy usage."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What is the specific challenge being referred to?",
+          "gold": "The specific challenge being referred to is the evaluation of methods using the Exact Match (EM-score) and macro-averaged F$_1$-score metrics.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by ",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model.",
+            "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score.",
+            "previous_rag_answer": "The metrics used in the challenge are the Exact Match (EM-score) and the macro-averaged F$_1$-score."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.691625,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.416387,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 117,
+              "rank": 3,
+              "score": 0.392975,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.374302,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 160,
+              "rank": 5,
+              "score": 0.353646,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 40,
+              "rank": 6,
+              "score": 0.348818,
+              "score_type": "cosine",
+              "text": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels."
+            },
+            {
+              "doc_id": 187,
+              "rank": 7,
+              "score": 0.348182,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            },
+            {
+              "doc_id": 288,
+              "rank": 8,
+              "score": 0.346929,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.723984,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.440479,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 3,
+              "score": 0.397668,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 160,
+              "rank": 4,
+              "score": 0.372082,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 117,
+              "rank": 5,
+              "score": 0.370637,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "How do these metrics vary depending on the nature of the challenge?",
+          "gold": "The metrics used in the challenge, specifically the Exact Match (EM-score) and macro-averaged F$_1$-score, vary based on the nature of the challenge as they measure different aspects of prediction accuracy; EM-score assesses exact matches while F$_1$-score evaluates average overlap.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by ",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by ",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "In this section, we devote to experimentally evaluating our proposed task and approach. The best results in tables are in bold.",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities.",
+            "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set.",
+            "Our approach follows the intuition that a distinctive community will use language that is particularly specific, or unique, to that community. Similarly, a dynamic community will use volatile language that rapidly changes across successive windows of time. To capture this intuition automatically, we start by defining word-level measures of specificity and volatility. We then extend these word-level primitives to characterize entire comments, and the community itself.",
+            "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The specific challenge being referred to is the evaluation of methods using the Exact Match (EM-score) and macro-averaged F$_1$-score metrics.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.72486,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.415453,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 117,
+              "rank": 3,
+              "score": 0.392903,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.391945,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 288,
+              "rank": 5,
+              "score": 0.349991,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 253,
+              "rank": 6,
+              "score": 0.349498,
+              "score_type": "cosine",
+              "text": "We delete incrementally the important words (words with the highest average) in the input and compared it to the control experiment that consists of deleting the least important word and compare the degradation of the resulting summaries. We obtain mitigated results: for some texts, we observe a quick degradation when deleting important words which are not observed when deleting unimportant words (see Figure 4 ), but for other test examples we don't observe a significant difference between the two settings (see Figure 5 )."
+            },
+            {
+              "doc_id": 160,
+              "rank": 7,
+              "score": 0.349417,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 20,
+              "rank": 8,
+              "score": 0.346645,
+              "score_type": "cosine",
+              "text": "$y_{i1}$ and $y_{i2}$ are the $i$-th pair of the CA pairs. $N_{\\rm CA}$ is the total number of CA pairs. $\\lambda _{\\rm CA}$ and $\\mu $ are hyperparameters. The first term makes the scores of the two events closer while the second term prevents the scores from shrinking to zero."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.432381,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 152,
+              "rank": 2,
+              "score": 0.382663,
+              "score_type": "cosine",
+              "text": "In this section, we devote to experimentally evaluating our proposed task and approach. The best results in tables are in bold."
+            },
+            {
+              "doc_id": 288,
+              "rank": 3,
+              "score": 0.378187,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 117,
+              "rank": 4,
+              "score": 0.361327,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 160,
+              "rank": 5,
+              "score": 0.356763,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 99,
+              "rank": 6,
+              "score": 0.323773,
+              "score_type": "cosine",
+              "text": "Our approach follows the intuition that a distinctive community will use language that is particularly specific, or unique, to that community. Similarly, a dynamic community will use volatile language that rapidly changes across successive windows of time. To capture this intuition automatically, we start by defining word-level measures of specificity and volatility. We then extend these word-level primitives to characterize entire comments, and the community itself."
+            },
+            {
+              "doc_id": 187,
+              "rank": 7,
+              "score": 0.30949,
+              "score_type": "cosine",
+              "text": "We use the Yelp Challenge dataset BIBREF2 for our fake review generation. The dataset (Aug 2017) contains 2.9 million 1 –5 star restaurant reviews. We treat all reviews as genuine human-written reviews for the purpose of this work, since wide-scale deployment of machine-generated review attacks are not yet reported (Sep 2017) BIBREF19 . As preprocessing, we remove non-printable (non-ASCII) characters and excessive white-space. We separate punctuation from words. We reserve 15,000 reviews for validation and 3,000 for testing, and the rest we use for training. NMT models require a parallel corpus of source and target sentences, i.e. a large set of (source, target)-pairs. We set up a parallel corpus by constructing (context, review)-pairs from the dataset. Next, we describe how we created our input context."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:core",
+          "question": "How are these metrics measured or calculated?",
+          "gold": "The Exact Match (EM-score) measures the percentage of predictions that match any one of the ground truth answers exactly, while the macro-averaged F$_1$-score measures the average overlap between the prediction and ground truth answer.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model ",
+          "rag_answer": "The Exact Match (EM-score) measures the percentage of predictions that match any one of the ground truth answers exactly, while the F$_1$-score measures the average overlap between the prediction and ground truth answer.",
+          "outcome": "wrong",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model ",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities.",
+            "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors.",
+            "We compare this method of bias mitigation with the no bias mitigation (\"Orig\"), geometric bias mitigation (\"Geo\"), the two pieces of our method alone (\"Prob\" and \"KNN\") and the composite method (\"KNN+Prob\"). We note that the composite method performs reasonably well according the the RIPA metric, and much better than traditional geometric bias mitigation according to the neighborhood metric, without significant performance loss according to the accepted benchmarks. To our knowledge this is the first bias mitigation method to perform reasonably both on both metrics."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The metrics used in the challenge, specifically the Exact Match (EM-score) and macro-averaged F$_1$-score, vary based on the nature of the challenge as they measure different aspects of prediction accuracy; EM-score assesses exact matches while F$_1$-score evaluates average overlap.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.776276,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 158,
+              "rank": 2,
+              "score": 0.446301,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.443912,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 117,
+              "rank": 4,
+              "score": 0.420192,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 20,
+              "rank": 5,
+              "score": 0.382757,
+              "score_type": "cosine",
+              "text": "$y_{i1}$ and $y_{i2}$ are the $i$-th pair of the CA pairs. $N_{\\rm CA}$ is the total number of CA pairs. $\\lambda _{\\rm CA}$ and $\\mu $ are hyperparameters. The first term makes the scores of the two events closer while the second term prevents the scores from shrinking to zero."
+            },
+            {
+              "doc_id": 267,
+              "rank": 6,
+              "score": 0.370088,
+              "score_type": "cosine",
+              "text": "The most well-established method thus far for mitigating bias relies on projecting target words onto a bias subspace (such as a gender subspace) and subtracting out the difference between the resulting distances BIBREF0. On the other hand, the most popular metric for measuring bias is the WEAT statistic BIBREF1, which compares the cosine similarities between groups of words. However, WEAT has been recently shown to overestimate bias as a result of implicitly relying on similar frequencies for the target words BIBREF4, and BIBREF5 demonstrated that evidence of bias can still be recovered after geometric bias mitigation by examining the neighborhood of a target word among socially-biased words."
+            },
+            {
+              "doc_id": 40,
+              "rank": 7,
+              "score": 0.367167,
+              "score_type": "cosine",
+              "text": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels."
+            },
+            {
+              "doc_id": 160,
+              "rank": 8,
+              "score": 0.362075,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.396795,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 288,
+              "rank": 2,
+              "score": 0.340906,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 117,
+              "rank": 3,
+              "score": 0.338471,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 115,
+              "rank": 4,
+              "score": 0.333542,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            },
+            {
+              "doc_id": 264,
+              "rank": 5,
+              "score": 0.322951,
+              "score_type": "cosine",
+              "text": "We compare this method of bias mitigation with the no bias mitigation (\"Orig\"), geometric bias mitigation (\"Geo\"), the two pieces of our method alone (\"Prob\" and \"KNN\") and the composite method (\"KNN+Prob\"). We note that the composite method performs reasonably well according the the RIPA metric, and much better than traditional geometric bias mitigation according to the neighborhood metric, without significant performance loss according to the accepted benchmarks. To our knowledge this is the first bias mitigation method to perform reasonably both on both metrics."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:core",
+          "question": "What role do metrics play in evaluating the success of a challenge?",
+          "gold": "Metrics like the Exact Match (EM-score) and macro-averaged F$_1$-score are crucial for evaluating the success of a challenge as they measure different aspects of prediction accuracy, with EM-score focusing on exact matches and F$_1$-score assessing average overlap between predictions and ground truth answers.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information",
+          "rag_answer": "Metrics play a crucial role in evaluating the success of a challenge by providing quantitative measures of performance, such as the Exact Match (EM-score) and F$_1$-score, which assess how well predictions align with ground truth answers.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model.",
+            "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively.",
+            "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The Exact Match (EM-score) measures the percentage of predictions that match any one of the ground truth answers exactly, while the macro-averaged F$_1$-score measures the average overlap between the prediction and ground truth answer.",
+            "previous_rag_answer": "The Exact Match (EM-score) measures the percentage of predictions that match any one of the ground truth answers exactly, while the F$_1$-score measures the average overlap between the prediction and ground truth answer."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.752808,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.424741,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 3,
+              "score": 0.418787,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 117,
+              "rank": 4,
+              "score": 0.389181,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 160,
+              "rank": 5,
+              "score": 0.373197,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 250,
+              "rank": 6,
+              "score": 0.372424,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 147,
+              "rank": 7,
+              "score": 0.364362,
+              "score_type": "cosine",
+              "text": "The final step is to use integrated representation $H_i$ to predict the start and end index of answer-related text. Here we define this calculation problem as a classification for each word to be the start or end word. We use a feed forward network (FFN) to compress and calculate the score of each word $H_f$ which makes the dimension to $\\left\\langle l_s, 2\\right\\rangle $ where $l_s$ denotes the length of sequence."
+            },
+            {
+              "doc_id": 173,
+              "rank": 8,
+              "score": 0.36368,
+              "score_type": "cosine",
+              "text": "Perplexity–Recall Scale. Word-level perplexity does not have a strictly monotonic relationship with recall-at- $k$ , the fraction of top $k$ predictions that contain the correct word. A given R@ $k$ imposes a weak minimum perplexity constraint—there are many free parameters that allow for large variability in the perplexity given a certain R@ $k$ . Consider the corpus, “choo choo train,” with an associated unigram model $P(\\text{``choo''}) = 0.1$ , $P(\\text{``train''}) = 0.9$ , resulting in an R@1 of $1/3$ and perplexity of $4.8$ . Clearly, R@1 $ =1/3$ for all $P(\\text{``choo''}) \\le 0.5$ ; thus, perplexity can drop as low as 2 without affecting recall."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.7999,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.473356,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 3,
+              "score": 0.459672,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 250,
+              "rank": 4,
+              "score": 0.409333,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 40,
+              "rank": 5,
+              "score": 0.39433,
+              "score_type": "cosine",
+              "text": "FLOAT SELECTED: Table 7: Recall and precision scores of the best model (dbmdz) for each emotion on the test set. ‘Support’ signifies the number of labels."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "What are the common types of metrics used in challenges across different fields?",
+          "gold": "The common types of metrics used in challenges across different fields include the Exact Match (EM-score) and macro-averaged F$_1$-score.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information",
+          "rag_answer": "The common types of metrics used in challenges across different fields include the Exact Match (EM-score) and the F$_1$-score.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score. As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively.",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities.",
+            "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Metrics like the Exact Match (EM-score) and macro-averaged F$_1$-score are crucial for evaluating the success of a challenge as they measure different aspects of prediction accuracy, with EM-score focusing on exact matches and F$_1$-score assessing average overlap between predictions and ground truth answers.",
+            "previous_rag_answer": "Metrics play a crucial role in evaluating the success of a challenge by providing quantitative measures of performance, such as the Exact Match (EM-score) and F$_1$-score, which assess how well predictions align with ground truth answers."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.791878,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.438116,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 3,
+              "score": 0.427703,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 117,
+              "rank": 4,
+              "score": 0.40811,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 250,
+              "rank": 5,
+              "score": 0.389145,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 160,
+              "rank": 6,
+              "score": 0.378192,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 267,
+              "rank": 7,
+              "score": 0.375019,
+              "score_type": "cosine",
+              "text": "The most well-established method thus far for mitigating bias relies on projecting target words onto a bias subspace (such as a gender subspace) and subtracting out the difference between the resulting distances BIBREF0. On the other hand, the most popular metric for measuring bias is the WEAT statistic BIBREF1, which compares the cosine similarities between groups of words. However, WEAT has been recently shown to overestimate bias as a result of implicitly relying on similar frequencies for the target words BIBREF4, and BIBREF5 demonstrated that evidence of bias can still be recovered after geometric bias mitigation by examining the neighborhood of a target word among socially-biased words."
+            },
+            {
+              "doc_id": 115,
+              "rank": 8,
+              "score": 0.367797,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.624512,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 156,
+              "rank": 2,
+              "score": 0.365813,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 250,
+              "rank": 3,
+              "score": 0.348629,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 117,
+              "rank": 4,
+              "score": 0.345276,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 158,
+              "rank": 5,
+              "score": 0.343261,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:background",
+          "question": "What is the purpose of using metrics in a challenge?",
+          "gold": "Metrics like the Exact Match (EM-score) and macro-averaged F$_1$-score are crucial for evaluating the success of a challenge as they measure different aspects of prediction accuracy.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%),",
+          "rag_answer": "The purpose of using metrics in a challenge is to provide quantitative measures of performance, assessing how well predictions align with ground truth answers.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%),",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities.",
+            "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score.",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "Our characterizations of words in a community are motivated by methodology from prior literature that compares the frequency of a word in a particular setting to its frequency in some background distribution, in order to identify instances of linguistic variation BIBREF21 , BIBREF19 . Our particular framework makes this comparison by way of pointwise mutual information (PMI)."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "The common types of metrics used in challenges across different fields include the Exact Match (EM-score) and macro-averaged F$_1$-score.",
+            "previous_rag_answer": "The common types of metrics used in challenges across different fields include the Exact Match (EM-score) and the F$_1$-score."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.688245,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 117,
+              "rank": 2,
+              "score": 0.382756,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.377502,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.367593,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 230,
+              "rank": 5,
+              "score": 0.344766,
+              "score_type": "cosine",
+              "text": "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result."
+            },
+            {
+              "doc_id": 115,
+              "rank": 6,
+              "score": 0.343478,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            },
+            {
+              "doc_id": 267,
+              "rank": 7,
+              "score": 0.339679,
+              "score_type": "cosine",
+              "text": "The most well-established method thus far for mitigating bias relies on projecting target words onto a bias subspace (such as a gender subspace) and subtracting out the difference between the resulting distances BIBREF0. On the other hand, the most popular metric for measuring bias is the WEAT statistic BIBREF1, which compares the cosine similarities between groups of words. However, WEAT has been recently shown to overestimate bias as a result of implicitly relying on similar frequencies for the target words BIBREF4, and BIBREF5 demonstrated that evidence of bias can still be recovered after geometric bias mitigation by examining the neighborhood of a target word among socially-biased words."
+            },
+            {
+              "doc_id": 250,
+              "rank": 8,
+              "score": 0.335402,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.608524,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 117,
+              "rank": 2,
+              "score": 0.354412,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.319085,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 288,
+              "rank": 4,
+              "score": 0.315708,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 100,
+              "rank": 5,
+              "score": 0.31162,
+              "score_type": "cosine",
+              "text": "Our characterizations of words in a community are motivated by methodology from prior literature that compares the frequency of a word in a particular setting to its frequency in some background distribution, in order to identify instances of linguistic variation BIBREF21 , BIBREF19 . Our particular framework makes this comparison by way of pointwise mutual information (PMI)."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:follow-up",
+          "question": "Can you provide examples of specific metrics used in a particular type of challenge?",
+          "gold": "Examples of specific metrics used in challenges include the Exact Match (EM-score) and macro-averaged F$_1$-score.",
+          "evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%),",
+          "rag_answer": "Examples of specific metrics used in challenges include the Exact Match (EM-score) and the F$_1$-score.",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer. Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities. Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%),",
+          "rag_retrieved_context": [
+            "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer.",
+            "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively.",
+            "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:",
+            "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B",
+            "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "follow-up",
+            "previous_gold_answer": "Metrics like the Exact Match (EM-score) and macro-averaged F$_1$-score are crucial for evaluating the success of a challenge as they measure different aspects of prediction accuracy.",
+            "previous_rag_answer": "The purpose of using metrics in a challenge is to provide quantitative measures of performance, assessing how well predictions align with ground truth answers."
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.662346,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 117,
+              "rank": 2,
+              "score": 0.376656,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            },
+            {
+              "doc_id": 156,
+              "rank": 3,
+              "score": 0.347091,
+              "score_type": "cosine",
+              "text": "Table TABREF23 indicates that our proposed model achieved the best performance both in EM-score and F$_1$-score with EM-score of 91.84% and F$_1$-score of 93.75%. QANet outperformed BERT-Base with 3.56% score in F$_1$-score but underperformed it with 0.75% score in EM-score. Compared with BERT-Base, our model led to a 5.64% performance improvement in EM-score and 3.69% in F$_1$-score. Although our model didn't outperform much with QANet in F$_1$-score (only 0.13%), our model significantly outperformed it with 6.39% score in EM-score."
+            },
+            {
+              "doc_id": 158,
+              "rank": 4,
+              "score": 0.336451,
+              "score_type": "cosine",
+              "text": "As demonstrated in Table TABREF25, with named entity information enabled, two-stage training mechanism improved the result by 4.36% in EM-score and 3.8% in F$_1$-score. Without two-stage training mechanism, named entity information led to an improvement by 1.28% in EM-score but it also led to a weak deterioration by 0.12% in F$_1$-score. With both of them enabled, our proposed model achieved a 5.64% score improvement in EM-score and a 3.69% score improvement in F$_1$-score. The experimental results show that both named entity information and two-stage training mechanism are helpful to our model."
+            },
+            {
+              "doc_id": 115,
+              "rank": 5,
+              "score": 0.327642,
+              "score_type": "cosine",
+              "text": "Estimating linguistic measures. We estimate word frequencies INLINEFORM0 , and by extension each downstream measure, in a carefully controlled manner in order to ensure we capture robust and meaningful linguistic behaviour. First, we only consider top-level comments which are initial responses to a post, as the content of lower-level responses might reflect conventions of dialogue more than a community's high-level interests. Next, in order to prevent a few highly active users from dominating our frequency estimates, we count each unique word once per user, ignoring successive uses of the same word by the same user. This ensures that our word-level characterizations are not skewed by a small subset of highly active contributors."
+            },
+            {
+              "doc_id": 288,
+              "rank": 6,
+              "score": 0.321561,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 160,
+              "rank": 7,
+              "score": 0.320551,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 230,
+              "rank": 8,
+              "score": 0.319406,
+              "score_type": "cosine",
+              "text": "Ever since the LIME algorithm BIBREF0 , \"explanation\" techniques focusing on finding the importance of input features in regard of a specific prediction have soared and we now have many ways of finding saliency maps (also called heat-maps because of the way we like to visualize them). We are interested in this paper by the use of such a technique in an extreme task that highlights questions about the validity and evaluation of the approach. We would like to first set the vocabulary we will use. We agree that saliency maps are not explanations in themselves and that they are more similar to attribution, which is only one part of the human explanation process BIBREF1 . We will prefer to call this importance mapping of the input an attribution rather than an explanation. We will talk about the importance of the input relevance score in regard to the model's computation and not make allusion to any human understanding of the model as a result."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 154,
+              "rank": 1,
+              "score": 0.439372,
+              "score_type": "cosine",
+              "text": "In the following experiments, two widely-used performance measures (i.e., EM-score BIBREF34 and (macro-averaged) F$_1$-score BIBREF35) are used to evaluate the methods. The Exact Match (EM-score) metric measures the percentage of predictions that match any one of the ground truth answers exactly. The F$_1$-score metric is a looser metric measures the average overlap between the prediction and ground truth answer."
+            },
+            {
+              "doc_id": 250,
+              "rank": 2,
+              "score": 0.330952,
+              "score_type": "cosine",
+              "text": "This allows us to question how good the saliency maps are in the sense that we question how well they actually represent the network's use of the input features. We will call that truthfulness of the attribution in regard to the computation, meaning that an attribution is truthful in regard to the computation if it actually highlights the important input features that the network attended to during prediction. We proceed to measure the truthfulness of the attributions by validating them quantitatively."
+            },
+            {
+              "doc_id": 209,
+              "rank": 3,
+              "score": 0.321607,
+              "score_type": "cosine",
+              "text": "The Yelp Challenge dataset includes metadata about restaurants, including their names, food tags, cities and states these restaurants are located in. For each restaurant review, we fetch this metadata and use it as our input context in the NMT model. The corresponding restaurant review is similarly set as the target sentence. This method produced 2.9 million pairs of sentences in our parallel corpus. We show one example of the parallel training corpus in Example 1 below:"
+            },
+            {
+              "doc_id": 288,
+              "rank": 4,
+              "score": 0.319951,
+              "score_type": "cosine",
+              "text": "Words used for WEAT statistic, consisting of baseline bias tests and gender bias tests in the format X vs Y / A vs B"
+            },
+            {
+              "doc_id": 117,
+              "rank": 5,
+              "score": 0.318763,
+              "score_type": "cosine",
+              "text": "Accounting for rare words. One complication when using measures such as PMI, which are based off of ratios of frequencies, is that estimates for very infrequent words could be overemphasized BIBREF24 . Words that only appear a few times in a community tend to score at the extreme ends of our measures (e.g. as highly specific or highly generic), obfuscating the impact of more frequent words in the community. To address this issue, we discard the long tail of infrequent words in our analyses, using only the top 5th percentile of words, by frequency within each INLINEFORM0 , to score comments and communities."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}

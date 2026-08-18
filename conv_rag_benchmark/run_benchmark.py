@@ -3,7 +3,7 @@ Run the adaptive conversational benchmark (generate questions + score their qual
 
 The core is an adaptive loop: each turn it asks a real target-RAG, grades the answer,
 and lets that outcome choose the next question's type
-(:mod:`conv_rag_benchmark.generation.adaptive_generator`).
+(:mod:`conv_rag_benchmark.generation.dynamic_generator`).
 
 It then reports TWO things:
   1. benchmark quality (well_formed / gold_supported / gold_correct), so the
@@ -30,7 +30,7 @@ import numpy as np
 from .config import Config
 from .connectors import connect_rag, connect_dataset, available_rags
 from .embeddings import Embedder
-from .generation.adaptive_generator import AdaptiveConversationGenerator, has_latex_label
+from .generation.dynamic_generator import AdaptiveConversationGenerator, has_latex_label
 from .graph.graph_builder import GraphBuilder, KnowledgeGraph
 from .graph.retriever import GraphRetriever
 from .llm import LLM
@@ -104,6 +104,23 @@ def main(argv=None):
                     help="'controller' = outcome-driven type selection (adaptive); "
                          "'random' = live loop that reads the RAG answer but picks the "
                          "next type at RANDOM (ignores outcome)")
+    ap.add_argument("--rag-k", type=int, default=None,
+                    help="retrieval budget: number of docs the RAG retrieves per query "
+                         "(overrides the backend default, e.g. vector's k=5). Difficulty "
+                         "lever for the 2x2: standard k=5 vs constrained k=2. Only affects "
+                         "how many chunks are retrieved, nothing else.")
+    ap.add_argument("--content", default="static", choices=["static", "dynamic"],
+                    help="follow-up question CONTENT conditioning (the thesis IV): "
+                         "'static' = generated WITHOUT the RAG's previous answer "
+                         "(generator sees gold/truth_history); 'dynamic' = generated AFTER "
+                         "observing the RAG's actual previous answer (sees rag_history). "
+                         "Gold answers always use truth_history regardless.")
+    ap.add_argument("--types", default="",
+                    help="comma-separated fixed follow-up type sequence, cycled over "
+                         "turns 1.. (turn 0 is always the seed). Forces the SAME question "
+                         "types in both static and dynamic runs — the paired-comparison "
+                         "control. E.g. 'Correction,Multi-Hop,Unanswerable'. Empty = use "
+                         "--type-policy instead.")
     ap.add_argument("--strict-gold", action="store_true",
                     help="use the strict composer (gold from evidence ONLY) + verify each "
                          "gold is grounded AND correct before accepting (trustworthy key)")
@@ -193,12 +210,18 @@ def main(argv=None):
         rag_graph_stats = rag_kg.stats()
         print(f"# GraphRAG graph ready: {rag_graph_stats}")
     target_rag = connect_rag(args.rag, kg.chunks, config=config, llm=gen_llm,
-                             retriever=rag_retriever, embedder=embedder, cache_dir=out_dir)
+                             retriever=rag_retriever, embedder=embedder, cache_dir=out_dir,
+                             **({} if args.rag_k is None else {"k": args.rag_k}))
+    if args.rag_k is not None:
+        print(f"# retrieval budget: k={args.rag_k} (constrained)")
 
     # ---- 3. run the adaptive loop ----
     gen = AdaptiveConversationGenerator(kg, target_rag, judge, config=config,
                                         gen_llm=gen_llm, retriever=retriever,
                                         type_policy=args.type_policy,
+                                        content_policy=args.content,
+                                        forced_types=([t.strip() for t in args.types.split(",")
+                                                       if t.strip()] or None),
                                         quality_gate=args.quality_gate,
                                         strict_gold=args.strict_gold,
                                         counterfactual=args.counterfactual,
@@ -221,7 +244,9 @@ def main(argv=None):
     # The STANDARD configuration (strict gold + no generation graph) is the one the
     # saved results use and stays unmarked; only DEVIATIONS get an extra suffix, so
     # ablation runs can never silently overwrite a standard one.
-    _flags = ("_randomtype" if args.type_policy == "random" else "") + \
+    _flags = ("_dynamic" if args.content == "dynamic" else "_static") + \
+             (f"_k{args.rag_k}" if args.rag_k is not None else "") + \
+             ("_randomtype" if args.type_policy == "random" else "") + \
              ("_qgate" if args.quality_gate else "") + \
              ("_cf" if args.counterfactual else "") + \
              ("_nostrictgold" if not args.strict_gold else "") + \
@@ -284,11 +309,13 @@ def main(argv=None):
         out = os.path.join(
             out_dir,
             f"{args.rag}_{ds_label}_t{args.turns}_c{len(convos)}{_flags}{rsuffix}.json")
+        # method label = the generation strategy actually run (self-describing).
+        method_name = f"{args.content}_question_generation"   # static_/dynamic_
         with open(out, "w", encoding="utf-8") as fw:
             json.dump({"rag": args.rag, "graph_stats": graph_stats,
-                       "method": "E",
+                       "method": method_name,
                        "repeat": rep + 1, "of_repeats": repeats,
-                       "quality": {"E": e_quality},
+                       "quality": {method_name: e_quality},
                        "e_by_query_type": e_by_type,
                        "rag_failure": {"n_turns": n, "outcomes": dict(outcomes),
                                        "failure_rate": failure_rate,

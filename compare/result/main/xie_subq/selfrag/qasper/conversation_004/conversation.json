@@ -1,0 +1,1144 @@
+{
+  "method": "xie_subq",
+  "rag": "selfrag",
+  "dataset": "qasper",
+  "seed": 42,
+  "n_turns": 8,
+  "content_policy": "static",
+  "generation_source": "truth_history",
+  "gen_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o",
+  "retrieval": {
+    "corpus_chunks": 300,
+    "rag_k": null,
+    "note": "score meaning differs per RAG; see rag_interface docstring. rank is comparable across RAGs, raw score is not."
+  },
+  "generated_at": "2026-08-17T12:46:05",
+  "schema_version": 1,
+  "experiment_label": "main",
+  "conversation_id": "conv-003",
+  "conversations": [
+    {
+      "conversation_id": "conv-003",
+      "seed_question": "What optimization algorithm is used to train the models?",
+      "type_sequence": [
+        "Seed",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:core",
+        "Xie:background",
+        "Xie:background",
+        "Xie:follow-up"
+      ],
+      "outcome_sequence": [
+        "correct",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained",
+        "abstained"
+      ],
+      "turns": [
+        {
+          "turn_id": 0,
+          "query_type": "Seed",
+          "question": "What optimization algorithm is used to train the models?",
+          "gold": "Adam optimization algorithm",
+          "evidence": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. The objective function for supervised training is: In truth, language models exist in a quality",
+          "rag_answer": "Adam optimization algorithm",
+          "outcome": "correct",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts. The objective function for supervised training is: In truth, language models exist in a quality",
+          "rag_retrieved_context": [
+            "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default.",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$.",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "\\subsubsection{Training Settings}",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "The objective function for supervised training is:",
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "",
+            "previous_gold_answer": "",
+            "previous_rag_answer": ""
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 39,
+              "rank": 1,
+              "score": 0.501904,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 217,
+              "rank": 2,
+              "score": 0.489603,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 120,
+              "rank": 3,
+              "score": 0.442727,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 34,
+              "rank": 4,
+              "score": 0.436425,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 164,
+              "rank": 5,
+              "score": 0.433252,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 150,
+              "rank": 6,
+              "score": 0.409832,
+              "score_type": "cosine",
+              "text": "Two-stage training mechanism is previously applied on bilinear model in fine-grained visual recognition BIBREF31, BIBREF32, BIBREF33. Two CNNs are deployed in the model. One is trained at first for coarse-graind features while freezing the parameter of the other. Then unfreeze the other one and train the entire model in a low learning rate for fetching fine-grained features."
+            },
+            {
+              "doc_id": 215,
+              "rank": 7,
+              "score": 0.405391,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 218,
+              "rank": 8,
+              "score": 0.402781,
+              "score_type": "cosine",
+              "text": "We leverage the framework openNMT-py \\cite{klein2017opennmt} to teach the our NMT model."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.562568,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 39,
+              "rank": 2,
+              "score": 0.407836,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 120,
+              "rank": 3,
+              "score": 0.393302,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 215,
+              "rank": 4,
+              "score": 0.392112,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 169,
+              "rank": 5,
+              "score": 0.377296,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 34,
+              "rank": 6,
+              "score": 0.436396,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 164,
+              "rank": 7,
+              "score": 0.4332,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            }
+          ],
+          "generation_source": "seed"
+        },
+        {
+          "turn_id": 1,
+          "query_type": "Xie:core",
+          "question": "What are the most commonly used optimization algorithms for training machine learning models?",
+          "gold": "Adam optimization algorithm",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.” In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For appli",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.” In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For appli",
+          "rag_retrieved_context": [
+            "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default.",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$.",
+            "\\subsubsection{Training Settings}",
+            "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts.",
+            "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly.",
+            "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”",
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Adam optimization algorithm",
+            "previous_rag_answer": "Adam optimization algorithm"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.501051,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 39,
+              "rank": 2,
+              "score": 0.414581,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 169,
+              "rank": 3,
+              "score": 0.349615,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 164,
+              "rank": 4,
+              "score": 0.348424,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 120,
+              "rank": 5,
+              "score": 0.345866,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.342157,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 34,
+              "rank": 7,
+              "score": 0.341156,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 165,
+              "rank": 8,
+              "score": 0.335951,
+              "score_type": "cosine",
+              "text": "There are, however, applications of NLMs that require less one-sided optimizations. On mobile devices such as smartphones and tablets, for example, NLMs may be integrated into software keyboards for next-word prediction, allowing much faster text entry. Popular Android apps that enthusiastically tout this technology include SwiftKey and Swype. The greater computational costs of NLMs lead to higher energy usage in model inference, translating into shorter battery life."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.562343,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 39,
+              "rank": 2,
+              "score": 0.439678,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 215,
+              "rank": 3,
+              "score": 0.438423,
+              "score_type": "cosine",
+              "text": "\\subsubsection{Training Settings}"
+            },
+            {
+              "doc_id": 120,
+              "rank": 4,
+              "score": 0.399149,
+              "score_type": "cosine",
+              "text": "To implement deep neural network models, we utilize the Keras library BIBREF36 with TensorFlow BIBREF37 backend. Each model is run on a single NVIDIA GeForce GTX 1080 Ti GPU. The models are trained by Adam optimization algorithm BIBREF38 whose parameters are the same as the default settings except for learning rate set to $5\\times 10^{-5}$. Batch size is set to 3 or 4 due to the lack of graphical memory. We select BERT-base as the pre-trained language model in this paper. Due to the high cost of pre-training BERT language model, we directly adopt parameters pre-trained by Google in Chinese general corpus. The named entity recognition is applied on both pathology report texts and query texts."
+            },
+            {
+              "doc_id": 179,
+              "rank": 5,
+              "score": 0.365971,
+              "score_type": "cosine",
+              "text": "For a different perspective, we further evaluated all the models under a desktop environment, using an i7-4790k CPU and Titan V GPU. Because the base power load for powering a desktop is much higher than running neural language models, we collected only latency statistics. We used the entire test set, since the QRNN runs quickly."
+            },
+            {
+              "doc_id": 169,
+              "rank": 6,
+              "score": 0.349721,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 164,
+              "rank": 7,
+              "score": 0.348431,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 2,
+          "query_type": "Xie:core",
+          "question": "How does the choice of optimization algorithm affect model performance?",
+          "gold": "The choice of optimization algorithm affects model performance by influencing the tradeoff between model quality (e.g., lower perplexity) and performance metrics such as energy consumption and query latency.",
+          "evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity com",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity com",
+          "rag_retrieved_context": [
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "Adam optimization algorithm",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 217,
+              "rank": 1,
+              "score": 0.481321,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 39,
+              "rank": 2,
+              "score": 0.407561,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 164,
+              "rank": 3,
+              "score": 0.373424,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 186,
+              "rank": 4,
+              "score": 0.360861,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 161,
+              "rank": 5,
+              "score": 0.352898,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 169,
+              "rank": 6,
+              "score": 0.348086,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 163,
+              "rank": 7,
+              "score": 0.345597,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 34,
+              "rank": 8,
+              "score": 0.332279,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.593,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 186,
+              "rank": 2,
+              "score": 0.557638,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.520595,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 161,
+              "rank": 4,
+              "score": 0.513972,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.508109,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 39,
+              "rank": 6,
+              "score": 0.377431,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 3,
+          "query_type": "Xie:core",
+          "question": "What role does learning rate play in optimization algorithms?",
+          "gold": "The learning rate in optimization algorithms determines the step size at each iteration while moving toward a minimum of the loss function, influencing the convergence speed and stability of the training process.",
+          "evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop. In the present work, we describe and examine the tradeoff space between quality and performance for the task",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": false,
+          "guard_gave_up": false,
+          "question_evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop. In the present work, we describe and examine the tradeoff space between quality and performance for the task",
+          "rag_retrieved_context": [
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The choice of optimization algorithm affects model performance by influencing the tradeoff between model quality (e.g., lower perplexity) and performance metrics such as energy consumption and query latency.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.535651,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 161,
+              "rank": 2,
+              "score": 0.473289,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 186,
+              "rank": 3,
+              "score": 0.456786,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 217,
+              "rank": 4,
+              "score": 0.445822,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.439354,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 160,
+              "rank": 6,
+              "score": 0.406165,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 163,
+              "rank": 7,
+              "score": 0.401366,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 184,
+              "rank": 8,
+              "score": 0.40065,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.601574,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 186,
+              "rank": 2,
+              "score": 0.587257,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.542593,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 166,
+              "rank": 4,
+              "score": 0.528851,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 5,
+              "score": 0.52255,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 217,
+              "rank": 6,
+              "score": 0.377709,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 4,
+          "query_type": "Xie:core",
+          "question": "How do different optimization algorithms compare in terms of convergence speed?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop. In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language m",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop. In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language m",
+          "rag_retrieved_context": [
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "core",
+            "previous_gold_answer": "The learning rate in optimization algorithms determines the step size at each iteration while moving toward a minimum of the loss function, influencing the convergence speed and stability of the training process.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.556606,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 161,
+              "rank": 2,
+              "score": 0.470143,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 166,
+              "rank": 3,
+              "score": 0.46356,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 186,
+              "rank": 4,
+              "score": 0.460838,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 184,
+              "rank": 5,
+              "score": 0.416117,
+              "score_type": "cosine",
+              "text": "Quality–performance tradeoff. In Table 2 , from left to right, we report perplexity results on the validation and test sets, R@3 on test, and finally per-query latency and energy usage. On the RPi, KN-5 is both fast and power-efficient to run, using only about 7 ms/query and 6 mJ/query for PTB (Table 2 , row 1), and 264 ms/q and 229 mJ/q on WT103 (row 5). Taking 220 ms/query and consuming 300 mJ/query, AWD-LSTM and ptb-qrnn are still viable for mobile phones: The modern smartphone holds upwards of 10,000 joules BIBREF22 , and the latency is within usability standards BIBREF23 . Nevertheless, the models are still 49 $\\times $ slower and 32 $\\times $ more power-hungry than KN-5. The wt103-qrnn model is completely unusable on phones, taking over 1.2 seconds per next-word prediction. Neural models achieve perplexity drops of 60–80% and R@3 increases of 22–34%, but these improvements come at a much higher cost in latency and energy usage."
+            },
+            {
+              "doc_id": 163,
+              "rank": 6,
+              "score": 0.406931,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 160,
+              "rank": 7,
+              "score": 0.403982,
+              "score_type": "cosine",
+              "text": "For each model, we examined word-level perplexity, R@3 in next-word prediction, latency (ms/q), and energy usage (mJ/q). To explore the perplexity–recall relationship, we collected individual perplexity and recall statistics for each sentence in the test set."
+            },
+            {
+              "doc_id": 167,
+              "rank": 8,
+              "score": 0.401799,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 186,
+              "rank": 1,
+              "score": 0.583538,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 2,
+              "score": 0.562652,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 3,
+              "score": 0.56123,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 163,
+              "rank": 4,
+              "score": 0.544904,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 164,
+              "rank": 5,
+              "score": 0.532492,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 217,
+              "rank": 6,
+              "score": 0.3307,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 5,
+          "query_type": "Xie:background",
+          "question": "What is the definition of an optimization algorithm in the context of model training?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. The objective function for supervised training is: In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we co",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default. Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing. The objective function for supervised training is: In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we co",
+          "rag_retrieved_context": [
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "The objective function for supervised training is:"
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.363239,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 217,
+              "rank": 2,
+              "score": 0.348286,
+              "score_type": "cosine",
+              "text": "We use the training settings: adam optimizer \\cite{kingma2014adam} with the suggested learning rate 0.001 \\cite{klein2017opennmt}. For most parts, parameters are at their default values. Notably, the maximum sentence length of input and output is 50 tokens by default."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.346215,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 34,
+              "rank": 4,
+              "score": 0.339862,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.337334,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 6,
+              "score": 0.330508,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.328085,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 17,
+              "rank": 8,
+              "score": 0.316379,
+              "score_type": "cosine",
+              "text": "We use mean squared error to construct loss functions. For the AL data, the loss function is defined as:"
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 186,
+              "rank": 1,
+              "score": 0.590167,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 166,
+              "rank": 2,
+              "score": 0.566344,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 164,
+              "rank": 3,
+              "score": 0.56235,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 161,
+              "rank": 4,
+              "score": 0.56183,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 163,
+              "rank": 5,
+              "score": 0.556258,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 34,
+              "rank": 6,
+              "score": 0.343778,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 6,
+          "query_type": "Xie:background",
+          "question": "What factors should be considered when selecting an optimization algorithm for a specific model?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is t",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is t",
+          "rag_retrieved_context": [
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "The objective function for supervised training is:",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "background",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.435911,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 166,
+              "rank": 2,
+              "score": 0.384124,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 34,
+              "rank": 3,
+              "score": 0.375423,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 161,
+              "rank": 4,
+              "score": 0.372354,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 186,
+              "rank": 5,
+              "score": 0.371714,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 163,
+              "rank": 6,
+              "score": 0.370217,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 167,
+              "rank": 7,
+              "score": 0.366499,
+              "score_type": "cosine",
+              "text": "BIBREF3 evaluate recent neural language models; however, their focus is not on the computational footprint of each model, but rather the perplexity. To further reduce perplexity, many neural language model extensions exist, such as continuous cache pointer BIBREF5 and mixture of softmaxes BIBREF6 . Since our focus is on comparing “core” neural and non-neural approaches, we disregard these extra optimizations techniques in all of our models."
+            },
+            {
+              "doc_id": 39,
+              "rank": 8,
+              "score": 0.366432,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 164,
+              "rank": 1,
+              "score": 0.581912,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 186,
+              "rank": 2,
+              "score": 0.538764,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.516126,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 133,
+              "rank": 4,
+              "score": 0.470211,
+              "score_type": "cosine",
+              "text": "Recently, some works focused on pre-trained language representation models to capture language information from text and then utilizing the information to improve the performance of specific natural language processing tasks BIBREF24, BIBREF25, BIBREF26, BIBREF27 which makes language model a shared model to all natural language processing tasks. Radford et al. BIBREF24 proposed a framework for fine-tuning pre-trained language model. Peters et al. BIBREF25 proposed ELMo which concatenates forward and backward language models in a shallow manner. Devlin et al. BIBREF26 used bidirectional Transformers to model deep interactions between the two directions. Yang et al. BIBREF27 replaced the fixed forward or backward factorization order with all possible permutations of the factorization order and avoided using the [MASK] tag which causes pretrain-finetune discrepancy that BERT is subject to."
+            },
+            {
+              "doc_id": 166,
+              "rank": 5,
+              "score": 0.465443,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 34,
+              "rank": 6,
+              "score": 0.385656,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 39,
+              "rank": 7,
+              "score": 0.357482,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        },
+        {
+          "turn_id": 7,
+          "query_type": "Xie:follow-up",
+          "question": "What are the key differences between gradient descent and stochastic gradient descent?",
+          "gold": "Not answerable from the available knowledge; the system should abstain.",
+          "evidence": "The objective function for supervised training is: In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained wi",
+          "rag_answer": "I don't know",
+          "outcome": "abstained",
+          "is_unanswerable": true,
+          "guard_gave_up": false,
+          "question_evidence": "The objective function for supervised training is: In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment. We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$. AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained wi",
+          "rag_retrieved_context": [
+            "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5.",
+            "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment.",
+            "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing.",
+            "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point.",
+            "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop.",
+            "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$.",
+            "We discuss the attack model, our generative machine learning method and controlling the generative process in this section."
+          ],
+          "cf_outcome": null,
+          "cf_rag_answer": "",
+          "provenance": {
+            "content_mode": "xie_static",
+            "generator_saw_rag_answer": false,
+            "subquestion_type": "follow-up",
+            "previous_gold_answer": "Not answerable from the available knowledge; the system should abstain.",
+            "previous_rag_answer": "I don't know"
+          },
+          "expected_components": [],
+          "question_generation_documents": [
+            {
+              "doc_id": 34,
+              "rank": 1,
+              "score": 0.360403,
+              "score_type": "cosine",
+              "text": "The objective function for supervised training is:"
+            },
+            {
+              "doc_id": 164,
+              "rank": 2,
+              "score": 0.359408,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 39,
+              "rank": 3,
+              "score": 0.336947,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 169,
+              "rank": 4,
+              "score": 0.326139,
+              "score_type": "cosine",
+              "text": "AWD-LSTM. BIBREF4 show that a simple three-layer LSTM, with proper regularization and optimization techniques, can achieve state of the art on various language modeling datasets, surpassing more complex models. Specifically, BIBREF4 apply randomized backpropagation through time, variational dropout, activation regularization, embedding dropout, and temporal activation regularization. A novel scheduler for optimization, non-monotonically triggered ASGD (NT-ASGD) is also introduced. BIBREF4 name their three-layer LSTM model trained with such tricks, “AWD-LSTM.”"
+            },
+            {
+              "doc_id": 200,
+              "rank": 5,
+              "score": 0.31961,
+              "score_type": "cosine",
+              "text": "Neural machine translation models are efficient at mapping one expression to another (one-to-one mapping). Researchers have evaluated these models for conversation generation BIBREF16 , with mixed results. Some researchers attribute poor performance to the use of the negative log likelihood cost function during training, which emphasizes generation of high-confidence phrases rather than diverse phrases BIBREF17 . The results are often generic text, which lacks variation. Li et al. have suggested various augmentations to this, among others suppressing typical responses in the decoder language model to promote response diversity BIBREF17 ."
+            },
+            {
+              "doc_id": 201,
+              "rank": 6,
+              "score": 0.3188,
+              "score_type": "cosine",
+              "text": "We discuss the attack model, our generative machine learning method and controlling the generative process in this section."
+            },
+            {
+              "doc_id": 186,
+              "rank": 7,
+              "score": 0.316112,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 207,
+              "rank": 8,
+              "score": 0.31308,
+              "score_type": "cosine",
+              "text": "NMT models are constructions of stacked recurrent neural networks (RNNs). They include an encoder network and a decoder network, which are jointly optimized to produce a translation of one sequence to another. The encoder rolls over the input data in sequence and produces one INLINEFORM0 -dimensional context vector representation for the sentence. The decoder then generates output sequences based on the embedding vector and an attention module, which is taught to associate output words with certain input words. The generation typically continues until a specific EOS (end of sentence) token is encountered. The review length can be controlled in many ways, e.g. by setting the probability of generating the EOS token to zero until the required length is reached."
+            }
+          ],
+          "rag_retrieved_documents": [
+            {
+              "doc_id": 186,
+              "rank": 1,
+              "score": 0.560152,
+              "score_type": "cosine",
+              "text": "In the present work, we describe and examine the tradeoff space between quality and performance for the task of language modeling. Specifically, we explore the quality–performance tradeoffs between KN-5, a non-neural approach, and AWD-LSTM and QRNN, two neural language models. We find that with decreased perplexity comes vastly increased computational requirements: In one of the NLMs, a perplexity reduction by 2.5 $\\times $ results in a 49 $\\times $ rise in latency and 32 $\\times $ increase in energy usage, when compared to KN-5."
+            },
+            {
+              "doc_id": 164,
+              "rank": 2,
+              "score": 0.540703,
+              "score_type": "cosine",
+              "text": "In truth, language models exist in a quality–performance tradeoff space. As model quality increases (e.g., lower perplexity), performance as measured in terms of energy consumption, query latency, etc. tends to decrease. For applications primarily running in the cloud—say, machine translation—practitioners often solely optimize for the lowest perplexity. This is because such applications are embarrassingly parallel and hence trivial to scale in a data center environment."
+            },
+            {
+              "doc_id": 163,
+              "rank": 3,
+              "score": 0.522531,
+              "score_type": "cosine",
+              "text": "Specifically focused on language modeling, this paper examines an issue that to our knowledge has not been explored: advances in neural language models have come at a significant cost in terms of increased computational complexity. Computing the probability of a token sequence using non-neural techniques requires a number of phrase lookups and perhaps a few arithmetic operations, whereas model inference with NLMs require large matrix multiplications consuming perhaps millions of floating point operations (FLOPs). These performance tradeoffs are worth discussing."
+            },
+            {
+              "doc_id": 166,
+              "rank": 4,
+              "score": 0.477908,
+              "score_type": "cosine",
+              "text": "In this paper, we examine the quality–performance tradeoff in the shift from non-neural to neural language models. In particular, we compare Kneser–Ney smoothing, widely accepted as the state of the art prior to NLMs, to the best NLMs today. The decrease in perplexity on standard datasets has been well documented BIBREF3 , but to our knowledge no one has examined the performances tradeoffs. With deployment on a mobile device in mind, we evaluate energy usage and inference latency on a Raspberry Pi (which shares the same ARM architecture as nearly all smartphones today). We find that a 2.5 $\\times $ reduction in perplexity on PTB comes at a staggering cost in terms of performance: inference with NLMs takes 49 $\\times $ longer and requires 32 $\\times $ more energy. Furthermore, we find that impressive reductions in perplexity translate into at best modest improvements in next-word prediction, which is arguable a better metric for evaluating software keyboards on a smartphone. The contribution of this paper is the first known elucidation of this quality–performance tradeoff. Note that we refrain from prescriptive recommendations: whether or not a tradeoff is worthwhile depends on the application. Nevertheless, NLP engineers should arguably keep these tradeoffs in mind when selecting a particular operating point."
+            },
+            {
+              "doc_id": 161,
+              "rank": 5,
+              "score": 0.468736,
+              "score_type": "cosine",
+              "text": "In recent years, we have witnessed a dramatic shift towards techniques driven by neural networks for a variety of NLP tasks. Undoubtedly, neural language models (NLMs) have reduced perplexity by impressive amounts. This progress, however, comes at a substantial cost in performance, in terms of inference latency and energy consumption, which is particularly of concern in deployments on mobile devices. This paper, which examines the quality-performance tradeoff of various language modeling techniques, represents to our knowledge the first to make this observation. We compare state-of-the-art NLMs with\"classic\"Kneser-Ney (KN) LMs in terms of energy usage, latency, perplexity, and prediction accuracy using two standard benchmarks. On a Raspberry Pi, we find that orders of increase in latency and energy usage correspond to less change in perplexity, while the difference is much less pronounced on a desktop."
+            },
+            {
+              "doc_id": 39,
+              "rank": 6,
+              "score": 0.34269,
+              "score_type": "cosine",
+              "text": "We trained the model with the following four combinations of the datasets: AL, AL+CA+CO (two proposed models), ACP (supervised), and ACP+AL+CA+CO (semi-supervised). The corresponding objective functions were: $\\mathcal {L}_{\\rm AL}$, $\\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$, $\\mathcal {L}_{\\rm ACP}$, and $\\mathcal {L}_{\\rm ACP} + \\mathcal {L}_{\\rm AL} + \\mathcal {L}_{\\rm CA} + \\mathcal {L}_{\\rm CO}$."
+            },
+            {
+              "doc_id": 201,
+              "rank": 7,
+              "score": 0.320086,
+              "score_type": "cosine",
+              "text": "We discuss the attack model, our generative machine learning method and controlling the generative process in this section."
+            }
+          ],
+          "generation_source": "xie_static_decomposition"
+        }
+      ]
+    }
+  ]
+}
